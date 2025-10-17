@@ -67,6 +67,17 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
             request.state.username = payload.get("username")
             request.state.is_admin = payload.get("is_admin")
             request.state.token_payload = payload
+            
+            # Load user's theme preference
+            try:
+                from .themes import get_theme_manager
+                theme_manager = get_theme_manager()
+                user_theme = theme_manager.get_user_theme(request.state.user_id)
+                request.state.theme = user_theme
+            except Exception as theme_error:
+                logger.warning(f"Could not load theme: {theme_error}")
+                request.state.theme = None
+            
             logger.info(f"✅ User authenticated: {payload.get('username')}")
             
         except jwt.InvalidTokenError as e:

@@ -167,12 +167,24 @@ def setup_templates(app: FastAPI) -> None:
     """Setup Jinja2 templates."""
     templates_dir = Path("templates")
     if templates_dir.exists():
-        app.state.templates = Jinja2Templates(directory=str(templates_dir))
+        templates = Jinja2Templates(directory=str(templates_dir))
     else:
         # Fallback to app_new/templates
         templates_dir = Path("app_new/templates")
         if templates_dir.exists():
-            app.state.templates = Jinja2Templates(directory=str(templates_dir))
+            templates = Jinja2Templates(directory=str(templates_dir))
+        else:
+            return
+    
+    # Add global template functions
+    def get_theme_css(theme_vars):
+        """Convert theme variables dict to CSS"""
+        if not theme_vars:
+            return ""
+        return "\n".join([f"    {k}: {v};" for k, v in theme_vars.items()])
+    
+    templates.env.globals['get_theme_css'] = get_theme_css
+    app.state.templates = templates
 
 
 def setup_routes(app: FastAPI) -> None:
@@ -390,9 +402,18 @@ def setup_routes(app: FastAPI) -> None:
                 "is_admin": getattr(request.state, 'is_admin', False)
             }
             
+            # Get theme information
+            from .core.themes import get_theme_manager
+            theme_manager = get_theme_manager()
+            all_themes = theme_manager.get_all_themes()
+            user_id = current_user.get("id")
+            current_theme = theme_manager.get_user_theme(user_id) if user_id else {"theme_id": "space"}
+            
             return templates.TemplateResponse("settings.html", {
                 "request": request,
-                "current_user": current_user
+                "current_user": current_user,
+                "themes": all_themes,
+                "current_theme": current_theme
             })
         else:
             return {"message": "Settings page"}
@@ -509,6 +530,10 @@ def setup_routes(app: FastAPI) -> None:
     # Include admin API router
     from .api.admin_new import router as admin_api_router
     app.include_router(admin_api_router)
+    
+    # Include theme management router
+    from .api.themes import router as themes_router
+    app.include_router(themes_router)
     
     # Include API router
     api_router = create_api_router()

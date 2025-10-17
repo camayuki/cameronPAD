@@ -5,24 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}CameronPAD{% endblock %}</title>
     
-    <!-- Space Theme CSS -->
+    <!-- Dynamic Theme CSS -->
     <style>
         :root {
-            --primary-bg: #0a0e1a;
-            --secondary-bg: #1a1f35;
-            --accent-bg: #2d3561;
-            --card-bg: rgba(26, 31, 53, 0.8);
-            --border-color: #3d4785;
-            --text-primary: #e8eaed;
-            --text-secondary: #9aa0a6;
-            --accent-primary: #4fc3f7;
-            --accent-secondary: #ab47bc;
-            --accent-tertiary: #66bb6a;
-            --danger: #f44336;
-            --warning: #ff9800;
-            --success: #4caf50;
-            --glow-color: rgba(79, 195, 247, 0.3);
-            --purple-glow: rgba(171, 71, 188, 0.3);
+{% if request.state.theme and request.state.theme.css_variables %}
+{{ get_theme_css(request.state.theme.css_variables) }}
+{% else %}
+    /* Default Space Theme */
+    --primary-bg: #0a0e1a;
+    --secondary-bg: #1a1f35;
+    --accent-bg: #2d3561;
+    --card-bg: rgba(26, 31, 53, 0.8);
+    --border-color: #3d4785;
+    --text-primary: #e8eaed;
+    --text-secondary: #9aa0a6;
+    --accent-primary: #4fc3f7;
+    --accent-secondary: #ab47bc;
+    --accent-tertiary: #66bb6a;
+    --danger: #f44336;
+    --warning: #ff9800;
+    --success: #4caf50;
+    --glow-color: rgba(79, 195, 247, 0.3);
+    --purple-glow: rgba(171, 71, 188, 0.3);
+{% endif %}
         }
 
         * {
