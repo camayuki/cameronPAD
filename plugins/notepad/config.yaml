@@ -1,0 +1,6 @@
+name: "notepad"
+version: "1.0.0"
+enabled: true
+description: "Multi-tab text editor for longer notes and code snippets"
+settings:
+  default_tab: "General"  # Default tab name when creating new workspace

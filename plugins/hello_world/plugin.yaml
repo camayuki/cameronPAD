@@ -1,0 +1,15 @@
+# Hello World Plugin Configuration
+
+name: hello_world
+version: 1.0.0
+description: A simple example plugin that demonstrates basic plugin functionality
+author: CameronPAD Team
+api_version: 1.0
+enabled: true
+priority: 100
+
+# Plugin-specific settings
+settings:
+  greeting_style: friendly
+  max_greetings: 1000
+  custom_message: "Welcome to CameronPAD!"

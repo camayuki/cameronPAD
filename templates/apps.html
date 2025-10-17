@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Apps - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>📱 Applications</h1>
+    <p>Browse and access all available applications</p>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Available Apps</h3>
+        <span class="badge badge-primary">{{ plugins|length }} apps</span>
+    </div>
+    <div class="card-content">
+        {% if plugins %}
+            <div class="apps-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 10px;">
+                {% for plugin in plugins %}
+                <a href="/api/v1/plugins/{{ plugin.name }}/" style="text-decoration: none; color: inherit;">
+                    <div class="app-card" style="cursor: pointer; padding: 20px; border: 1px solid #ddd; border-radius: 12px; transition: all 0.3s; background: white; height: 100%;">
+                        <div class="app-header" style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                            <div class="app-icon" style="font-size: 48px; line-height: 1;">
+                                {% if plugin.metadata and plugin.metadata.icon %}
+                                {{ plugin.metadata.icon }}
+                                {% else %}
+                                🔌
+                                {% endif %}
+                            </div>
+                            <span class="badge badge-success" style="font-size: 11px;">Active</span>
+                        </div>
+                        <div class="app-info">
+                            <h4 style="margin: 0 0 10px 0; font-size: 18px; font-weight: 600;">
+                                {% if plugin.metadata and plugin.metadata.display_name %}
+                                {{ plugin.metadata.display_name }}
+                                {% else %}
+                                {{ plugin.name|title }}
+                                {% endif %}
+                            </h4>
+                            {% if plugin.metadata %}
+                            <p style="margin: 0 0 10px 0; color: #666; font-size: 14px; line-height: 1.5;">
+                                {{ plugin.metadata.description or 'No description available' }}
+                            </p>
+                            <div style="display: flex; gap: 10px; align-items: center; font-size: 12px; color: #999;">
+                                <span>v{{ plugin.metadata.version or '1.0.0' }}</span>
+                                {% if plugin.metadata.author %}
+                                <span>•</span>
+                                <span>{{ plugin.metadata.author }}</span>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            
+            <style>
+            .app-card:hover {
+                background: #f8f9fa !important;
+                border-color: #4a9eff !important;
+                transform: translateY(-4px);
+                box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            }
+            
+            .app-card:active {
+                transform: translateY(-2px);
+            }
+            </style>
+        {% else %}
+            <div class="empty-state" style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 64px; margin-bottom: 20px;">📦</div>
+                <h3 style="margin: 0 0 10px 0; color: #666;">No Apps Available</h3>
+                <p class="text-muted" style="margin: 0;">Enable plugins to see available applications</p>
+                <a href="/plugins" class="btn btn-primary" style="margin-top: 20px;">Manage Plugins</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if plugins %}
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h3>💡 Quick Tip</h3>
+    </div>
+    <div class="card-content">
+        <p>Click on any app card to view detailed information, configure settings, and access advanced features.</p>
+        <a href="/plugins" class="btn btn-secondary">Manage All Plugins</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

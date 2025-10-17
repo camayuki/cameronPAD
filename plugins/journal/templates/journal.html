@@ -1,0 +1,594 @@
+{% extends "base.html" %}
+
+{% block title %}Journal - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>📔 Journal</h1>
+        <p class="muted">Daily entries with calendar view</p>
+    </div>
+
+    <!-- Calendar -->
+    <div class="card">
+        <div class="calendar">
+            <div class="calendar-nav">
+                <button type="button" class="btn" onclick="prevMonth()">← Previous</button>
+                <h2 id="calendar-header">Month Year</h2>
+                <button type="button" class="btn" onclick="nextMonth()">Next →</button>
+            </div>
+            
+            <div id="calendar-weekdays" class="calendar-weekdays"></div>
+            <div id="calendar-grid" class="calendar-grid"></div>
+        </div>
+    </div>
+
+    <!-- Selected Date Info -->
+    <div class="card">
+        <div class="selected-date-header">
+            <h3>Selected Date: <span id="selected-date-display" class="date-badge">{{ today }}</span></h3>
+        </div>
+    </div>
+
+    <!-- New Entry Form -->
+    <div class="card">
+        <h2>New Entry</h2>
+        <form method="post" action="/api/v1/plugins/journal/add" enctype="multipart/form-data">
+            <input type="hidden" id="entry-date" name="date" value="{{ today }}" />
+            
+            <div class="form-row">
+                <input 
+                    name="title" 
+                    class="form-control flex-grow" 
+                    placeholder="Title (e.g., Dinner with friends)" 
+                />
+                <input 
+                    name="time" 
+                    type="time" 
+                    class="form-control time-input" 
+                />
+                <input 
+                    name="location" 
+                    class="form-control flex-grow" 
+                    placeholder="Location" 
+                />
+            </div>
+            
+            <div class="form-group">
+                <textarea 
+                    name="notes" 
+                    rows="4" 
+                    class="form-control" 
+                    placeholder="Write your thoughts..."
+                ></textarea>
+            </div>
+            
+            <div class="form-row">
+                <input 
+                    type="file" 
+                    name="photos" 
+                    accept="image/*" 
+                    multiple 
+                    class="file-input"
+                />
+                <button type="submit" class="btn btn-primary">Save Entry</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Entries for Selected Date -->
+    <div class="card">
+        <h2>Entries</h2>
+        <div id="entries-container">
+            <div class="empty-state">
+                <p class="muted">No entries for this date. Create one above!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .page-header {
+        margin-bottom: 30px;
+    }
+    
+    .page-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 32px;
+    }
+    
+    .card {
+        background: var(--card-bg, #1e1e1e);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+        border: 1px solid var(--border-color, #333);
+    }
+    
+    .card h2 {
+        margin: 0 0 20px 0;
+        font-size: 20px;
+        color: var(--text-primary, #e0e0e0);
+    }
+    
+    .card h3 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--text-primary, #e0e0e0);
+    }
+    
+    /* Calendar */
+    .calendar {
+        width: 100%;
+    }
+    
+    .calendar-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .calendar-nav h2 {
+        margin: 0;
+        font-size: 22px;
+    }
+    
+    .calendar-weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .weekday {
+        text-align: center;
+        font-weight: 600;
+        font-size: 13px;
+        padding: 8px;
+        color: var(--text-secondary, #888);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+    }
+    
+    .calendar-cell {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    
+    .calendar-cell:hover {
+        background: var(--hover-bg, #333);
+        border-color: var(--primary-color, #007acc);
+    }
+    
+    .calendar-cell.other-month {
+        opacity: 0.3;
+    }
+    
+    .calendar-cell.today {
+        border-color: var(--primary-color, #007acc);
+        border-width: 2px;
+    }
+    
+    .calendar-cell.selected {
+        background: var(--primary-color, #007acc);
+        color: white;
+        border-color: var(--primary-color, #007acc);
+    }
+    
+    .calendar-cell.has-entries::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        width: 4px;
+        height: 4px;
+        background: var(--primary-color, #007acc);
+        border-radius: 50%;
+    }
+    
+    .calendar-cell.selected.has-entries::after {
+        background: white;
+    }
+    
+    /* Selected Date */
+    .selected-date-header {
+        display: flex;
+        align-items: center;
+    }
+    
+    .date-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: var(--primary-color, #007acc);
+        color: white;
+        border-radius: 16px;
+        font-weight: 500;
+        font-size: 16px;
+    }
+    
+    /* Forms */
+    .form-group {
+        margin-bottom: 16px;
+    }
+    
+    .form-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+    }
+    
+    .form-control {
+        padding: 12px;
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 8px;
+        color: var(--text-primary, #e0e0e0);
+        font-size: 14px;
+        font-family: inherit;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color, #007acc);
+    }
+    
+    textarea.form-control {
+        width: 100%;
+        resize: vertical;
+    }
+    
+    .flex-grow {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .time-input {
+        width: 140px;
+    }
+    
+    .file-input {
+        flex: 1;
+        padding: 10px;
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 8px;
+        color: var(--text-primary, #e0e0e0);
+        cursor: pointer;
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+        background: var(--input-bg, #2a2a2a);
+        color: var(--text-primary, #e0e0e0);
+        border: 1px solid var(--border-color, #444);
+    }
+    
+    .btn:hover {
+        background: var(--hover-bg, #333);
+    }
+    
+    .btn-primary {
+        background: var(--primary-color, #007acc);
+        color: white;
+        border-color: var(--primary-color, #007acc);
+    }
+    
+    .btn-primary:hover {
+        background: var(--primary-hover, #005a9e);
+    }
+    
+    .btn-danger {
+        background: #d32f2f;
+        color: white;
+        border-color: #d32f2f;
+    }
+    
+    .btn-danger:hover {
+        background: #b71c1c;
+    }
+    
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+    
+    /* Entries */
+    .entry-card {
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .entry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    
+    .entry-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-primary, #e0e0e0);
+    }
+    
+    .entry-meta {
+        color: var(--text-secondary, #888);
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    
+    .entry-notes {
+        color: var(--text-primary, #e0e0e0);
+        line-height: 1.6;
+        margin-bottom: 12px;
+        white-space: pre-wrap;
+    }
+    
+    .entry-gallery {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+    }
+    
+    .entry-image {
+        position: relative;
+    }
+    
+    .entry-image img {
+        max-width: 160px;
+        height: auto;
+        border-radius: 8px;
+        border: 1px solid var(--border-color, #444);
+    }
+    
+    .muted {
+        color: var(--text-secondary, #888);
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+    }
+</style>
+
+<script>
+    let currentYear, currentMonth;
+    let selectedDate = "{{ today }}";
+    let entriesByDate = {};  // Cache for entries
+    
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'];
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    
+    function pad(num) {
+        return String(num).padStart(2, '0');
+    }
+    
+    function formatDate(year, month, day) {
+        return `${year}-${pad(month + 1)}-${pad(day)}`;
+    }
+    
+    function daysInMonth(year, month) {
+        return new Date(year, month + 1, 0).getDate();
+    }
+    
+    function renderCalendar(year, month) {
+        currentYear = year;
+        currentMonth = month;
+        
+        // Update header
+        document.getElementById('calendar-header').textContent = 
+            `${monthNames[month]} ${year}`;
+        
+        // Render weekdays
+        const weekdaysEl = document.getElementById('calendar-weekdays');
+        weekdaysEl.innerHTML = '';
+        weekdays.forEach(day => {
+            const div = document.createElement('div');
+            div.className = 'weekday';
+            div.textContent = day;
+            weekdaysEl.appendChild(div);
+        });
+        
+        // Render calendar grid
+        const grid = document.getElementById('calendar-grid');
+        grid.innerHTML = '';
+        
+        const firstDay = new Date(year, month, 1).getDay();
+        const totalDays = daysInMonth(year, month);
+        const prevMonthDays = month === 0 ? 
+            daysInMonth(year - 1, 11) : daysInMonth(year, month - 1);
+        
+        const today = new Date();
+        const todayStr = formatDate(today.getFullYear(), today.getMonth(), today.getDate());
+        
+        // Previous month days
+        for (let i = firstDay - 1; i >= 0; i--) {
+            const day = prevMonthDays - i;
+            const cell = createCalendarCell(year, month - 1, day, true);
+            grid.appendChild(cell);
+        }
+        
+        // Current month days
+        for (let day = 1; day <= totalDays; day++) {
+            const dateStr = formatDate(year, month, day);
+            const cell = createCalendarCell(year, month, day, false);
+            
+            if (dateStr === todayStr) {
+                cell.classList.add('today');
+            }
+            if (dateStr === selectedDate) {
+                cell.classList.add('selected');
+            }
+            
+            grid.appendChild(cell);
+        }
+        
+        // Next month days (fill to 42 cells)
+        const cellsRendered = firstDay + totalDays;
+        const remainingCells = 42 - cellsRendered;
+        for (let day = 1; day <= remainingCells; day++) {
+            const cell = createCalendarCell(year, month + 1, day, true);
+            grid.appendChild(cell);
+        }
+    }
+    
+    function createCalendarCell(year, month, day, otherMonth) {
+        const cell = document.createElement('div');
+        cell.className = 'calendar-cell';
+        cell.textContent = day;
+        
+        if (otherMonth) {
+            cell.classList.add('other-month');
+        }
+        
+        const dateStr = formatDate(year, month, day);
+        cell.dataset.date = dateStr;
+        
+        cell.onclick = () => selectDate(dateStr);
+        
+        return cell;
+    }
+    
+    function selectDate(dateStr) {
+        selectedDate = dateStr;
+        
+        // Update UI
+        document.getElementById('selected-date-display').textContent = dateStr;
+        document.getElementById('entry-date').value = dateStr;
+        
+        // Update calendar selection
+        document.querySelectorAll('.calendar-cell').forEach(cell => {
+            if (cell.dataset.date === dateStr) {
+                cell.classList.add('selected');
+            } else {
+                cell.classList.remove('selected');
+            }
+        });
+        
+        // Load entries for this date
+        loadEntries(dateStr);
+    }
+    
+    async function loadEntries(dateStr) {
+        try {
+            const response = await fetch(
+                `/api/v1/plugins/journal/entries?entry_date=${encodeURIComponent(dateStr)}`,
+                { cache: 'no-store' }
+            );
+            const data = await response.json();
+            
+            const container = document.getElementById('entries-container');
+            
+            if (!data.entries || data.entries.length === 0) {
+                container.innerHTML = '<div class="empty-state"><p class="muted">No entries for this date. Create one above!</p></div>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            data.entries.forEach(entry => {
+                const card = createEntryCard(entry);
+                container.appendChild(card);
+            });
+            
+        } catch (error) {
+            console.error('Failed to load entries:', error);
+        }
+    }
+    
+    function createEntryCard(entry) {
+        const card = document.createElement('div');
+        card.className = 'entry-card';
+        
+        let meta = [];
+        if (entry.time) meta.push(entry.time);
+        if (entry.location) meta.push(entry.location);
+        
+        let imagesHTML = '';
+        if (entry.images && entry.images.length > 0) {
+            imagesHTML = '<div class="entry-gallery">' +
+                entry.images.map(img => `
+                    <div class="entry-image">
+                        <a href="${img.url}" target="_blank">
+                            <img src="${img.url}" alt="">
+                        </a>
+                    </div>
+                `).join('') +
+                '</div>';
+        }
+        
+        card.innerHTML = `
+            <div class="entry-header">
+                <div class="entry-title">${escapeHTML(entry.title || '(Untitled)')}</div>
+                <form method="post" action="/api/v1/plugins/journal/delete" style="display:inline;"
+                      onsubmit="return confirm('Delete this entry?')">
+                    <input type="hidden" name="entry_id" value="${entry.id}" />
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
+            ${meta.length > 0 ? `<div class="entry-meta">${escapeHTML(meta.join(' • '))}</div>` : ''}
+            ${entry.notes ? `<div class="entry-notes">${escapeHTML(entry.notes)}</div>` : ''}
+            ${imagesHTML}
+        `;
+        
+        return card;
+    }
+    
+    function escapeHTML(str) {
+        const div = document.createElement('div');
+        div.textContent = str || '';
+        return div.innerHTML;
+    }
+    
+    function prevMonth() {
+        const newDate = new Date(currentYear, currentMonth - 1, 1);
+        renderCalendar(newDate.getFullYear(), newDate.getMonth());
+    }
+    
+    function nextMonth() {
+        const newDate = new Date(currentYear, currentMonth + 1, 1);
+        renderCalendar(newDate.getFullYear(), newDate.getMonth());
+    }
+    
+    // Initialize
+    window.addEventListener('load', () => {
+        const today = new Date();
+        renderCalendar(today.getFullYear(), today.getMonth());
+        selectDate(selectedDate);
+    });
+</script>
+{% endblock %}

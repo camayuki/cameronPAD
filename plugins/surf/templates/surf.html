@@ -1,0 +1,405 @@
+{% extends "base.html" %}
+
+{% block title %}Surf - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>🏄 Surf Conditions</h1>
+        <p class="muted">Wave height, period, and direction monitoring</p>
+    </div>
+
+    <!-- Add Spot Form -->
+    <div class="card">
+        <h2>Add Surf Spot</h2>
+        <form method="post" action="/api/v1/plugins/surf/add" class="spot-form">
+            <div class="form-row">
+                <input 
+                    name="name" 
+                    class="form-control flex-grow" 
+                    placeholder="Spot name (e.g., Malibu First Point)" 
+                    required 
+                />
+                <input 
+                    name="lat" 
+                    type="number" 
+                    step="0.0001" 
+                    class="form-control lat-lon" 
+                    placeholder="Latitude" 
+                    required 
+                />
+                <input 
+                    name="lon" 
+                    type="number" 
+                    step="0.0001" 
+                    class="form-control lat-lon" 
+                    placeholder="Longitude" 
+                    required 
+                />
+                <button type="submit" class="btn btn-primary">Add Spot</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Surf Spots -->
+    <div class="card">
+        <div class="card-header">
+            <h2>Your Surf Spots</h2>
+            <button type="button" class="btn btn-sm" onclick="refreshSurfData()">🔄 Refresh</button>
+        </div>
+        
+        {% if spots %}
+        <div class="spots-grid">
+            {% for spot in spots %}
+            <div class="spot-card" data-spot-id="{{ spot.id }}">
+                <div class="spot-header">
+                    <h3>{{ spot.name }}</h3>
+                    <form 
+                        method="post" 
+                        action="/api/v1/plugins/surf/delete" 
+                        class="inline-form"
+                        onsubmit="return confirm('Delete this surf spot?')"
+                    >
+                        <input type="hidden" name="spot_id" value="{{ spot.id }}" />
+                        <button type="submit" class="btn-icon" title="Delete spot">🗑️</button>
+                    </form>
+                </div>
+                
+                <div class="spot-data">
+                    <div class="data-item">
+                        <div class="data-label">Wave Height</div>
+                        <div class="data-value" id="height-{{ spot.id }}">
+                            <span class="metric" id="hm-{{ spot.id }}">--</span> m
+                            <span class="imperial">(<span id="hf-{{ spot.id }}">--</span> ft)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="data-item">
+                        <div class="data-label">Period</div>
+                        <div class="data-value">
+                            <span id="ps-{{ spot.id }}">--</span> s
+                        </div>
+                    </div>
+                    
+                    <div class="data-item">
+                        <div class="data-label">Direction</div>
+                        <div class="data-value">
+                            <span id="dg-{{ spot.id }}">--</span>°
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="spot-footer">
+                    <span class="muted" id="ts-{{ spot.id }}">Loading...</span>
+                    <a 
+                        href="https://www.google.com/maps?q={{ spot.lat }},{{ spot.lon }}" 
+                        target="_blank" 
+                        class="map-link"
+                    >
+                        📍 View on Map
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p class="muted">No surf spots added yet. Add your first spot above!</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="info-footer">
+        <p class="muted">
+            Auto-refresh every {{ refresh_minutes }} minutes. 
+            Wave data provided by <a href="https://open-meteo.com/en/docs/marine-weather-api" target="_blank">Open-Meteo Marine API</a>
+        </p>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .page-header {
+        margin-bottom: 30px;
+    }
+    
+    .page-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 32px;
+    }
+    
+    .card {
+        background: var(--card-bg, #1e1e1e);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+        border: 1px solid var(--border-color, #333);
+    }
+    
+    .card h2 {
+        margin: 0 0 20px 0;
+        font-size: 20px;
+        color: var(--text-primary, #e0e0e0);
+    }
+    
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .card-header h2 {
+        margin: 0;
+    }
+    
+    /* Form */
+    .spot-form {
+        width: 100%;
+    }
+    
+    .form-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    
+    .form-control {
+        padding: 12px;
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 8px;
+        color: var(--text-primary, #e0e0e0);
+        font-size: 14px;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color, #007acc);
+    }
+    
+    .flex-grow {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .lat-lon {
+        width: 140px;
+    }
+    
+    /* Spots Grid */
+    .spots-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 20px;
+    }
+    
+    .spot-card {
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.2s;
+    }
+    
+    .spot-card:hover {
+        border-color: var(--primary-color, #007acc);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 122, 204, 0.2);
+    }
+    
+    .spot-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color, #333);
+    }
+    
+    .spot-header h3 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--text-primary, #e0e0e0);
+    }
+    
+    .spot-data {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .data-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .data-label {
+        font-size: 13px;
+        color: var(--text-secondary, #888);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .data-value {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-primary, #e0e0e0);
+    }
+    
+    .data-value .metric {
+        color: var(--primary-color, #007acc);
+    }
+    
+    .data-value .imperial {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-secondary, #888);
+    }
+    
+    .spot-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-color, #333);
+        font-size: 13px;
+    }
+    
+    .map-link {
+        color: var(--primary-color, #007acc);
+        text-decoration: none;
+    }
+    
+    .map-link:hover {
+        text-decoration: underline;
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+        background: var(--input-bg, #2a2a2a);
+        color: var(--text-primary, #e0e0e0);
+        border: 1px solid var(--border-color, #444);
+    }
+    
+    .btn:hover {
+        background: var(--hover-bg, #333);
+    }
+    
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+    
+    .btn-primary {
+        background: var(--primary-color, #007acc);
+        color: white;
+        border-color: var(--primary-color, #007acc);
+    }
+    
+    .btn-primary:hover {
+        background: var(--primary-hover, #005a9e);
+    }
+    
+    .btn-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 4px;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+    
+    .btn-icon:hover {
+        opacity: 1;
+    }
+    
+    .inline-form {
+        display: inline;
+    }
+    
+    .muted {
+        color: var(--text-secondary, #888);
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .info-footer {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .info-footer a {
+        color: var(--primary-color, #007acc);
+        text-decoration: none;
+    }
+    
+    .info-footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<script>
+    function mToFt(m) {
+        return m == null ? null : (m * 3.28084);
+    }
+    
+    async function refreshSurfData() {
+        try {
+            const response = await fetch('/api/v1/plugins/surf/data', { cache: 'no-store' });
+            const data = await response.json();
+            
+            (data.spots || []).forEach(spot => {
+                const hmEl = document.getElementById('hm-' + spot.id);
+                const hfEl = document.getElementById('hf-' + spot.id);
+                const psEl = document.getElementById('ps-' + spot.id);
+                const dgEl = document.getElementById('dg-' + spot.id);
+                const tsEl = document.getElementById('ts-' + spot.id);
+                
+                if (hmEl && spot.height_m != null) {
+                    hmEl.textContent = Number(spot.height_m).toFixed(2);
+                }
+                if (hfEl && spot.height_m != null) {
+                    hfEl.textContent = Number(mToFt(spot.height_m)).toFixed(1);
+                }
+                if (psEl && spot.period_s != null) {
+                    psEl.textContent = Number(spot.period_s).toFixed(1);
+                }
+                if (dgEl && spot.direction_deg != null) {
+                    dgEl.textContent = Math.round(spot.direction_deg);
+                }
+                if (tsEl && spot.ts) {
+                    tsEl.textContent = new Date(spot.ts + 'Z').toLocaleString();
+                }
+            });
+        } catch (error) {
+            console.error('Failed to refresh surf data:', error);
+        }
+    }
+    
+    // Auto-refresh every {{ refresh_minutes }} minutes
+    setInterval(refreshSurfData, {{ refresh_minutes }} * 60 * 1000);
+    
+    // Initial load
+    window.addEventListener('load', refreshSurfData);
+</script>
+{% endblock %}

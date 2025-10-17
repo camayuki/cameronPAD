@@ -1,0 +1,7 @@
+name: "surf"
+version: "1.0.0"
+enabled: true
+description: "Wave height, period, and direction monitoring for surf spots"
+settings:
+  refresh_interval: 300  # Refresh surf data every 5 minutes (300 seconds)
+  provider: "open-meteo"  # Wave data provider

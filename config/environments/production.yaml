@@ -1,0 +1,45 @@
+# Production Environment Configuration
+
+debug: false
+reload: false
+environment: production
+
+# Production security settings
+security:
+  cors_origins:
+    - "https://yourdomain.com"
+    - "https://www.yourdomain.com"
+  rate_limit_requests: 100
+  rate_limit_period: 60
+
+# Production logging
+logging:
+  level: INFO
+  file_path: /var/log/cameronpad/app.log
+
+# Production database
+database:
+  url: ${DATABASE_URL}
+  pool_size: 10
+  max_overflow: 20
+  echo: false
+
+# Disable hot reloading in production
+plugins:
+  enable_hot_reload: false
+
+# Disable API docs in production (can be enabled if needed)
+api:
+  enable_docs: false
+  docs_url: null
+  redoc_url: null
+
+# Redis cache for production
+cache:
+  backend: redis
+  redis_url: ${REDIS_URL}
+  default_ttl: 600
+
+# Production upload settings
+upload_dir: /var/lib/cameronpad/uploads
+max_upload_size: 5242880  # 5MB in production

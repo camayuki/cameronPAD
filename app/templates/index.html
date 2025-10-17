@@ -1,0 +1,579 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>cameronpad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { color-scheme: light; }
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:0;background:#fff;color:#111}
+    .wrap{max-width:1200px;margin:0 auto;padding:20px 16px}
+    h1{text-align:center;margin:0 0 14px}
+    h2{margin:18px 0 8px}
+    .tabs{display:flex;gap:8px;margin:10px 0 16px;justify-content:center;flex-wrap:wrap}
+    .tab{padding:8px 12px;border:1px solid #ccc;border-radius:8px;cursor:pointer}
+    .tab.active{background:#eee}
+    .panel{display:none}
+    .panel.active{display:block}
+    .actions{display:flex;gap:8px;margin:8px 0 12px;justify-content:center;flex-wrap:wrap}
+    .btn{padding:6px 10px;border:1px solid #ccc;border-radius:8px;background:#f3f3f3;cursor:pointer}
+    table{border-collapse:collapse;width:100%}
+    th,td{border-bottom:1px solid #eee;padding:8px;text-align:left;vertical-align:top}
+    form.inline{display:inline}
+    .muted{opacity:.65}
+    .padbox{border:1px solid #ddd;border-radius:8px;padding:12px;background:#fafafa}
+    pre{white-space:pre-wrap;word-wrap:break-word;margin:0}
+    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .grow{flex:1}
+    .section{margin-top:16px}
+
+    /* Journal calendar */
+    .cal { display:grid; grid-template-rows:auto 1fr; gap:8px; }
+    .cal-nav { display:flex; justify-content:space-between; align-items:center; }
+    .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
+    .cal-cell { border:1px solid #ddd; border-radius:8px; padding:8px; min-height:70px; cursor:pointer; }
+    .cal-cell.muted{ color:#aaa; }
+    .cal-cell.selected{ outline:2px solid #333; }
+    .cal-weekday{ font-weight:600; text-align:center; padding:6px 0; }
+    .chip { display:inline-block; padding:2px 6px; border:1px solid #ddd; border-radius:999px; font-size:12px; margin-right:4px; }
+    .gallery { display:flex; gap:8px; flex-wrap:wrap; }
+    .gallery img{ max-width:160px; height:auto; border:1px solid #ddd; border-radius:8px; }
+    .entry { border:1px solid #eee; border-radius:10px; padding:10px; margin:10px 0; }
+  </style>
+  <script>
+    function showTab(id){
+      document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+      document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+      const tab = document.getElementById("tab-"+id);
+      const panel = document.getElementById("panel-"+id);
+      if(tab && panel){
+        tab.classList.add("active");
+        panel.classList.add("active");
+        history.replaceState(null, "", "#"+id);
+      }
+    }
+    function padEdit(on){
+      const view=document.getElementById("pad-view");
+      const form=document.getElementById("pad-form");
+      view.style.display = on ? "none" : "block";
+      form.style.display = on ? "block" : "none";
+      if(on){ const ta=document.getElementById("pad-textarea"); if(ta) ta.focus(); }
+    }
+
+    // Stocks refresh
+    async function refreshTracked(){
+      try{
+        const r = await fetch("/api/quotes",{cache:"no-store"});
+        const data = await r.json();
+        (data.quotes||[]).forEach(q=>{
+          const p = document.getElementById("p-"+q.symbol);
+          const h = document.getElementById("h-"+q.symbol);
+          const l = document.getElementById("l-"+q.symbol);
+          const d = document.getElementById("t-"+q.symbol);
+          const pr= document.getElementById("pred-"+q.symbol);
+          if(p)  p.textContent  = (q.price!=null)?Number(q.price).toFixed(2):"--";
+          if(h)  h.textContent  = (q.high !=null)?Number(q.high ).toFixed(2):"--";
+          if(l)  l.textContent  = (q.low  !=null)?Number(q.low  ).toFixed(2):"--";
+          if(pr) pr.textContent = (q.pred !=null)?Number(q.pred ).toFixed(2):"—";
+          if(d)  d.textContent  = q.ts ? new Date(q.ts+'Z').toLocaleTimeString() : "--";
+        });
+      }catch(e){}
+    }
+    async function refreshShowcase(){
+      try{
+        const r = await fetch("/api/showcase",{cache:"no-store"});
+        const data = await r.json();
+        (data.quotes||[]).forEach(q=>{
+          const p = document.getElementById("sp-"+q.symbol);
+          const h = document.getElementById("sh-"+q.symbol);
+          const l = document.getElementById("sl-"+q.symbol);
+          const d = document.getElementById("st-"+q.symbol);
+          if(p) p.textContent = (q.price!=null)?Number(q.price).toFixed(2):"--";
+          if(h) h.textContent = (q.high !=null)?Number(q.high ).toFixed(2):"--";
+          if(l) l.textContent = (q.low  !=null)?Number(q.low  ).toFixed(2):"--";
+          if(d) d.textContent = q.ts ? new Date(q.ts+'Z').toLocaleTimeString() : "--";
+        });
+      }catch(e){}
+    }
+
+    // Surf
+    function mToFt(m){ return m==null ? null : (m*3.28084); }
+    async function refreshSurf(){
+      try{
+        const r = await fetch("/api/surf",{cache:"no-store"});
+        const data = await r.json();
+        (data.spots||[]).forEach(s=>{
+          const hm = document.getElementById("hm-"+s.id);
+          const hf = document.getElementById("hf-"+s.id);
+          const ps = document.getElementById("ps-"+s.id);
+          const dg = document.getElementById("dg-"+s.id);
+          const ts = document.getElementById("hs-"+s.id);
+          if(hm) hm.textContent = (s.height_m!=null)?Number(s.height_m).toFixed(2):"--";
+          if(hf) hf.textContent = (s.height_m!=null)?Number(mToFt(s.height_m)).toFixed(1):"--";
+          if(ps) ps.textContent = (s.period_s!=null)?Number(s.period_s).toFixed(1):"--";
+          if(dg) dg.textContent = (s.direction_deg!=null)?Math.round(s.direction_deg):"--";
+          if(ts) ts.textContent = s.ts ? new Date(s.ts+'Z').toLocaleString() : "--";
+        });
+      }catch(e){}
+    }
+
+    // Journal
+    let currentYear, currentMonth; // month index 0-11
+    let selectedDate = "{{ today_iso }}";
+    function iso(y,m,d){ const mm=String(m).padStart(2,'0'); const dd=String(d).padStart(2,'0'); return `${y}-${mm}-${dd}`; }
+    function daysInMonth(y,m){ return new Date(y, m+1, 0).getDate(); }
+
+    function renderCalendar(y, m){ // m = 0..11
+      currentYear=y; currentMonth=m;
+      const grid = document.getElementById('cal-grid');
+      const head = document.getElementById('cal-head');
+      grid.innerHTML='';
+      const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      head.textContent = `${monthNames[m]} ${y}`;
+
+      // Weekday row
+      const weekdays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const weekRow = document.getElementById('cal-weekdays');
+      weekRow.innerHTML='';
+      weekdays.forEach(w=>{
+        const div=document.createElement('div'); div.className='cal-weekday'; div.textContent=w; weekRow.appendChild(div);
+      });
+
+      const first = new Date(y, m, 1);
+      const startIdx = first.getDay();
+      const daysPrev = startIdx;
+      const prevMonthDays = daysInMonth(y, (m-1+12)%12);
+      // previous month tail
+      for(let i=daysPrev; i>0; i--){
+        const d = prevMonthDays - i + 1;
+        const cell = document.createElement('div');
+        cell.className='cal-cell muted';
+        cell.textContent = d;
+        grid.appendChild(cell);
+      }
+      // this month
+      const total = daysInMonth(y,m);
+      for(let d=1; d<=total; d++){
+        const cell = document.createElement('div');
+        cell.className='cal-cell';
+        const idate = iso(y, m+1, d);
+        cell.dataset.iso = idate;
+        cell.innerHTML = `<div><strong>${d}</strong></div>`;
+        if(idate === selectedDate) cell.classList.add('selected');
+        cell.onclick = ()=>selectDate(idate);
+        grid.appendChild(cell);
+      }
+      // next month head (fill 42 cells)
+      const cells = grid.children.length;
+      for(let i=0; i<42-cells; i++){
+        const cell = document.createElement('div');
+        cell.className='cal-cell muted';
+        cell.textContent = i+1;
+        grid.appendChild(cell);
+      }
+    }
+
+    function escapeHTML(s){ const d=document.createElement('div'); d.innerText = s==null? "": String(s); return d.innerHTML; }
+    function nl2br(s){ return escapeHTML(s).replace(/\n/g,'<br>'); }
+
+    async function loadEntries(dateIso){
+      try{
+        const r = await fetch(`/api/journal?date=${encodeURIComponent(dateIso)}`, {cache:'no-store'});
+        const data = await r.json();
+        const cont = document.getElementById('journal-entries');
+        cont.innerHTML = '';
+        if(!data.entries || data.entries.length===0){
+          cont.innerHTML = '<div class="muted">No entries yet for this day.</div>';
+          return;
+        }
+        data.entries.forEach(e=>{
+          const div = document.createElement('div');
+          div.className = 'entry';
+          const when = (e.time? escapeHTML(e.time)+' — ' : '') + escapeHTML(e.location||'');
+          const notes = nl2br(e.notes||'');
+          let imgs = '';
+          if (e.images && e.images.length){
+            imgs = '<div class="gallery">' + e.images.map(im=>(
+              `<div>
+                 <a href="${im.url}" target="_blank"><img src="${im.url}" alt=""></a>
+                 <form class="inline" method="post" action="/journal/image/delete" onsubmit="return confirm('Delete image?')">
+                   <input type="hidden" name="id" value="${im.id}"/>
+                   <button class="btn" type="submit">Delete image</button>
+                 </form>
+               </div>`
+            )).join('') + '</div>';
+          }
+          div.innerHTML = `
+            <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
+              <div><strong>${escapeHTML(e.title||'(Untitled)')}</strong></div>
+              <form class="inline" method="post" action="/journal/delete" onsubmit="return confirm('Delete entry?')">
+                <input type="hidden" name="id" value="${e.id}"/>
+                <button class="btn" type="submit">Delete</button>
+              </form>
+            </div>
+            <div class="muted" style="margin:4px 0">${when||'—'}</div>
+            <div>${notes}</div>
+            ${imgs}
+          `;
+          cont.appendChild(div);
+        });
+      }catch(e){}
+    }
+
+    function selectDate(dateIso){
+      selectedDate = dateIso;
+      document.getElementById('selected-date-label').textContent = dateIso;
+      document.getElementById('journal-date').value = dateIso;
+      document.querySelectorAll('.cal-cell').forEach(cell => {
+        if (cell.dataset && cell.dataset.iso){
+          cell.classList.toggle('selected', cell.dataset.iso === dateIso);
+        }
+      });
+      loadEntries(dateIso);
+    }
+    function prevMonth(){ const d=new Date(currentYear,currentMonth-1,1); renderCalendar(d.getFullYear(), d.getMonth()); }
+    function nextMonth(){ const d=new Date(currentYear,currentMonth+1,1); renderCalendar(d.getFullYear(), d.getMonth()); }
+
+    // Simple filter for TV list
+    function filterTv(){
+      const q=(document.getElementById('tv-search').value||'').toUpperCase();
+      document.querySelectorAll('#tv-list tr.data').forEach(tr=>{
+        tr.style.display = tr.textContent.toUpperCase().includes(q) ? '' : 'none';
+      });
+    }
+
+    window.onload=()=>{
+      // Default tab
+      document.getElementById("tab-stocks").classList.add("active");
+      document.getElementById("panel-stocks").classList.add("active");
+      const target = (location.hash||"#stocks").slice(1);
+      if (target && target !== "stocks") showTab(target);
+
+      // Refreshers
+      refreshTracked(); refreshShowcase(); refreshSurf();
+      setInterval(refreshTracked, 3000);
+      setInterval(refreshShowcase, 30000);
+      setInterval(refreshSurf, 300000);
+
+      // Journal init
+      const now = new Date();
+      renderCalendar(now.getFullYear(), now.getMonth());
+      selectDate("{{ today_iso }}");
+    };
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <h1>cameronpad</h1>
+
+    <div class="actions">
+      <form class="inline" method="post" action="/admin/test-notify"><button class="btn" type="submit">Send test alert</button></form>
+      <form class="inline" method="post" action="/admin/fetch-now-ui"><button class="btn" type="submit">Fetch data now</button></form>
+    </div>
+
+    <div class="tabs">
+      <div id="tab-stocks"   class="tab" onclick="showTab('stocks')">Stocks</div>
+      <div id="tab-surf"     class="tab" onclick="showTab('surf')">Surf</div>
+      <div id="tab-journal"  class="tab" onclick="showTab('journal')">Journal</div>
+      <div id="tab-alerts"   class="tab" onclick="showTab('alerts')">Alerts</div>
+      <div id="tab-notes"    class="tab" onclick="showTab('notes')">Notes</div>
+    </div>
+
+    <!-- Stocks -->
+    <div id="panel-stocks" class="panel">
+      <!-- Heatmap -->
+      <h2 id="heatmap" class="section">Market heatmap</h2>
+      <div style="width:100%;height:480px;max-width:1200px;margin:8px 0;">
+        <div class="tradingview-widget-container" style="height:100%;width:100%;">
+          <div class="tradingview-widget-container__widget" style="height:100%;width:100%;"></div>
+          <div class="tradingview-widget-copyright">
+            <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+              <span class="blue-text">Track all markets on TradingView</span>
+            </a>
+          </div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+          {
+            "exchanges": [],
+            "dataSource": "SPX500",
+            "grouping": "no_group",
+            "blockSize": "market_cap_basic",
+            "blockColor": "Perf.YTD",
+            "locale": "en",
+            "symbolUrl": "",
+            "colorTheme": "light",
+            "hasTopBar": false,
+            "isDataSetEnabled": false,
+            "isZoomEnabled": true,
+            "hasSymbolTooltip": true,
+            "width": "100%",
+            "height": "100%"
+          }
+          </script>
+        </div>
+      </div>
+
+      <!-- Symbol Overview (dynamic) -->
+      <h2 class="section">Symbol Overview</h2>
+      <div class="tradingview-widget-container" style="margin:12px 0;">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript"
+          src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+        {
+          "symbols": [
+            {% for tv,label in tv_syms %}
+              ["{{ tv }}","{{ label }}"]{% if not loop.last %},{% endif %}
+            {% endfor %}
+          ],
+          "chartOnly": false, "locale": "en", "colorTheme": "light",
+          "showVolume": false, "showMA": false, "width": "100%", "height": 220
+        }
+        </script>
+      </div>
+
+      <!-- Manage list -->
+      <div class="row" style="margin:8px 0 6px">
+        <input id="tv-search" class="grow" placeholder="Search/filter current list…" oninput="filterTv()"/>
+      </div>
+      <form class="row" method="post" action="/tv/add" style="margin-bottom:8px">
+        <input class="grow" name="tv_symbol" placeholder="Add: e.g., NASDAQ:AAPL or BINANCE:BTCUSDT" required />
+        <input name="label" placeholder="Label (optional)" />
+        <button class="btn" type="submit">Add to Symbol Overview</button>
+      </form>
+      <table>
+        <thead><tr><th>TradingView Symbol</th><th>Label</th><th>Actions</th></tr></thead>
+        <tbody id="tv-list">
+          {% for tv,label in tv_syms %}
+          <tr class="data">
+            <td>{{ tv }}</td>
+            <td>{{ label }}</td>
+            <td>
+              <form class="inline" method="post" action="/tv/delete" onsubmit="return confirm('Remove from Symbol Overview?')">
+                <input type="hidden" name="tv_symbol" value="{{ tv }}"/>
+                <button class="btn">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Showcase (cached) -->
+      <h2 class="section">Showcase (majors)</h2>
+      <p class="muted">These refresh every 30s (cached).</p>
+      <table>
+        <thead><tr><th>Ticker</th><th>Current</th><th>Day High</th><th>Day Low</th><th>Last Update</th></tr></thead>
+        <tbody>
+          {% for sym in showcase %}
+          <tr>
+            <td>{{ sym }}</td>
+            <td id="sp-{{ sym }}">--</td>
+            <td id="sh-{{ sym }}">--</td>
+            <td id="sl-{{ sym }}">--</td>
+            <td id="st-{{ sym }}" class="muted">--</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <!-- Trackers -->
+      <h2 class="section">Trackers</h2>
+      <form method="post" action="/stocks/add">
+        <input name="symbol" placeholder="Ticker (AAPL)" required />
+        <input name="target" type="number" step="0.01" placeholder="Target price" required />
+        <select name="direction"><option value="above">Crosses above</option><option value="below">Crosses below</option></select>
+        <button class="btn">Add</button>
+      </form>
+      <p class="muted">Upstream API polls every {{ poll }}s; tracked table refreshes every 3s.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Ticker</th><th>Current</th><th>Day High</th><th>Day Low</th><th>Pred. Next Close</th><th>Last Update</th><th>Target</th><th>Direction</th><th>Enabled</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for id,symbol,target,dir,enabled in stocks %}
+          <tr>
+            <td>{{ symbol }}</td>
+            <td><span id="p-{{ symbol }}">--</span></td>
+            <td><span id="h-{{ symbol }}">--</span></td>
+            <td><span id="l-{{ symbol }}">--</span></td>
+            <td><span id="pred-{{ symbol }}">—</span></td>
+            <td class="muted"><span id="t-{{ symbol }}">--</span></td>
+            <td>{{ '%.2f'|format(target) }}</td>
+            <td>{{ dir }}</td>
+            <td>{{ 'on' if enabled else 'off' }}</td>
+            <td>
+              <form class="inline" method="post" action="/stocks/toggle"><input type="hidden" name="id" value="{{ id }}" /><button class="btn">Toggle</button></form>
+              <form class="inline" method="post" action="/stocks/delete" onsubmit="return confirm('Delete?')"><input type="hidden" name="id" value="{{ id }}" /><button class="btn">Delete</button></form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Surf -->
+    <div id="panel-surf" class="panel">
+      <h2>Surf (wave height / period / direction)</h2>
+      <form class="row" method="post" action="/surf/add" style="margin-bottom:8px">
+        <input class="grow" name="name" placeholder="Spot name (e.g., Malibu First Point)" required />
+        <input style="width:140px" name="lat" type="number" step="0.0001" placeholder="Lat" required />
+        <input style="width:140px" name="lon" type="number" step="0.0001" placeholder="Lon" required />
+        <button class="btn" type="submit">Add spot</button>
+      </form>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Spot</th><th>Height</th><th>Period (s)</th><th>Direction (°)</th><th>Time</th><th>Map</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="surf-body">
+          {% for id,name,lat,lon in surf_spots %}
+          <tr>
+            <td>{{ name }}</td>
+            <td><span id="hm-{{ id }}">--</span> m · <span id="hf-{{ id }}">--</span> ft</td>
+            <td id="ps-{{ id }}">--</td>
+            <td id="dg-{{ id }}">--</td>
+            <td class="muted" id="hs-{{ id }}">--</td>
+            <td><a href="https://www.google.com/maps?q={{ lat }},{{ lon }}" target="_blank">Map</a></td>
+            <td>
+              <form class="inline" method="post" action="/surf/delete" onsubmit="return confirm('Delete this spot?')">
+                <input type="hidden" name="id" value="{{ id }}" />
+                <button class="btn">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="muted">Auto-refresh every {{ (surf_refresh/60)|round|int }} min. Data by Open-Meteo Marine (nearest hour).</p>
+    </div>
+
+    <!-- Journal -->
+    <div id="panel-journal" class="panel">
+      <h2>Journal</h2>
+
+      <div class="cal">
+        <div class="cal-nav">
+          <button class="btn" onclick="prevMonth()" type="button">← Prev</button>
+          <div id="cal-head" style="font-weight:600"></div>
+          <button class="btn" onclick="nextMonth()" type="button">Next →</button>
+        </div>
+        <div id="cal-weekdays" class="cal-grid"></div>
+        <div id="cal-grid" class="cal-grid"></div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <strong>Selected date:</strong>
+        <span id="selected-date-label" class="chip">{{ today_iso }}</span>
+      </div>
+
+      <h3 class="section">New entry</h3>
+      <form method="post" action="/journal/add" enctype="multipart/form-data">
+        <input id="journal-date" type="hidden" name="date" value="{{ today_iso }}"/>
+        <div class="row" style="margin-bottom:8px">
+          <input class="grow" name="title" placeholder="Title (e.g., Dinner with friends)"/>
+          <input style="width:140px" name="time" type="time" />
+          <input class="grow" name="location" placeholder="Location"/>
+        </div>
+        <textarea name="notes" rows="4" style="width:100%" placeholder="Notes…"></textarea>
+        <div class="row" style="margin-top:8px">
+          <input type="file" name="photos" accept="image/*" multiple />
+          <button class="btn" type="submit">Save entry</button>
+        </div>
+      </form>
+
+      <h3 class="section">Entries</h3>
+      <div id="journal-entries" class="section"></div>
+    </div>
+
+    <!-- Alerts -->
+    <div id="panel-alerts" class="panel">
+      <h2>Recent Alerts</h2>
+      <table>
+        <thead><tr><th>Time</th><th>Ticker</th><th>Condition</th><th>Target</th><th>Last Price</th></tr></thead>
+        <tbody>
+        {% for id,symbol,price,target,dir,ts in alerts %}
+          <tr><td>{{ ts }}</td><td>{{ symbol }}</td><td>{{ dir }}</td><td>{{ '%.2f'|format(target) }}</td><td>{{ '%.2f'|format(price) }}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Notes + Big Notepad (tabbed) -->
+    <div id="panel-notes" class="panel">
+      <h2 id="notes">Notes</h2>
+      <form method="post" action="/notes/add">
+        <textarea name="content" rows="4" style="width:100%" placeholder="Type a note..."></textarea>
+        <button class="btn">Add note (timestamped)</button>
+      </form>
+
+      <table style="margin-top:10px">
+        <thead><tr><th>Time</th><th>Note</th><th>Actions</th></tr></thead>
+        <tbody>
+        {% for id,content,ts in notes %}
+          <tr>
+            <td style="white-space:nowrap">{{ ts }}</td>
+            <td>{{ content }}</td>
+            <td>
+              <form class="inline" method="post" action="/notes/delete" onsubmit="return confirm('Delete note?')">
+                <input type="hidden" name="id" value="{{ id }}" />
+                <button class="btn">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <hr style="margin:20px 0" />
+
+      <h2>Big Notepad</h2>
+
+      <!-- Tabs bar -->
+      <div class="row" style="flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        {% for id,name in pad_tabs %}
+          <a class="btn" href="/?pad={{ id }}#notes" {% if id==pad_id %}style="background:#eee;font-weight:600"{% endif %}>
+            {{ name }}
+          </a>
+        {% endfor %}
+        <form class="inline" method="post" action="/pad/tab/add" style="display:flex;gap:6px;align-items:center">
+          <input name="name" placeholder="New tab name" required />
+          <button class="btn" type="submit">Add</button>
+        </form>
+      </div>
+
+      <!-- Active tab controls -->
+      <div class="row" style="gap:8px;margin:4px 0 8px">
+        <div class="muted">Tab: <strong>{{ pad_name }}</strong> · Last saved: {{ pad_updated or "—" }}</div>
+        <span class="grow"></span>
+        <form class="inline" method="post" action="/pad/tab/rename" style="display:flex;gap:6px;align-items:center">
+          <input type="hidden" name="id" value="{{ pad_id }}"/>
+          <input name="name" placeholder="Rename tab"/>
+          <button class="btn" type="submit">Rename</button>
+        </form>
+        <form class="inline" method="post" action="/pad/tab/delete" onsubmit="return confirm('Delete this tab and its notes?')">
+          <input type="hidden" name="id" value="{{ pad_id }}"/>
+          <button class="btn" type="submit">Delete tab</button>
+        </form>
+      </div>
+
+      <!-- Read view -->
+      <div id="pad-view" class="padbox"><pre>{{ pad_html | safe }}</pre></div>
+      <div style="margin-top:8px"><button class="btn" onclick="padEdit(true)">Edit</button></div>
+
+      <!-- Editor -->
+      <form id="pad-form" class="padbox" method="post" action="/pad/save" style="display:none;margin-top:10px">
+        <input type="hidden" name="tab_id" value="{{ pad_id }}"/>
+        <textarea id="pad-textarea" name="content" rows="12" style="width:100%">{{ pad_content | e }}</textarea>
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <button class="btn" type="submit">Save</button>
+          <button class="btn" type="button" onclick="padEdit(false)">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

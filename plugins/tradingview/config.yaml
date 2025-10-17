@@ -1,0 +1,14 @@
+name: "tradingview"
+version: "1.0.0"
+enabled: true
+description: "TradingView widgets for market heatmap and symbol overview"
+settings:
+  default_symbols:
+    - ["NASDAQ:AAPL", "AAPL"]
+    - ["NASDAQ:MSFT", "MSFT"]
+    - ["NASDAQ:NVDA", "NVDA"]
+    - ["NASDAQ:GOOGL", "GOOGL"]
+    - ["NASDAQ:AMZN", "AMZN"]
+    - ["NASDAQ:META", "META"]
+    - ["NASDAQ:TSLA", "TSLA"]
+    - ["AMEX:SPY", "SPY"]

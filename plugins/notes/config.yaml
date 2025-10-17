@@ -1,0 +1,6 @@
+name: "notes"
+version: "1.0.0"
+enabled: true
+description: "Timestamped notes with add/delete functionality"
+settings:
+  max_display: 100  # Maximum number of notes to display

@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% block title %}Notepad - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>📓 Big Notepad</h1>
+        <p class="muted">Multi-tab text editor for longer notes and code</p>
+    </div>
+
+    <!-- Tabs Bar -->
+    <div class="card">
+        <div class="tabs-container">
+            <div class="tabs-list">
+                {% for tab in tabs %}
+                <a 
+                    href="/api/v1/plugins/notepad/?tab_id={{ tab.id }}" 
+                    class="tab-btn {% if active_tab and tab.id == active_tab.id %}active{% endif %}"
+                >
+                    {{ tab.name }}
+                </a>
+                {% endfor %}
+            </div>
+            
+            <form method="post" action="/api/v1/plugins/notepad/tab/add" class="tab-add-form">
+                <input 
+                    name="name" 
+                    placeholder="New tab name" 
+                    required 
+                    class="form-control-sm"
+                />
+                <button type="submit" class="btn btn-sm btn-primary">+ Add Tab</button>
+            </form>
+        </div>
+    </div>
+
+    {% if active_tab %}
+    <!-- Tab Controls -->
+    <div class="card">
+        <div class="tab-controls">
+            <div class="tab-info">
+                <strong>Active Tab:</strong> {{ active_tab.name }}
+                {% if active_tab.updated_at %}
+                <span class="muted"> · Last saved: {{ active_tab.updated_at }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="tab-actions">
+                <form method="post" action="/api/v1/plugins/notepad/tab/rename" class="inline-form">
+                    <input type="hidden" name="tab_id" value="{{ active_tab.id }}" />
+                    <input 
+                        name="name" 
+                        placeholder="Rename tab" 
+                        class="form-control-sm"
+                    />
+                    <button type="submit" class="btn btn-sm">Rename</button>
+                </form>
+                
+                <form 
+                    method="post" 
+                    action="/api/v1/plugins/notepad/tab/delete" 
+                    class="inline-form"
+                    onsubmit="return confirm('Delete this tab and its content?')"
+                >
+                    <input type="hidden" name="tab_id" value="{{ active_tab.id }}" />
+                    <button type="submit" class="btn btn-sm btn-danger">Delete Tab</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editor -->
+    <div class="card">
+        <div id="view-mode" class="editor-view">
+            <div class="view-content">
+                <pre>{{ active_tab.content or '(Empty notepad - click Edit to start writing)' }}</pre>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="toggleEdit(true)">✏️ Edit</button>
+        </div>
+
+        <form 
+            id="edit-mode" 
+            method="post" 
+            action="/api/v1/plugins/notepad/save" 
+            class="editor-form" 
+            style="display: none;"
+        >
+            <input type="hidden" name="tab_id" value="{{ active_tab.id }}" />
+            <textarea 
+                name="content" 
+                id="editor-textarea"
+                rows="20" 
+                class="form-control editor-textarea"
+                placeholder="Start typing..."
+            >{{ active_tab.content }}</textarea>
+            <div class="editor-actions">
+                <button type="submit" class="btn btn-primary">💾 Save</button>
+                <button type="button" class="btn" onclick="toggleEdit(false)">Cancel</button>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <div class="card">
+        <div class="empty-state">
+            <p class="muted">No tabs available. Create your first tab above!</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .page-header {
+        margin-bottom: 30px;
+    }
+    
+    .page-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 32px;
+    }
+    
+    .card {
+        background: var(--card-bg, #1e1e1e);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+        border: 1px solid var(--border-color, #333);
+    }
+    
+    /* Tabs */
+    .tabs-container {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    
+    .tabs-list {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        flex: 1;
+    }
+    
+    .tab-btn {
+        padding: 10px 16px;
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 8px;
+        color: var(--text-primary, #e0e0e0);
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-weight: 500;
+    }
+    
+    .tab-btn:hover {
+        background: var(--hover-bg, #333);
+    }
+    
+    .tab-btn.active {
+        background: var(--primary-color, #007acc);
+        border-color: var(--primary-color, #007acc);
+        color: white;
+    }
+    
+    .tab-add-form {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    /* Tab Controls */
+    .tab-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    
+    .tab-info {
+        color: var(--text-primary, #e0e0e0);
+    }
+    
+    .tab-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    
+    .inline-form {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    /* Editor */
+    .editor-view {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .view-content {
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 8px;
+        padding: 16px;
+        min-height: 300px;
+    }
+    
+    .view-content pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-primary, #e0e0e0);
+    }
+    
+    .editor-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .editor-textarea {
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        min-height: 400px;
+    }
+    
+    .editor-actions {
+        display: flex;
+        gap: 12px;
+    }
+    
+    /* Form Elements */
+    .form-control, .form-control-sm {
+        padding: 10px 14px;
+        background: var(--input-bg, #2a2a2a);
+        border: 1px solid var(--border-color, #444);
+        border-radius: 8px;
+        color: var(--text-primary, #e0e0e0);
+        font-family: inherit;
+        font-size: 14px;
+    }
+    
+    .form-control-sm {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .form-control:focus, .form-control-sm:focus {
+        outline: none;
+        border-color: var(--primary-color, #007acc);
+    }
+    
+    textarea.form-control {
+        resize: vertical;
+        width: 100%;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+        background: var(--input-bg, #2a2a2a);
+        color: var(--text-primary, #e0e0e0);
+        border: 1px solid var(--border-color, #444);
+    }
+    
+    .btn:hover {
+        background: var(--hover-bg, #333);
+    }
+    
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+    
+    .btn-primary {
+        background: var(--primary-color, #007acc);
+        color: white;
+        border-color: var(--primary-color, #007acc);
+    }
+    
+    .btn-primary:hover {
+        background: var(--primary-hover, #005a9e);
+    }
+    
+    .btn-danger {
+        background: #d32f2f;
+        color: white;
+        border-color: #d32f2f;
+    }
+    
+    .btn-danger:hover {
+        background: #b71c1c;
+    }
+    
+    .muted {
+        color: var(--text-secondary, #888);
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+    }
+</style>
+
+<script>
+    function toggleEdit(editMode) {
+        const viewMode = document.getElementById('view-mode');
+        const editModeEl = document.getElementById('edit-mode');
+        
+        if (editMode) {
+            viewMode.style.display = 'none';
+            editModeEl.style.display = 'flex';
+            document.getElementById('editor-textarea').focus();
+        } else {
+            viewMode.style.display = 'flex';
+            editModeEl.style.display = 'none';
+        }
+    }
+</script>
+{% endblock %}

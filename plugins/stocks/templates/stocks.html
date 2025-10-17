@@ -1,0 +1,560 @@
+{% extends "base.html" %}
+
+{% block title %}Stocks - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="page-header" style="margin-bottom: 2rem;">
+    <h1 style="color: var(--accent-primary); margin: 0;">📈 Stock Tracker</h1>
+    <p style="color: var(--text-muted); margin: 0.5rem 0 0;">Track stock prices, set alerts, and monitor your watchlist</p>
+</div>
+
+<!-- Showcase Table -->
+<div class="card" style="margin-bottom: 2rem;">
+    <div class="card-header">
+        <h3>📊 Market Showcase</h3>
+        <div class="actions">
+            <button class="btn btn-sm" onclick="refreshShowcase()">🔄 Refresh</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color);">
+                        <th style="padding: 0.75rem; text-align: left;">Symbol</th>
+                        <th style="padding: 0.75rem; text-align: right;">Price</th>
+                        <th style="padding: 0.75rem; text-align: right;">High</th>
+                        <th style="padding: 0.75rem; text-align: right;">Low</th>
+                        <th style="padding: 0.75rem; text-align: right;">Updated</th>
+                    </tr>
+                </thead>
+                <tbody id="showcase-tbody">
+                    {% for symbol in showcase_symbols %}
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600; color: var(--accent-primary);">{{ symbol }}</td>
+                        <td style="padding: 0.75rem; text-align: right;" id="sp-{{ symbol }}">--</td>
+                        <td style="padding: 0.75rem; text-align: right; color: var(--success);" id="sh-{{ symbol }}">--</td>
+                        <td style="padding: 0.75rem; text-align: right; color: var(--error);" id="sl-{{ symbol }}">--</td>
+                        <td style="padding: 0.75rem; text-align: right; font-size: 0.85rem; color: var(--text-muted);" id="st-{{ symbol }}">--</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Tracked Stocks & Alerts -->
+<div class="card" style="margin-bottom: 2rem;">
+    <div class="card-header">
+        <h3>🎯 Tracked Stocks & Alerts</h3>
+        <button class="btn btn-sm" onclick="showAddStockModal()">+ Add Stock Alert</button>
+    </div>
+    <div class="card-body">
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid var(--border-color);">
+                        <th style="padding: 0.75rem;">Symbol</th>
+                        <th style="padding: 0.75rem; text-align: right;">Current</th>
+                        <th style="padding: 0.75rem; text-align: right;">Target</th>
+                        <th style="padding: 0.75rem;">Direction</th>
+                        <th style="padding: 0.75rem;">Status</th>
+                        <th style="padding: 0.75rem; text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tracked-tbody">
+                    <tr>
+                        <td colspan="6" style="padding: 2rem; text-align: center; color: var(--text-muted);">
+                            No stock alerts configured yet. Click "Add Stock Alert" to get started.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Service Console -->
+<div class="card" style="margin-bottom: 2rem;">
+    <div class="card-header">
+        <h3>🖥️ Service Console</h3>
+        <div class="actions">
+            <span id="service-status-badge" class="badge badge-stopped">⏹️ Stopped</span>
+            <button class="btn btn-sm btn-success" id="btn-start" onclick="controlService('start')">▶️ Start</button>
+            <button class="btn btn-sm btn-danger" id="btn-stop" onclick="controlService('stop')" disabled>⏹️ Stop</button>
+            <button class="btn btn-sm btn-warning" id="btn-restart" onclick="controlService('restart')" disabled>🔄 Restart</button>
+            <button class="btn btn-sm" onclick="refreshServiceLogs()">🔄 Refresh Logs</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="console-output" id="service-console">
+            <div class="console-line">
+                <span class="console-timestamp">--:--:--</span>
+                <span class="console-level console-info">INFO</span>
+                <span class="console-message">Service console ready. Start the service to see logs.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Alerts -->
+<div class="card">
+    <div class="card-header">
+        <h3>🔔 Recent Alerts</h3>
+    </div>
+    <div class="card-body">
+        <div id="alerts-list">
+            <p style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                No alerts triggered yet.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .btn-success {
+        background: #28a745;
+        color: white;
+    }
+    
+    .btn-success:hover:not(:disabled) {
+        background: #218838;
+    }
+    
+    .btn-danger {
+        background: #dc3545;
+        color: white;
+    }
+    
+    .btn-danger:hover:not(:disabled) {
+        background: #c82333;
+    }
+    
+    .btn-warning {
+        background: #ffc107;
+        color: #333;
+    }
+    
+    .btn-warning:hover:not(:disabled) {
+        background: #e0a800;
+    }
+    
+    .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    .badge {
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    
+    .badge-running {
+        background: rgba(40, 167, 69, 0.2);
+        color: #28a745;
+        border: 1px solid #28a745;
+    }
+    
+    .badge-stopped {
+        background: rgba(108, 117, 125, 0.2);
+        color: #6c757d;
+        border: 1px solid #6c757d;
+    }
+    
+    .console-output {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 0.875rem;
+        padding: 1rem;
+        border-radius: 4px;
+        max-height: 400px;
+        overflow-y: auto;
+        line-height: 1.6;
+    }
+    
+    .console-line {
+        margin-bottom: 0.25rem;
+        display: flex;
+        gap: 0.75rem;
+    }
+    
+    .console-timestamp {
+        color: #858585;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+    
+    .console-level {
+        font-weight: 600;
+        flex-shrink: 0;
+        min-width: 65px;
+    }
+    
+    .console-info {
+        color: #4fc3f7;
+    }
+    
+    .console-success {
+        color: #81c784;
+    }
+    
+    .console-warning {
+        color: #ffb74d;
+    }
+    
+    .console-error {
+        color: #e57373;
+    }
+    
+    .console-message {
+        flex: 1;
+    }
+    
+    table {
+        font-size: 0.95rem;
+    }
+    
+    @media (max-width: 768px) {
+        table {
+            font-size: 0.85rem;
+        }
+        
+        th, td {
+            padding: 0.5rem !important;
+        }
+        
+        .console-output {
+            font-size: 0.75rem;
+        }
+        
+        .console-line {
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+    }
+</style>
+
+<script>
+    // Auto-refresh showcase every 30 seconds
+    let refreshInterval;
+    let serviceStatusInterval;
+    
+    async function refreshShowcase() {
+        console.log('🔄 [SHOWCASE] Starting refresh...');
+        try {
+            console.log('🔄 [SHOWCASE] Fetching from /api/v1/plugins/stocks/showcase');
+            const response = await fetch('/api/v1/plugins/stocks/showcase', {
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            });
+            
+            console.log('🔄 [SHOWCASE] Response status:', response.status);
+            
+            if (response.ok) {
+                const data = await response.json();
+                console.log('📊 [SHOWCASE] Received data:', data);
+                console.log('📊 [SHOWCASE] Number of quotes:', data.quotes ? data.quotes.length : 0);
+                
+                // Update the table with real data
+                if (data.quotes && data.quotes.length > 0) {
+                    let updated = 0;
+                    let skipped = 0;
+                    
+                    data.quotes.forEach(quote => {
+                        const symbol = quote.symbol;
+                        console.log(`📈 [SHOWCASE] Processing ${symbol}:`, quote);
+                        
+                        // Check element existence
+                        const priceCell = document.getElementById(`sp-${symbol}`);
+                        const highCell = document.getElementById(`sh-${symbol}`);
+                        const lowCell = document.getElementById(`sl-${symbol}`);
+                        const tsCell = document.getElementById(`st-${symbol}`);
+                        
+                        console.log(`🔍 [SHOWCASE] Elements for ${symbol}:`, {
+                            priceCell: !!priceCell,
+                            highCell: !!highCell,
+                            lowCell: !!lowCell,
+                            tsCell: !!tsCell,
+                            hasPrice: !!quote.price,
+                            hasHigh: !!quote.high,
+                            hasLow: !!quote.low,
+                            hasTs: !!quote.price_ts
+                        });
+                        
+                        console.log(`🔍 [SHOWCASE DEBUG] ${symbol} RAW VALUES:`, {
+                            price: quote.price,
+                            priceType: typeof quote.price,
+                            high: quote.high,
+                            highType: typeof quote.high,
+                            low: quote.low,
+                            lowType: typeof quote.low,
+                            timestamp: quote.price_ts
+                        });
+                        
+                        let elementUpdated = false;
+                        
+                        // Update price
+                        if (priceCell && quote.price) {
+                            const oldValue = priceCell.textContent;
+                            const newValue = `$${parseFloat(quote.price).toFixed(2)}`;
+                            priceCell.textContent = newValue;
+                            console.log(`💲 [SHOWCASE] ${symbol} price: ${oldValue} → ${newValue}`);
+                            elementUpdated = true;
+                        } else {
+                            console.warn(`⚠️ [SHOWCASE DEBUG] ${symbol} price NOT updated:`, {
+                                priceCellExists: !!priceCell,
+                                priceValue: quote.price,
+                                priceIsNull: quote.price === null,
+                                priceIsUndefined: quote.price === undefined,
+                                currentCellText: priceCell ? priceCell.textContent : 'N/A'
+                            });
+                        }
+                        
+                        // Update high
+                        if (highCell && quote.high) {
+                            const oldValue = highCell.textContent;
+                            const newValue = `$${parseFloat(quote.high).toFixed(2)}`;
+                            highCell.textContent = newValue;
+                            console.log(`📈 [SHOWCASE] ${symbol} high: ${oldValue} → ${newValue}`);
+                            elementUpdated = true;
+                        } else {
+                            console.warn(`⚠️ [SHOWCASE DEBUG] ${symbol} high NOT updated:`, {
+                                highCellExists: !!highCell,
+                                highValue: quote.high,
+                                highIsNull: quote.high === null,
+                                currentCellText: highCell ? highCell.textContent : 'N/A'
+                            });
+                        }
+                        
+                        // Update low
+                        if (lowCell && quote.low) {
+                            const oldValue = lowCell.textContent;
+                            const newValue = `$${parseFloat(quote.low).toFixed(2)}`;
+                            lowCell.textContent = newValue;
+                            console.log(`📉 [SHOWCASE] ${symbol} low: ${oldValue} → ${newValue}`);
+                            elementUpdated = true;
+                        } else {
+                            console.warn(`⚠️ [SHOWCASE DEBUG] ${symbol} low NOT updated:`, {
+                                lowCellExists: !!lowCell,
+                                lowValue: quote.low,
+                                lowIsNull: quote.low === null,
+                                currentCellText: lowCell ? lowCell.textContent : 'N/A'
+                            });
+                        }
+                        
+                        // Update timestamp
+                        if (tsCell && quote.price_ts) {
+                            const date = new Date(quote.price_ts);
+                            const oldValue = tsCell.textContent;
+                            const newValue = date.toLocaleTimeString();
+                            tsCell.textContent = newValue;
+                            console.log(`🕒 [SHOWCASE] ${symbol} timestamp: ${oldValue} → ${newValue}`);
+                            elementUpdated = true;
+                        } else {
+                            console.warn(`⚠️ [SHOWCASE DEBUG] ${symbol} timestamp NOT updated:`, {
+                                tsCellExists: !!tsCell,
+                                timestampValue: quote.price_ts,
+                                currentCellText: tsCell ? tsCell.textContent : 'N/A'
+                            });
+                        }
+                        
+                        if (elementUpdated) {
+                            updated++;
+                        } else {
+                            skipped++;
+                            console.error(`❌ [SHOWCASE DEBUG] ${symbol} - NO UPDATES APPLIED! Cell stays as "--"`, {
+                                quote: quote,
+                                cells: {
+                                    price: priceCell ? priceCell.textContent : null,
+                                    high: highCell ? highCell.textContent : null,
+                                    low: lowCell ? lowCell.textContent : null,
+                                    ts: tsCell ? tsCell.textContent : null
+                                }
+                            });
+                        }
+                    });
+                    
+                    console.log(`✅ [SHOWCASE] Update complete: ${updated} updated, ${skipped} skipped`);
+                } else {
+                    console.warn('⚠️ [SHOWCASE] No quotes in response or empty array');
+                }
+            } else {
+                console.error(`❌ [SHOWCASE] HTTP error: ${response.status} ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('❌ [SHOWCASE] Error refreshing showcase:', error);
+            console.error('❌ [SHOWCASE] Stack trace:', error.stack);
+        }
+    }
+    
+    async function checkServiceStatus() {
+        try {
+            const response = await fetch('/api/v1/plugins/stocks/service-status');
+            if (response.ok) {
+                const data = await response.json();
+                updateServiceUI(data.data);
+            }
+        } catch (error) {
+            console.error('Error checking service status:', error);
+        }
+    }
+    
+    function updateServiceUI(status) {
+        const badge = document.getElementById('service-status-badge');
+        const btnStart = document.getElementById('btn-start');
+        const btnStop = document.getElementById('btn-stop');
+        const btnRestart = document.getElementById('btn-restart');
+        
+        if (status.service_running) {
+            badge.textContent = '▶️ Running';
+            badge.className = 'badge badge-running';
+            btnStart.disabled = true;
+            btnStop.disabled = false;
+            btnRestart.disabled = false;
+        } else {
+            badge.textContent = '⏹️ Stopped';
+            badge.className = 'badge badge-stopped';
+            btnStart.disabled = false;
+            btnStop.disabled = true;
+            btnRestart.disabled = true;
+        }
+    }
+    
+    async function controlService(action) {
+        try {
+            const response = await fetch('/api/v1/plugins/stocks/service-control', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action })
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.status === 'success') {
+                    addConsoleLog('SUCCESS', data.message);
+                    await checkServiceStatus();
+                    await refreshServiceLogs();
+                } else {
+                    addConsoleLog('ERROR', data.message);
+                }
+            }
+        } catch (error) {
+            console.error(`Error ${action}ing service:`, error);
+            addConsoleLog('ERROR', `Failed to ${action} service: ${error.message}`);
+        }
+    }
+    
+    async function refreshServiceLogs() {
+        try {
+            const response = await fetch('/api/v1/plugins/stocks/service-logs?limit=50');
+            if (response.ok) {
+                const data = await response.json();
+                displayLogs(data.logs);
+            }
+        } catch (error) {
+            console.error('Error fetching service logs:', error);
+        }
+    }
+    
+    function displayLogs(logs) {
+        const console = document.getElementById('service-console');
+        
+        if (!logs || logs.length === 0) {
+            console.innerHTML = `
+                <div class="console-line">
+                    <span class="console-timestamp">--:--:--</span>
+                    <span class="console-level console-info">INFO</span>
+                    <span class="console-message">No service logs available yet.</span>
+                </div>
+            `;
+            return;
+        }
+        
+        console.innerHTML = logs.map(log => {
+            const time = new Date(log.timestamp).toLocaleTimeString();
+            const levelClass = `console-${log.level.toLowerCase()}`;
+            return `
+                <div class="console-line">
+                    <span class="console-timestamp">${time}</span>
+                    <span class="console-level ${levelClass}">${log.level}</span>
+                    <span class="console-message">${escapeHtml(log.message)}</span>
+                </div>
+            `;
+        }).join('');
+        
+        // Auto-scroll to bottom
+        console.scrollTop = console.scrollHeight;
+    }
+    
+    function addConsoleLog(level, message) {
+        const console = document.getElementById('service-console');
+        const time = new Date().toLocaleTimeString();
+        const levelClass = `console-${level.toLowerCase()}`;
+        
+        const logLine = document.createElement('div');
+        logLine.className = 'console-line';
+        logLine.innerHTML = `
+            <span class="console-timestamp">${time}</span>
+            <span class="console-level ${levelClass}">${level}</span>
+            <span class="console-message">${escapeHtml(message)}</span>
+        `;
+        
+        console.appendChild(logLine);
+        console.scrollTop = console.scrollHeight;
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function showAddStockModal() {
+        alert('Add Stock Alert feature coming soon!\n\nThis will allow you to:\n• Set price targets\n• Choose alert direction (above/below)\n• Enable/disable alerts\n• Receive notifications');
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        checkServiceStatus();
+        refreshServiceLogs();
+        
+        // Auto-refresh service status every 5 seconds
+        serviceStatusInterval = setInterval(checkServiceStatus, 5000);
+        
+        // Auto-refresh logs every 10 seconds
+        setInterval(refreshServiceLogs, 10000);
+    });
+    
+    // Auto-refresh on load and every 30 seconds
+    document.addEventListener('DOMContentLoaded', () => {
+        refreshShowcase();
+        refreshInterval = setInterval(refreshShowcase, 30000);
+    });
+    
+    // Cleanup interval on page unload
+    window.addEventListener('beforeunload', () => {
+        if (refreshInterval) {
+            clearInterval(refreshInterval);
+        }
+    });
+</script>
+{% endblock %}

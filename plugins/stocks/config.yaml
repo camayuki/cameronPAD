@@ -1,0 +1,76 @@
+# Stocks Plugin Configuration
+
+# Enable/disable the plugin
+enabled: true
+
+# Plugin priority (lower numbers load first)
+priority: 50
+
+# Plugin settings
+settings:
+  # External API keys (can be overridden by environment variables)
+  finnhub_token: ${FINNHUB_TOKEN}
+  alpha_vantage_key: ${ALPHA_VANTAGE_KEY}
+  
+  # Polling configuration
+  enable_polling: true
+  poll_interval: 60  # seconds
+  
+  # Alert configuration
+  alert_cooldown_minutes: 0  # 0 = no cooldown
+  
+  # Showcase symbols (main dashboard view)
+  showcase_symbols:
+    - AAPL
+    - MSFT
+    - NVDA
+    - GOOGL
+    - AMZN
+    - META
+    - TSLA
+    - SPY
+  
+  # Alpha Vantage rate limiting (free tier: 5 requests per minute)
+  alpha_min_interval: 13.0  # seconds between requests
+  
+  # Showcase symbols (displayed in overview)
+  showcase_symbols:
+    - AAPL
+    - MSFT
+    - NVDA
+    - GOOGL
+    - AMZN
+    - META
+    - TSLA
+    - SPY
+  
+  # Notification settings
+  notifications:
+    discord_webhook: ${DISCORD_WEBHOOK_URL}
+    telegram_bot_token: ${TELEGRAM_BOT_TOKEN}
+    telegram_chat_id: ${TELEGRAM_CHAT_ID}
+    twilio_sid: ${TWILIO_SID}
+    twilio_token: ${TWILIO_TOKEN}
+    twilio_from: ${TWILIO_FROM}
+    alert_phone: ${ALERT_PHONE}
+
+# Plugin metadata
+metadata:
+  name: "stocks"
+  version: "1.0.0"
+  description: "Stock price tracking and alerting system"
+  author: "CameronPAD"
+  tags:
+    - finance
+    - tracking
+    - alerts
+  
+# Plugin dependencies
+dependencies: []
+
+# Plugin permissions
+permissions:
+  - database.read
+  - database.write
+  - network.external_api
+  - notifications.send

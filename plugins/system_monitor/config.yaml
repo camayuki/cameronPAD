@@ -1,0 +1,13 @@
+name: system_monitor
+version: 1.0.0
+description: Real-time system monitoring and resource tracking
+author: CameronPAD Team
+enabled: true
+priority: 90
+
+settings:
+  refresh_interval: 5
+  track_cpu: true
+  track_memory: true
+  track_disk: true
+  alert_threshold: 90

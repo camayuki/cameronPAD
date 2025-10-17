@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block title %}{{ plugin_name }} - Plugin Detail{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>🔌 {{ plugin_name }}</h1>
+    <p>{{ plugin.metadata.description if plugin.metadata else 'Plugin Details' }}</p>
+</div>
+
+<div style="margin-bottom: 20px;">
+    <a href="/plugins" class="btn btn-secondary">← Back to Plugins</a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Plugin Information</h3>
+    </div>
+    <div class="card-content">
+        <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; margin-bottom: 20px;">
+            <div style="font-weight: 600;">Name:</div>
+            <div>{{ plugin.metadata.name if plugin.metadata else plugin_name }}</div>
+            
+            <div style="font-weight: 600;">Version:</div>
+            <div>{{ plugin.metadata.version if plugin.metadata else 'Unknown' }}</div>
+            
+            <div style="font-weight: 600;">Author:</div>
+            <div>{{ plugin.metadata.author if plugin.metadata else 'Unknown' }}</div>
+            
+            <div style="font-weight: 600;">Status:</div>
+            <div>
+                <span class="badge badge-success">{{ health.status }}</span>
+            </div>
+            
+            <div style="font-weight: 600;">API Version:</div>
+            <div>{{ plugin.metadata.api_version if plugin.metadata else 'Unknown' }}</div>
+        </div>
+        
+        {% if current_user.is_admin %}
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+            <form method="POST" action="/plugins/{{ plugin_name }}/disable" onsubmit="return confirm('Are you sure you want to disable this plugin?');">
+                <button type="submit" class="btn btn-danger">🛑 Disable Plugin</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h3>Available Routes</h3>
+    </div>
+    <div class="card-content">
+        {% if routes %}
+            <div style="margin-bottom: 20px;">
+                <p>This plugin exposes the following API endpoints:</p>
+            </div>
+            {% for route in routes %}
+            <div style="border: 1px solid #333; border-radius: 8px; padding: 15px; margin-bottom: 10px; background: #1e1e1e;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div>
+                        <strong style="font-family: monospace; color: #4ec9b0; font-size: 14px;">{{ route.path }}</strong>
+                    </div>
+                    <div>
+                        {% for method in route.methods %}
+                        <span class="badge" style="background: {% if method == 'GET' %}#28a745{% elif method == 'POST' %}#007bff{% elif method == 'DELETE' %}#dc3545{% else %}#6c757d{% endif %}; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-left: 4px;">{{ method }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if 'GET' in route.methods %}
+                <button onclick="testEndpoint('{{ route.path }}', 'GET')" class="btn btn-primary btn-sm">Test GET</button>
+                {% endif %}
+                {% if 'POST' in route.methods %}
+                <button onclick="testEndpoint('{{ route.path }}', 'POST')" class="btn btn-secondary btn-sm">Test POST</button>
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">No routes available</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h3>API Test Console</h3>
+    </div>
+    <div class="card-content">
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: 600;">Endpoint URL:</label>
+            <input type="text" id="testUrl" class="form-control" placeholder="/api/v1/plugins/{{ plugin_name }}/..." style="margin-top: 5px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: 600;">Method:</label>
+            <select id="testMethod" class="form-control" style="margin-top: 5px;">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label style="font-weight: 600;">Request Body (for POST/PUT):</label>
+            <textarea id="testBody" class="form-control" rows="4" style="margin-top: 5px; font-family: monospace;" placeholder='{"key": "value"}'></textarea>
+        </div>
+        <button onclick="testCustomEndpoint()" class="btn btn-primary">Send Request</button>
+        <button onclick="clearConsole()" class="btn btn-secondary">Clear Output</button>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h3>Output Console</h3>
+    </div>
+    <div class="card-content">
+        <div id="outputConsole" style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 14px; min-height: 200px; max-height: 400px; overflow-y: auto;">
+            <div style="color: #6a9955;">// API response output will appear here</div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h3>Health Status</h3>
+    </div>
+    <div class="card-content">
+        <pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: monospace;">{{ health | tojson(indent=2) }}</pre>
+        <button onclick="refreshHealth()" class="btn btn-primary btn-sm" style="margin-top: 10px;">🔄 Refresh Health</button>
+    </div>
+</div>
+
+<style>
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-success {
+    background: #28a745;
+    color: white;
+}
+</style>
+
+<script>
+async function testEndpoint(path, method) {
+    const outputConsole = document.getElementById('outputConsole');
+    
+    // Add request info
+    outputConsole.innerHTML += `\n<div style="color: #569cd6; margin-top: 10px;">> ${method} ${path}</div>`;
+    outputConsole.scrollTop = outputConsole.scrollHeight;
+    
+    try {
+        const response = await fetch(path, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const data = await response.json();
+        
+        // Add response
+        outputConsole.innerHTML += `<div style="color: #4ec9b0;">Status: ${response.status} ${response.statusText}</div>`;
+        outputConsole.innerHTML += `<div style="color: #ce9178;">Response:</div>`;
+        outputConsole.innerHTML += `<pre style="color: #d4d4d4; margin-left: 10px;">${JSON.stringify(data, null, 2)}</pre>`;
+        outputConsole.scrollTop = outputConsole.scrollHeight;
+    } catch (error) {
+        outputConsole.innerHTML += `<div style="color: #f48771;">Error: ${error.message}</div>`;
+        outputConsole.scrollTop = outputConsole.scrollHeight;
+    }
+}
+
+async function testCustomEndpoint() {
+    const url = document.getElementById('testUrl').value;
+    const method = document.getElementById('testMethod').value;
+    const body = document.getElementById('testBody').value;
+    
+    if (!url) {
+        alert('Please enter an endpoint URL');
+        return;
+    }
+    
+    const outputConsole = document.getElementById('outputConsole');
+    outputConsole.innerHTML += `\n<div style="color: #569cd6; margin-top: 10px;">> ${method} ${url}</div>`;
+    
+    if (body && (method === 'POST' || method === 'PUT')) {
+        outputConsole.innerHTML += `<div style="color: #ce9178;">Body: ${body}</div>`;
+    }
+    
+    outputConsole.scrollTop = outputConsole.scrollHeight;
+    
+    try {
+        const options = {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        
+        if (body && (method === 'POST' || method === 'PUT')) {
+            options.body = body;
+        }
+        
+        const response = await fetch(url, options);
+        const data = await response.json();
+        
+        outputConsole.innerHTML += `<div style="color: #4ec9b0;">Status: ${response.status} ${response.statusText}</div>`;
+        outputConsole.innerHTML += `<div style="color: #ce9178;">Response:</div>`;
+        outputConsole.innerHTML += `<pre style="color: #d4d4d4; margin-left: 10px;">${JSON.stringify(data, null, 2)}</pre>`;
+        outputConsole.scrollTop = outputConsole.scrollHeight;
+    } catch (error) {
+        outputConsole.innerHTML += `<div style="color: #f48771;">Error: ${error.message}</div>`;
+        outputConsole.scrollTop = outputConsole.scrollHeight;
+    }
+}
+
+function clearConsole() {
+    document.getElementById('outputConsole').innerHTML = '<div style="color: #6a9955;">// Console cleared</div>';
+}
+
+async function refreshHealth() {
+    const outputConsole = document.getElementById('outputConsole');
+    outputConsole.innerHTML += `\n<div style="color: #569cd6; margin-top: 10px;">> Refreshing health status...</div>`;
+    
+    try {
+        const response = await fetch('/health');
+        const data = await response.json();
+        
+        const pluginHealth = data.plugins.find(p => p.name === '{{ plugin_name }}');
+        if (pluginHealth) {
+            outputConsole.innerHTML += `<div style="color: #4ec9b0;">Health Status:</div>`;
+            outputConsole.innerHTML += `<pre style="color: #d4d4d4; margin-left: 10px;">${JSON.stringify(pluginHealth, null, 2)}</pre>`;
+        }
+        
+        outputConsole.scrollTop = outputConsole.scrollHeight;
+        location.reload(); // Reload to update the health display
+    } catch (error) {
+        outputConsole.innerHTML += `<div style="color: #f48771;">Error: ${error.message}</div>`;
+        outputConsole.scrollTop = outputConsole.scrollHeight;
+    }
+}
+</script>
+{% endblock %}

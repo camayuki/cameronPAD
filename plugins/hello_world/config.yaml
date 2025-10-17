@@ -1,0 +1,13 @@
+# Hello World Plugin Configuration File
+
+# Plugin is enabled by default
+enabled: true
+
+# Priority (lower numbers load first)
+priority: 100
+
+# Plugin-specific settings
+settings:
+  greeting_style: friendly
+  max_greetings: 1000
+  custom_message: "Welcome to CameronPAD!"

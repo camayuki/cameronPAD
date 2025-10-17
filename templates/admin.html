@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Panel - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>👥 Admin Panel</h1>
+    <p>System administration and user management</p>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>User Management</h3>
+    </div>
+    <div class="card-content">
+        <p>User management features coming soon:</p>
+        <ul>
+            <li>View all users</li>
+            <li>Create new users</li>
+            <li>Edit user roles and permissions</li>
+            <li>Deactivate/activate accounts</li>
+        </ul>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h3>System Status</h3>
+    </div>
+    <div class="card-content">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">💾</div>
+                <div class="stat-info">
+                    <div class="stat-number">Database</div>
+                    <div class="stat-label">Connected</div>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🔌</div>
+                <div class="stat-info">
+                    <div class="stat-number">Plugins</div>
+                    <div class="stat-label">Running</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h3>System Configuration</h3>
+    </div>
+    <div class="card-content">
+        <p>Advanced configuration options coming soon:</p>
+        <ul>
+            <li>Database settings</li>
+            <li>API configuration</li>
+            <li>Plugin settings</li>
+            <li>Security policies</li>
+            <li>Backup and restore</li>
+        </ul>
+    </div>
+</div>
+
+<div style="margin-top: 20px;">
+    <a href="/app" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

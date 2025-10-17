@@ -1,0 +1,54 @@
+# Plugin Configuration
+# Global settings that override individual plugin configurations
+
+# Stocks Plugin
+stocks:
+  enabled: true
+  priority: 50
+  settings:
+    enable_polling: true
+    poll_interval: 60
+    alert_cooldown_minutes: 5
+    showcase_symbols:
+      - AAPL
+      - MSFT
+      - NVDA
+      - GOOGL
+      - AMZN
+      - META
+      - TSLA
+      - SPY
+
+# Notes Plugin
+notes:
+  enabled: true
+  priority: 60
+  settings:
+    max_note_length: 10000
+    enable_search: true
+    auto_save_interval: 30
+
+# Journal Plugin  
+journal:
+  enabled: true
+  priority: 70
+  settings:
+    max_image_size: 5242880  # 5MB
+    thumbnail_size: 200
+    enable_calendar_view: true
+
+# Surf Plugin
+surf:
+  enabled: true
+  priority: 80
+  settings:
+    enable_forecasting: true
+    forecast_days: 7
+    refresh_interval: 600
+    default_spots:
+      - name: "Malibu"
+        lat: 34.0259
+        lon: -118.7798
+      - name: "Santa Monica"
+        lat: 34.0195
+        lon: -118.4912

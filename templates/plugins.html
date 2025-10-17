@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Plugins - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>🔌 Plugin Management</h1>
+    <p>Manage your CameronPAD plugins</p>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Available Plugins</h3>
+    </div>
+    <div class="card-content">
+        {% if plugins %}
+            <div class="plugins-list">
+                {% for plugin in plugins %}
+                <a href="/plugins/{{ plugin.name }}" style="text-decoration: none; color: inherit;">
+                    <div class="plugin-item" style="cursor: pointer; padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s;">
+                        <div class="plugin-info">
+                            <h4 style="margin: 0 0 5px 0;">{{ plugin.name }}</h4>
+                            {% if plugin.metadata %}
+                            <p style="margin: 0 0 5px 0;">{{ plugin.metadata.description or 'No description available' }}</p>
+                            <p class="text-muted" style="margin: 0; font-size: 12px;">Version: {{ plugin.metadata.version or 'Unknown' }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="plugin-status">
+                            {% if plugin.enabled %}
+                            <span class="badge badge-success">Enabled</span>
+                            {% else %}
+                            <span class="badge badge-secondary">Disabled</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            
+            <style>
+            .plugin-item:hover {
+                background: #f8f9fa;
+                border-color: #4a9eff !important;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            </style>
+        {% else %}
+            <div class="empty-state">
+                <p>No plugins available</p>
+                <p class="text-muted">Install plugins to extend CameronPAD functionality</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <h3>Plugin Management Coming Soon</h3>
+    </div>
+    <div class="card-content">
+        <p>Full plugin management features including:</p>
+        <ul>
+            <li>Enable/disable plugins</li>
+            <li>Configure plugin settings</li>
+            <li>Install new plugins</li>
+            <li>Update existing plugins</li>
+        </ul>
+        <a href="/app" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

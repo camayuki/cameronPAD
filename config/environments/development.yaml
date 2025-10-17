@@ -1,0 +1,27 @@
+
+# Development Configuration
+environment: "development"
+debug: true
+host: "127.0.0.1"
+port: 8000
+
+database:
+  url: "sqlite+aiosqlite:///./data/cameronpad_dev.db"
+  echo: true
+
+security:
+  secret_key: "dev-secret-key-change-in-production"
+  algorithm: "HS256"
+  access_token_expire_minutes: 1440
+
+logging:
+  level: "DEBUG"
+  file_path: "./logs/cameronpad_dev.log"
+
+plugins:
+  auto_load: true
+  plugins_dir: "./plugins"
+
+cache:
+  backend: "memory"
+  default_ttl: 300
