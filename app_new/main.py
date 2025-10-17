@@ -18,6 +18,9 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import RedirectResponse
+from fastapi import HTTPException
+from pydantic import BaseModel
+from typing import Optional
 
 from .core.config import get_config
 from .core.database import initialize_database, get_migration_manager
@@ -189,6 +192,14 @@ def setup_templates(app: FastAPI) -> None:
 
 def setup_routes(app: FastAPI) -> None:
     """Setup application routes."""
+    
+    # Pydantic model for profile update
+    class ProfileUpdateRequest(BaseModel):
+        email: Optional[str] = None
+        full_name: Optional[str] = None
+        current_password: Optional[str] = None
+        new_password: Optional[str] = None
+        confirm_password: Optional[str] = None
     
     @app.get("/")
     async def root():
@@ -395,11 +406,25 @@ def setup_routes(app: FastAPI) -> None:
         logger.info(f"⚙️ Settings page accessed by user: {getattr(request.state, 'username', 'Unknown')}")
         templates = getattr(request.app.state, 'templates', None)
         if templates:
+            user_id = getattr(request.state, 'user_id', None)
+            username = getattr(request.state, 'username', 'Unknown')
+            
+            # Get full user info from database
+            from .core.database import get_database_manager
+            db_manager = get_database_manager()
+            user = None
+            if user_id:
+                query = "SELECT email, full_name FROM users WHERE id = ?"
+                results = db_manager.execute_query(query, (user_id,))
+                user = results[0] if results else None
+            
             current_user = {
-                "id": getattr(request.state, 'user_id', None),
-                "username": getattr(request.state, 'username', 'Unknown'),
+                "id": user_id,
+                "username": username,
                 "role": 'admin' if getattr(request.state, 'is_admin', False) else 'user',
-                "is_admin": getattr(request.state, 'is_admin', False)
+                "is_admin": getattr(request.state, 'is_admin', False),
+                "email": user.get('email') if user else None,
+                "full_name": user.get('full_name') if user else None
             }
             
             # Get theme information
@@ -417,6 +442,77 @@ def setup_routes(app: FastAPI) -> None:
             })
         else:
             return {"message": "Settings page"}
+    
+    @app.post("/api/profile/update")
+    async def update_profile(request: Request, profile_data: ProfileUpdateRequest):
+        """Update user profile information."""
+        user_id = getattr(request.state, 'user_id', None)
+        username = getattr(request.state, 'username', None)
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        logger.info(f"👤 Profile update requested by user: {username}")
+        
+        from .core.auth import get_auth_manager
+        auth_manager = get_auth_manager()
+        
+        update_fields = {}
+        
+        # Handle email update
+        if profile_data.email is not None:
+            update_fields['email'] = profile_data.email or None
+        
+        # Handle full_name update
+        if profile_data.full_name is not None:
+            update_fields['full_name'] = profile_data.full_name or None
+        
+        # Handle password change
+        if profile_data.new_password:
+            # Verify current password
+            if not profile_data.current_password:
+                raise HTTPException(status_code=400, detail="Current password is required")
+            
+            # Get current user from database
+            from .core.database import get_database_manager
+            db_manager = get_database_manager()
+            query = "SELECT password_hash FROM users WHERE username = ?"
+            results = db_manager.execute_query(query, (username,))
+            user = results[0] if results else None
+            
+            if not user:
+                raise HTTPException(status_code=404, detail="User not found")
+            
+            # Verify current password
+            if not auth_manager.verify_password(profile_data.current_password, user.get('password_hash')):
+                raise HTTPException(status_code=400, detail="Current password is incorrect")
+            
+            # Hash new password
+            update_fields['password_hash'] = auth_manager.hash_password(profile_data.new_password)
+            logger.info(f"🔒 Password changed for user: {username}")
+        
+        # Update user in database
+        if update_fields:
+            from .core.database import get_database_manager
+            db_manager = get_database_manager()
+            
+            # Build update query
+            set_clauses = [f"{key} = ?" for key in update_fields.keys()]
+            values = list(update_fields.values())
+            values.append(user_id)
+            
+            query = f"UPDATE users SET {', '.join(set_clauses)}, updated_at = CURRENT_TIMESTAMP WHERE id = ?"
+            db_manager.execute_update(query, values)
+            
+            logger.info(f"✅ Profile updated for user: {username}")
+            
+            message = "Profile updated successfully"
+            if 'password_hash' in update_fields:
+                message += " (password changed)"
+            
+            return {"success": True, "message": message}
+        else:
+            return {"success": True, "message": "No changes made"}
     
     @app.get("/profile")
     async def profile_page(request: Request):
@@ -534,6 +630,10 @@ def setup_routes(app: FastAPI) -> None:
     # Include theme management router
     from .api.themes import router as themes_router
     app.include_router(themes_router)
+    
+    # Include theme marketplace router
+    from .api.theme_marketplace import router as marketplace_router
+    app.include_router(marketplace_router)
     
     # Include API router
     api_router = create_api_router()

@@ -45,6 +45,15 @@ class SurfPlugin(WebPlugin):
         self.templates = Jinja2Templates(directory=str(template_dir))
         self.templates.env.loader = loader
         
+        # Add get_theme_css function to template globals
+        def get_theme_css(theme_vars):
+            """Convert theme variables dict to CSS"""
+            if not theme_vars:
+                return ""
+            return "\n".join([f"    {k}: {v};" for k, v in theme_vars.items()])
+        
+        self.templates.env.globals['get_theme_css'] = get_theme_css
+        
         # Register routes
         self.register_routes()
         
@@ -61,17 +70,17 @@ class SurfPlugin(WebPlugin):
         
         logger.info("🌊 Starting surf update service...")
         
-        # Do an initial update
-        try:
-            from .services import update_all_spots
-            update_all_spots()
-            logger.info("✅ Initial surf update complete")
-        except Exception as e:
-            logger.error(f"❌ Initial surf update failed: {e}")
+        # Skip initial update on startup - only update on scheduled intervals
+        # try:
+        #     from .services import update_all_spots
+        #     update_all_spots()
+        #     logger.info("✅ Initial surf update complete")
+        # except Exception as e:
+        #     logger.error(f"❌ Initial surf update failed: {e}")
         
         # Start background update loop
         async def update_loop():
-            surf_refresh = int(os.getenv('SURF_REFRESH', '600'))  # 10 minutes default
+            surf_refresh = int(os.getenv('SURF_REFRESH', '300'))  # 5 minutes default
             cycle_count = 0
             
             logger.info(f"🔄 Starting surf update loop (refresh={surf_refresh}s)")

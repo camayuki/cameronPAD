@@ -47,29 +47,79 @@
             </div>
         </form>
         
-        <div style="margin-top: 30px; padding: 15px; background: rgba(255, 193, 7, 0.1); border-left: 4px solid var(--warning); border-radius: 4px;">
-            <strong style="color: var(--warning);">🎨 Theme Marketplace - Coming Soon!</strong>
-            <p style="margin-top: 10px; color: var(--text-secondary);">
-                Browse and download custom themes from the community. Create your own themes and share them with others!
+        <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(171, 71, 188, 0.1)); border: 2px solid var(--accent-primary); border-radius: 12px; text-align: center;">
+            <h3 style="color: var(--accent-primary); margin: 0 0 10px 0;">🎨 Want More Themes?</h3>
+            <p style="margin: 10px 0; color: var(--text-secondary); font-size: 1.05em;">
+                Browse and download 6 popular community themes from the marketplace!<br>
+                <span style="font-size: 0.9em;">Including: Tokyo Night, Dracula, Nord, Monokai Pro, Gruvbox & Solarized Light</span>
             </p>
+            <a href="/themes/marketplace" style="display: inline-block; margin-top: 15px; padding: 12px 30px; background: var(--accent-primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px var(--glow-color);">
+                🛍️ Browse Theme Marketplace
+            </a>
         </div>
     </div>
 </div>
 
 <div class="card" style="margin-top: 20px;">
     <div class="card-header">
-        <h3>User Profile</h3>
+        <h3>👤 User Profile</h3>
     </div>
     <div class="card-content">
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" value="{{ current_user.username }}" disabled>
-        </div>
-        <div class="form-group">
-            <label>Role</label>
-            <input type="text" class="form-control" value="{{ current_user.role }}" disabled>
-        </div>
-        <p class="text-muted">Profile editing coming soon</p>
+        <form id="profile-form" action="/api/profile/update" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="form-control" value="{{ current_user.username }}" disabled>
+                <small class="text-muted">Username cannot be changed</small>
+            </div>
+            
+            <div class="form-group" style="margin-top: 15px;">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" 
+                       value="{{ current_user.email or '' }}" placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group" style="margin-top: 15px;">
+                <label for="full_name">Full Name</label>
+                <input type="text" id="full_name" name="full_name" class="form-control" 
+                       value="{{ current_user.full_name or '' }}" placeholder="Enter your full name">
+            </div>
+            
+            <div class="form-group" style="margin-top: 15px;">
+                <label>Role</label>
+                <input type="text" class="form-control" value="{{ current_user.role }}" disabled>
+                <small class="text-muted">Role is managed by administrators</small>
+            </div>
+            
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+                <h4 style="margin-bottom: 15px;">🔒 Change Password</h4>
+                
+                <div class="form-group">
+                    <label for="current_password">Current Password</label>
+                    <input type="password" id="current_password" name="current_password" 
+                           class="form-control" placeholder="Enter current password">
+                </div>
+                
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="new_password">New Password</label>
+                    <input type="password" id="new_password" name="new_password" 
+                           class="form-control" placeholder="Enter new password">
+                    <small class="text-muted">Leave blank to keep current password</small>
+                </div>
+                
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="confirm_password">Confirm New Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" 
+                           class="form-control" placeholder="Confirm new password">
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px;">
+                <button type="submit" class="btn-primary" style="padding: 12px 24px; font-size: 16px;">
+                    💾 Save Changes
+                </button>
+                <span id="profile-status" style="margin-left: 15px; color: var(--text-secondary);"></span>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -388,4 +438,84 @@ document.getElementById('theme-form').addEventListener('submit', function(e) {
         color: #ccc;
     }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const profileForm = document.getElementById('profile-form');
+    const statusElement = document.getElementById('profile-status');
+    
+    if (profileForm) {
+        profileForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            statusElement.textContent = '⏳ Saving...';
+            statusElement.style.color = 'var(--text-secondary)';
+            
+            const formData = new FormData(profileForm);
+            const data = {
+                email: formData.get('email'),
+                full_name: formData.get('full_name'),
+                current_password: formData.get('current_password'),
+                new_password: formData.get('new_password'),
+                confirm_password: formData.get('confirm_password')
+            };
+            
+            // Validate password fields if attempting to change password
+            if (data.new_password || data.confirm_password) {
+                if (!data.current_password) {
+                    statusElement.textContent = '❌ Current password is required to change password';
+                    statusElement.style.color = '#ff4444';
+                    return;
+                }
+                
+                if (data.new_password !== data.confirm_password) {
+                    statusElement.textContent = '❌ New passwords do not match';
+                    statusElement.style.color = '#ff4444';
+                    return;
+                }
+                
+                if (data.new_password.length < 6) {
+                    statusElement.textContent = '❌ New password must be at least 6 characters';
+                    statusElement.style.color = '#ff4444';
+                    return;
+                }
+            }
+            
+            try {
+                const response = await fetch('/api/profile/update', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    statusElement.textContent = '✅ ' + (result.message || 'Profile updated successfully!');
+                    statusElement.style.color = '#00ff88';
+                    
+                    // Clear password fields
+                    document.getElementById('current_password').value = '';
+                    document.getElementById('new_password').value = '';
+                    document.getElementById('confirm_password').value = '';
+                    
+                    // Clear status after 3 seconds
+                    setTimeout(() => {
+                        statusElement.textContent = '';
+                    }, 3000);
+                } else {
+                    statusElement.textContent = '❌ ' + (result.detail || 'Failed to update profile');
+                    statusElement.style.color = '#ff4444';
+                }
+            } catch (error) {
+                console.error('Error updating profile:', error);
+                statusElement.textContent = '❌ Network error. Please try again.';
+                statusElement.style.color = '#ff4444';
+            }
+        });
+    }
+});
+</script>
 {% endblock %}

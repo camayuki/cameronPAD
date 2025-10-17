@@ -145,6 +145,7 @@ class MigrationManager:
             ("003_create_api_keys", self._create_api_keys_table),
             ("004_create_groups", self._create_groups_tables),
             ("005_add_is_admin_column", self._add_is_admin_column),
+            ("006_add_full_name_column", self._add_full_name_column),
         ]
         
         for migration_name, migration_func in core_migrations:
@@ -304,6 +305,15 @@ class MigrationManager:
             logger.info("✅ Updated existing admin users")
         else:
             logger.info("ℹ️ is_admin column already exists")
+    
+    def _add_full_name_column(self) -> None:
+        """Add full_name column to users table if it doesn't exist."""
+        if not self.db_manager.column_exists("users", "full_name"):
+            query = "ALTER TABLE users ADD COLUMN full_name TEXT"
+            self.db_manager.execute_update(query)
+            logger.info("✅ Added full_name column to users table")
+        else:
+            logger.info("ℹ️ full_name column already exists")
     
     def run_plugin_migrations(self, plugin_name: str, migrations_path: str) -> None:
         """Run migrations for a specific plugin."""

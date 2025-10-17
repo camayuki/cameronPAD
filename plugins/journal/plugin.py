@@ -38,6 +38,13 @@ class JournalPlugin(WebPlugin):
         self.templates = Jinja2Templates(directory=str(template_dir))
         self.templates.env.loader = loader
         
+        # Add get_theme_css function to template globals
+        def get_theme_css(theme_vars):
+            if not theme_vars:
+                return ""
+            return "\n".join([f"    {k}: {v};" for k, v in theme_vars.items()])
+        self.templates.env.globals['get_theme_css'] = get_theme_css
+        
         # Register routes
         self.register_routes()
         
