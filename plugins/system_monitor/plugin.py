@@ -41,6 +41,10 @@ class SystemMonitorPlugin(WebPlugin):
             psutil.cpu_percent(interval=0.1)
             psutil.virtual_memory()
             psutil.disk_usage('/')
+            
+            # Register routes
+            self.register_routes()
+            
             logger.info("✅ System Monitor plugin initialized successfully!")
         except Exception as e:
             logger.error(f"❌ Failed to initialize System Monitor: {e}")
@@ -50,8 +54,9 @@ class SystemMonitorPlugin(WebPlugin):
         """Cleanup on shutdown"""
         logger.info("🛑 System Monitor plugin shutting down...")
     
-    def register_routes(self, router: APIRouter) -> None:
+    def register_routes(self) -> None:
         """Register API routes"""
+        router = self._router
         
         @router.get("/info")
         async def get_system_info():
@@ -206,6 +211,31 @@ class SystemMonitorPlugin(WebPlugin):
                     "uptime_seconds": (datetime.now() - self.start_time).total_seconds()
                 }
             }
+        
+        @router.get("/metrics")
+        async def get_metrics():
+            """Get simplified metrics for dashboard (CPU, Memory, Disk)"""
+            self.request_count += 1
+            logger.info("📊 Dashboard metrics requested")
+            
+            try:
+                memory = psutil.virtual_memory()
+                disk = psutil.disk_usage('/')
+                cpu_percent = psutil.cpu_percent(interval=0.1)
+                
+                return {
+                    "cpu": cpu_percent,
+                    "memory": memory.percent,
+                    "disk": disk.percent
+                }
+            except Exception as e:
+                logger.error(f"❌ Error fetching metrics: {e}")
+                return {
+                    "cpu": 0,
+                    "memory": 0,
+                    "disk": 0,
+                    "error": str(e)
+                }
         
         @router.get("/stats")
         async def get_plugin_stats():

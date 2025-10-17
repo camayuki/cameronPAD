@@ -71,14 +71,33 @@ class NotepadPlugin(WebPlugin):
             """Render notepad home page"""
             import sqlite3
             
-            # Fetch tabs from database
+            # Get current user ID from request state
+            user_id = getattr(request.state, "user_id", None)
+            username = getattr(request.state, "username", None)
+            is_admin = getattr(request.state, "is_admin", False)
+            
+            # Fetch tabs from database - filtered by user's groups
             tabs = []
             try:
                 with sqlite3.connect("data/cameronpad_dev.db") as conn:
                     conn.row_factory = sqlite3.Row
                     cur = conn.cursor()
-                    cur.execute("SELECT id, name, content FROM pad_tabs ORDER BY id")
-                    tabs = [dict(row) for row in cur.fetchall()]
+                    
+                    if user_id:
+                        # Only show tabs from groups the user belongs to
+                        cur.execute("""
+                            SELECT DISTINCT p.id, p.name, p.content 
+                            FROM pad_tabs p
+                            INNER JOIN user_groups ug ON p.group_id = ug.group_id
+                            WHERE ug.user_id = ?
+                            ORDER BY p.id
+                        """, (user_id,))
+                        tabs = [dict(row) for row in cur.fetchall()]
+                        logger.info(f"📓 Loaded {len(tabs)} notepad tabs for user {user_id} ({username})")
+                    else:
+                        # No user logged in - show no tabs
+                        logger.warning("⚠️ No user logged in - showing no tabs")
+                        tabs = []
             except Exception as e:
                 logger.error(f"Failed to fetch tabs: {e}")
             
@@ -94,78 +113,146 @@ class NotepadPlugin(WebPlugin):
                     "request": request,
                     "tabs": tabs,
                     "active_tab": active_tab,
-                    "user": getattr(request.state, "user", None)
+                    "user": {"id": user_id, "username": username, "is_admin": is_admin} if user_id else None
                 }
             )
         
         @self._router.post("/save")
-        async def save_content(tab_id: int = Form(...), content: str = Form(...)):
+        async def save_content(tab_id: int = Form(...), content: str = Form(...), request: Request = None):
             """Save notepad content"""
             import sqlite3
+            
+            # Get current user
+            user_id = getattr(request.state, "user_id", None) if request else None
             
             try:
                 with sqlite3.connect("data/cameronpad_dev.db") as conn:
                     cur = conn.cursor()
-                    cur.execute(
-                        "UPDATE pad_tabs SET content = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
-                        (content, tab_id)
-                    )
-                    conn.commit()
-                    logger.info(f"💾 Saved notepad tab ID: {tab_id}")
+                    
+                    # Only allow saving if the tab belongs to a group the user is in
+                    if user_id:
+                        cur.execute("""
+                            UPDATE pad_tabs 
+                            SET content = ?, updated_at = CURRENT_TIMESTAMP 
+                            WHERE id = ? 
+                            AND group_id IN (
+                                SELECT group_id FROM user_groups WHERE user_id = ?
+                            )
+                        """, (content, tab_id, user_id))
+                        
+                        if cur.rowcount > 0:
+                            conn.commit()
+                            logger.info(f"💾 User {user_id} saved notepad tab ID: {tab_id}")
+                        else:
+                            logger.warning(f"⚠️ User {user_id} attempted to save tab {tab_id} without permission")
+                    else:
+                        logger.warning(f"⚠️ Unauthenticated save attempt for tab {tab_id}")
             except Exception as e:
                 logger.error(f"Failed to save tab: {e}")
             
             return RedirectResponse(f"/api/v1/plugins/notepad/?tab_id={tab_id}", status_code=303)
         
         @self._router.post("/tab/add")
-        async def add_tab(name: str = Form(...)):
+        async def add_tab(name: str = Form(...), request: Request = None):
             """Create a new tab"""
             import sqlite3
             
             try:
+                # Get current user from request
+                user_id = getattr(request.state, "user_id", None) if request else None
+                
                 with sqlite3.connect("data/cameronpad_dev.db") as conn:
                     cur = conn.cursor()
+                    
+                    # Get user's primary group (prefer Admins if they're in it)
+                    group_id = None
+                    if user_id:
+                        cur.execute("""
+                            SELECT g.id 
+                            FROM user_groups ug 
+                            JOIN groups g ON ug.group_id = g.id 
+                            WHERE ug.user_id = ?
+                            ORDER BY CASE WHEN g.name = 'Admins' THEN 0 ELSE 1 END
+                            LIMIT 1
+                        """, (user_id,))
+                        result = cur.fetchone()
+                        group_id = result[0] if result else None
+                    
                     cur.execute(
-                        "INSERT INTO pad_tabs(name, content, updated_at) VALUES(?, '', CURRENT_TIMESTAMP)",
-                        (name.strip(),)
+                        "INSERT INTO pad_tabs(name, content, user_id, group_id, updated_at) VALUES(?, '', ?, ?, CURRENT_TIMESTAMP)",
+                        (name.strip(), user_id, group_id)
                     )
                     conn.commit()
-                    logger.info(f"➕ Created new tab: {name}")
+                    logger.info(f"➕ Created new tab by user {user_id} in group {group_id}: {name}")
             except Exception as e:
                 logger.error(f"Failed to add tab: {e}")
             
             return RedirectResponse("/api/v1/plugins/notepad/", status_code=303)
         
         @self._router.post("/tab/rename")
-        async def rename_tab(tab_id: int = Form(...), name: str = Form(...)):
+        async def rename_tab(tab_id: int = Form(...), name: str = Form(...), request: Request = None):
             """Rename a tab"""
             import sqlite3
+            
+            # Get current user
+            user_id = getattr(request.state, "user_id", None) if request else None
             
             try:
                 with sqlite3.connect("data/cameronpad_dev.db") as conn:
                     cur = conn.cursor()
-                    cur.execute(
-                        "UPDATE pad_tabs SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
-                        (name.strip(), tab_id)
-                    )
-                    conn.commit()
-                    logger.info(f"✏️ Renamed tab ID {tab_id} to: {name}")
+                    
+                    # Only allow renaming if the tab belongs to a group the user is in
+                    if user_id:
+                        cur.execute("""
+                            UPDATE pad_tabs 
+                            SET name = ?, updated_at = CURRENT_TIMESTAMP 
+                            WHERE id = ? 
+                            AND group_id IN (
+                                SELECT group_id FROM user_groups WHERE user_id = ?
+                            )
+                        """, (name.strip(), tab_id, user_id))
+                        
+                        if cur.rowcount > 0:
+                            conn.commit()
+                            logger.info(f"✏️ User {user_id} renamed tab ID {tab_id} to: {name}")
+                        else:
+                            logger.warning(f"⚠️ User {user_id} attempted to rename tab {tab_id} without permission")
+                    else:
+                        logger.warning(f"⚠️ Unauthenticated rename attempt for tab {tab_id}")
             except Exception as e:
                 logger.error(f"Failed to rename tab: {e}")
             
             return RedirectResponse(f"/api/v1/plugins/notepad/?tab_id={tab_id}", status_code=303)
         
         @self._router.post("/tab/delete")
-        async def delete_tab(tab_id: int = Form(...)):
+        async def delete_tab(tab_id: int = Form(...), request: Request = None):
             """Delete a tab"""
             import sqlite3
+            
+            # Get current user
+            user_id = getattr(request.state, "user_id", None) if request else None
             
             try:
                 with sqlite3.connect("data/cameronpad_dev.db") as conn:
                     cur = conn.cursor()
-                    cur.execute("DELETE FROM pad_tabs WHERE id = ?", (tab_id,))
-                    conn.commit()
-                    logger.info(f"🗑️ Deleted tab ID: {tab_id}")
+                    
+                    # Only allow deletion if the tab belongs to a group the user is in
+                    if user_id:
+                        cur.execute("""
+                            DELETE FROM pad_tabs 
+                            WHERE id = ? 
+                            AND group_id IN (
+                                SELECT group_id FROM user_groups WHERE user_id = ?
+                            )
+                        """, (tab_id, user_id))
+                        
+                        if cur.rowcount > 0:
+                            conn.commit()
+                            logger.info(f"🗑️ User {user_id} deleted tab ID: {tab_id}")
+                        else:
+                            logger.warning(f"⚠️ User {user_id} attempted to delete tab {tab_id} without permission")
+                    else:
+                        logger.warning(f"⚠️ Unauthenticated deletion attempt for tab {tab_id}")
             except Exception as e:
                 logger.error(f"Failed to delete tab: {e}")
             
@@ -199,3 +286,4 @@ class NotepadPlugin(WebPlugin):
 def get_plugin(config: PluginConfig) -> NotepadPlugin:
     """Factory function to create plugin instance"""
     return NotepadPlugin(config)
+

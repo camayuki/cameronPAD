@@ -537,10 +537,12 @@
                     {% if current_user.role in ['admin', 'superuser'] %}
                         <li><a href="/admin" class="nav-link">Admin</a></li>
                     {% endif %}
-                    <li>
-                        <div class="user-menu">
-                            <span class="nav-link">{{ current_user.username }}</span>
-                            <a href="/auth/logout" class="btn btn-secondary">Logout</a>
+                    <li class="dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">👤 {{ current_user.username }}</a>
+                        <div class="dropdown-content">
+                            <a href="/profile">👤 View Profile</a>
+                            <a href="/settings">⚙️ Account Settings</a>
+                            <a href="/auth/logout">🚪 Logout</a>
                         </div>
                     </li>
                 {% endif %}

@@ -1,9 +1,11 @@
 """
 Surf Plugin - Wave monitoring for surf spots
 """
+import asyncio
 import logging
+import os
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from fastapi import Request, Form
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -20,6 +22,8 @@ class SurfPlugin(WebPlugin):
     def __init__(self, config: PluginConfig):
         super().__init__(config)
         self.templates = None
+        self.update_task: Optional[asyncio.Task] = None
+        self._service_running = False
         
     async def initialize(self) -> None:
         """Initialize the Surf plugin"""
@@ -44,11 +48,78 @@ class SurfPlugin(WebPlugin):
         # Register routes
         self.register_routes()
         
+        # Start background surf updates
+        await self.start_surf_updates()
+        
         logger.info("✅ Surf plugin initialized successfully")
         
+    async def start_surf_updates(self) -> None:
+        """Start background surf condition updates."""
+        if self._service_running:
+            logger.warning("Surf updates already running")
+            return
+        
+        logger.info("🌊 Starting surf update service...")
+        
+        # Do an initial update
+        try:
+            from .services import update_all_spots
+            update_all_spots()
+            logger.info("✅ Initial surf update complete")
+        except Exception as e:
+            logger.error(f"❌ Initial surf update failed: {e}")
+        
+        # Start background update loop
+        async def update_loop():
+            surf_refresh = int(os.getenv('SURF_REFRESH', '600'))  # 10 minutes default
+            cycle_count = 0
+            
+            logger.info(f"🔄 Starting surf update loop (refresh={surf_refresh}s)")
+            
+            while True:
+                try:
+                    await asyncio.sleep(surf_refresh)
+                    
+                    cycle_count += 1
+                    logger.info(f"🌊 Starting surf update cycle #{cycle_count}")
+                    
+                    from .services import update_all_spots
+                    update_all_spots()
+                    
+                    logger.info(f"✅ Surf update cycle #{cycle_count} complete")
+                    
+                except asyncio.CancelledError:
+                    logger.info("🛑 Surf update loop cancelled")
+                    break
+                except Exception as e:
+                    logger.error(f"❌ Error in surf update loop: {e}", exc_info=True)
+                    logger.info("⚠️ Continuing loop after error...")
+        
+        self.update_task = asyncio.create_task(update_loop())
+        self._service_running = True
+        logger.info("✅ Surf update service started")
+    
+    async def stop_surf_updates(self) -> None:
+        """Stop background surf updates."""
+        if not self._service_running:
+            return
+        
+        logger.info("⏹️ Stopping surf update service...")
+        
+        if self.update_task and not self.update_task.done():
+            self.update_task.cancel()
+            try:
+                await self.update_task
+            except asyncio.CancelledError:
+                pass
+        
+        self._service_running = False
+        logger.info("✅ Surf update service stopped")
+    
     async def shutdown(self) -> None:
         """Clean shutdown"""
         logger.info("🛑 Surf plugin shutting down")
+        await self.stop_surf_updates()
         
     def get_metadata(self) -> PluginMetadata:
         """Return plugin metadata"""

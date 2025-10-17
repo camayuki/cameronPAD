@@ -20,9 +20,26 @@ def init_notepad_db(db_path: str = "data/cameronpad_dev.db"):
                 id INTEGER PRIMARY KEY,
                 name TEXT UNIQUE NOT NULL,
                 content TEXT DEFAULT '',
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                user_id INTEGER,
+                group_id INTEGER,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id),
+                FOREIGN KEY (group_id) REFERENCES groups(id)
             )
         """)
+        
+        # Add columns if they don't exist (for existing databases)
+        try:
+            cur.execute("ALTER TABLE pad_tabs ADD COLUMN user_id INTEGER")
+            logger.info("Added user_id column to pad_tabs")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
+        
+        try:
+            cur.execute("ALTER TABLE pad_tabs ADD COLUMN group_id INTEGER")
+            logger.info("Added group_id column to pad_tabs")
+        except sqlite3.OperationalError:
+            pass  # Column already exists
         
         # Create default "General" tab if no tabs exist
         count = cur.execute("SELECT COUNT(*) FROM pad_tabs").fetchone()[0]

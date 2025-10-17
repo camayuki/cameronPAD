@@ -1,0 +1,405 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="profile-header">
+    <h1>👤 User Profile</h1>
+    <p>Manage your profile information</p>
+</div>
+
+<div class="profile-container">
+    <!-- Profile Card -->
+    <div class="card profile-card">
+        <div class="profile-avatar-section">
+            <div class="profile-avatar-large">
+                {{ current_user.username[0]|upper }}
+            </div>
+            <div class="profile-info-header">
+                <h2>{{ current_user.full_name or current_user.username }}</h2>
+                <p class="profile-username">@{{ current_user.username }}</p>
+                <div class="profile-badges">
+                    <span class="badge badge-role">{{ current_user.role|title }}</span>
+                    {% if current_user.is_active %}
+                        <span class="badge badge-success">Active</span>
+                    {% else %}
+                        <span class="badge badge-danger">Inactive</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="card profile-details-card">
+        <div class="card-header">
+            <h3>📋 Account Information</h3>
+            <a href="/settings" class="btn btn-primary btn-sm">Edit Profile</a>
+        </div>
+        
+        <div class="profile-details-grid">
+            <div class="detail-item">
+                <div class="detail-label">👤 Username</div>
+                <div class="detail-value">{{ current_user.username }}</div>
+            </div>
+            
+            <div class="detail-item">
+                <div class="detail-label">📧 Email</div>
+                <div class="detail-value">{{ current_user.email }}</div>
+            </div>
+            
+            <div class="detail-item">
+                <div class="detail-label">🎭 Role</div>
+                <div class="detail-value">{{ current_user.role|title }}</div>
+            </div>
+            
+            <div class="detail-item">
+                <div class="detail-label">🆔 User ID</div>
+                <div class="detail-value">{{ current_user.id }}</div>
+            </div>
+            
+            {% if current_user.created_at %}
+            <div class="detail-item">
+                <div class="detail-label">📅 Member Since</div>
+                <div class="detail-value">{{ current_user.created_at.strftime('%B %d, %Y') if current_user.created_at else 'N/A' }}</div>
+            </div>
+            {% endif %}
+            
+            {% if current_user.last_login %}
+            <div class="detail-item">
+                <div class="detail-label">🕐 Last Login</div>
+                <div class="detail-value">{{ current_user.last_login.strftime('%B %d, %Y at %H:%M') if current_user.last_login else 'N/A' }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Activity Stats -->
+    <div class="card activity-stats-card">
+        <div class="card-header">
+            <h3>📊 Activity Statistics</h3>
+        </div>
+        
+        <div class="stats-grid-profile">
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-content">
+                    <div class="stat-number">--</div>
+                    <div class="stat-label">Total Notes</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📔</div>
+                <div class="stat-content">
+                    <div class="stat-number">--</div>
+                    <div class="stat-label">Journal Entries</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <div class="stat-number">--</div>
+                    <div class="stat-label">Tracked Stocks</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🔌</div>
+                <div class="stat-content">
+                    <div class="stat-number">--</div>
+                    <div class="stat-label">Active Plugins</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card profile-actions-card">
+        <div class="card-header">
+            <h3>⚡ Quick Actions</h3>
+        </div>
+        
+        <div class="actions-grid">
+            <a href="/settings" class="action-button">
+                <div class="action-icon">⚙️</div>
+                <div class="action-text">
+                    <div class="action-title">Account Settings</div>
+                    <div class="action-desc">Update your preferences</div>
+                </div>
+            </a>
+            
+            <a href="/auth/change-password" class="action-button">
+                <div class="action-icon">🔐</div>
+                <div class="action-text">
+                    <div class="action-title">Change Password</div>
+                    <div class="action-desc">Update your password</div>
+                </div>
+            </a>
+            
+            <a href="/api/v1/plugins/notes/" class="action-button">
+                <div class="action-icon">📝</div>
+                <div class="action-text">
+                    <div class="action-title">My Notes</div>
+                    <div class="action-desc">View and manage notes</div>
+                </div>
+            </a>
+            
+            <a href="/api/v1/plugins/journal/" class="action-button">
+                <div class="action-icon">📔</div>
+                <div class="action-text">
+                    <div class="action-title">My Journal</div>
+                    <div class="action-desc">Access journal entries</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Security Information -->
+    <div class="card security-card">
+        <div class="card-header">
+            <h3>🛡️ Security</h3>
+        </div>
+        
+        <div class="security-info">
+            <div class="security-item">
+                <div class="security-icon">🔐</div>
+                <div class="security-content">
+                    <div class="security-title">Password</div>
+                    <div class="security-desc">Last changed: Never (or unknown)</div>
+                </div>
+                <a href="/auth/change-password" class="btn btn-secondary btn-sm">Change</a>
+            </div>
+            
+            <div class="security-item">
+                <div class="security-icon">🔑</div>
+                <div class="security-content">
+                    <div class="security-title">API Keys</div>
+                    <div class="security-desc">Manage your API access keys</div>
+                </div>
+                <a href="/settings#api-keys" class="btn btn-secondary btn-sm">Manage</a>
+            </div>
+            
+            <div class="security-item">
+                <div class="security-icon">📱</div>
+                <div class="security-content">
+                    <div class="security-title">Active Sessions</div>
+                    <div class="security-desc">1 active session</div>
+                </div>
+                <button class="btn btn-secondary btn-sm" onclick="alert('Session management coming soon!')">View</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .profile-header h1 {
+        font-size: 3rem;
+        color: var(--accent-primary);
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 20px rgba(79, 195, 247, 0.5);
+    }
+
+    .profile-header p {
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+    }
+
+    .profile-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .profile-card {
+        grid-column: 1 / -1;
+    }
+
+    .profile-avatar-section {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .profile-avatar-large {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+        box-shadow: 0 10px 40px rgba(79, 195, 247, 0.4);
+        flex-shrink: 0;
+    }
+
+    .profile-info-header h2 {
+        color: var(--accent-primary);
+        margin-bottom: 0.5rem;
+        font-size: 2rem;
+    }
+
+    .profile-username {
+        color: var(--text-secondary);
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .profile-badges {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .badge-role {
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .profile-details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .detail-item {
+        padding: 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+
+    .detail-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .detail-value {
+        color: var(--text-primary);
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .stats-grid-profile {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .stat-card {
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+        background: rgba(45, 53, 97, 0.5);
+        border-color: var(--accent-primary);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(79, 195, 247, 0.2);
+    }
+
+    .stat-card .stat-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .stat-card .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--accent-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .security-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .security-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .security-item:hover {
+        background: rgba(45, 53, 97, 0.5);
+        border-color: var(--accent-primary);
+    }
+
+    .security-icon {
+        font-size: 2rem;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+        flex-shrink: 0;
+    }
+
+    .security-content {
+        flex: 1;
+    }
+
+    .security-title {
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+        font-size: 1.1rem;
+    }
+
+    .security-desc {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .profile-avatar-section {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .profile-container {
+            grid-template-columns: 1fr;
+        }
+
+        .stats-grid-profile {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+{% endblock %}

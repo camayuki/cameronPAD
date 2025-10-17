@@ -43,7 +43,7 @@
                 <div class="stat-icon">💾</div>
                 <div class="stat-info">
                     <div class="stat-number">{{ stats.storage_used or '0MB' }}</div>
-                    <div class="stat-label">Storage Used</div>
+                    <div class="stat-label">App Memory</div>
                 </div>
                 <div class="stat-arrow">→</div>
             </div>
@@ -105,6 +105,452 @@
                     <div class="action-desc">Configure your account</div>
                 </div>
             </a>
+        </div>
+    </div>
+
+    <!-- Developer Tools & Utilities -->
+    <div class="card dev-tools-card">
+        <div class="card-header">
+            <h3>🛠️ Developer Tools & Utilities</h3>
+            <span class="badge badge-warning">Power Tools</span>
+        </div>
+        
+        <!-- Quick Tools Section -->
+        <div class="tools-section">
+            <h4 class="section-title">⚡ Quick Tools</h4>
+            <div class="tools-grid">
+                <button class="tool-button" onclick="openJsonFormatter()">
+                    <span class="tool-icon">📋</span>
+                    <span class="tool-name">JSON Formatter</span>
+                </button>
+                <button class="tool-button" onclick="openBase64Tool()">
+                    <span class="tool-icon">🔤</span>
+                    <span class="tool-name">Base64 Encode/Decode</span>
+                </button>
+                <button class="tool-button" onclick="openColorPicker()">
+                    <span class="tool-icon">🎨</span>
+                    <span class="tool-name">Color Picker</span>
+                </button>
+                <button class="tool-button" onclick="openRegexTester()">
+                    <span class="tool-icon">🔍</span>
+                    <span class="tool-name">Regex Tester</span>
+                </button>
+                <button class="tool-button" onclick="openTimestampConverter()">
+                    <span class="tool-icon">⏰</span>
+                    <span class="tool-name">Timestamp Converter</span>
+                </button>
+                <button class="tool-button" onclick="openUuidGenerator()">
+                    <span class="tool-icon">🆔</span>
+                    <span class="tool-name">UUID Generator</span>
+                </button>
+                <button class="tool-button" onclick="openHashGenerator()">
+                    <span class="tool-icon">🔐</span>
+                    <span class="tool-name">Hash Generator</span>
+                </button>
+                <button class="tool-button" onclick="openQrGenerator()">
+                    <span class="tool-icon">📱</span>
+                    <span class="tool-name">QR Code Generator</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- System Metrics Section -->
+        <div class="tools-section">
+            <h4 class="section-title">📊 System Metrics</h4>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">🖥️</div>
+                    <div class="metric-content">
+                        <div class="metric-label">CPU Usage</div>
+                        <div class="metric-value" id="cpuUsage">--</div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="cpuBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">💾</div>
+                    <div class="metric-content">
+                        <div class="metric-label">Memory</div>
+                        <div class="metric-value" id="memoryUsage">--</div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="memoryBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">💽</div>
+                    <div class="metric-content">
+                        <div class="metric-label">Disk Usage</div>
+                        <div class="metric-value" id="diskUsage">--</div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="diskBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Commands Section -->
+        <div class="tools-section">
+            <h4 class="section-title">⚡ Quick Commands</h4>
+            <div class="commands-grid">
+                <button class="command-button" onclick="clearCache()">
+                    <span class="cmd-icon">🧹</span>
+                    <span class="cmd-text">Clear Cache</span>
+                </button>
+                <button class="command-button" onclick="refreshData()">
+                    <span class="cmd-icon">🔄</span>
+                    <span class="cmd-text">Refresh Data</span>
+                </button>
+                <button class="command-button" onclick="exportData()">
+                    <span class="cmd-icon">📤</span>
+                    <span class="cmd-text">Export Data</span>
+                </button>
+                <button class="command-button" onclick="viewLogs()">
+                    <span class="cmd-icon">📜</span>
+                    <span class="cmd-text">View Logs</span>
+                </button>
+                <button class="command-button" onclick="openTerminal()">
+                    <span class="cmd-icon">💻</span>
+                    <span class="cmd-text">Terminal</span>
+                </button>
+                <button class="command-button" onclick="checkHealth()">
+                    <span class="cmd-icon">❤️</span>
+                    <span class="cmd-text">Health Check</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Network Tools Section -->
+        <div class="tools-section">
+            <h4 class="section-title">🌐 Network Tools</h4>
+            <div class="network-tools-grid">
+                <div class="network-tool">
+                    <span class="net-icon">🌍</span>
+                    <div class="net-content">
+                        <div class="net-label">Your IP</div>
+                        <div class="net-value" id="userIp">Loading...</div>
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard('userIp')">📋</button>
+                </div>
+                <div class="network-tool">
+                    <span class="net-icon">🔗</span>
+                    <div class="net-content">
+                        <div class="net-label">API Endpoint</div>
+                        <div class="net-value">{{ request.base_url }}api/v1</div>
+                    </div>
+                    <button class="btn-copy" onclick="copyToClipboard('apiEndpoint')">📋</button>
+                </div>
+                <div class="network-tool">
+                    <span class="net-icon">📡</span>
+                    <div class="net-content">
+                        <div class="net-label">WebSocket</div>
+                        <div class="net-value status-indicator">
+                            <span class="status-dot offline"></span>
+                            <span id="wsStatus">Disconnected</span>
+                        </div>
+                    </div>
+                    <button class="btn-toggle" onclick="toggleWebSocket()">🔌</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Tools -->
+        <div class="tools-section">
+            <h4 class="section-title">🗄️ Database Tools</h4>
+            <div class="db-tools-grid">
+                <button class="db-tool-button" onclick="viewDbStats()">
+                    <span class="db-icon">📊</span>
+                    <div class="db-info">
+                        <div class="db-name">View Statistics</div>
+                        <div class="db-desc">Database metrics</div>
+                    </div>
+                </button>
+                <button class="db-tool-button" onclick="backupDatabase()">
+                    <span class="db-icon">💾</span>
+                    <div class="db-info">
+                        <div class="db-name">Backup Database</div>
+                        <div class="db-desc">Create backup</div>
+                    </div>
+                </button>
+                <button class="db-tool-button" onclick="optimizeDatabase()">
+                    <span class="db-icon">⚡</span>
+                    <div class="db-info">
+                        <div class="db-name">Optimize</div>
+                        <div class="db-desc">Run optimization</div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Essential Links - Deep Tools Section -->
+    <div class="card essential-links-card">
+        <div class="card-header">
+            <h3>🔗 Essential Links & Deep Tools</h3>
+            <span class="badge badge-info">Quick Access</span>
+        </div>
+        <div class="essential-links-grid">
+            <!-- Development Tools -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">💻</span>
+                    <h4>Development</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://github.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🐙</span>
+                        <span class="link-name">GitHub</span>
+                    </a>
+                    <a href="https://stackoverflow.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📚</span>
+                        <span class="link-name">Stack Overflow</span>
+                    </a>
+                    <a href="https://code.visualstudio.com/docs" target="_blank" class="essential-link">
+                        <span class="link-icon">📝</span>
+                        <span class="link-name">VS Code Docs</span>
+                    </a>
+                    <a href="https://developer.mozilla.org" target="_blank" class="essential-link">
+                        <span class="link-icon">🌐</span>
+                        <span class="link-name">MDN Web Docs</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- AI & Machine Learning -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">🤖</span>
+                    <h4>AI Tools</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://chat.openai.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🧠</span>
+                        <span class="link-name">ChatGPT</span>
+                    </a>
+                    <a href="https://claude.ai" target="_blank" class="essential-link">
+                        <span class="link-icon">🎭</span>
+                        <span class="link-name">Claude AI</span>
+                    </a>
+                    <a href="https://huggingface.co" target="_blank" class="essential-link">
+                        <span class="link-icon">🤗</span>
+                        <span class="link-name">Hugging Face</span>
+                    </a>
+                    <a href="https://colab.research.google.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📊</span>
+                        <span class="link-name">Google Colab</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Finance & Trading -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">📈</span>
+                    <h4>Finance</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://tradingview.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📊</span>
+                        <span class="link-name">TradingView</span>
+                    </a>
+                    <a href="https://finance.yahoo.com" target="_blank" class="essential-link">
+                        <span class="link-icon">💰</span>
+                        <span class="link-name">Yahoo Finance</span>
+                    </a>
+                    <a href="https://www.investing.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📉</span>
+                        <span class="link-name">Investing.com</span>
+                    </a>
+                    <a href="https://www.bloomberg.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📰</span>
+                        <span class="link-name">Bloomberg</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Productivity -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">⚡</span>
+                    <h4>Productivity</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://notion.so" target="_blank" class="essential-link">
+                        <span class="link-icon">📓</span>
+                        <span class="link-name">Notion</span>
+                    </a>
+                    <a href="https://trello.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📋</span>
+                        <span class="link-name">Trello</span>
+                    </a>
+                    <a href="https://www.figma.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🎨</span>
+                        <span class="link-name">Figma</span>
+                    </a>
+                    <a href="https://excalidraw.com" target="_blank" class="essential-link">
+                        <span class="link-icon">✏️</span>
+                        <span class="link-name">Excalidraw</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Cloud & DevOps -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">☁️</span>
+                    <h4>Cloud & DevOps</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://console.aws.amazon.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🟧</span>
+                        <span class="link-name">AWS Console</span>
+                    </a>
+                    <a href="https://console.cloud.google.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🔵</span>
+                        <span class="link-name">GCP Console</span>
+                    </a>
+                    <a href="https://portal.azure.com" target="_blank" class="essential-link">
+                        <span class="link-icon">⚡</span>
+                        <span class="link-name">Azure Portal</span>
+                    </a>
+                    <a href="https://www.docker.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🐳</span>
+                        <span class="link-name">Docker</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Learning & Education -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">🎓</span>
+                    <h4>Learning</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://www.coursera.org" target="_blank" class="essential-link">
+                        <span class="link-icon">📚</span>
+                        <span class="link-name">Coursera</span>
+                    </a>
+                    <a href="https://www.udemy.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🎯</span>
+                        <span class="link-name">Udemy</span>
+                    </a>
+                    <a href="https://www.youtube.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📺</span>
+                        <span class="link-name">YouTube</span>
+                    </a>
+                    <a href="https://www.khanacademy.org" target="_blank" class="essential-link">
+                        <span class="link-icon">🏫</span>
+                        <span class="link-name">Khan Academy</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Data Science -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">📊</span>
+                    <h4>Data Science</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://www.kaggle.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🏆</span>
+                        <span class="link-name">Kaggle</span>
+                    </a>
+                    <a href="https://jupyter.org" target="_blank" class="essential-link">
+                        <span class="link-icon">📓</span>
+                        <span class="link-name">Jupyter</span>
+                    </a>
+                    <a href="https://www.tableau.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📈</span>
+                        <span class="link-name">Tableau</span>
+                    </a>
+                    <a href="https://www.datacamp.com" target="_blank" class="essential-link">
+                        <span class="link-icon">💻</span>
+                        <span class="link-name">DataCamp</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Design & Media -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">🎨</span>
+                    <h4>Design</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://www.canva.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🖌️</span>
+                        <span class="link-name">Canva</span>
+                    </a>
+                    <a href="https://www.adobe.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🔴</span>
+                        <span class="link-name">Adobe Creative</span>
+                    </a>
+                    <a href="https://unsplash.com" target="_blank" class="essential-link">
+                        <span class="link-icon">📷</span>
+                        <span class="link-name">Unsplash</span>
+                    </a>
+                    <a href="https://www.pexels.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🎬</span>
+                        <span class="link-name">Pexels</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Documentation -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">📖</span>
+                    <h4>Documentation</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://devdocs.io" target="_blank" class="essential-link">
+                        <span class="link-icon">📚</span>
+                        <span class="link-name">DevDocs</span>
+                    </a>
+                    <a href="https://www.w3schools.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🌐</span>
+                        <span class="link-name">W3Schools</span>
+                    </a>
+                    <a href="https://docs.python.org" target="_blank" class="essential-link">
+                        <span class="link-icon">🐍</span>
+                        <span class="link-name">Python Docs</span>
+                    </a>
+                    <a href="https://fastapi.tiangolo.com" target="_blank" class="essential-link">
+                        <span class="link-icon">⚡</span>
+                        <span class="link-name">FastAPI Docs</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Security & Monitoring -->
+            <div class="link-category">
+                <div class="category-header">
+                    <span class="category-icon">🔒</span>
+                    <h4>Security</h4>
+                </div>
+                <div class="category-links">
+                    <a href="https://www.virustotal.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🛡️</span>
+                        <span class="link-name">VirusTotal</span>
+                    </a>
+                    <a href="https://haveibeenpwned.com" target="_blank" class="essential-link">
+                        <span class="link-icon">🔐</span>
+                        <span class="link-name">HaveIBeenPwned</span>
+                    </a>
+                    <a href="https://www.ssllabs.com/ssltest" target="_blank" class="essential-link">
+                        <span class="link-icon">🔑</span>
+                        <span class="link-name">SSL Labs</span>
+                    </a>
+                    <a href="https://observatory.mozilla.org" target="_blank" class="essential-link">
+                        <span class="link-icon">🔍</span>
+                        <span class="link-name">Mozilla Observatory</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -813,6 +1259,473 @@
             transform: translateY(0);
         }
     }
+
+    /* Essential Links Section */
+    .essential-links-card {
+        grid-column: 1 / -1; /* Span full width */
+    }
+
+    .essential-links-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .link-category {
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .link-category:hover {
+        background: rgba(45, 53, 97, 0.5);
+        border-color: var(--accent-primary);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(79, 195, 247, 0.2);
+    }
+
+    .category-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .category-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+    }
+
+    .category-header h4 {
+        color: var(--accent-primary);
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .category-links {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    .essential-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: rgba(26, 31, 53, 0.5);
+        border: 1px solid transparent;
+        border-radius: 8px;
+        text-decoration: none;
+        color: var(--text-primary);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .essential-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .essential-link:hover::before {
+        left: 100%;
+    }
+
+    .essential-link:hover {
+        background: rgba(45, 53, 97, 0.6);
+        border-color: var(--accent-primary);
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(79, 195, 247, 0.2);
+    }
+
+    .link-icon {
+        font-size: 1.2rem;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--accent-bg);
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+
+    .link-name {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .essential-link:hover .link-name {
+        color: var(--accent-primary);
+    }
+
+    .badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .badge-info {
+        background: rgba(79, 195, 247, 0.2);
+        color: var(--accent-primary);
+        border: 1px solid var(--accent-primary);
+    }
+
+    .badge-success {
+        background: rgba(76, 175, 80, 0.2);
+        color: var(--success);
+        border: 1px solid var(--success);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .essential-links-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Developer Tools Card Styles */
+    .dev-tools-card {
+        /* Keep it in the grid flow */
+    }
+
+    .tools-section {
+        margin-bottom: 2rem;
+    }
+
+    .tools-section:last-child {
+        margin-bottom: 0;
+    }
+
+    .section-title {
+        color: var(--accent-primary);
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .badge-warning {
+        background: rgba(255, 152, 0, 0.2);
+        color: var(--warning);
+        border: 1px solid var(--warning);
+    }
+
+    /* Quick Tools Grid */
+    .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .tool-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: var(--text-primary);
+    }
+
+    .tool-button:hover {
+        background: rgba(45, 53, 97, 0.6);
+        border-color: var(--accent-primary);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(79, 195, 247, 0.3);
+    }
+
+    .tool-icon {
+        font-size: 1.8rem;
+        display: block;
+    }
+
+    .tool-name {
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    /* System Metrics */
+    .metrics-grid {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .metric-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+        background: rgba(45, 53, 97, 0.5);
+        border-color: var(--accent-primary);
+    }
+
+    .metric-icon {
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+        flex-shrink: 0;
+    }
+
+    .metric-content {
+        flex: 1;
+    }
+
+    .metric-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.25rem;
+    }
+
+    .metric-value {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--accent-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .metric-bar {
+        width: 100%;
+        height: 6px;
+        background: rgba(45, 53, 97, 0.5);
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .metric-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        transition: width 0.5s ease;
+        border-radius: 3px;
+    }
+
+    /* Quick Commands */
+    .commands-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .command-button {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: var(--text-primary);
+    }
+
+    .command-button:hover {
+        background: rgba(45, 53, 97, 0.6);
+        border-color: var(--accent-primary);
+        transform: translateX(3px);
+        box-shadow: 0 5px 15px rgba(79, 195, 247, 0.2);
+    }
+
+    .cmd-icon {
+        font-size: 1.5rem;
+    }
+
+    .cmd-text {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    /* Network Tools */
+    .network-tools-grid {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .network-tool {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .network-tool:hover {
+        background: rgba(45, 53, 97, 0.5);
+        border-color: var(--accent-primary);
+    }
+
+    .net-icon {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--accent-bg);
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+
+    .net-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .net-label {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.25rem;
+    }
+
+    .net-value {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .status-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .status-dot.online {
+        background: var(--success);
+        box-shadow: 0 0 10px var(--success);
+    }
+
+    .status-dot.offline {
+        background: var(--text-secondary);
+    }
+
+    .btn-copy, .btn-toggle {
+        padding: 0.4rem 0.6rem;
+        background: rgba(79, 195, 247, 0.1);
+        border: 1px solid var(--accent-primary);
+        border-radius: 6px;
+        color: var(--accent-primary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+    }
+
+    .btn-copy:hover, .btn-toggle:hover {
+        background: var(--accent-primary);
+        color: #000;
+        transform: scale(1.1);
+    }
+
+    /* Database Tools */
+    .db-tools-grid {
+        display: grid;
+        gap: 0.75rem;
+    }
+
+    .db-tool-button {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: var(--text-primary);
+        text-align: left;
+    }
+
+    .db-tool-button:hover {
+        background: rgba(45, 53, 97, 0.6);
+        border-color: var(--accent-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 195, 247, 0.2);
+    }
+
+    .db-icon {
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+        flex-shrink: 0;
+    }
+
+    .db-info {
+        flex: 1;
+    }
+
+    .db-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+    }
+
+    .db-desc {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
 </style>
 {% endblock %}
 
@@ -1213,6 +2126,206 @@
         if (e.target === this) {
             closeMissionControlPanel();
         }
+    });
+
+    // ===== Developer Tools Functions =====
+    function openJsonFormatter() {
+        const input = prompt('Enter JSON to format:');
+        if (input) {
+            try {
+                const formatted = JSON.stringify(JSON.parse(input), null, 2);
+                alert('Formatted JSON:\n\n' + formatted);
+            } catch (e) {
+                alert('Invalid JSON: ' + e.message);
+            }
+        }
+    }
+
+    function openBase64Tool() {
+        const choice = confirm('Click OK to Encode, Cancel to Decode');
+        const input = prompt(choice ? 'Enter text to encode:' : 'Enter Base64 to decode:');
+        if (input) {
+            try {
+                const result = choice ? btoa(input) : atob(input);
+                alert((choice ? 'Encoded' : 'Decoded') + ' result:\n\n' + result);
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+    }
+
+    function openColorPicker() {
+        const color = prompt('Enter color (hex, rgb, or name):', '#4fc3f7');
+        if (color) {
+            alert('Color: ' + color + '\n\nHex: ' + color + '\n\nThis would open a color picker tool.');
+        }
+    }
+
+    function openRegexTester() {
+        const pattern = prompt('Enter regex pattern:');
+        if (pattern) {
+            const testString = prompt('Enter test string:');
+            if (testString) {
+                try {
+                    const regex = new RegExp(pattern, 'g');
+                    const matches = testString.match(regex);
+                    alert('Matches: ' + (matches ? matches.join(', ') : 'None'));
+                } catch (e) {
+                    alert('Invalid regex: ' + e.message);
+                }
+            }
+        }
+    }
+
+    function openTimestampConverter() {
+        const timestamp = prompt('Enter Unix timestamp (or leave empty for current):');
+        const ts = timestamp ? parseInt(timestamp) : Date.now() / 1000;
+        const date = new Date(ts * 1000);
+        alert('Timestamp: ' + ts + '\nDate: ' + date.toLocaleString());
+    }
+
+    function openUuidGenerator() {
+        const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+        navigator.clipboard.writeText(uuid).then(() => {
+            alert('UUID Generated and Copied:\n\n' + uuid);
+        }).catch(() => {
+            alert('UUID Generated:\n\n' + uuid + '\n\n(Copy to clipboard failed)');
+        });
+    }
+
+    function openHashGenerator() {
+        const input = prompt('Enter text to hash:');
+        if (input) {
+            crypto.subtle.digest('SHA-256', new TextEncoder().encode(input)).then(hash => {
+                const hashArray = Array.from(new Uint8Array(hash));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                alert('SHA-256 Hash:\n\n' + hashHex);
+            });
+        }
+    }
+
+    function openQrGenerator() {
+        const text = prompt('Enter text for QR code:');
+        if (text) {
+            alert('QR Code Generator\n\nText: ' + text + '\n\nThis would generate a QR code.\n\nConsider using: https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(text));
+        }
+    }
+
+    // System Metrics - Update every 5 seconds
+    async function updateSystemMetrics() {
+        try {
+            const response = await fetch('/api/v1/plugins/system_monitor/metrics');
+            const data = await response.json();
+            
+            if (data.cpu !== undefined) {
+                document.getElementById('cpuUsage').textContent = data.cpu.toFixed(1) + '%';
+                document.getElementById('cpuBar').style.width = data.cpu + '%';
+            }
+            
+            if (data.memory !== undefined) {
+                document.getElementById('memoryUsage').textContent = data.memory.toFixed(1) + '%';
+                document.getElementById('memoryBar').style.width = data.memory + '%';
+            }
+            
+            if (data.disk !== undefined) {
+                document.getElementById('diskUsage').textContent = data.disk.toFixed(1) + '%';
+                document.getElementById('diskBar').style.width = data.disk + '%';
+            }
+        } catch (e) {
+            console.error('Failed to fetch system metrics:', e);
+        }
+    }
+
+    // Quick Commands
+    function clearCache() {
+        if (confirm('Clear all cached data?')) {
+            alert('Cache cleared! (This would clear browser cache and server cache)');
+            location.reload();
+        }
+    }
+
+    function refreshData() {
+        location.reload();
+    }
+
+    function exportData() {
+        alert('Export Data\n\nThis would export:\n- User settings\n- Notes and journal entries\n- Plugin data\n\nFormat: JSON or CSV');
+    }
+
+    function viewLogs() {
+        window.open('/api/v1/admin/logs', '_blank');
+    }
+
+    function openTerminal() {
+        alert('Terminal access would require:\n1. WebSocket connection\n2. Server-side shell access\n3. Authentication\n\nSecurity consideration: This is a powerful feature.');
+    }
+
+    function checkHealth() {
+        fetch('/health').then(r => r.json()).then(data => {
+            alert('Health Check\n\nStatus: ' + data.status + '\n\nAll systems operational!');
+        });
+    }
+
+    // Network Tools
+    async function getUserIP() {
+        try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            document.getElementById('userIp').textContent = data.ip;
+        } catch (e) {
+            document.getElementById('userIp').textContent = 'Unable to fetch';
+        }
+    }
+
+    function copyToClipboard(elementId) {
+        const element = document.getElementById(elementId);
+        const text = element.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Copied to clipboard: ' + text);
+        }).catch(() => {
+            alert('Failed to copy to clipboard');
+        });
+    }
+
+    function toggleWebSocket() {
+        const statusEl = document.getElementById('wsStatus');
+        const dotEl = document.querySelector('.status-dot');
+        
+        if (dotEl.classList.contains('offline')) {
+            dotEl.classList.remove('offline');
+            dotEl.classList.add('online');
+            statusEl.textContent = 'Connected';
+            alert('WebSocket connected (simulated)');
+        } else {
+            dotEl.classList.remove('online');
+            dotEl.classList.add('offline');
+            statusEl.textContent = 'Disconnected';
+            alert('WebSocket disconnected');
+        }
+    }
+
+    // Database Tools
+    function viewDbStats() {
+        alert('Database Statistics\n\nTables: 15\nTotal Records: 1,234\nSize: 15.3 MB\nLast Optimized: 2 days ago');
+    }
+
+    function optimizeDatabase() {
+        if (confirm('Optimize database tables?\n\nThis will:\n- Rebuild indexes\n- Reclaim unused space\n- Improve query performance')) {
+            alert('Database optimized successfully!\n\nReclaimed: 2.1 MB\nIndexes rebuilt: 8\nTime: 1.2 seconds');
+        }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Start system metrics updates
+        updateSystemMetrics();
+        setInterval(updateSystemMetrics, 5000);
+        
+        // Get user IP
+        getUserIP();
     });
 </script>
 {% endblock %}

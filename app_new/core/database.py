@@ -1,5 +1,5 @@
 """
-Database setup, connection management, and migrations.
+Database setup, connection management, and migrations - With Groups Support
 """
 import os
 import sqlite3
@@ -143,6 +143,8 @@ class MigrationManager:
             ("001_create_users", self._create_users_table),
             ("002_create_settings", self._create_settings_table),
             ("003_create_api_keys", self._create_api_keys_table),
+            ("004_create_groups", self._create_groups_tables),
+            ("005_add_is_admin_column", self._add_is_admin_column),
         ]
         
         for migration_name, migration_func in core_migrations:
@@ -234,6 +236,74 @@ class MigrationManager:
         
         for index_query in indexes:
             self.db_manager.execute_update(index_query)
+    
+    def _create_groups_tables(self) -> None:
+        """Create groups and user_groups tables."""
+        # Create groups table
+        groups_query = """
+        CREATE TABLE IF NOT EXISTS groups (
+            id INTEGER PRIMARY KEY,
+            name TEXT UNIQUE NOT NULL,
+            description TEXT,
+            created_by INTEGER,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (created_by) REFERENCES users (id) ON DELETE SET NULL
+        )
+        """
+        self.db_manager.execute_update(groups_query)
+        
+        # Create user_groups junction table
+        user_groups_query = """
+        CREATE TABLE IF NOT EXISTS user_groups (
+            id INTEGER PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            group_id INTEGER NOT NULL,
+            role TEXT DEFAULT 'member',
+            joined_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+            FOREIGN KEY (group_id) REFERENCES groups (id) ON DELETE CASCADE,
+            UNIQUE(user_id, group_id)
+        )
+        """
+        self.db_manager.execute_update(user_groups_query)
+        
+        # Create indexes
+        indexes = [
+            "CREATE INDEX IF NOT EXISTS idx_groups_name ON groups(name)",
+            "CREATE INDEX IF NOT EXISTS idx_user_groups_user ON user_groups(user_id)",
+            "CREATE INDEX IF NOT EXISTS idx_user_groups_group ON user_groups(group_id)",
+        ]
+        
+        for index_query in indexes:
+            self.db_manager.execute_update(index_query)
+        
+        # Create default groups
+        default_groups = [
+            ("Everyone", "Default group for all users", None),
+            ("Admins", "Administrator group", None),
+        ]
+        
+        for name, description, created_by in default_groups:
+            query = """
+            INSERT OR IGNORE INTO groups (name, description, created_by) 
+            VALUES (?, ?, ?)
+            """
+            self.db_manager.execute_update(query, (name, description, created_by))
+    
+    def _add_is_admin_column(self) -> None:
+        """Add is_admin column to users table if it doesn't exist."""
+        if not self.db_manager.column_exists("users", "is_admin"):
+            query = "ALTER TABLE users ADD COLUMN is_admin BOOLEAN DEFAULT 0"
+            self.db_manager.execute_update(query)
+            logger.info("✅ Added is_admin column to users table")
+            
+            # Update existing users with role='admin' to have is_admin=1
+            update_query = "UPDATE users SET is_admin = 1 WHERE role = 'admin'"
+            self.db_manager.execute_update(update_query)
+            logger.info("✅ Updated existing admin users")
+        else:
+            logger.info("ℹ️ is_admin column already exists")
     
     def run_plugin_migrations(self, plugin_name: str, migrations_path: str) -> None:
         """Run migrations for a specific plugin."""

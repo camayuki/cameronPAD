@@ -3,6 +3,8 @@ Main FastAPI application with plugin system integration.
 """
 import asyncio
 import logging
+import os
+import psutil
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -202,12 +204,21 @@ def setup_routes(app: FastAPI) -> None:
                             })
             
             # Get some basic stats for the dashboard
+            # Calculate application memory usage
+            try:
+                process = psutil.Process(os.getpid())
+                app_memory_mb = process.memory_info().rss / (1024 * 1024)  # Convert bytes to MB
+                app_memory_str = f"{app_memory_mb:.1f}MB"
+            except Exception as e:
+                logger.error(f"Error calculating app memory: {e}")
+                app_memory_str = "N/A"
+            
             stats = {
                 "total_users": 1,  # TODO: Get from database
                 "total_plugins": len(enabled_plugins),
                 "active_plugins": len(enabled_plugins),
                 "api_calls": 0,  # TODO: Track API calls
-                "storage_used": "0MB",  # TODO: Calculate storage
+                "storage_used": app_memory_str,  # Application memory usage
                 "active_sessions": 1
             }
             
@@ -386,6 +397,43 @@ def setup_routes(app: FastAPI) -> None:
         else:
             return {"message": "Settings page"}
     
+    @app.get("/profile")
+    async def profile_page(request: Request):
+        """User profile page."""
+        logger.info(f"👤 Profile page accessed by user: {getattr(request.state, 'username', 'Unknown')}")
+        templates = getattr(request.app.state, 'templates', None)
+        if templates:
+            # Get user details from database
+            from .core.auth import get_user_manager
+            user_manager = get_user_manager()
+            
+            user_id = getattr(request.state, 'user_id', None)
+            user_data = None
+            if user_id:
+                try:
+                    user_data = user_manager.get_user_by_id(user_id)
+                except:
+                    pass
+            
+            current_user = {
+                "id": getattr(request.state, 'user_id', None),
+                "username": getattr(request.state, 'username', 'Unknown'),
+                "role": 'admin' if getattr(request.state, 'is_admin', False) else 'user',
+                "is_admin": getattr(request.state, 'is_admin', False),
+                "email": user_data.get('email', 'N/A') if user_data else 'N/A',
+                "full_name": user_data.get('full_name', '') if user_data else '',
+                "created_at": user_data.get('created_at', None) if user_data else None,
+                "last_login": user_data.get('last_login', None) if user_data else None,
+                "is_active": user_data.get('is_active', True) if user_data else True
+            }
+            
+            return templates.TemplateResponse("profile.html", {
+                "request": request,
+                "current_user": current_user
+            })
+        else:
+            return {"message": "Profile page"}
+    
     @app.get("/services")
     async def services_page(request: Request):
         """Background services monitoring page."""
@@ -416,7 +464,7 @@ def setup_routes(app: FastAPI) -> None:
                 "is_admin": getattr(request.state, 'is_admin', False)
             }
             
-            return templates.TemplateResponse("admin.html", {
+            return templates.TemplateResponse("admin/admin_panel.html", {
                 "request": request,
                 "current_user": current_user
             })
@@ -457,6 +505,10 @@ def setup_routes(app: FastAPI) -> None:
     # Include auth router (no prefix, direct routes)
     from .api.auth import router as auth_router
     app.include_router(auth_router)
+    
+    # Include admin API router
+    from .api.admin_new import router as admin_api_router
+    app.include_router(admin_api_router)
     
     # Include API router
     api_router = create_api_router()

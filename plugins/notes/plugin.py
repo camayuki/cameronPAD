@@ -1,5 +1,5 @@
 """
-Notes Plugin - Timestamped notes with add/delete functionality
+Notes Plugin - Timestamped notes with add/delete functionality and group support
 """
 import logging
 from pathlib import Path
@@ -25,9 +25,9 @@ class NotesPlugin(WebPlugin):
         """Initialize the Notes plugin"""
         logger.info("📝 Initializing Notes plugin...")
         
-        # Initialize database tables
+        # Initialize database tables with the correct database path
         from .database import init_notes_db
-        init_notes_db()
+        init_notes_db("data/cameronpad_dev.db")
         
         # Setup templates with both main and plugin template directories
         template_dir = Path(__file__).parent / "templates"
@@ -71,14 +71,33 @@ class NotesPlugin(WebPlugin):
             """Render notes home page"""
             import sqlite3
             
-            # Fetch notes from database
+            # Get current user ID from request state
+            user_id = getattr(request.state, "user_id", None)
+            username = getattr(request.state, "username", None)
+            is_admin = getattr(request.state, "is_admin", False)
+            
+            # Fetch notes from database - filtered by user's groups
             notes = []
             try:
                 with sqlite3.connect("data/cameronpad_dev.db") as conn:
                     conn.row_factory = sqlite3.Row
                     cur = conn.cursor()
-                    cur.execute("SELECT id, content, ts FROM notes ORDER BY ts DESC")
-                    notes = [dict(row) for row in cur.fetchall()]
+                    
+                    if user_id:
+                        # Only show notes from groups the user belongs to
+                        cur.execute("""
+                            SELECT DISTINCT n.id, n.content, n.ts 
+                            FROM notes n
+                            INNER JOIN user_groups ug ON n.group_id = ug.group_id
+                            WHERE ug.user_id = ?
+                            ORDER BY n.ts DESC
+                        """, (user_id,))
+                        notes = [dict(row) for row in cur.fetchall()]
+                        logger.info(f"📋 Loaded {len(notes)} notes for user {user_id} ({username})")
+                    else:
+                        # No user logged in - show no notes
+                        logger.warning("⚠️ No user logged in - showing no notes")
+                        notes = []
             except Exception as e:
                 logger.error(f"Failed to fetch notes: {e}")
             
@@ -87,40 +106,77 @@ class NotesPlugin(WebPlugin):
                 {
                     "request": request,
                     "notes": notes,
-                    "user": getattr(request.state, "user", None)
+                    "user": {"id": user_id, "username": username, "is_admin": is_admin} if user_id else None
                 }
             )
         
         @self._router.post("/add")
-        async def add_note(content: str = Form(...)):
+        async def add_note(content: str = Form(...), request: Request = None):
             """Add a new note"""
             import sqlite3
             
             try:
+                # Get current user ID from request state
+                user_id = getattr(request.state, "user_id", None) if request else None
+                
                 with sqlite3.connect("data/cameronpad_dev.db") as conn:
                     cur = conn.cursor()
+                    
+                    # Get user's primary group (prefer Admins if they're in it)
+                    group_id = None
+                    if user_id:
+                        cur.execute("""
+                            SELECT g.id 
+                            FROM user_groups ug 
+                            JOIN groups g ON ug.group_id = g.id 
+                            WHERE ug.user_id = ?
+                            ORDER BY CASE WHEN g.name = 'Admins' THEN 0 ELSE 1 END
+                            LIMIT 1
+                        """, (user_id,))
+                        result = cur.fetchone()
+                        group_id = result[0] if result else None
+                    
+                    # Insert note with user_id and group_id
                     cur.execute(
-                        "INSERT INTO notes(content, ts) VALUES(?, CURRENT_TIMESTAMP)",
-                        (content.strip(),)
+                        "INSERT INTO notes(content, ts, user_id, group_id) VALUES(?, CURRENT_TIMESTAMP, ?, ?)",
+                        (content.strip(), user_id, group_id)
                     )
                     conn.commit()
-                    logger.info(f"📝 Added note: {content[:50]}...")
+                    logger.info(f"📝 Added note by user {user_id} to group {group_id}: {content[:50]}...")
             except Exception as e:
                 logger.error(f"Failed to add note: {e}")
             
             return RedirectResponse("/api/v1/plugins/notes/", status_code=303)
         
         @self._router.post("/delete")
-        async def delete_note(note_id: int = Form(...)):
+        async def delete_note(note_id: int = Form(...), request: Request = None):
             """Delete a note"""
             import sqlite3
+            
+            # Get current user ID from request state
+            user_id = getattr(request.state, "user_id", None) if request else None
             
             try:
                 with sqlite3.connect("data/cameronpad_dev.db") as conn:
                     cur = conn.cursor()
-                    cur.execute("DELETE FROM notes WHERE id = ?", (note_id,))
-                    conn.commit()
-                    logger.info(f"🗑️ Deleted note ID: {note_id}")
+                    
+                    # Only allow deletion if the note belongs to a group the user is in
+                    if user_id:
+                        cur.execute("""
+                            DELETE FROM notes 
+                            WHERE id = ? 
+                            AND group_id IN (
+                                SELECT group_id FROM user_groups WHERE user_id = ?
+                            )
+                        """, (note_id, user_id))
+                        
+                        if cur.rowcount > 0:
+                            conn.commit()
+                            logger.info(f"🗑️ User {user_id} deleted note ID: {note_id}")
+                        else:
+                            logger.warning(f"⚠️ User {user_id} attempted to delete note {note_id} without permission")
+                    else:
+                        logger.warning(f"⚠️ Unauthenticated deletion attempt for note {note_id}")
             except Exception as e:
                 logger.error(f"Failed to delete note: {e}")
             
