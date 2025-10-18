@@ -15,15 +15,25 @@ aiosqlite>=0.19.0
 pyjwt>=2.8.0
 bcrypt>=4.0.0
 
-# HTTP Client (for stock APIs, surf plugin)
+# HTTP Client (for stock APIs, surf plugin, theme marketplace)
 aiohttp>=3.9.0
 requests>=2.31.0
 
 # System Monitoring
 psutil>=5.9.0
 
-# Template Engine
+# Template Engine (already included with FastAPI but ensuring version)
 jinja2>=3.1.2
 
-# Web Server (ASGI)
+# Web Server & ASGI (already included with FastAPI/uvicorn but ensuring version)
 starlette>=0.27.0
+
+# Email validation (included with pydantic[email] but ensuring it's available)
+email-validator>=2.0.0
+
+# Python 3.8+ compatibility
+typing-extensions>=4.0.0
+
+# Standard library equivalents for older Python versions (if needed)
+# These are typically included in Python 3.8+ but good to specify for Linux
+pathlib>=1.0.1; python_version < "3.4"

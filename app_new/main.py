@@ -118,24 +118,8 @@ def create_app() -> FastAPI:
         lifespan=lifespan
     )
     
-    # Setup middleware
+    # Setup middleware (includes CORS, Auth, Security headers)
     setup_middleware(app, config)
-    
-    # Add CORS middleware
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=config.security.cors_origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-    
-    # Add trusted host middleware for production
-    if config.environment == "production":
-        app.add_middleware(
-            TrustedHostMiddleware,
-            allowed_hosts=["*"]  # Configure with actual allowed hosts
-        )
     
     # Setup static files
     setup_static_files(app)
@@ -262,6 +246,12 @@ def setup_routes(app: FastAPI) -> None:
             })
         else:
             return {"message": "CameronPAD API", "plugins_loaded": len(getattr(request.app.state, 'plugin_manager', {}).get_all_plugins())}
+    
+    @app.get("/favicon.ico")
+    async def favicon():
+        """Return 204 No Content for favicon requests to avoid 404 errors."""
+        from fastapi.responses import Response
+        return Response(status_code=204)
     
     @app.get("/health")
     async def health_check(request: Request):
@@ -412,19 +402,22 @@ def setup_routes(app: FastAPI) -> None:
             # Get full user info from database
             from .core.database import get_database_manager
             db_manager = get_database_manager()
-            user = None
+            user_email = None
+            user_full_name = None
             if user_id:
                 query = "SELECT email, full_name FROM users WHERE id = ?"
                 results = db_manager.execute_query(query, (user_id,))
-                user = results[0] if results else None
+                if results:
+                    user_email = results[0][0]  # First column: email
+                    user_full_name = results[0][1]  # Second column: full_name
             
             current_user = {
                 "id": user_id,
                 "username": username,
                 "role": 'admin' if getattr(request.state, 'is_admin', False) else 'user',
                 "is_admin": getattr(request.state, 'is_admin', False),
-                "email": user.get('email') if user else None,
-                "full_name": user.get('full_name') if user else None
+                "email": user_email,
+                "full_name": user_full_name
             }
             
             # Get theme information
