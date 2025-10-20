@@ -73,28 +73,31 @@
 2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: lol_champions
 2025-10-20 07:23:20 - app_new.main - INFO - Application startup completed
 2025-10-20 07:23:20 - plugins.surf.plugin - INFO - 🔄 Starting surf update loop (refresh=300s)
-2025-10-20 07:23:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:23:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:23:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:23:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:23:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:23:24 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:23:24 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:23:24 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:23:24 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:23:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:23:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:23:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:23:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:23:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:23:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:23:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:23:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:23:28 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:59 - app_new.main - INFO - Shutting down CameronPAD application...
+2025-10-20 07:24:59 - plugins.stocks.plugin - INFO - 🛑 Shutting down Stocks plugin...
+2025-10-20 07:24:59 - plugins.stocks.plugin - INFO - ✅ Stocks plugin shutdown completed
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: stocks
+2025-10-20 07:24:59 - plugins.notes.plugin - INFO - 🛑 Notes plugin shutting down
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: notes
+2025-10-20 07:24:59 - plugins.journal.plugin - INFO - 🛑 Journal plugin shutting down
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: journal
+2025-10-20 07:24:59 - plugins.surf.plugin - INFO - 🛑 Surf plugin shutting down
+2025-10-20 07:24:59 - plugins.surf.plugin - INFO - ⏹️ Stopping surf update service...
+2025-10-20 07:24:59 - plugins.surf.plugin - INFO - 🛑 Surf update loop cancelled
+2025-10-20 07:24:59 - plugins.surf.plugin - INFO - ✅ Surf update service stopped
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: surf
+2025-10-20 07:24:59 - plugins.system_monitor.plugin - INFO - 🛑 System Monitor plugin shutting down...
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: system_monitor
+2025-10-20 07:24:59 - plugins.hello_world.plugin - INFO - 👋 Shutting down Hello World plugin...
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: hello_world
+2025-10-20 07:24:59 - plugins.notepad.plugin - INFO - 🛑 Notepad plugin shutting down
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: notepad
+2025-10-20 07:24:59 - plugins.tradingview.plugin - INFO - 🛑 TradingView plugin shutting down
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: tradingview
+2025-10-20 07:24:59 - plugins.lol_champions.plugin - INFO - 🛑 LoL Champions plugin shutting down
+2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: lol_champions
+2025-10-20 07:24:59 - app_new.main - INFO - Application shutdown completed
+25-10-20 07:23:28 - app_new.main - DEBUG - ✅ Response status: 200
 2025-10-20 07:23:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
 2025-10-20 07:23:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
 2025-10-20 07:23:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
@@ -150,3 +153,410 @@
 2025-10-20 07:23:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
 2025-10-20 07:23:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
 2025-10-20 07:23:53 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:23:58 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:58 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:58 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:23:58 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:23:58 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:23:58 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:23:58 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:23:58 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:23:58 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:23:58 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:23:58 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:03 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:03 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:03 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:03 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:08 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:08 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:08 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:08 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:08 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:08 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:08 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:09 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:09 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:09 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:09 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:13 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:13 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:13 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:13 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:13 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:14 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:14 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:14 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:14 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:18 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:23 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:23 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:23 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:23 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:28 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:33 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:33 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:33 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:34 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:38 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:38 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:38 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:38 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:38 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:39 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:39 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:39 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:39 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:43 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:43 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:43 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:43 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:43 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:43 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:43 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:43 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:43 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:43 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:43 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:48 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:48 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:48 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:48 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:48 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:48 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:48 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:48 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:48 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:48 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:48 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:53 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:53 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:53 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:53 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:53 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:53 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:53 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:53 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:53 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:24:58 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:58 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:24:58 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:24:58 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:24:58 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:24:58 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:24:58 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:24:59 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:24:59 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:24:59 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:24:59 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:03 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:03 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:03 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:03 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:08 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:08 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:08 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:08 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:08 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:08 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:08 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:08 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:08 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:08 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:08 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:13 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:13 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:13 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:13 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:13 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:13 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:13 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:13 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:13 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:18 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:23 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:23 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:23 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:23 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:28 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:33 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:33 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:33 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:33 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:38 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:38 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:38 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:38 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:38 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:38 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:38 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:38 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:38 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:43 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:43 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:43 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:43 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:43 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:43 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:43 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:44 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:44 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:44 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:44 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:48 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:48 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:48 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:48 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:48 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:48 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:48 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:48 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:48 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:48 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:48 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:53 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:53 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:53 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:53 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:53 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:53 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:53 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:53 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:53 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:25:58 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:58 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:25:58 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:25:58 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:25:58 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:25:58 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:25:58 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:25:58 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:25:58 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:25:58 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:25:58 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:04 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:04 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:04 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:04 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:08 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:08 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:08 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:08 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:08 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:08 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:08 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:08 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:08 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:08 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:08 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:13 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:13 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:13 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:13 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:13 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:13 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:13 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:13 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:14 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:18 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:23 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:23 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:23 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:23 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:28 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:34 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:34 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:34 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:34 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:38 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:38 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:38 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:38 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:38 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:39 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:39 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:39 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:39 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:43 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:43 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:43 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:43 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:43 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:43 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:43 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:43 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:43 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:43 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:43 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:48 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:48 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:48 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:48 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:48 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:48 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:48 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:48 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:48 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:48 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:48 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:53 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:53 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:53 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:53 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:53 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:53 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:53 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:53 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:53 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:26:58 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:58 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:26:58 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:26:58 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:26:58 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:26:58 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:26:58 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:26:59 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:26:59 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:26:59 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:26:59 - app_new.main - DEBUG - ✅ Response status: 200
