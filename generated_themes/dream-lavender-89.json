@@ -1,0 +1,31 @@
+{
+  "id": "dream-lavender-89",
+  "name": "Dream Lavender",
+  "description": "A beautiful pastel theme with tetradic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "tetradic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f6f2f6",
+    "--secondary-bg": "#fefdfe",
+    "--accent-bg": "#10710e109",
+    "--text-primary": "#4f414e",
+    "--text-secondary": "#0f0b0e",
+    "--accent-primary": "#d8a926",
+    "--accent-secondary": "#2abb38",
+    "--accent-tertiary": "#3359cb",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(254, 253, 254, 0.9)",
+    "--border-color": "#11b12a11d",
+    "--glow-color": "rgba(216, 169, 38, 0.3)",
+    "--purple-glow": "rgba(42, 187, 56, 0.3)"
+  }
+}

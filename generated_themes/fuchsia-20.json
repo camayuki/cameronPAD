@@ -1,0 +1,31 @@
+{
+  "id": "fuchsia-20",
+  "name": "Fuchsia",
+  "description": "A beautiful dark theme with triadic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "triadic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#1d141f",
+    "--secondary-bg": "#251b26",
+    "--accent-bg": "#3e2746",
+    "--text-primary": "#eae7eb",
+    "--text-secondary": "#c4b8ca",
+    "--accent-primary": "#e0ca51",
+    "--accent-secondary": "#6dddcd",
+    "--accent-tertiary": "#d0c547",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(37, 27, 38, 0.9)",
+    "--border-color": "#422e47",
+    "--glow-color": "rgba(224, 202, 81, 0.3)",
+    "--purple-glow": "rgba(109, 221, 205, 0.3)"
+  }
+}

@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+
+{% block title %}Theme Marketplace - CameronPAD{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 20px;">
+    <div class="page-header">
+        <h1>🎨 Theme Marketplace</h1>
+        <p>Browse and install community themes with one click</p>
+    </div>
+
+    <!-- Stats & Filters -->
+    <div class="marketplace-controls" style="margin: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <div class="stats">
+            <span style="color: var(--text-secondary);">
+                📦 {{ marketplace_themes|length }} themes available • 
+                ✅ {{ installed_count }} installed
+            </span>
+        </div>
+        
+        <div class="controls" style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <input type="text" id="searchInput" placeholder="🔍 Search themes..." 
+                   style="padding: 8px 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--secondary-bg); color: var(--text-primary); min-width: 250px;">
+            
+            <select id="categoryFilter" style="padding: 8px 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--secondary-bg); color: var(--text-primary);">
+                <option value="">All Categories</option>
+                <option value="dark">Dark Themes</option>
+                <option value="light">Light Themes</option>
+            </select>
+            
+            <select id="sortSelect" style="padding: 8px 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--secondary-bg); color: var(--text-primary);">
+                <option value="downloads">Most Downloaded</option>
+                <option value="rating">Highest Rated</option>
+                <option value="name">Name (A-Z)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Theme Grid -->
+    <div id="themeGrid" class="theme-marketplace-grid">
+        {% for theme in marketplace_themes %}
+        <div class="marketplace-theme-card" data-theme-id="{{ theme.id }}" 
+             data-category="{{ theme.category|lower }}" 
+             data-name="{{ theme.name|lower }}" 
+             data-downloads="{{ theme.downloads }}" 
+             data-rating="{{ theme.rating }}">
+            
+            <!-- Preview Image -->
+            <div class="theme-preview" style="background: {% if theme.css_variables %}linear-gradient(135deg, {{ theme.css_variables['--primary-bg'] }}, {{ theme.css_variables['--accent-bg'] }}){% else %}linear-gradient(135deg, #1a202c, #2d3748){% endif %}; height: 150px; border-radius: 8px 8px 0 0; position: relative;">
+                <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.7); padding: 5px 10px; border-radius: 5px; font-size: 0.85em;">
+                    {% if theme.rating %}⭐ {{ theme.rating }}{% endif %}{% if theme.downloads %} • ⬇️ {{ theme.downloads }}{% endif %}
+                </div>
+                {% if theme.is_installed %}
+                <div style="position: absolute; top: 10px; right: 10px; background: var(--success); padding: 5px 10px; border-radius: 5px; font-size: 0.85em; font-weight: bold;">
+                    ✅ INSTALLED
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Theme Info -->
+            <div class="theme-info" style="padding: 15px;">
+                <h3 style="margin: 0 0 8px 0; color: var(--text-primary); font-size: 1.2em;">
+                    {{ theme.name }}
+                </h3>
+                <p style="color: var(--text-secondary); font-size: 0.9em; margin: 0 0 10px 0;">
+                    {{ theme.description }}
+                </p>
+                
+                <div class="theme-meta" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;">
+                    <span class="badge" style="background: var(--accent-bg); padding: 4px 8px; border-radius: 4px; font-size: 0.8em;">
+                        {{ theme.category }}
+                    </span>
+                    {% for tag in theme.tags %}
+                    <span class="badge" style="background: var(--accent-bg); padding: 4px 8px; border-radius: 4px; font-size: 0.8em; opacity: 0.8;">
+                        {{ tag }}
+                    </span>
+                    {% endfor %}
+                </div>
+                
+                <div class="theme-author" style="color: var(--text-secondary); font-size: 0.85em; margin-bottom: 15px;">
+                    👤 {{ theme.author }} • v{{ theme.version }}
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="theme-actions" style="display: flex; gap: 8px;">
+                    {% if theme.is_installed %}
+                    <button class="btn btn-success" disabled style="flex: 1; opacity: 0.7;">
+                        ✅ Installed
+                    </button>
+                    <button class="btn btn-primary apply-theme-btn" data-theme-id="{{ theme.id }}" style="flex: 1;">
+                        🎨 Apply
+                    </button>
+                    {% else %}
+                    <button class="btn btn-primary install-theme-btn" data-theme-id="{{ theme.id }}" data-theme-name="{{ theme.name }}" style="flex: 1;">
+                        ⬇️ Install
+                    </button>
+                    {% endif %}
+                    <button class="btn btn-secondary preview-theme-btn" data-theme-id="{{ theme.id }}" title="Preview">
+                        👁️
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- No Results Message -->
+    <div id="noResults" style="display: none; text-align: center; padding: 40px; color: var(--text-secondary);">
+        <div style="font-size: 3em; margin-bottom: 15px;">🔍</div>
+        <h3>No themes found</h3>
+        <p>Try adjusting your search or filters</p>
+    </div>
+</div>
+
+<style>
+.theme-marketplace-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.marketplace-theme-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.marketplace-theme-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--glow-color);
+    border-color: var(--accent-primary);
+}
+
+.btn {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--accent-secondary);
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: var(--accent-bg);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--border-color);
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+}
+</style>
+
+<script>
+// Filter and search functionality
+const searchInput = document.getElementById('searchInput');
+const categoryFilter = document.getElementById('categoryFilter');
+const sortSelect = document.getElementById('sortSelect');
+const themeGrid = document.getElementById('themeGrid');
+const noResults = document.getElementById('noResults');
+const cards = Array.from(document.querySelectorAll('.marketplace-theme-card'));
+
+function filterThemes() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const category = categoryFilter.value.toLowerCase();
+    let visibleCards = cards.filter(card => {
+        const name = card.dataset.name;
+        const cardCategory = card.dataset.category;
+        
+        const matchesSearch = !searchTerm || name.includes(searchTerm);
+        const matchesCategory = !category || cardCategory === category;
+        
+        return matchesSearch && matchesCategory;
+    });
+    
+    // Sort cards
+    const sortBy = sortSelect.value;
+    if (sortBy === 'downloads') {
+        visibleCards.sort((a, b) => parseInt(b.dataset.downloads) - parseInt(a.dataset.downloads));
+    } else if (sortBy === 'rating') {
+        visibleCards.sort((a, b) => parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating));
+    } else if (sortBy === 'name') {
+        visibleCards.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+    }
+    
+    // Hide all cards
+    cards.forEach(card => card.style.display = 'none');
+    
+    // Show visible cards in sorted order
+    visibleCards.forEach(card => {
+        card.style.display = 'block';
+        themeGrid.appendChild(card); // Re-append to reorder
+    });
+    
+    // Show/hide no results message
+    noResults.style.display = visibleCards.length === 0 ? 'block' : 'none';
+}
+
+searchInput.addEventListener('input', filterThemes);
+categoryFilter.addEventListener('change', filterThemes);
+sortSelect.addEventListener('change', filterThemes);
+
+// Install theme functionality
+document.querySelectorAll('.install-theme-btn').forEach(btn => {
+    btn.addEventListener('click', async function() {
+        const themeId = this.dataset.themeId;
+        const themeName = this.dataset.themeName;
+        
+        // Show loading state
+        this.disabled = true;
+        this.textContent = '⏳ Installing...';
+        
+        try {
+            const response = await fetch(`/themes/marketplace/api/install/${themeId}`, {
+                method: 'POST'
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                this.textContent = '✅ Installed!';
+                this.classList.remove('btn-primary');
+                this.classList.add('btn-success');
+                
+                // Ask if user wants to apply the theme
+                if (data.prompt_apply && confirm(`Theme "${themeName}" installed successfully!\n\nWould you like to apply it now?`)) {
+                    // Apply the theme
+                    const applyResponse = await fetch('/api/themes/set', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({theme_id: themeId})
+                    });
+                    
+                    if (applyResponse.ok) {
+                        // Reload page to show new theme
+                        window.location.reload();
+                    }
+                } else {
+                    // Just reload to update UI
+                    setTimeout(() => window.location.reload(), 1000);
+                }
+            } else {
+                alert(`Failed to install theme: ${data.error || 'Unknown error'}`);
+                this.disabled = false;
+                this.textContent = '⬇️ Install';
+            }
+        } catch (error) {
+            alert(`Error installing theme: ${error.message}`);
+            this.disabled = false;
+            this.textContent = '⬇️ Install';
+        }
+    });
+});
+
+// Apply theme functionality
+document.querySelectorAll('.apply-theme-btn').forEach(btn => {
+    btn.addEventListener('click', async function() {
+        const themeId = this.dataset.themeId;
+        
+        this.disabled = true;
+        this.textContent = '⏳ Applying...';
+        
+        try {
+            const response = await fetch('/api/themes/set', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({theme_id: themeId})
+            });
+            
+            if (response.ok) {
+                window.location.reload();
+            }
+        } catch (error) {
+            alert(`Error applying theme: ${error.message}`);
+            this.disabled = false;
+            this.textContent = '🎨 Apply';
+        }
+    });
+});
+
+// Preview theme functionality (shows CSS variables)
+document.querySelectorAll('.preview-theme-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const themeId = this.dataset.themeId;
+        alert('Preview feature coming soon!\nYou can install the theme and try it out.');
+    });
+});
+</script>
+{% endblock %}

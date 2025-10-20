@@ -1,0 +1,31 @@
+{
+  "id": "mist-fuchsia-73",
+  "name": "Mist Fuchsia",
+  "description": "A beautiful pastel theme with forest color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "forest",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f1f1eb",
+    "--secondary-bg": "#fafaf8",
+    "--accent-bg": "#10610610a",
+    "--text-primary": "#4a4a3c",
+    "--text-secondary": "#060605",
+    "--accent-primary": "#75cc32",
+    "--accent-secondary": "#b0a434",
+    "--accent-tertiary": "#8cc03e",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(250, 250, 248, 0.9)",
+    "--border-color": "#11a119125",
+    "--glow-color": "rgba(117, 204, 50, 0.3)",
+    "--purple-glow": "rgba(176, 164, 52, 0.3)"
+  }
+}

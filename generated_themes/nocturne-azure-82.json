@@ -1,0 +1,31 @@
+{
+  "id": "nocturne-azure-82",
+  "name": "Nocturne Azure",
+  "description": "A beautiful midnight theme with earth color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "earth",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#050405",
+    "--secondary-bg": "#0e0c0f",
+    "--accent-bg": "#1f1622",
+    "--text-primary": "#f7f6f8",
+    "--text-secondary": "#c3b5c8",
+    "--accent-primary": "#ad65cc",
+    "--accent-secondary": "#ac7dcd",
+    "--accent-tertiary": "#b65bbd",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(14, 12, 15, 0.9)",
+    "--border-color": "#2a222f",
+    "--glow-color": "rgba(173, 101, 204, 0.3)",
+    "--purple-glow": "rgba(172, 125, 205, 0.3)"
+  }
+}

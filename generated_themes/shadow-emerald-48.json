@@ -1,0 +1,31 @@
+{
+  "id": "shadow-emerald-48",
+  "name": "Shadow Emerald",
+  "description": "A beautiful dark theme with ocean color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "ocean",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#130c10",
+    "--secondary-bg": "#1a1217",
+    "--accent-bg": "#412436",
+    "--text-primary": "#e6e1e4",
+    "--text-secondary": "#b398a3",
+    "--accent-primary": "#e05651",
+    "--accent-secondary": "#dd9c6d",
+    "--accent-tertiary": "#d04770",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(26, 18, 23, 0.9)",
+    "--border-color": "#34222a",
+    "--glow-color": "rgba(224, 86, 81, 0.3)",
+    "--purple-glow": "rgba(221, 156, 109, 0.3)"
+  }
+}

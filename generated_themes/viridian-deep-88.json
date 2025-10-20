@@ -1,0 +1,31 @@
+{
+  "id": "viridian-deep-88",
+  "name": "Viridian Deep",
+  "description": "A beautiful midnight theme with cherry color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "cherry",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0d150e",
+    "--secondary-bg": "#161f19",
+    "--accent-bg": "#244030",
+    "--text-primary": "#e3e8e4",
+    "--text-secondary": "#b2c6b6",
+    "--accent-primary": "#51e0b3",
+    "--accent-secondary": "#6ddd89",
+    "--accent-tertiary": "#47d0c2",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(22, 31, 25, 0.9)",
+    "--border-color": "#294032",
+    "--glow-color": "rgba(81, 224, 179, 0.3)",
+    "--purple-glow": "rgba(109, 221, 137, 0.3)"
+  }
+}

@@ -68,6 +68,42 @@ class StocksPlugin(WebPlugin):
             return "\n".join([f"    {k}: {v};" for k, v in theme_vars.items()])
         self.templates.env.globals['get_theme_css'] = get_theme_css
         
+        # Add get_enabled_plugins function to template globals
+        def get_enabled_plugins():
+            """Get list of enabled plugins for navigation"""
+            # Map plugin names to icons
+            plugin_icons = {
+                'stocks': '📈',
+                'notes': '📝',
+                'journal': '📔',
+                'surf': '🏄',
+                'system_monitor': '🖥️',
+                'hello_world': '👋',
+                'notepad': '📓',
+                'tradingview': '📊',
+                'lol_champions': '🎮'
+            }
+            
+            try:
+                # Try to get plugin_manager from the main app
+                from app_new.main import plugin_manager
+                if not plugin_manager:
+                    return []
+                plugins_list = []
+                for plugin_name, plugin in plugin_manager.get_enabled_plugins().items():
+                    if hasattr(plugin, 'metadata'):
+                        plugins_list.append({
+                            'name': plugin.metadata.name,
+                            'url': f"/api/v1/plugins/{plugin_name}/",
+                            'icon': plugin_icons.get(plugin_name, '📦')
+                        })
+                return plugins_list
+            except Exception as e:
+                logger.error(f"Error getting enabled plugins: {e}", exc_info=True)
+                return []
+        
+        self.templates.env.globals['get_enabled_plugins'] = get_enabled_plugins
+        
         # Register routes
         self.register_routes()
         
@@ -230,27 +266,39 @@ class StocksPlugin(WebPlugin):
         @self._router.get("/", response_class=HTMLResponse)
         async def stocks_page(request: Request):
             """Render the stocks tracking page"""
-            logger.info("📈 Stocks page accessed")
+            logger.info("=" * 80)
+            logger.info("STOCKS PAGE ACCESSED!")
+            logger.info(f"Request path: {request.url.path}")
+            logger.info(f"User: {getattr(request.state, 'username', 'Unknown')}")
+            logger.info(f"Templates object exists: {self.templates is not None}")
+            logger.info("=" * 80)
             
-            # Default showcase symbols
-            showcase_symbols = [
-                "AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", 
-                "META", "TSLA", "SPY"
-            ]
-            
-            return self.templates.TemplateResponse("stocks.html", {
-                "request": request,
-                "showcase_symbols": showcase_symbols,
-                "current_user": {
-                    "username": getattr(request.state, "username", "guest"),
-                    "is_admin": getattr(request.state, "is_admin", False)
-                }
-            })
+            try:
+                # Default showcase symbols
+                showcase_symbols = [
+                    "AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", 
+                    "META", "TSLA", "SPY"
+                ]
+                
+                logger.info(f"SUCCESS About to render template with {len(showcase_symbols)} symbols")
+                response = self.templates.TemplateResponse("stocks.html", {
+                    "request": request,
+                    "showcase_symbols": showcase_symbols,
+                    "current_user": {
+                        "username": getattr(request.state, "username", "guest"),
+                        "is_admin": getattr(request.state, "is_admin", False)
+                    }
+                })
+                logger.info("SUCCESS Template rendered successfully!")
+                return response
+            except Exception as e:
+                logger.error(f"ERROR rendering stocks page: {e}", exc_info=True)
+                raise
         
         @self._router.get("/status")
         async def get_status():
             """Get stock plugin status"""
-            logger.info("📊 Stock status requested")
+            logger.info("Stock status requested")
             return {
                 "status": "success",
                 "data": {

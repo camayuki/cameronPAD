@@ -1,0 +1,31 @@
+{
+  "id": "cobalt-bright-18",
+  "name": "Cobalt Bright",
+  "description": "A beautiful light theme with lavender color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "lavender",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#e6ede6",
+    "--secondary-bg": "#f2f4f1",
+    "--accent-bg": "#10e10810d",
+    "--text-primary": "#303a2f",
+    "--text-secondary": "#-7-a-7",
+    "--accent-primary": "#32cc5b",
+    "--accent-secondary": "#72b034",
+    "--accent-tertiary": "#3ec042",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(242, 244, 241, 0.9)",
+    "--border-color": "#11b11311c",
+    "--glow-color": "rgba(50, 204, 91, 0.3)",
+    "--purple-glow": "rgba(114, 176, 52, 0.3)"
+  }
+}

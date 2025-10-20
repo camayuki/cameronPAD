@@ -1,0 +1,31 @@
+{
+  "id": "chartreuse-radiant-1",
+  "name": "Chartreuse Radiant",
+  "description": "A beautiful light theme with lavender color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "lavender",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#eee7e9",
+    "--secondary-bg": "#f6f4f5",
+    "--accent-bg": "#ffffff",
+    "--text-primary": "#3e3334",
+    "--text-secondary": "#-2-2-2",
+    "--accent-primary": "#cc5932",
+    "--accent-secondary": "#b03470",
+    "--accent-tertiary": "#c04b3e",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(246, 244, 245, 0.9)",
+    "--border-color": "#11411d11b",
+    "--glow-color": "rgba(204, 89, 50, 0.3)",
+    "--purple-glow": "rgba(176, 52, 112, 0.3)"
+  }
+}

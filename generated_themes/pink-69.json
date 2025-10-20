@@ -1,0 +1,31 @@
+{
+  "id": "pink-69",
+  "name": "Pink",
+  "description": "A beautiful midnight theme with triadic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "triadic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#180f15",
+    "--secondary-bg": "#251a1f",
+    "--accent-bg": "#47283f",
+    "--text-primary": "#f8f7f8",
+    "--text-secondary": "#c3aebb",
+    "--accent-primary": "#9de051",
+    "--accent-secondary": "#6dafdd",
+    "--accent-tertiary": "#8ed047",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(37, 26, 31, 0.9)",
+    "--border-color": "#412a37",
+    "--glow-color": "rgba(157, 224, 81, 0.3)",
+    "--purple-glow": "rgba(109, 175, 221, 0.3)"
+  }
+}

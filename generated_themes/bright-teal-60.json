@@ -1,0 +1,31 @@
+{
+  "id": "bright-teal-60",
+  "name": "Bright Teal",
+  "description": "A beautiful light theme with warm color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "warm",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#e7efef",
+    "--secondary-bg": "#f2f6f6",
+    "--accent-bg": "#11610c10d",
+    "--text-primary": "#364343",
+    "--text-secondary": "#070908",
+    "--accent-primary": "#26bad8",
+    "--accent-secondary": "#2a42bb",
+    "--accent-tertiary": "#33becb",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(242, 246, 246, 0.9)",
+    "--border-color": "#10d108109",
+    "--glow-color": "rgba(38, 186, 216, 0.3)",
+    "--purple-glow": "rgba(42, 66, 187, 0.3)"
+  }
+}

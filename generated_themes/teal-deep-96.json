@@ -1,0 +1,31 @@
+{
+  "id": "teal-deep-96",
+  "name": "Teal Deep",
+  "description": "A beautiful midnight theme with complementary color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "complementary",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0a100f",
+    "--secondary-bg": "#0f1415",
+    "--accent-bg": "#1b2f31",
+    "--text-primary": "#f6f7f8",
+    "--text-secondary": "#b4c7c7",
+    "--accent-primary": "#e07a51",
+    "--accent-secondary": "#dd8f6d",
+    "--accent-tertiary": "#d04757",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(15, 20, 21, 0.9)",
+    "--border-color": "#2c4144",
+    "--glow-color": "rgba(224, 122, 81, 0.3)",
+    "--purple-glow": "rgba(221, 143, 109, 0.3)"
+  }
+}

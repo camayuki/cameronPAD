@@ -1,0 +1,31 @@
+{
+  "id": "radiant-marigold-8",
+  "name": "Radiant Marigold",
+  "description": "A beautiful light theme with analogous color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "analogous",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f1f2eb",
+    "--secondary-bg": "#f9f9f7",
+    "--accent-bg": "#104104109",
+    "--text-primary": "#36352c",
+    "--text-secondary": "#-a-a-7",
+    "--accent-primary": "#76d826",
+    "--accent-secondary": "#bb642a",
+    "--accent-tertiary": "#a2cb33",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(249, 249, 247, 0.9)",
+    "--border-color": "#10e10f116",
+    "--glow-color": "rgba(118, 216, 38, 0.3)",
+    "--purple-glow": "rgba(187, 100, 42, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "magenta-soft-26",
+  "name": "Magenta Soft",
+  "description": "A beautiful pastel theme with earth color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "earth",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f8f5f7",
+    "--secondary-bg": "#fdfdfd",
+    "--accent-bg": "#10d11510e",
+    "--text-primary": "#493b46",
+    "--text-secondary": "#030203",
+    "--accent-primary": "#bf3f8c",
+    "--accent-secondary": "#a63f87",
+    "--accent-tertiary": "#b54995",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(253, 253, 253, 0.9)",
+    "--border-color": "#11c12611f",
+    "--glow-color": "rgba(191, 63, 140, 0.3)",
+    "--purple-glow": "rgba(166, 63, 135, 0.3)"
+  }
+}

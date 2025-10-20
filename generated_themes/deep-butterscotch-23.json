@@ -1,0 +1,31 @@
+{
+  "id": "deep-butterscotch-23",
+  "name": "Deep Butterscotch",
+  "description": "A beautiful midnight theme with forest color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "forest",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0d1313",
+    "--secondary-bg": "#141b1b",
+    "--accent-bg": "#213732",
+    "--text-primary": "#f6f8f8",
+    "--text-secondary": "#c3d2d3",
+    "--accent-primary": "#5ba3d6",
+    "--accent-secondary": "#75d5ba",
+    "--accent-tertiary": "#51b5c6",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(20, 27, 27, 0.9)",
+    "--border-color": "#334948",
+    "--glow-color": "rgba(91, 163, 214, 0.3)",
+    "--purple-glow": "rgba(117, 213, 186, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "peach-day-32",
+  "name": "Peach Day",
+  "description": "A beautiful light theme with tetradic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "tetradic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f7f4f3",
+    "--secondary-bg": "#100101101",
+    "--accent-bg": "#11211a122",
+    "--text-primary": "#4f4840",
+    "--text-secondary": "#211d18",
+    "--accent-primary": "#44d826",
+    "--accent-secondary": "#2a6dbb",
+    "--accent-tertiary": "#c133cb",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(16, 1, 1, 0.9)",
+    "--border-color": "#118120126",
+    "--glow-color": "rgba(68, 216, 38, 0.3)",
+    "--purple-glow": "rgba(42, 109, 187, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "morning-peach-74",
+  "name": "Morning Peach",
+  "description": "A beautiful light theme with warm color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "warm",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f4f2ee",
+    "--secondary-bg": "#faf9f8",
+    "--accent-bg": "#10910b112",
+    "--text-primary": "#323129",
+    "--text-secondary": "#-d-c-a",
+    "--accent-primary": "#c9d826",
+    "--accent-secondary": "#61bb2a",
+    "--accent-tertiary": "#cbcb33",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(250, 249, 248, 0.9)",
+    "--border-color": "#10d10f115",
+    "--glow-color": "rgba(201, 216, 38, 0.3)",
+    "--purple-glow": "rgba(97, 187, 42, 0.3)"
+  }
+}

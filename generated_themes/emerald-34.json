@@ -1,0 +1,31 @@
+{
+  "id": "emerald-34",
+  "name": "Emerald",
+  "description": "A beautiful midnight theme with earth color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "earth",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0e1213",
+    "--secondary-bg": "#131618",
+    "--accent-bg": "#202b31",
+    "--text-primary": "#e1e5e6",
+    "--text-secondary": "#a7b9be",
+    "--accent-primary": "#65b4cc",
+    "--accent-secondary": "#7dcdcb",
+    "--accent-tertiary": "#5ba7bd",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(19, 22, 24, 0.9)",
+    "--border-color": "#36464a",
+    "--glow-color": "rgba(101, 180, 204, 0.3)",
+    "--purple-glow": "rgba(125, 205, 203, 0.3)"
+  }
+}

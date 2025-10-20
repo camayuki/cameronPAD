@@ -1,0 +1,31 @@
+{
+  "id": "blush-92",
+  "name": "Blush",
+  "description": "A beautiful pastel theme with mint color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "mint",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#ecf0ea",
+    "--secondary-bg": "#f2f5f1",
+    "--accent-bg": "#11310b113",
+    "--text-primary": "#4f5b4a",
+    "--text-secondary": "#242e22",
+    "--accent-primary": "#49cc32",
+    "--accent-secondary": "#34b03d",
+    "--accent-tertiary": "#5ac03e",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(242, 245, 241, 0.9)",
+    "--border-color": "#120116120",
+    "--glow-color": "rgba(73, 204, 50, 0.3)",
+    "--purple-glow": "rgba(52, 176, 61, 0.3)"
+  }
+}

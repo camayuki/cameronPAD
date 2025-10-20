@@ -1,0 +1,31 @@
+{
+  "id": "cobalt-31",
+  "name": "Cobalt",
+  "description": "A beautiful pastel theme with monochrome color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "monochrome",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f2f2f6",
+    "--secondary-bg": "#fcfcfc",
+    "--accent-bg": "#11411410b",
+    "--text-primary": "#3d3c4a",
+    "--text-secondary": "#050507",
+    "--accent-primary": "#2f26d8",
+    "--accent-secondary": "#312abb",
+    "--accent-tertiary": "#3b33cb",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(252, 252, 252, 0.9)",
+    "--border-color": "#12c12d11d",
+    "--glow-color": "rgba(47, 38, 216, 0.3)",
+    "--purple-glow": "rgba(49, 42, 187, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "cobalt-0",
+  "name": "Cobalt",
+  "description": "A beautiful pastel theme with cool color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "cool",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f1f2eb",
+    "--secondary-bg": "#f8f8f6",
+    "--accent-bg": "#10510610a",
+    "--text-primary": "#504b41",
+    "--text-secondary": "#15150f",
+    "--accent-primary": "#ccd826",
+    "--accent-secondary": "#49bb2a",
+    "--accent-tertiary": "#91cb33",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(248, 248, 246, 0.9)",
+    "--border-color": "#11311511e",
+    "--glow-color": "rgba(204, 216, 38, 0.3)",
+    "--purple-glow": "rgba(73, 187, 42, 0.3)"
+  }
+}

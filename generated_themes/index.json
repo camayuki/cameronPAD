@@ -1,0 +1,1410 @@
+{
+  "version": "1.0.0",
+  "theme_count": 100,
+  "categories": {
+    "Light": 46,
+    "Dark": 54
+  },
+  "themes": [
+    {
+      "id": "cobalt-0",
+      "name": "Cobalt",
+      "description": "A beautiful pastel theme with cool color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cobalt-0.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cobalt-0.png"
+    },
+    {
+      "id": "chartreuse-radiant-1",
+      "name": "Chartreuse Radiant",
+      "description": "A beautiful light theme with lavender color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "lavender",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/chartreuse-radiant-1.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/chartreuse-radiant-1.png"
+    },
+    {
+      "id": "morning-sapphire-2",
+      "name": "Morning Sapphire",
+      "description": "A beautiful light theme with cherry color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "cherry",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/morning-sapphire-2.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/morning-sapphire-2.png"
+    },
+    {
+      "id": "twilight-azure-3",
+      "name": "Twilight Azure",
+      "description": "A beautiful dark theme with triadic color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/twilight-azure-3.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/twilight-azure-3.png"
+    },
+    {
+      "id": "radiant-sage-4",
+      "name": "Radiant Sage",
+      "description": "A beautiful light theme with neon color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "neon",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/radiant-sage-4.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/radiant-sage-4.png"
+    },
+    {
+      "id": "violet-5",
+      "name": "Violet",
+      "description": "A beautiful pastel theme with warm color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "warm",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/violet-5.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/violet-5.png"
+    },
+    {
+      "id": "twilight-indigo-6",
+      "name": "Twilight Indigo",
+      "description": "A beautiful dark theme with monochrome color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "monochrome",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/twilight-indigo-6.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/twilight-indigo-6.png"
+    },
+    {
+      "id": "cloud-cherry-7",
+      "name": "Cloud Cherry",
+      "description": "A beautiful pastel theme with cool color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cloud-cherry-7.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cloud-cherry-7.png"
+    },
+    {
+      "id": "radiant-marigold-8",
+      "name": "Radiant Marigold",
+      "description": "A beautiful light theme with analogous color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "analogous",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/radiant-marigold-8.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/radiant-marigold-8.png"
+    },
+    {
+      "id": "teal-9",
+      "name": "Teal",
+      "description": "A beautiful dark theme with cool color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/teal-9.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/teal-9.png"
+    },
+    {
+      "id": "dawn-aqua-10",
+      "name": "Dawn Aqua",
+      "description": "A beautiful light theme with tetradic color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/dawn-aqua-10.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/dawn-aqua-10.png"
+    },
+    {
+      "id": "rose-night-11",
+      "name": "Rose Night",
+      "description": "A beautiful dark theme with warm color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "warm",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/rose-night-11.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/rose-night-11.png"
+    },
+    {
+      "id": "dawn-amber-12",
+      "name": "Dawn Amber",
+      "description": "A beautiful light theme with triadic color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/dawn-amber-12.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/dawn-amber-12.png"
+    },
+    {
+      "id": "plum-shadow-13",
+      "name": "Plum Shadow",
+      "description": "A beautiful dark theme with tetradic color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/plum-shadow-13.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/plum-shadow-13.png"
+    },
+    {
+      "id": "emerald-mist-14",
+      "name": "Emerald Mist",
+      "description": "A beautiful pastel theme with mint color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "mint",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/emerald-mist-14.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/emerald-mist-14.png"
+    },
+    {
+      "id": "emerald-15",
+      "name": "Emerald",
+      "description": "A beautiful midnight theme with neon color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "neon",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/emerald-15.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/emerald-15.png"
+    },
+    {
+      "id": "blush-nocturne-16",
+      "name": "Blush Nocturne",
+      "description": "A beautiful midnight theme with analogous color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "analogous",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/blush-nocturne-16.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/blush-nocturne-16.png"
+    },
+    {
+      "id": "magenta-nocturne-17",
+      "name": "Magenta Nocturne",
+      "description": "A beautiful midnight theme with tetradic color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/magenta-nocturne-17.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/magenta-nocturne-17.png"
+    },
+    {
+      "id": "cobalt-bright-18",
+      "name": "Cobalt Bright",
+      "description": "A beautiful light theme with lavender color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "lavender",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cobalt-bright-18.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cobalt-bright-18.png"
+    },
+    {
+      "id": "twilight-cobalt-19",
+      "name": "Twilight Cobalt",
+      "description": "A beautiful dark theme with cherry color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "cherry",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/twilight-cobalt-19.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/twilight-cobalt-19.png"
+    },
+    {
+      "id": "fuchsia-20",
+      "name": "Fuchsia",
+      "description": "A beautiful dark theme with triadic color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/fuchsia-20.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/fuchsia-20.png"
+    },
+    {
+      "id": "orchid-morning-21",
+      "name": "Orchid Morning",
+      "description": "A beautiful light theme with triadic color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/orchid-morning-21.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/orchid-morning-21.png"
+    },
+    {
+      "id": "golden-shadow-22",
+      "name": "Golden Shadow",
+      "description": "A beautiful dark theme with cherry color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "cherry",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/golden-shadow-22.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/golden-shadow-22.png"
+    },
+    {
+      "id": "deep-butterscotch-23",
+      "name": "Deep Butterscotch",
+      "description": "A beautiful midnight theme with forest color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "forest",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/deep-butterscotch-23.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/deep-butterscotch-23.png"
+    },
+    {
+      "id": "chartreuse-eclipse-24",
+      "name": "Chartreuse Eclipse",
+      "description": "A beautiful dark theme with tetradic color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/chartreuse-eclipse-24.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/chartreuse-eclipse-24.png"
+    },
+    {
+      "id": "night-turquoise-25",
+      "name": "Night Turquoise",
+      "description": "A beautiful dark theme with triadic color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/night-turquoise-25.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/night-turquoise-25.png"
+    },
+    {
+      "id": "magenta-soft-26",
+      "name": "Magenta Soft",
+      "description": "A beautiful pastel theme with earth color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "earth",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/magenta-soft-26.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/magenta-soft-26.png"
+    },
+    {
+      "id": "cloud-cyan-27",
+      "name": "Cloud Cyan",
+      "description": "A beautiful pastel theme with cool color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cloud-cyan-27.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cloud-cyan-27.png"
+    },
+    {
+      "id": "cloud-mint-28",
+      "name": "Cloud Mint",
+      "description": "A beautiful pastel theme with forest color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "forest",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cloud-mint-28.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cloud-mint-28.png"
+    },
+    {
+      "id": "butterscotch-29",
+      "name": "Butterscotch",
+      "description": "A beautiful dark theme with tetradic color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/butterscotch-29.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/butterscotch-29.png"
+    },
+    {
+      "id": "scarlet-eclipse-30",
+      "name": "Scarlet Eclipse",
+      "description": "A beautiful dark theme with triadic color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/scarlet-eclipse-30.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/scarlet-eclipse-30.png"
+    },
+    {
+      "id": "cobalt-31",
+      "name": "Cobalt",
+      "description": "A beautiful pastel theme with monochrome color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "monochrome",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cobalt-31.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cobalt-31.png"
+    },
+    {
+      "id": "peach-day-32",
+      "name": "Peach Day",
+      "description": "A beautiful light theme with tetradic color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/peach-day-32.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/peach-day-32.png"
+    },
+    {
+      "id": "cardinal-33",
+      "name": "Cardinal",
+      "description": "A beautiful light theme with mint color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "mint",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cardinal-33.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cardinal-33.png"
+    },
+    {
+      "id": "emerald-34",
+      "name": "Emerald",
+      "description": "A beautiful midnight theme with earth color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "earth",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/emerald-34.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/emerald-34.png"
+    },
+    {
+      "id": "plum-35",
+      "name": "Plum",
+      "description": "A beautiful midnight theme with lavender color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "lavender",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/plum-35.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/plum-35.png"
+    },
+    {
+      "id": "morning-emerald-36",
+      "name": "Morning Emerald",
+      "description": "A beautiful light theme with triadic color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/morning-emerald-36.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/morning-emerald-36.png"
+    },
+    {
+      "id": "nocturne-blush-37",
+      "name": "Nocturne Blush",
+      "description": "A beautiful midnight theme with complementary color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "complementary",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/nocturne-blush-37.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/nocturne-blush-37.png"
+    },
+    {
+      "id": "turquoise-shadow-38",
+      "name": "Turquoise Shadow",
+      "description": "A beautiful dark theme with earth color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "earth",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/turquoise-shadow-38.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/turquoise-shadow-38.png"
+    },
+    {
+      "id": "cyan-39",
+      "name": "Cyan",
+      "description": "A beautiful midnight theme with warm color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "warm",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cyan-39.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cyan-39.png"
+    },
+    {
+      "id": "tangerine-40",
+      "name": "Tangerine",
+      "description": "A beautiful pastel theme with tetradic color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/tangerine-40.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/tangerine-40.png"
+    },
+    {
+      "id": "cloud-sapphire-41",
+      "name": "Cloud Sapphire",
+      "description": "A beautiful pastel theme with complementary color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "complementary",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cloud-sapphire-41.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cloud-sapphire-41.png"
+    },
+    {
+      "id": "amber-42",
+      "name": "Amber",
+      "description": "A beautiful dark theme with sunset color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "sunset",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/amber-42.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/amber-42.png"
+    },
+    {
+      "id": "purple-43",
+      "name": "Purple",
+      "description": "A beautiful midnight theme with mint color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "mint",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/purple-43.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/purple-43.png"
+    },
+    {
+      "id": "sapphire-44",
+      "name": "Sapphire",
+      "description": "A beautiful midnight theme with cool color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/sapphire-44.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/sapphire-44.png"
+    },
+    {
+      "id": "sapphire-45",
+      "name": "Sapphire",
+      "description": "A beautiful midnight theme with mint color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "mint",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/sapphire-45.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/sapphire-45.png"
+    },
+    {
+      "id": "gentle-honey-46",
+      "name": "Gentle Honey",
+      "description": "A beautiful pastel theme with analogous color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "analogous",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/gentle-honey-46.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/gentle-honey-46.png"
+    },
+    {
+      "id": "rose-soft-47",
+      "name": "Rose Soft",
+      "description": "A beautiful pastel theme with monochrome color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "monochrome",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/rose-soft-47.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/rose-soft-47.png"
+    },
+    {
+      "id": "shadow-emerald-48",
+      "name": "Shadow Emerald",
+      "description": "A beautiful dark theme with ocean color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "ocean",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/shadow-emerald-48.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/shadow-emerald-48.png"
+    },
+    {
+      "id": "indigo-dawn-49",
+      "name": "Indigo Dawn",
+      "description": "A beautiful light theme with ocean color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "ocean",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/indigo-dawn-49.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/indigo-dawn-49.png"
+    },
+    {
+      "id": "midnight-emerald-50",
+      "name": "Midnight Emerald",
+      "description": "A beautiful midnight theme with monochrome color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "monochrome",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/midnight-emerald-50.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/midnight-emerald-50.png"
+    },
+    {
+      "id": "teal-dusk-51",
+      "name": "Teal Dusk",
+      "description": "A beautiful dark theme with forest color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "forest",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/teal-dusk-51.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/teal-dusk-51.png"
+    },
+    {
+      "id": "azure-52",
+      "name": "Azure",
+      "description": "A beautiful dark theme with tetradic color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/azure-52.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/azure-52.png"
+    },
+    {
+      "id": "purple-bright-53",
+      "name": "Purple Bright",
+      "description": "A beautiful light theme with forest color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "forest",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/purple-bright-53.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/purple-bright-53.png"
+    },
+    {
+      "id": "void-viridian-54",
+      "name": "Void Viridian",
+      "description": "A beautiful midnight theme with cherry color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "cherry",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/void-viridian-54.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/void-viridian-54.png"
+    },
+    {
+      "id": "dream-cobalt-55",
+      "name": "Dream Cobalt",
+      "description": "A beautiful pastel theme with monochrome color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "monochrome",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/dream-cobalt-55.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/dream-cobalt-55.png"
+    },
+    {
+      "id": "midnight-pink-56",
+      "name": "Midnight Pink",
+      "description": "A beautiful midnight theme with analogous color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "analogous",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/midnight-pink-56.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/midnight-pink-56.png"
+    },
+    {
+      "id": "abyss-emerald-57",
+      "name": "Abyss Emerald",
+      "description": "A beautiful midnight theme with tetradic color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/abyss-emerald-57.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/abyss-emerald-57.png"
+    },
+    {
+      "id": "cloud-coral-58",
+      "name": "Cloud Coral",
+      "description": "A beautiful pastel theme with analogous color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "analogous",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cloud-coral-58.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cloud-coral-58.png"
+    },
+    {
+      "id": "indigo-59",
+      "name": "Indigo",
+      "description": "A beautiful dark theme with complementary color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "complementary",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/indigo-59.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/indigo-59.png"
+    },
+    {
+      "id": "bright-teal-60",
+      "name": "Bright Teal",
+      "description": "A beautiful light theme with warm color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "warm",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/bright-teal-60.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/bright-teal-60.png"
+    },
+    {
+      "id": "cherry-bright-61",
+      "name": "Cherry Bright",
+      "description": "A beautiful light theme with cool color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cherry-bright-61.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cherry-bright-61.png"
+    },
+    {
+      "id": "abyss-viridian-62",
+      "name": "Abyss Viridian",
+      "description": "A beautiful midnight theme with cool color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/abyss-viridian-62.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/abyss-viridian-62.png"
+    },
+    {
+      "id": "abyss-sapphire-63",
+      "name": "Abyss Sapphire",
+      "description": "A beautiful midnight theme with sunset color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "sunset",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/abyss-sapphire-63.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/abyss-sapphire-63.png"
+    },
+    {
+      "id": "fuchsia-64",
+      "name": "Fuchsia",
+      "description": "A beautiful light theme with mint color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "mint",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/fuchsia-64.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/fuchsia-64.png"
+    },
+    {
+      "id": "coral-65",
+      "name": "Coral",
+      "description": "A beautiful midnight theme with lavender color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "lavender",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/coral-65.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/coral-65.png"
+    },
+    {
+      "id": "viridian-radiant-66",
+      "name": "Viridian Radiant",
+      "description": "A beautiful light theme with monochrome color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "monochrome",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/viridian-radiant-66.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/viridian-radiant-66.png"
+    },
+    {
+      "id": "dawn-turquoise-67",
+      "name": "Dawn Turquoise",
+      "description": "A beautiful light theme with analogous color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "analogous",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/dawn-turquoise-67.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/dawn-turquoise-67.png"
+    },
+    {
+      "id": "dusk-chartreuse-68",
+      "name": "Dusk Chartreuse",
+      "description": "A beautiful dark theme with analogous color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "analogous",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/dusk-chartreuse-68.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/dusk-chartreuse-68.png"
+    },
+    {
+      "id": "pink-69",
+      "name": "Pink",
+      "description": "A beautiful midnight theme with triadic color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/pink-69.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/pink-69.png"
+    },
+    {
+      "id": "scarlet-morning-70",
+      "name": "Scarlet Morning",
+      "description": "A beautiful light theme with mint color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "mint",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/scarlet-morning-70.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/scarlet-morning-70.png"
+    },
+    {
+      "id": "abyss-orchid-71",
+      "name": "Abyss Orchid",
+      "description": "A beautiful midnight theme with warm color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "warm",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/abyss-orchid-71.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/abyss-orchid-71.png"
+    },
+    {
+      "id": "amber-morning-72",
+      "name": "Amber Morning",
+      "description": "A beautiful light theme with triadic color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "triadic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/amber-morning-72.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/amber-morning-72.png"
+    },
+    {
+      "id": "mist-fuchsia-73",
+      "name": "Mist Fuchsia",
+      "description": "A beautiful pastel theme with forest color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "forest",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/mist-fuchsia-73.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/mist-fuchsia-73.png"
+    },
+    {
+      "id": "morning-peach-74",
+      "name": "Morning Peach",
+      "description": "A beautiful light theme with warm color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "warm",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/morning-peach-74.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/morning-peach-74.png"
+    },
+    {
+      "id": "dusk-navy-75",
+      "name": "Dusk Navy",
+      "description": "A beautiful dark theme with neon color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "neon",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/dusk-navy-75.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/dusk-navy-75.png"
+    },
+    {
+      "id": "azure-dream-76",
+      "name": "Azure Dream",
+      "description": "A beautiful pastel theme with cool color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/azure-dream-76.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/azure-dream-76.png"
+    },
+    {
+      "id": "crimson-77",
+      "name": "Crimson",
+      "description": "A beautiful pastel theme with lavender color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "lavender",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/crimson-77.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/crimson-77.png"
+    },
+    {
+      "id": "scarlet-dusk-78",
+      "name": "Scarlet Dusk",
+      "description": "A beautiful dark theme with cherry color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "cherry",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/scarlet-dusk-78.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/scarlet-dusk-78.png"
+    },
+    {
+      "id": "shadow-scarlet-79",
+      "name": "Shadow Scarlet",
+      "description": "A beautiful dark theme with sunset color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "sunset",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/shadow-scarlet-79.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/shadow-scarlet-79.png"
+    },
+    {
+      "id": "butterscotch-80",
+      "name": "Butterscotch",
+      "description": "A beautiful midnight theme with tetradic color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/butterscotch-80.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/butterscotch-80.png"
+    },
+    {
+      "id": "shadow-rose-81",
+      "name": "Shadow Rose",
+      "description": "A beautiful dark theme with analogous color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "analogous",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/shadow-rose-81.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/shadow-rose-81.png"
+    },
+    {
+      "id": "nocturne-azure-82",
+      "name": "Nocturne Azure",
+      "description": "A beautiful midnight theme with earth color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "earth",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/nocturne-azure-82.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/nocturne-azure-82.png"
+    },
+    {
+      "id": "eclipse-viridian-83",
+      "name": "Eclipse Viridian",
+      "description": "A beautiful dark theme with warm color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "warm",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/eclipse-viridian-83.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/eclipse-viridian-83.png"
+    },
+    {
+      "id": "tangerine-morning-84",
+      "name": "Tangerine Morning",
+      "description": "A beautiful light theme with complementary color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "complementary",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/tangerine-morning-84.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/tangerine-morning-84.png"
+    },
+    {
+      "id": "gentle-azure-85",
+      "name": "Gentle Azure",
+      "description": "A beautiful pastel theme with forest color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "forest",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/gentle-azure-85.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/gentle-azure-85.png"
+    },
+    {
+      "id": "cobalt-86",
+      "name": "Cobalt",
+      "description": "A beautiful light theme with neon color harmony",
+      "category": "Light",
+      "tags": [
+        "light",
+        "neon",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/cobalt-86.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/cobalt-86.png"
+    },
+    {
+      "id": "pink-shadow-87",
+      "name": "Pink Shadow",
+      "description": "A beautiful dark theme with sunset color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "sunset",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/pink-shadow-87.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/pink-shadow-87.png"
+    },
+    {
+      "id": "viridian-deep-88",
+      "name": "Viridian Deep",
+      "description": "A beautiful midnight theme with cherry color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "cherry",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/viridian-deep-88.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/viridian-deep-88.png"
+    },
+    {
+      "id": "dream-lavender-89",
+      "name": "Dream Lavender",
+      "description": "A beautiful pastel theme with tetradic color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/dream-lavender-89.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/dream-lavender-89.png"
+    },
+    {
+      "id": "jade-abyss-90",
+      "name": "Jade Abyss",
+      "description": "A beautiful midnight theme with complementary color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "complementary",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/jade-abyss-90.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/jade-abyss-90.png"
+    },
+    {
+      "id": "golden-shadow-91",
+      "name": "Golden Shadow",
+      "description": "A beautiful dark theme with cherry color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "cherry",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/golden-shadow-91.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/golden-shadow-91.png"
+    },
+    {
+      "id": "blush-92",
+      "name": "Blush",
+      "description": "A beautiful pastel theme with mint color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "mint",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/blush-92.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/blush-92.png"
+    },
+    {
+      "id": "aqua-dream-93",
+      "name": "Aqua Dream",
+      "description": "A beautiful pastel theme with cool color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/aqua-dream-93.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/aqua-dream-93.png"
+    },
+    {
+      "id": "chartreuse-nocturne-94",
+      "name": "Chartreuse Nocturne",
+      "description": "A beautiful midnight theme with sunset color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "sunset",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/chartreuse-nocturne-94.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/chartreuse-nocturne-94.png"
+    },
+    {
+      "id": "gentle-blush-95",
+      "name": "Gentle Blush",
+      "description": "A beautiful pastel theme with neon color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "neon",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/gentle-blush-95.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/gentle-blush-95.png"
+    },
+    {
+      "id": "teal-deep-96",
+      "name": "Teal Deep",
+      "description": "A beautiful midnight theme with complementary color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "complementary",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/teal-deep-96.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/teal-deep-96.png"
+    },
+    {
+      "id": "marigold-97",
+      "name": "Marigold",
+      "description": "A beautiful pastel theme with cool color harmony",
+      "category": "Light",
+      "tags": [
+        "pastel",
+        "cool",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/marigold-97.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/marigold-97.png"
+    },
+    {
+      "id": "mint-abyss-98",
+      "name": "Mint Abyss",
+      "description": "A beautiful midnight theme with tetradic color harmony",
+      "category": "Dark",
+      "tags": [
+        "midnight",
+        "tetradic",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/mint-abyss-98.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/mint-abyss-98.png"
+    },
+    {
+      "id": "eclipse-tangerine-99",
+      "name": "Eclipse Tangerine",
+      "description": "A beautiful dark theme with lavender color harmony",
+      "category": "Dark",
+      "tags": [
+        "dark",
+        "lavender",
+        "generated",
+        "auto"
+      ],
+      "download_url": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/eclipse-tangerine-99.json",
+      "preview_image": "https://raw.githubusercontent.com/camayuki/theme_marketplace/main/previews/eclipse-tangerine-99.png"
+    }
+  ]
+}

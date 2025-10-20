@@ -1,0 +1,31 @@
+{
+  "id": "twilight-azure-3",
+  "name": "Twilight Azure",
+  "description": "A beautiful dark theme with triadic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "triadic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#12131d",
+    "--secondary-bg": "#1a1c26",
+    "--accent-bg": "#2b2645",
+    "--text-primary": "#eff0f2",
+    "--text-secondary": "#babbcc",
+    "--accent-primary": "#e0516b",
+    "--accent-secondary": "#6ddd71",
+    "--accent-tertiary": "#d05c47",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(26, 28, 38, 0.9)",
+    "--border-color": "#3a3b5a",
+    "--glow-color": "rgba(224, 81, 107, 0.3)",
+    "--purple-glow": "rgba(109, 221, 113, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "chartreuse-eclipse-24",
+  "name": "Chartreuse Eclipse",
+  "description": "A beautiful dark theme with tetradic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "tetradic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#1b2015",
+    "--secondary-bg": "#212b1e",
+    "--accent-bg": "#374527",
+    "--text-primary": "#eaede9",
+    "--text-secondary": "#b8c2ac",
+    "--accent-primary": "#51c6e0",
+    "--accent-secondary": "#a36ddd",
+    "--accent-tertiary": "#d05347",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(33, 43, 30, 0.9)",
+    "--border-color": "#485a3b",
+    "--glow-color": "rgba(81, 198, 224, 0.3)",
+    "--purple-glow": "rgba(163, 109, 221, 0.3)"
+  }
+}

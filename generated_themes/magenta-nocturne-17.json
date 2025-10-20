@@ -1,0 +1,31 @@
+{
+  "id": "magenta-nocturne-17",
+  "name": "Magenta Nocturne",
+  "description": "A beautiful midnight theme with tetradic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "tetradic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#050406",
+    "--secondary-bg": "#0e0b0f",
+    "--accent-bg": "#2a182c",
+    "--text-primary": "#edebee",
+    "--text-secondary": "#c3b6c9",
+    "--accent-primary": "#e08851",
+    "--accent-secondary": "#7add6d",
+    "--accent-tertiary": "#47a5d0",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(14, 11, 15, 0.9)",
+    "--border-color": "#312335",
+    "--glow-color": "rgba(224, 136, 81, 0.3)",
+    "--purple-glow": "rgba(122, 221, 109, 0.3)"
+  }
+}

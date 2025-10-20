@@ -1,0 +1,31 @@
+{
+  "id": "dusk-chartreuse-68",
+  "name": "Dusk Chartreuse",
+  "description": "A beautiful dark theme with analogous color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "analogous",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#131b11",
+    "--secondary-bg": "#1b2016",
+    "--accent-bg": "#26371f",
+    "--text-primary": "#dde0d9",
+    "--text-secondary": "#afbaa2",
+    "--accent-primary": "#51e053",
+    "--accent-secondary": "#cddd6d",
+    "--accent-tertiary": "#47d04e",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(27, 32, 22, 0.9)",
+    "--border-color": "#3c4c32",
+    "--glow-color": "rgba(81, 224, 83, 0.3)",
+    "--purple-glow": "rgba(205, 221, 109, 0.3)"
+  }
+}

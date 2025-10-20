@@ -1,0 +1,31 @@
+{
+  "id": "gentle-blush-95",
+  "name": "Gentle Blush",
+  "description": "A beautiful pastel theme with neon color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "neon",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f5f3f8",
+    "--secondary-bg": "#101101100",
+    "--accent-bg": "#10d10e106",
+    "--text-primary": "#4f4757",
+    "--text-secondary": "#28222e",
+    "--accent-primary": "#0cf27f",
+    "--accent-secondary": "#cf4a15",
+    "--accent-tertiary": "#1de144",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(16, 17, 1, 0.9)",
+    "--border-color": "#12112a117",
+    "--glow-color": "rgba(12, 242, 127, 0.3)",
+    "--purple-glow": "rgba(207, 74, 21, 0.3)"
+  }
+}

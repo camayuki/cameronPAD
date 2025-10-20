@@ -1,0 +1,152 @@
+2025-10-20 07:23:19 - app_new.main - INFO - 📝 Logging to file: D:\Repositories\cameronPAD_main2\logs\server_debug.log
+2025-10-20 07:23:19 - app_new.core.config - INFO - Loaded configuration for environment: development
+2025-10-20 07:23:19 - app_new.core.database - INFO - 🔧 Creating DatabaseManager with URL: sqlite:///data/app.db
+2025-10-20 07:23:19 - app_new.core.database - INFO - 📁 Using database: data/app.db
+2025-10-20 07:23:19 - app_new.main - INFO - Starting CameronPAD application...
+2025-10-20 07:23:19 - app_new.main - INFO - Loaded configuration for environment: development
+2025-10-20 07:23:19 - app_new.core.database - INFO - 🔄 Initializing database with URL: sqlite+aiosqlite:///./data/cameronpad_dev.db
+2025-10-20 07:23:19 - app_new.core.database - INFO - 🔧 Creating DatabaseManager with URL: sqlite+aiosqlite:///./data/cameronpad_dev.db
+2025-10-20 07:23:19 - app_new.core.database - INFO - 📁 Using database: data/cameronpad_dev.db
+2025-10-20 07:23:19 - app_new.core.database - INFO - Running core database migrations...
+2025-10-20 07:23:20 - app_new.core.database - INFO - Database initialization completed
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Discovered 9 plugins
+2025-10-20 07:23:20 - plugins.stocks.plugin - INFO - 📈 Initializing Stocks plugin...
+2025-10-20 07:23:20 - plugins.stocks.database - INFO - 🗄️ Initializing Stocks database tables...
+2025-10-20 07:23:20 - plugins.stocks.database - INFO - ✅ Stocks database tables initialized
+2025-10-20 07:23:20 - plugins.stocks.plugin - INFO - ✅ Stocks routes registered
+2025-10-20 07:23:20 - plugins.stocks.plugin - INFO - ✅ Stock service initialized with API keys from environment
+2025-10-20 07:23:20 - plugins.stocks.services - INFO - ✅ Ensured 8 showcase symbols in database
+2025-10-20 07:23:20 - plugins.stocks.plugin - INFO - ✅ Stocks plugin initialized successfully
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: stocks v1.0.0
+2025-10-20 07:23:20 - plugins.notes.plugin - INFO - 📝 Initializing Notes plugin...
+2025-10-20 07:23:20 - plugins.notes.database - INFO - 🗄️ Initializing Notes database tables at: data/cameronpad_dev.db
+2025-10-20 07:23:20 - plugins.notes.database - INFO - ✅ Notes database tables initialized
+2025-10-20 07:23:20 - plugins.notes.plugin - INFO - ✅ Notes plugin initialized successfully
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: notes v1.0.0
+2025-10-20 07:23:20 - plugins.journal.plugin - INFO - 📔 Initializing Journal plugin...
+2025-10-20 07:23:20 - plugins.journal.plugin - INFO - ✅ Journal plugin initialized successfully
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: journal v1.0.0
+2025-10-20 07:23:20 - plugins.surf.plugin - INFO - 🏄 Initializing Surf plugin...
+2025-10-20 07:23:20 - plugins.surf.database - INFO - 🗄️ Initializing Surf database tables...
+2025-10-20 07:23:20 - plugins.surf.database - INFO - ✅ Surf database tables initialized
+2025-10-20 07:23:20 - plugins.surf.plugin - INFO - 🌊 Starting surf update service...
+2025-10-20 07:23:20 - plugins.surf.plugin - INFO - ✅ Surf update service started
+2025-10-20 07:23:20 - plugins.surf.plugin - INFO - ✅ Surf plugin initialized successfully
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: surf v1.0.0
+2025-10-20 07:23:20 - plugins.system_monitor.plugin - INFO - 🖥️ Initializing System Monitor plugin...
+2025-10-20 07:23:20 - plugins.system_monitor.plugin - INFO - ✅ System Monitor routes registered
+2025-10-20 07:23:20 - plugins.system_monitor.plugin - INFO - DEBUG System Monitor registered routes: ['/ (GET)', '/info (GET)', '/cpu (GET)', '/memory (GET)', '/disk (GET)', '/network (GET)', '/all (GET)', '/metrics (GET)', '/logs (GET)', '/stats (GET)']
+2025-10-20 07:23:20 - plugins.system_monitor.plugin - INFO - SUCCESS System Monitor plugin initialized successfully!
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: system_monitor v1.0.0
+2025-10-20 07:23:20 - plugins.hello_world.plugin - INFO - 🌍 Initializing Hello World plugin...
+2025-10-20 07:23:20 - plugins.hello_world.plugin - INFO - ✅ Hello World plugin initialized successfully!
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: hello_world v1.0.0
+2025-10-20 07:23:20 - plugins.notepad.plugin - INFO - 📓 Initializing Notepad plugin...
+2025-10-20 07:23:20 - plugins.notepad.database - INFO - 🗄️ Initializing Notepad database tables...
+2025-10-20 07:23:20 - plugins.notepad.database - INFO - ✅ Notepad database tables initialized
+2025-10-20 07:23:20 - plugins.notepad.plugin - INFO - ✅ Notepad plugin initialized successfully
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: notepad v1.0.0
+2025-10-20 07:23:20 - plugins.tradingview.plugin - INFO - 📊 Initializing TradingView plugin...
+2025-10-20 07:23:20 - plugins.tradingview.plugin - INFO - ✅ TradingView plugin initialized successfully
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: tradingview v1.0.0
+2025-10-20 07:23:20 - plugins.lol_champions.plugin - INFO - 🎮 Initializing LoL Champions plugin (Vanilla JS)...
+2025-10-20 07:23:20 - plugins.lol_champions.plugin - INFO - ✅ LoL Champions plugin initialized
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: League of Legends Champions v2.0.0
+2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded 9 plugins
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: stocks
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: notes
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: journal
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: surf
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: system_monitor
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: hello_world
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: notepad
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: tradingview
+2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: League of Legends Champions
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: stocks
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: notes
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: journal
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: surf
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: system_monitor
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: hello_world
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: notepad
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: tradingview
+2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: lol_champions
+2025-10-20 07:23:20 - app_new.main - INFO - Application startup completed
+2025-10-20 07:23:20 - plugins.surf.plugin - INFO - 🔄 Starting surf update loop (refresh=300s)
+2025-10-20 07:23:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:23:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:23:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:23:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:23:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:23:24 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:23:24 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:23:24 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:23:24 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:23:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:23:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:23:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:23:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:23:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:23:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:23:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:23:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:23:28 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:23:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:23:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:23:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:23:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:23:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:23:33 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:23:33 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:23:33 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:23:33 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:23:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:38 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:23:38 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:23:38 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:23:38 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:23:38 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:23:38 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:23:38 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:23:38 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:23:38 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:23:43 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:43 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:43 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:23:43 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:23:43 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:23:43 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:23:43 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:23:43 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:23:43 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:23:43 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:23:43 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:23:48 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:48 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:48 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:23:48 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:23:48 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:23:48 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:23:48 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:23:48 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:23:48 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:23:48 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:23:48 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-20 07:23:53 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:53 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-20 07:23:53 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-20 07:23:53 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-20 07:23:53 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-20 07:23:53 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
+2025-10-20 07:23:53 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-20 07:23:53 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-20 07:23:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-20 07:23:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-20 07:23:53 - app_new.main - DEBUG - ✅ Response status: 200

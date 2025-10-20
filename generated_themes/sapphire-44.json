@@ -1,0 +1,31 @@
+{
+  "id": "sapphire-44",
+  "name": "Sapphire",
+  "description": "A beautiful midnight theme with cool color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "cool",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0d0e09",
+    "--secondary-bg": "#13140e",
+    "--accent-bg": "#2d371f",
+    "--text-primary": "#f4f4f2",
+    "--text-secondary": "#c3c7b3",
+    "--accent-primary": "#8ae051",
+    "--accent-secondary": "#6ddd89",
+    "--accent-tertiary": "#63d047",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(19, 20, 14, 0.9)",
+    "--border-color": "#313321",
+    "--glow-color": "rgba(138, 224, 81, 0.3)",
+    "--purple-glow": "rgba(109, 221, 137, 0.3)"
+  }
+}

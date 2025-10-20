@@ -1,0 +1,31 @@
+{
+  "id": "abyss-viridian-62",
+  "name": "Abyss Viridian",
+  "description": "A beautiful midnight theme with cool color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "cool",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0f0a0d",
+    "--secondary-bg": "#1b1316",
+    "--accent-bg": "#311b1f",
+    "--text-primary": "#f4f2f3",
+    "--text-secondary": "#cebdc7",
+    "--accent-primary": "#e05162",
+    "--accent-secondary": "#ddb26d",
+    "--accent-tertiary": "#d04753",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(27, 19, 22, 0.9)",
+    "--border-color": "#3d2830",
+    "--glow-color": "rgba(224, 81, 98, 0.3)",
+    "--purple-glow": "rgba(221, 178, 109, 0.3)"
+  }
+}

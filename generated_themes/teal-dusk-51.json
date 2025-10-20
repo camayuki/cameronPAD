@@ -1,0 +1,31 @@
+{
+  "id": "teal-dusk-51",
+  "name": "Teal Dusk",
+  "description": "A beautiful dark theme with forest color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "forest",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#140e12",
+    "--secondary-bg": "#1d151c",
+    "--accent-bg": "#341f30",
+    "--text-primary": "#e5dfe4",
+    "--text-secondary": "#bba3b6",
+    "--accent-primary": "#d65ba1",
+    "--accent-secondary": "#d575d4",
+    "--accent-tertiary": "#c65196",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(29, 21, 28, 0.9)",
+    "--border-color": "#412d3c",
+    "--glow-color": "rgba(214, 91, 161, 0.3)",
+    "--purple-glow": "rgba(213, 117, 212, 0.3)"
+  }
+}

@@ -18,6 +18,7 @@ class PluginMetadata(BaseModel):
     api_version: str = "1.0"
     enabled: bool = True
     priority: int = 100  # Lower numbers load first
+    requires_auth: bool = True  # Whether plugin requires authentication
 
 
 class PluginConfig(BaseModel):

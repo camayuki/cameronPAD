@@ -1,0 +1,31 @@
+{
+  "id": "crimson-77",
+  "name": "Crimson",
+  "description": "A beautiful pastel theme with lavender color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "lavender",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f0ecf1",
+    "--secondary-bg": "#f5f4f6",
+    "--accent-bg": "#10910d108",
+    "--text-primary": "#524959",
+    "--text-secondary": "#201a24",
+    "--accent-primary": "#cc32c9",
+    "--accent-secondary": "#5e34b0",
+    "--accent-tertiary": "#c03ea8",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(245, 244, 246, 0.9)",
+    "--border-color": "#10c11010b",
+    "--glow-color": "rgba(204, 50, 201, 0.3)",
+    "--purple-glow": "rgba(94, 52, 176, 0.3)"
+  }
+}

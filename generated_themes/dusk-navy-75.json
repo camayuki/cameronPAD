@@ -1,0 +1,31 @@
+{
+  "id": "dusk-navy-75",
+  "name": "Dusk Navy",
+  "description": "A beautiful dark theme with neon color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "neon",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#09110e",
+    "--secondary-bg": "#131e17",
+    "--accent-bg": "#18332a",
+    "--text-primary": "#e5eae9",
+    "--text-secondary": "#adc3ba",
+    "--accent-primary": "#f45e3d",
+    "--accent-secondary": "#b45dee",
+    "--accent-tertiary": "#e45a34",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(19, 30, 23, 0.9)",
+    "--border-color": "#2a4939",
+    "--glow-color": "rgba(244, 94, 61, 0.3)",
+    "--purple-glow": "rgba(180, 93, 238, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "abyss-orchid-71",
+  "name": "Abyss Orchid",
+  "description": "A beautiful midnight theme with warm color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "warm",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0d090d",
+    "--secondary-bg": "#150f13",
+    "--accent-bg": "#2d1925",
+    "--text-primary": "#efecee",
+    "--text-secondary": "#bea8b9",
+    "--accent-primary": "#e0518f",
+    "--accent-secondary": "#dd7e6d",
+    "--accent-tertiary": "#d04755",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(21, 15, 19, 0.9)",
+    "--border-color": "#3e283a",
+    "--glow-color": "rgba(224, 81, 143, 0.3)",
+    "--purple-glow": "rgba(221, 126, 109, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "nocturne-blush-37",
+  "name": "Nocturne Blush",
+  "description": "A beautiful midnight theme with complementary color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "complementary",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#170f14",
+    "--secondary-bg": "#231920",
+    "--accent-bg": "#432539",
+    "--text-primary": "#ede9eb",
+    "--text-secondary": "#c2adbe",
+    "--accent-primary": "#51e081",
+    "--accent-secondary": "#6ddd89",
+    "--accent-tertiary": "#47d089",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(35, 25, 32, 0.9)",
+    "--border-color": "#442c3a",
+    "--glow-color": "rgba(81, 224, 129, 0.3)",
+    "--purple-glow": "rgba(109, 221, 137, 0.3)"
+  }
+}

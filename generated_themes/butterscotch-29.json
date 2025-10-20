@@ -1,0 +1,31 @@
+{
+  "id": "butterscotch-29",
+  "name": "Butterscotch",
+  "description": "A beautiful dark theme with tetradic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "tetradic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#14170f",
+    "--secondary-bg": "#1b1d14",
+    "--accent-bg": "#323920",
+    "--text-primary": "#e8e9e4",
+    "--text-secondary": "#b7b9a0",
+    "--accent-primary": "#51e0b5",
+    "--accent-secondary": "#6d6ddd",
+    "--accent-tertiary": "#d04767",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(27, 29, 20, 0.9)",
+    "--border-color": "#3d402a",
+    "--glow-color": "rgba(81, 224, 181, 0.3)",
+    "--purple-glow": "rgba(109, 109, 221, 0.3)"
+  }
+}

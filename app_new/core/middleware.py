@@ -5,6 +5,7 @@ from fastapi import Request, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import RedirectResponse
+from fastapi.responses import JSONResponse
 import jwt
 from typing import Optional
 from app_new.core.auth import get_security_manager
@@ -29,7 +30,8 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
             "/docs",
             "/openapi.json",
             "/static",
-            "/favicon.ico"
+            "/favicon.ico",
+            "/api/v1/plugins/surf"  # Surf plugin is public
         }
         
         # API routes that don't require authentication
@@ -53,6 +55,9 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
         
         if not token:
             logger.warning(f"❌ No token found, redirecting to login")
+            # For API requests return a JSON 401 to avoid raising exceptions from middleware
+            if path.startswith('/api/'):
+                return JSONResponse(status_code=401, content={"detail": "Authentication required"})
             return self._redirect_to_login(request)
         
         try:
@@ -82,13 +87,15 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
             
         except jwt.InvalidTokenError as e:
             logger.warning(f"❌ Invalid token: {e}")
+            if path.startswith('/api/'):
+                return JSONResponse(status_code=401, content={"detail": "Invalid token"})
             return self._redirect_to_login(request)
         except Exception as e:
             logger.error(f"❌ Middleware error: {type(e).__name__}: {e}")
             import traceback
             logger.error(traceback.format_exc())
             if path.startswith("/api/"):
-                raise HTTPException(status_code=401, detail="Authentication required")
+                return JSONResponse(status_code=401, content={"detail": "Authentication required"})
             return self._redirect_to_login(request)
         
         return await call_next(request)
@@ -99,8 +106,8 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
         if path in self.public_routes or path in self.public_api_routes:
             return True
         
-        # Prefix matches for static files
-        public_prefixes = ["/static/", "/docs", "/redoc"]
+        # Prefix matches for static files and public plugins
+        public_prefixes = ["/static/", "/docs", "/redoc", "/api/v1/plugins/surf"]
         return any(path.startswith(prefix) for prefix in public_prefixes)
     
     def _extract_token(self, request: Request) -> Optional[str]:

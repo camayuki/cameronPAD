@@ -1,0 +1,31 @@
+{
+  "id": "chartreuse-nocturne-94",
+  "name": "Chartreuse Nocturne",
+  "description": "A beautiful midnight theme with sunset color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "sunset",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#10140c",
+    "--secondary-bg": "#1c2015",
+    "--accent-bg": "#3d4523",
+    "--text-primary": "#f3f3f1",
+    "--text-secondary": "#c0c3ae",
+    "--accent-primary": "#7dea47",
+    "--accent-secondary": "#e66585",
+    "--accent-tertiary": "#8cda3e",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(28, 32, 21, 0.9)",
+    "--border-color": "#444c2e",
+    "--glow-color": "rgba(125, 234, 71, 0.3)",
+    "--purple-glow": "rgba(230, 101, 133, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "azure-dream-76",
+  "name": "Azure Dream",
+  "description": "A beautiful pastel theme with cool color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "cool",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f8f7f4",
+    "--secondary-bg": "#fdfdfc",
+    "--accent-bg": "#10c10b115",
+    "--text-primary": "#6b6958",
+    "--text-secondary": "#353427",
+    "--accent-primary": "#7fd826",
+    "--accent-secondary": "#44bb2a",
+    "--accent-tertiary": "#b9cb33",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(253, 253, 252, 0.9)",
+    "--border-color": "#117119124",
+    "--glow-color": "rgba(127, 216, 38, 0.3)",
+    "--purple-glow": "rgba(68, 187, 42, 0.3)"
+  }
+}

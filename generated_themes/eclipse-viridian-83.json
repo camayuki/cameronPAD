@@ -1,0 +1,31 @@
+{
+  "id": "eclipse-viridian-83",
+  "name": "Eclipse Viridian",
+  "description": "A beautiful dark theme with warm color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "warm",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0c120c",
+    "--secondary-bg": "#131a12",
+    "--accent-bg": "#294325",
+    "--text-primary": "#dee2dc",
+    "--text-secondary": "#9ab49a",
+    "--accent-primary": "#51e088",
+    "--accent-secondary": "#6dddbf",
+    "--accent-tertiary": "#47d09e",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(19, 26, 18, 0.9)",
+    "--border-color": "#233321",
+    "--glow-color": "rgba(81, 224, 136, 0.3)",
+    "--purple-glow": "rgba(109, 221, 191, 0.3)"
+  }
+}

@@ -1,0 +1,242 @@
+/* Apple-inspired Dashboard Styling */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 2rem 0;
+}
+
+.dashboard-header h1 {
+    font-size: 3.5rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.dashboard-header p {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Apple-style Cards */
+.card {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px !important;
+    padding: 2rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 2px 4px rgba(0, 0, 0, 0.06) !important;
+}
+
+.card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.2),
+        0 10px 10px -5px rgba(0, 0, 0, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.card-header h3 {
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    margin-bottom: 1.5rem !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Stats Grid - Apple Style */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+
+.stat-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.25rem !important;
+    padding: 1.25rem !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.stat-item.clickable:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(102, 126, 234, 0.4) !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.2) !important;
+}
+
+.stat-item.clickable:hover::before {
+    opacity: 1;
+}
+
+.stat-item:active {
+    transform: scale(0.98) !important;
+}
+
+.stat-arrow {
+    font-size: 1.25rem !important;
+    color: rgba(102, 126, 234, 0.8) !important;
+    opacity: 0 !important;
+    transition: all 0.25s ease !important;
+    margin-left: auto !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.stat-item.clickable:hover .stat-arrow {
+    opacity: 1 !important;
+    transform: translateX(4px) !important;
+}
+
+.stat-icon {
+    font-size: 1.75rem !important;
+    width: 56px !important;
+    height: 56px !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3) !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.stat-info {
+    flex: 1 !important;
+    min-width: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.stat-number {
+    font-size: 1.75rem !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    margin-bottom: 0.25rem !important;
+    letter-spacing: -0.01em !important;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+}
+
+/* Actions Grid - Apple Style */
+.actions-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.action-button {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.25rem !important;
+    padding: 1.25rem !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 16px !important;
+    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.action-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.action-button:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(102, 126, 234, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+.action-button:hover::before {
+    opacity: 1;
+}
+
+.action-button:active {
+    transform: translateY(0) !important;
+}
+
+.action-icon {
+    font-size: 1.5rem !important;
+    width: 48px !important;
+    height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25) !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.action-text {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.action-title {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.action-desc {
+    font-size: 0.875rem !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-weight: 400 !important;
+}

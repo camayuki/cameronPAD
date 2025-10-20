@@ -1,0 +1,31 @@
+{
+  "id": "cardinal-33",
+  "name": "Cardinal",
+  "description": "A beautiful light theme with mint color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "mint",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f8faf9",
+    "--secondary-bg": "#102101101",
+    "--accent-bg": "#11d113111",
+    "--text-primary": "#232a28",
+    "--text-secondary": "#-9-c-b",
+    "--accent-primary": "#32cc9e",
+    "--accent-secondary": "#347db0",
+    "--accent-tertiary": "#3ec07b",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(16, 33, 1, 0.9)",
+    "--border-color": "#11a111113",
+    "--glow-color": "rgba(50, 204, 158, 0.3)",
+    "--purple-glow": "rgba(52, 125, 176, 0.3)"
+  }
+}

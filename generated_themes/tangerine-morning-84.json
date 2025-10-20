@@ -1,0 +1,31 @@
+{
+  "id": "tangerine-morning-84",
+  "name": "Tangerine Morning",
+  "description": "A beautiful light theme with complementary color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "complementary",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f2f1ec",
+    "--secondary-bg": "#f9f8f6",
+    "--accent-bg": "#10710810d",
+    "--text-primary": "#2f2a26",
+    "--text-secondary": "#-15-12-10",
+    "--accent-primary": "#2685d8",
+    "--accent-secondary": "#2a6bbb",
+    "--accent-tertiary": "#335ecb",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(249, 248, 246, 0.9)",
+    "--border-color": "#11311711d",
+    "--glow-color": "rgba(38, 133, 216, 0.3)",
+    "--purple-glow": "rgba(42, 107, 187, 0.3)"
+  }
+}

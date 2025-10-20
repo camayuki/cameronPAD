@@ -1,0 +1,31 @@
+{
+  "id": "rose-soft-47",
+  "name": "Rose Soft",
+  "description": "A beautiful pastel theme with monochrome color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "monochrome",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f1eaf0",
+    "--secondary-bg": "#f7f4f7",
+    "--accent-bg": "#10610b107",
+    "--text-primary": "#4a3c46",
+    "--text-secondary": "#0c090b",
+    "--accent-primary": "#d826ac",
+    "--accent-secondary": "#bb2a96",
+    "--accent-tertiary": "#cb33a5",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(247, 244, 247, 0.9)",
+    "--border-color": "#10d11510f",
+    "--glow-color": "rgba(216, 38, 172, 0.3)",
+    "--purple-glow": "rgba(187, 42, 150, 0.3)"
+  }
+}

@@ -6,7 +6,11 @@ import psutil
 import platform
 from datetime import datetime
 from typing import Dict, List, Any
-from fastapi import APIRouter
+from pathlib import Path
+from fastapi import APIRouter, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from jinja2 import ChoiceLoader, FileSystemLoader
 from app_new.plugins.base import WebPlugin, PluginMetadata, PluginConfig
 
 logger = logging.getLogger(__name__)
@@ -19,6 +23,59 @@ class SystemMonitorPlugin(WebPlugin):
         super().__init__(config)
         self.start_time = datetime.now()
         self.request_count = 0
+        
+        # Setup templates with both main and plugin template directories
+        template_dir = Path(__file__).parent / "templates"
+        main_template_dir = Path(__file__).parent.parent.parent / "templates"
+        
+        # Use ChoiceLoader to search in plugin templates first, then main templates
+        loader = ChoiceLoader([
+            FileSystemLoader(str(template_dir)),
+            FileSystemLoader(str(main_template_dir))
+        ])
+        self.templates = Jinja2Templates(directory=str(template_dir))
+        self.templates.env.loader = loader
+        
+        # Add get_theme_css function to template globals
+        def get_theme_css(theme_vars):
+            if not theme_vars:
+                return ""
+            return "\n".join([f"    {k}: {v};" for k, v in theme_vars.items()])
+        self.templates.env.globals['get_theme_css'] = get_theme_css
+        
+        # Add get_enabled_plugins function to template globals
+        def get_enabled_plugins():
+            """Get list of enabled plugins for navigation menu"""
+            plugin_icons = {
+                'stocks': '📈',
+                'notes': '📝',
+                'journal': '📔',
+                'surf': '🏄',
+                'system_monitor': '🖥️',
+                'hello_world': '🌍',
+                'notepad': '📓',
+                'tradingview': '📊',
+                'lol_champions': '🎮'
+            }
+            try:
+                from app_new.main import plugin_manager
+                if not plugin_manager:
+                    return []
+                
+                plugins_list = []
+                for plugin_name, plugin in plugin_manager.get_enabled_plugins().items():
+                    if hasattr(plugin, 'metadata'):
+                        plugins_list.append({
+                            'name': plugin.metadata.name,
+                            'url': f"/api/v1/plugins/{plugin_name}/",
+                            'icon': plugin_icons.get(plugin_name, '📦')
+                        })
+                return plugins_list
+            except Exception as e:
+                logger.error(f"Error getting enabled plugins: {e}", exc_info=True)
+                return []
+        self.templates.env.globals['get_enabled_plugins'] = get_enabled_plugins
+        
         logger.info("🖥️ Initializing System Monitor plugin...")
     
     def get_metadata(self) -> PluginMetadata:
@@ -45,7 +102,11 @@ class SystemMonitorPlugin(WebPlugin):
             # Register routes
             self.register_routes()
             
-            logger.info("✅ System Monitor plugin initialized successfully!")
+            # Debug: Log registered routes
+            routes = [f"{route.path} ({', '.join(route.methods)})" for route in self._router.routes]
+            logger.info(f"DEBUG System Monitor registered routes: {routes}")
+            
+            logger.info("SUCCESS System Monitor plugin initialized successfully!")
         except Exception as e:
             logger.error(f"❌ Failed to initialize System Monitor: {e}")
             raise
@@ -57,6 +118,33 @@ class SystemMonitorPlugin(WebPlugin):
     def register_routes(self) -> None:
         """Register API routes"""
         router = self._router
+        
+        @router.get("/", response_class=HTMLResponse)
+        async def system_monitor_page(request: Request):
+            """Render the system monitor page"""
+            logger.info("=" * 80)
+            logger.info("SYSTEM MONITOR PAGE ACCESSED!")
+            logger.info(f"Request path: {request.url.path}")
+            logger.info(f"User: {getattr(request.state, 'username', 'Unknown')}")
+            logger.info(f"Templates object exists: {self.templates is not None}")
+            logger.info(f"Template type: {type(self.templates)}")
+            logger.info("=" * 80)
+            
+            try:
+                logger.info("SUCCESS About to render system_monitor.html template")
+                response = self.templates.TemplateResponse("system_monitor.html", {
+                    "request": request,
+                    "current_user": {
+                        "username": getattr(request.state, "username", "guest"),
+                        "is_admin": getattr(request.state, "is_admin", False),
+                        "role": getattr(request.state, "role", "user")
+                    }
+                })
+                logger.info("SUCCESS Template rendered successfully!")
+                return response
+            except Exception as e:
+                logger.error(f"ERROR rendering system monitor page: {e}", exc_info=True)
+                raise
         
         @router.get("/info")
         async def get_system_info():
@@ -235,6 +323,64 @@ class SystemMonitorPlugin(WebPlugin):
                     "memory": 0,
                     "disk": 0,
                     "error": str(e)
+                }
+        
+        @router.get("/logs")
+        async def get_server_logs(lines: int = 100):
+            """Get recent server logs from server_debug.log"""
+            logger.info(f"📋 Server logs requested (last {lines} lines)")
+            
+            try:
+                log_file = Path(__file__).parent.parent.parent / "logs" / "server_debug.log"
+                
+                if not log_file.exists():
+                    return {
+                        "status": "error",
+                        "message": "Log file not found",
+                        "logs": []
+                    }
+                
+                # Read the last N lines from the log file
+                with open(log_file, 'r', encoding='utf-8', errors='ignore') as f:
+                    all_lines = f.readlines()
+                    recent_lines = all_lines[-lines:] if len(all_lines) > lines else all_lines
+                
+                # Parse log lines to extract timestamp, level, and message
+                parsed_logs = []
+                for line in recent_lines:
+                    line = line.strip()
+                    if line:
+                        # Try to parse structured log format
+                        # Format: 2025-10-20 05:27:06 - module.name - LEVEL - message
+                        parts = line.split(' - ', 3)
+                        if len(parts) >= 4:
+                            parsed_logs.append({
+                                "timestamp": parts[0],
+                                "module": parts[1],
+                                "level": parts[2],
+                                "message": parts[3]
+                            })
+                        else:
+                            # Fallback for non-structured lines
+                            parsed_logs.append({
+                                "timestamp": "",
+                                "module": "",
+                                "level": "INFO",
+                                "message": line
+                            })
+                
+                return {
+                    "status": "success",
+                    "logs": parsed_logs,
+                    "total": len(parsed_logs)
+                }
+                
+            except Exception as e:
+                logger.error(f"❌ Error reading logs: {e}", exc_info=True)
+                return {
+                    "status": "error",
+                    "message": str(e),
+                    "logs": []
                 }
         
         @router.get("/stats")

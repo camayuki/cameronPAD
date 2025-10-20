@@ -1,0 +1,31 @@
+{
+  "id": "dream-cobalt-55",
+  "name": "Dream Cobalt",
+  "description": "A beautiful pastel theme with monochrome color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "monochrome",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f2f1f6",
+    "--secondary-bg": "#fbfafc",
+    "--accent-bg": "#11511710c",
+    "--text-primary": "#474554",
+    "--text-secondary": "#0e0d12",
+    "--accent-primary": "#4326d8",
+    "--accent-secondary": "#422abb",
+    "--accent-tertiary": "#4c33cb",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(251, 250, 252, 0.9)",
+    "--border-color": "#117119110",
+    "--glow-color": "rgba(67, 38, 216, 0.3)",
+    "--purple-glow": "rgba(66, 42, 187, 0.3)"
+  }
+}

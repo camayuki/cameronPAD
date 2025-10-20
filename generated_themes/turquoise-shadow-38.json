@@ -1,0 +1,31 @@
+{
+  "id": "turquoise-shadow-38",
+  "name": "Turquoise Shadow",
+  "description": "A beautiful dark theme with earth color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "earth",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#111517",
+    "--secondary-bg": "#181c1e",
+    "--accent-bg": "#243137",
+    "--text-primary": "#d5dadc",
+    "--text-secondary": "#8ca0aa",
+    "--accent-primary": "#65a4cc",
+    "--accent-secondary": "#7dbccd",
+    "--accent-tertiary": "#5b84bd",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(24, 28, 30, 0.9)",
+    "--border-color": "#2e3a3e",
+    "--glow-color": "rgba(101, 164, 204, 0.3)",
+    "--purple-glow": "rgba(125, 188, 205, 0.3)"
+  }
+}

@@ -5,6 +5,8 @@ import asyncio
 import logging
 import os
 import psutil
+import sys
+import io
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -29,9 +31,41 @@ from .plugins.registry import PluginRegistry
 from .api.router import create_api_router
 from .api.middleware import setup_middleware
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
+# Configure logging with file output
+log_dir = Path("logs")
+log_dir.mkdir(exist_ok=True)
+log_file = log_dir / "server_debug.log"
+
+# Create formatter
+formatter = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+# File handler with detailed logging
+file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')  # 'w' to start fresh each run; use utf-8
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(formatter)
+
+# Console handler
+# Wrap stdout with UTF-8 encoding to avoid mojibake on Windows consoles
+try:
+    utf8_stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', line_buffering=True)
+    console_handler = logging.StreamHandler(utf8_stdout)
+except Exception:
+    # Fallback if stdout isn't available as buffer
+    console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(formatter)
+
+# Configure root logger
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+root_logger.addHandler(file_handler)
+root_logger.addHandler(console_handler)
+
 logger = logging.getLogger(__name__)
+logger.info(f"📝 Logging to file: {log_file.absolute()}")
 
 
 # Global instances
@@ -81,7 +115,25 @@ async def lifespan(app: FastAPI):
         app.state.plugin_manager = plugin_manager
         app.state.plugin_registry = plugin_registry
         app.state.config = config
-        
+        # Include plugin routes now that plugins are loaded
+        try:
+            if plugin_manager:
+                for plugin_name, plugin in plugin_manager.get_enabled_plugins().items():
+                    try:
+                        router = plugin.get_router()
+                        if router:
+                            # Include under /api/v1/plugins/<plugin_name>
+                            # Note: make sure API router prefixing is consistent with create_api_router
+                            app.include_router(router, prefix=f"/api/v1/plugins/{plugin_name}")
+                            logger.info(f"✅ Included routes for plugin at startup: {plugin_name}")
+                        else:
+                            logger.warning(f"⚠️ Plugin {plugin_name} has no router to include")
+                    except Exception as pr_err:
+                        logger.error(f"Error including routes for plugin {plugin_name}: {pr_err}", exc_info=True)
+
+        except Exception as e:
+            logger.error(f"Error while including plugin routes at startup: {e}", exc_info=True)
+
         logger.info("Application startup completed")
         
         yield
@@ -170,7 +222,41 @@ def setup_templates(app: FastAPI) -> None:
             return ""
         return "\n".join([f"    {k}: {v};" for k, v in theme_vars.items()])
     
+    def get_enabled_plugins():
+        """Get list of enabled plugins for navigation"""
+        global plugin_manager
+        
+        # Map plugin names to icons
+        plugin_icons = {
+            'stocks': '📈',
+            'notes': '📝',
+            'journal': '📔',
+            'surf': '🏄',
+            'system_monitor': '🖥️',
+            'hello_world': '👋',
+            'notepad': '📓',
+            'tradingview': '📊',
+            'lol_champions': '🎮'
+        }
+        
+        try:
+            if not plugin_manager:
+                return []
+            plugins_list = []
+            for plugin_name, plugin in plugin_manager.get_enabled_plugins().items():
+                if hasattr(plugin, 'metadata'):
+                    plugins_list.append({
+                        'name': plugin.metadata.name,
+                        'url': f"/api/v1/plugins/{plugin_name}/",
+                        'icon': plugin_icons.get(plugin_name, '📦')
+                    })
+            return plugins_list
+        except Exception as e:
+            logger.error(f"Error getting enabled plugins: {e}", exc_info=True)
+            return []
+    
     templates.env.globals['get_theme_css'] = get_theme_css
+    templates.env.globals['get_enabled_plugins'] = get_enabled_plugins
     app.state.templates = templates
 
 
@@ -186,14 +272,50 @@ def setup_routes(app: FastAPI) -> None:
         confirm_password: Optional[str] = None
     
     @app.get("/")
-    async def root():
-        """Root endpoint - redirect to main interface."""
-        return RedirectResponse(url="/app")
+    async def root(request: Request):
+        """Public landing page - show features and stats without requiring login."""
+        logger.info("🏠 Public landing page accessed")
+        
+        # Check if user is already logged in
+        if hasattr(request.state, 'user_id') and request.state.user_id:
+            # Redirect logged-in users to dashboard
+            return RedirectResponse(url="/app")
+        
+        templates = getattr(request.app.state, 'templates', None)
+        if templates:
+            # Get public stats
+            plugin_manager = getattr(request.app.state, 'plugin_manager', None)
+            stats = {
+                'total_plugins': len(plugin_manager.get_all_plugins()) if plugin_manager else 0,
+                'active_plugins': len(plugin_manager.get_enabled_plugins()) if plugin_manager else 0,
+            }
+            
+            # Get featured plugins for showcase
+            featured_plugins = []
+            if plugin_manager:
+                for plugin_name, plugin in list(plugin_manager.get_enabled_plugins().items())[:6]:
+                    featured_plugins.append({
+                        'name': plugin_name,
+                        'display_name': plugin.metadata.display_name if hasattr(plugin.metadata, 'display_name') else plugin_name.title(),
+                        'description': plugin.metadata.description if hasattr(plugin.metadata, 'description') else 'No description',
+                        'icon': plugin.metadata.icon if hasattr(plugin.metadata, 'icon') else '🔌',
+                        'url': f"/api/v1/plugins/{plugin_name}/"
+                    })
+            
+            return templates.TemplateResponse("landing.html", {
+                "request": request,
+                "stats": stats,
+                "featured_plugins": featured_plugins
+            })
+        
+        return RedirectResponse(url="/auth/login")
     
     @app.get("/app")
     async def main_app(request: Request):
         """Main application interface."""
+        logger.info(f"📱 Main app (/app) accessed by user: {getattr(request.state, 'username', 'Unknown')}")
         templates = getattr(request.app.state, 'templates', None)
+        logger.info(f"🎨 Templates object: {templates is not None}")
         if templates:
             # Get enabled plugins for the interface
             plugin_manager = getattr(request.app.state, 'plugin_manager', None)
@@ -405,11 +527,16 @@ def setup_routes(app: FastAPI) -> None:
             user_email = None
             user_full_name = None
             if user_id:
-                query = "SELECT email, full_name FROM users WHERE id = ?"
-                results = db_manager.execute_query(query, (user_id,))
-                if results:
-                    user_email = results[0][0]  # First column: email
-                    user_full_name = results[0][1]  # Second column: full_name
+                try:
+                    query = "SELECT email, full_name FROM users WHERE id = ?"
+                    results = db_manager.execute_query(query, (user_id,))
+                    if results and len(results) > 0:
+                        row = results[0]
+                        user_email = row[0] if len(row) > 0 else None  # First column: email
+                        user_full_name = row[1] if len(row) > 1 else None  # Second column: full_name
+                except Exception as e:
+                    logger.error(f"Error fetching user info: {e}")
+                    # Continue with None values
             
             current_user = {
                 "id": user_id,
@@ -628,28 +755,31 @@ def setup_routes(app: FastAPI) -> None:
     from .api.theme_marketplace import router as marketplace_router
     app.include_router(marketplace_router)
     
-    # Include API router
+    # Include API router - this creates routes under /api
     api_router = create_api_router()
-    app.include_router(api_router, prefix="/api/v1")
+    app.include_router(api_router)
     
     # Dynamic plugin route inclusion
     @app.middleware("http")
-    async def include_plugin_routes(request: Request, call_next):
-        """Middleware to dynamically include plugin routes."""
-        # This runs after plugin loading, so we can include plugin routes
-        plugin_manager = getattr(request.app.state, 'plugin_manager', None)
-        
-        if plugin_manager and not hasattr(app.state, 'plugin_routes_included'):
-            for plugin_name, plugin in plugin_manager.get_enabled_plugins().items():
-                router = plugin.get_router()
-                if router:
-                    app.include_router(router, prefix=f"/api/v1/plugins/{plugin_name}")
-                    logger.info(f"Included routes for plugin: {plugin_name}")
-            
-            app.state.plugin_routes_included = True
-        
+    async def plugin_routes_noop_middleware(request: Request, call_next):
+        """Lightweight middleware kept for debugging; plugin routes are included at startup."""
+        logger.debug(f"🔍 Middleware (noop): Request to {request.url.path}")
         response = await call_next(request)
+        logger.debug(f"✅ Response status: {response.status_code}")
         return response
+
+    # Small stubs to reduce noisy 404s from external callers
+    @app.get("/api/quotes")
+    async def api_quotes_stub():
+        return {"error": "Quotes endpoint not implemented", "data": []}
+
+    @app.get("/api/showcase")
+    async def api_showcase_stub():
+        return {"error": "Showcase endpoint not implemented", "items": []}
+
+    @app.get("/api/surf")
+    async def api_surf_stub():
+        return {"error": "Surf API not implemented", "conditions": []}
 
 
 # Create the FastAPI app instance

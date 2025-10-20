@@ -1,0 +1,31 @@
+{
+  "id": "plum-shadow-13",
+  "name": "Plum Shadow",
+  "description": "A beautiful dark theme with tetradic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "tetradic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#1d1521",
+    "--secondary-bg": "#251c28",
+    "--accent-bg": "#3b2542",
+    "--text-primary": "#e5e1e7",
+    "--text-secondary": "#c0b4c7",
+    "--accent-primary": "#e06951",
+    "--accent-secondary": "#96dd6d",
+    "--accent-tertiary": "#47b2d0",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(37, 28, 40, 0.9)",
+    "--border-color": "#4a3755",
+    "--glow-color": "rgba(224, 105, 81, 0.3)",
+    "--purple-glow": "rgba(150, 221, 109, 0.3)"
+  }
+}

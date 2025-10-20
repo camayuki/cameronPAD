@@ -146,6 +146,7 @@ class MigrationManager:
             ("004_create_groups", self._create_groups_tables),
             ("005_add_is_admin_column", self._add_is_admin_column),
             ("006_add_full_name_column", self._add_full_name_column),
+            ("007_add_password_hash_column", self._add_password_hash_column),
         ]
         
         for migration_name, migration_func in core_migrations:
@@ -314,6 +315,24 @@ class MigrationManager:
             logger.info("✅ Added full_name column to users table")
         else:
             logger.info("ℹ️ full_name column already exists")
+    
+    def _add_password_hash_column(self) -> None:
+        """Add password_hash column to users table if it doesn't exist."""
+        if not self.db_manager.column_exists("users", "password_hash"):
+            # SQLite doesn't support adding NOT NULL columns without a default
+            # So we add it as nullable first, then we can set defaults
+            query = "ALTER TABLE users ADD COLUMN password_hash TEXT"
+            self.db_manager.execute_update(query)
+            logger.info("✅ Added password_hash column to users table")
+            
+            # Rename old password column if it exists
+            if self.db_manager.column_exists("users", "password"):
+                # Copy data from password to password_hash
+                update_query = "UPDATE users SET password_hash = password WHERE password_hash IS NULL"
+                self.db_manager.execute_update(update_query)
+                logger.info("✅ Migrated password data to password_hash column")
+        else:
+            logger.info("ℹ️ password_hash column already exists")
     
     def run_plugin_migrations(self, plugin_name: str, migrations_path: str) -> None:
         """Run migrations for a specific plugin."""

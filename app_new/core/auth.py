@@ -172,7 +172,7 @@ class UserManager:
         
         try:
             user_id = self.db.execute_update("""
-                INSERT INTO users (username, email, password_hash, is_admin)
+                INSERT INTO users (username, email, hashed_password, is_admin)
                 VALUES (?, ?, ?, ?)
             """, (username, email, password_hash, is_admin))
             

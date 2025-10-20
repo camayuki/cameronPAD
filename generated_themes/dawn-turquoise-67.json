@@ -1,0 +1,31 @@
+{
+  "id": "dawn-turquoise-67",
+  "name": "Dawn Turquoise",
+  "description": "A beautiful light theme with analogous color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "analogous",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#ebf2f2",
+    "--secondary-bg": "#f6f9f9",
+    "--accent-bg": "#10b106105",
+    "--text-primary": "#27302f",
+    "--text-secondary": "#-1-2-2",
+    "--accent-primary": "#268ed8",
+    "--accent-secondary": "#2abb79",
+    "--accent-tertiary": "#3377cb",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(246, 249, 249, 0.9)",
+    "--border-color": "#11510d10d",
+    "--glow-color": "rgba(38, 142, 216, 0.3)",
+    "--purple-glow": "rgba(42, 187, 121, 0.3)"
+  }
+}

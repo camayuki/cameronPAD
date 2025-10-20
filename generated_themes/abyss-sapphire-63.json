@@ -1,0 +1,31 @@
+{
+  "id": "abyss-sapphire-63",
+  "name": "Abyss Sapphire",
+  "description": "A beautiful midnight theme with sunset color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "sunset",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#08070c",
+    "--secondary-bg": "#0c0c12",
+    "--accent-bg": "#201c36",
+    "--text-primary": "#f0eff2",
+    "--text-secondary": "#b0aac0",
+    "--accent-primary": "#7847ea",
+    "--accent-secondary": "#65dde6",
+    "--accent-tertiary": "#b33eda",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(12, 12, 18, 0.9)",
+    "--border-color": "#2e2943",
+    "--glow-color": "rgba(120, 71, 234, 0.3)",
+    "--purple-glow": "rgba(101, 221, 230, 0.3)"
+  }
+}

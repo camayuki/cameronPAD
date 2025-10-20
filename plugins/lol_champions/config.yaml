@@ -1,0 +1,4 @@
+enabled: true
+priority: 100
+settings:
+  youtube_api_key: "AIzaSyCPIp7XLzIm6bEr7mnMDNX9kvW0brDT2LE"

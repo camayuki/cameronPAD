@@ -1,0 +1,31 @@
+{
+  "id": "morning-emerald-36",
+  "name": "Morning Emerald",
+  "description": "A beautiful light theme with triadic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "triadic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#e7efeb",
+    "--secondary-bg": "#f6f8f8",
+    "--accent-bg": "#107103105",
+    "--text-primary": "#343f3a",
+    "--text-secondary": "#030504",
+    "--accent-primary": "#a926d8",
+    "--accent-secondary": "#bb8a2a",
+    "--accent-tertiary": "#7a33cb",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(246, 248, 248, 0.9)",
+    "--border-color": "#11d112117",
+    "--glow-color": "rgba(169, 38, 216, 0.3)",
+    "--purple-glow": "rgba(187, 138, 42, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "scarlet-dusk-78",
+  "name": "Scarlet Dusk",
+  "description": "A beautiful dark theme with cherry color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "dark",
+    "cherry",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#2e1f1e",
+    "--secondary-bg": "#352528",
+    "--accent-bg": "#593235",
+    "--text-primary": "#e1dadc",
+    "--text-secondary": "#b9a0a0",
+    "--accent-primary": "#e06e51",
+    "--accent-secondary": "#dd6d82",
+    "--accent-tertiary": "#d07047",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(53, 37, 40, 0.9)",
+    "--border-color": "#533636",
+    "--glow-color": "rgba(224, 110, 81, 0.3)",
+    "--purple-glow": "rgba(221, 109, 130, 0.3)"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "coral-65",
+  "name": "Coral",
+  "description": "A beautiful midnight theme with lavender color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Dark",
+  "tags": [
+    "midnight",
+    "lavender",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#0f0a0f",
+    "--secondary-bg": "#181116",
+    "--accent-bg": "#301d2a",
+    "--text-primary": "#eeeaee",
+    "--text-secondary": "#c3aec3",
+    "--accent-primary": "#d65b80",
+    "--accent-secondary": "#ca75d5",
+    "--accent-tertiary": "#c651a9",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(24, 17, 22, 0.9)",
+    "--border-color": "#4b3448",
+    "--glow-color": "rgba(214, 91, 128, 0.3)",
+    "--purple-glow": "rgba(202, 117, 213, 0.3)"
+  }
+}

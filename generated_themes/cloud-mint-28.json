@@ -1,0 +1,31 @@
+{
+  "id": "cloud-mint-28",
+  "name": "Cloud Mint",
+  "description": "A beautiful pastel theme with forest color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "pastel",
+    "forest",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f2eff4",
+    "--secondary-bg": "#fcfbfc",
+    "--accent-bg": "#106108104",
+    "--text-primary": "#4c4352",
+    "--text-secondary": "#161218",
+    "--accent-primary": "#ba32cc",
+    "--accent-secondary": "#5c34b0",
+    "--accent-tertiary": "#c03eb5",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(252, 251, 252, 0.9)",
+    "--border-color": "#11711d113",
+    "--glow-color": "rgba(186, 50, 204, 0.3)",
+    "--purple-glow": "rgba(92, 52, 176, 0.3)"
+  }
+}

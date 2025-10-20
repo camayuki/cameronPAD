@@ -1,0 +1,31 @@
+{
+  "id": "viridian-radiant-66",
+  "name": "Viridian Radiant",
+  "description": "A beautiful light theme with monochrome color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "monochrome",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#e8f0e8",
+    "--secondary-bg": "#f4f7f4",
+    "--accent-bg": "#104101104",
+    "--text-primary": "#3c493c",
+    "--text-secondary": "#0f150f",
+    "--accent-primary": "#29d826",
+    "--accent-secondary": "#2cbb2a",
+    "--accent-tertiary": "#36cb33",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(244, 247, 244, 0.9)",
+    "--border-color": "#11a11011a",
+    "--glow-color": "rgba(41, 216, 38, 0.3)",
+    "--purple-glow": "rgba(44, 187, 42, 0.3)"
+  }
+}

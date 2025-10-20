@@ -140,7 +140,8 @@ class SurfPlugin(WebPlugin):
             dependencies=[],
             api_version="1.0",
             enabled=True,
-            priority=100
+            priority=100,
+            requires_auth=False  # Surf plugin is public
         )
     
     def register_routes(self) -> None:

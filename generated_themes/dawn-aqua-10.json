@@ -1,0 +1,31 @@
+{
+  "id": "dawn-aqua-10",
+  "name": "Dawn Aqua",
+  "description": "A beautiful light theme with tetradic color harmony",
+  "author": "CameronPAD Theme Generator",
+  "version": "1.0.0",
+  "category": "Light",
+  "tags": [
+    "light",
+    "tetradic",
+    "generated",
+    "auto"
+  ],
+  "css_variables": {
+    "--primary-bg": "#f0f3f5",
+    "--secondary-bg": "#f9fafb",
+    "--accent-bg": "#11510c10b",
+    "--text-primary": "#374143",
+    "--text-secondary": "#0f1314",
+    "--accent-primary": "#ba26d8",
+    "--accent-secondary": "#bb402a",
+    "--accent-tertiary": "#4acb33",
+    "--danger": "#e83030",
+    "--warning": "#f3ae24",
+    "--success": "#32cc32",
+    "--card-bg": "rgba(249, 250, 251, 0.9)",
+    "--border-color": "#11110c10a",
+    "--glow-color": "rgba(186, 38, 216, 0.3)",
+    "--purple-glow": "rgba(187, 64, 42, 0.3)"
+  }
+}
