@@ -52,8 +52,22 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
         logger.debug(f"🔍 Middleware: {request.method} {path}")
         
         # Check if route is public (including dynamic plugin check)
-        if self._is_public_route(path, request):
+        is_public = self._is_public_route(path, request)
+        if is_public:
             logger.debug(f"✅ Public route allowed: {path}")
+            # Even for public routes, try to extract user info if token exists
+            token = self._extract_token(request)
+            if token:
+                try:
+                    payload = self.security_manager.verify_token(token)
+                    request.state.user_id = payload.get("sub")
+                    request.state.username = payload.get("username")
+                    request.state.is_admin = payload.get("is_admin")
+                    request.state.token_payload = payload
+                    logger.debug(f"✅ Optional auth for public route: {payload.get('username')}")
+                except:
+                    # Silently fail for public routes - user just won't be authenticated
+                    pass
             return await call_next(request)
         
         # Check for authentication
