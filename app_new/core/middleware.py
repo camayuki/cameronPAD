@@ -20,6 +20,7 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
     def __init__(self, app):
         super().__init__(app)
         self.security_manager = get_security_manager()
+        self.public_plugins = []  # Will be populated by app
         
         # Routes that don't require authentication
         self.public_routes = {
@@ -30,8 +31,7 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
             "/docs",
             "/openapi.json",
             "/static",
-            "/favicon.ico",
-            "/api/v1/plugins/surf"  # Surf plugin is public
+            "/favicon.ico"
         }
         
         # API routes that don't require authentication
@@ -41,12 +41,18 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
             "/api/v1/health"
         }
     
+    def add_public_plugin(self, plugin_name: str):
+        """Add a plugin to the public access list"""
+        plugin_path = f"/api/v1/plugins/{plugin_name}"
+        self.public_plugins.append(plugin_path)
+        logger.info(f"🔓 Registered public plugin: {plugin_path}")
+    
     async def dispatch(self, request: Request, call_next):
         path = request.url.path
         logger.debug(f"🔍 Middleware: {request.method} {path}")
         
-        # Check if route is public
-        if self._is_public_route(path):
+        # Check if route is public (including dynamic plugin check)
+        if self._is_public_route(path, request):
             logger.debug(f"✅ Public route allowed: {path}")
             return await call_next(request)
         
@@ -100,14 +106,38 @@ class AuthenticationMiddleware(BaseHTTPMiddleware):
         
         return await call_next(request)
     
-    def _is_public_route(self, path: str) -> bool:
+    def _is_public_route(self, path: str, request: Request = None) -> bool:
         """Check if route is public"""
         # Exact matches
         if path in self.public_routes or path in self.public_api_routes:
             return True
         
-        # Prefix matches for static files and public plugins
-        public_prefixes = ["/static/", "/docs", "/redoc", "/api/v1/plugins/surf"]
+        # Check if path matches any registered public plugin
+        for plugin_path in self.public_plugins:
+            if path.startswith(plugin_path):
+                return True
+        
+        # Dynamically check plugin manager for public plugins
+        if request and hasattr(request.app.state, 'plugin_manager'):
+            try:
+                plugin_manager = request.app.state.plugin_manager
+                # Extract plugin name from path like /api/v1/plugins/tradingview/...
+                if path.startswith("/api/v1/plugins/"):
+                    path_parts = path[16:].split("/")  # Remove /api/v1/plugins/
+                    if path_parts:
+                        plugin_name = path_parts[0]
+                        plugins = plugin_manager.get_enabled_plugins()
+                        if plugin_name in plugins:
+                            plugin = plugins[plugin_name]
+                            metadata = plugin.get_metadata()
+                            if not metadata.requires_auth:
+                                logger.debug(f"🔓 Plugin {plugin_name} is public (requires_auth=False)")
+                                return True
+            except Exception as e:
+                logger.debug(f"Error checking plugin public status: {e}")
+        
+        # Prefix matches for static files
+        public_prefixes = ["/static/", "/docs", "/redoc"]
         return any(path.startswith(prefix) for prefix in public_prefixes)
     
     def _extract_token(self, request: Request) -> Optional[str]:

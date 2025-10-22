@@ -19,6 +19,8 @@ class PluginMetadata(BaseModel):
     enabled: bool = True
     priority: int = 100  # Lower numbers load first
     requires_auth: bool = True  # Whether plugin requires authentication
+    icon: str = "🔌"  # Icon emoji for the plugin
+    display_name: Optional[str] = None  # Display name (defaults to name.title())
 
 
 class PluginConfig(BaseModel):

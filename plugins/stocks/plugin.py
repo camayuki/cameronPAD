@@ -38,7 +38,9 @@ class StocksPlugin(WebPlugin):
             dependencies=[],
             api_version="1.0",
             enabled=True,
-            priority=50
+            priority=50,
+            icon="📈",
+            display_name="Stock Tracker"
         )
     
     async def initialize(self) -> None:
@@ -104,10 +106,7 @@ class StocksPlugin(WebPlugin):
         
         self.templates.env.globals['get_enabled_plugins'] = get_enabled_plugins
         
-        # Register routes
-        self.register_routes()
-        
-        # Initialize stock service with API keys from environment
+        # Initialize stock service with API keys from environment FIRST
         from .services import StockService
         service_config = {
             'finnhub_token': os.getenv('FINNHUB_TOKEN', ''),
@@ -118,6 +117,9 @@ class StocksPlugin(WebPlugin):
         }
         self.stock_service = StockService(service_config)
         logger.info("✅ Stock service initialized with API keys from environment")
+        
+        # Register routes (includes API routes with predictions)
+        self.register_routes()
         
         # Ensure showcase symbols are in the database
         await self.stock_service.ensure_showcase_symbols()
@@ -263,6 +265,11 @@ class StocksPlugin(WebPlugin):
     def register_routes(self) -> None:
         """Register web routes for this plugin."""
         
+        # Import and setup API routes (includes predictions endpoint)
+        from .api import setup_routes as setup_api_routes
+        setup_api_routes(self._router, self.stock_service)
+        logger.info("✅ Stocks API routes registered (including predictions)")
+        
         @self._router.get("/", response_class=HTMLResponse)
         async def stocks_page(request: Request):
             """Render the stocks tracking page"""
@@ -394,63 +401,41 @@ class StocksPlugin(WebPlugin):
         @self._router.get("/showcase")
         async def get_showcase():
             """Get showcase stock quotes from database"""
-            import sqlite3
-            
-            logger.info("🌐 [ENDPOINT] /showcase called by frontend - starting data retrieval")
+            logger.info("=" * 80)
+            logger.info("🌐 [ENDPOINT] /showcase called by frontend")
+            logger.info("=" * 80)
             quotes = []
             
             try:
-                logger.info("🔌 [ENDPOINT] Opening database connection...")
-                with sqlite3.connect("data/cameronpad_dev.db") as conn:
-                    conn.row_factory = sqlite3.Row
-                    cur = conn.cursor()
-                    
-                    # First, check how many stocks are in the database
-                    cur.execute("SELECT COUNT(*) as count FROM stocks WHERE enabled = 1")
-                    stock_count = cur.fetchone()['count']
-                    logger.info(f"📊 [ENDPOINT] Database query: {stock_count} enabled stocks found")
-                    
-                    # Check how many have prices
-                    cur.execute("SELECT COUNT(*) as count FROM latest_prices")
-                    price_count = cur.fetchone()['count']
-                    logger.info(f"📊 [ENDPOINT] Database query: {price_count} stocks with prices found")
-                    
-                    if price_count == 0:
-                        logger.warning("⚠️ [ENDPOINT] WARNING: latest_prices table is EMPTY! Service may not be running.")
-                    
-                    logger.info("🔍 [ENDPOINT] Executing JOIN query to fetch showcase data...")
-                    cur.execute("""
-                        SELECT 
-                            s.symbol, s.target, s.direction, s.enabled,
-                            p.price, p.high, p.low, p.ts as price_ts,
-                            pr.pred_next, pr.src_days, pr.ts as pred_ts
-                        FROM stocks s
-                        LEFT JOIN latest_prices p ON s.symbol = p.symbol
-                        LEFT JOIN predictions pr ON s.symbol = pr.symbol
-                        WHERE s.enabled = 1
-                        ORDER BY s.symbol
-                    """)
-                    quotes = [dict(row) for row in cur.fetchall()]
-                    logger.info(f"✅ [ENDPOINT] Query complete: {len(quotes)} quotes retrieved")
-                    
-                    # Log each quote for debugging
-                    for quote in quotes:
-                        has_price = quote.get('price') is not None
-                        has_high = quote.get('high') is not None
-                        has_low = quote.get('low') is not None
-                        status = "✅ HAS DATA" if has_price else "❌ NO DATA"
-                        logger.info(f"� [ENDPOINT] {quote['symbol']}: {status} | Price=${quote.get('price', '--')}, High=${quote.get('high', '--')}, Low=${quote.get('low', '--')}, Timestamp={quote.get('price_ts', 'None')}")
+                # Use the stock_service method which already handles showcase data correctly
+                logger.info("🔍 [ENDPOINT] Calling stock_service.get_showcase_data()...")
+                quotes = await self.stock_service.get_showcase_data()
+                logger.info(f"✅ [ENDPOINT] Retrieved {len(quotes)} showcase quotes")
+                
+                # Log each quote with ALL fields for debugging
+                logger.info("📊 [ENDPOINT] DETAILED QUOTE DATA:")
+                for i, quote in enumerate(quotes, 1):
+                    logger.info(f"  Quote #{i}: {quote}")
                     
             except Exception as e:
-                logger.error(f"❌ [ENDPOINT] Database error while fetching showcase quotes: {e}", exc_info=True)
+                logger.error(f"❌ [ENDPOINT] Error fetching showcase quotes: {e}", exc_info=True)
             
-            logger.info(f"� [ENDPOINT] Sending response to frontend: status=success, {len(quotes)} quotes")
-            logger.info(f"📤 [ENDPOINT] Response summary: {sum(1 for q in quotes if q.get('price') is not None)} with prices, {sum(1 for q in quotes if q.get('price') is None)} without prices")
-            return {
+            response = {
                 "status": "success",
                 "quotes": quotes
             }
-        
+            
+            logger.info(f"📤 [ENDPOINT] Response structure:")
+            logger.info(f"  - status: {response['status']}")
+            logger.info(f"  - quotes count: {len(response['quotes'])}")
+            logger.info(f"  - quotes type: {type(response['quotes'])}")
+            if quotes:
+                logger.info(f"  - First quote keys: {list(quotes[0].keys())}")
+                logger.info(f"  - First quote: {quotes[0]}")
+            logger.info("=" * 80)
+            
+            return response
+
         logger.info("✅ Stocks routes registered")
     
     def get_health_status(self) -> Dict[str, Any]:

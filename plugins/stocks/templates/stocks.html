@@ -2,6 +2,15 @@
 
 {% block title %}Stocks - CameronPAD{% endblock %}
 
+{% block extra_head %}
+<!-- Chart.js library loaded from local static files -->
+<script src="/static/js/chart.umd.min.js"></script>
+<script>
+console.log('📊 Loaded Chart.js from local files');
+window.chartJsLoaded = true;
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="page-header" style="margin-bottom: 2rem;">
     <h1 style="color: var(--accent-primary); margin: 0;">📈 Stock Tracker</h1>
@@ -40,6 +49,179 @@
                     {% endfor %}
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- AI Stock Predictions -->
+<div class="card" style="margin-bottom: 2rem;">
+    <div class="card-header">
+        <h3>🤖 AI Price Predictions (15-Day Forecast)</h3>
+        <div class="actions">
+            <input type="text" id="prediction-symbol" placeholder="Symbol (e.g., AAPL)" 
+                   style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-secondary); color: var(--text-primary);">
+            <select id="prediction-days" style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-secondary); color: var(--text-primary);">
+                <option value="10">Use 10 days</option>
+                <option value="30">Use 30 days</option>
+                <option value="60">Use 60 days</option>
+            </select>
+            <button class="btn btn-sm" onclick="loadPrediction()">🔮 Generate Forecast</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="prediction-loading" style="display: none; text-align: center; padding: 2rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🔮</div>
+            <p style="color: var(--text-muted);">Running ensemble ML algorithm...</p>
+        </div>
+        <div id="prediction-error" style="display: none; padding: 2rem; text-align: center; color: var(--error);">
+        </div>
+        <div id="prediction-content" style="display: none;">
+            <!-- Prediction Summary -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-primary);">
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Algorithm</div>
+                    <div style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);" id="pred-algorithm">--</div>
+                </div>
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4fc3f7;">
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Confidence</div>
+                    <div style="font-size: 1.25rem; font-weight: 600;" id="pred-confidence">--</div>
+                </div>
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #81c784;">
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">Current Price</div>
+                    <div style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);" id="pred-current">--</div>
+                </div>
+                <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ffb74d;">
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">15-Day Target</div>
+                    <div style="font-size: 1.25rem; font-weight: 600;" id="pred-target">--</div>
+                </div>
+            </div>
+
+            <!-- Training Data Display -->
+            <div id="training-data-section" style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <h4 style="margin: 0 0 1rem 0; color: var(--text-primary); display: flex; align-items: center; justify-content: space-between;">
+                    <span>📚 Training Data (Historical Prices)</span>
+                    <button onclick="document.getElementById('training-table-container').style.display = document.getElementById('training-table-container').style.display === 'none' ? 'block' : 'none'" 
+                            style="padding: 0.25rem 0.75rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); cursor: pointer; font-size: 0.85rem;">
+                        Toggle View
+                    </button>
+                </h4>
+                <div id="training-summary" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                    The ML model was trained on <span id="training-days-count" style="color: var(--accent-primary); font-weight: 600;">--</span> days of historical data.
+                </div>
+                <div id="training-table-container" style="overflow-x: auto; max-height: 300px; overflow-y: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                        <thead style="position: sticky; top: 0; background: var(--bg-secondary); z-index: 10;">
+                            <tr style="border-bottom: 2px solid var(--border-color);">
+                                <th style="padding: 0.5rem; text-align: left;">Date</th>
+                                <th style="padding: 0.5rem; text-align: right;">Close Price</th>
+                                <th style="padding: 0.5rem; text-align: right;">Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody id="training-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Prediction Chart -->
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; min-height: 400px;">
+                <h4 style="margin: 0 0 1rem 0; color: var(--text-primary);">📊 Price Forecast Chart</h4>
+                <div style="position: relative; height: 350px; width: 100%;">
+                    <canvas id="prediction-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Prediction Table -->
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--border-color);">
+                            <th style="padding: 0.75rem; text-align: left;">Date</th>
+                            <th style="padding: 0.75rem; text-align: right;">Predicted Price</th>
+                            <th style="padding: 0.75rem; text-align: right;">Change from Current</th>
+                            <th style="padding: 0.75rem; text-align: right;">% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody id="prediction-tbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Algorithm Explanation -->
+            <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(79, 195, 247, 0.1); border-left: 4px solid #4fc3f7; border-radius: 8px;">
+                <h4 style="margin: 0 0 1rem 0; color: var(--accent-primary); display: flex; align-items: center; gap: 0.5rem;">
+                    <span>🧠</span> Ensemble ML Algorithm Explained
+                </h4>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                    <!-- Linear Regression -->
+                    <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <div style="font-weight: 600; color: #4fc3f7; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                            📊 Linear Regression (40% weight)
+                        </div>
+                        <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                            Calculates the best-fit line through historical prices using <code style="background: rgba(79, 195, 247, 0.2); padding: 2px 4px; border-radius: 3px;">y = mx + b</code>. 
+                            Identifies long-term trends and extrapolates them into the future. Best for stable, trending stocks.
+                        </p>
+                    </div>
+                    
+                    <!-- Weighted Moving Average -->
+                    <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <div style="font-weight: 600; color: #81c784; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                            📈 Weighted Moving Average (40% weight)
+                        </div>
+                        <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                            Analyzes short-term (3 days) vs long-term (7 days) momentum to detect trend direction. 
+                            Applies exponential dampening to avoid over-predicting. Adapts to volatility patterns.
+                        </p>
+                    </div>
+                    
+                    <!-- Exponential Moving Average -->
+                    <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <div style="font-weight: 600; color: #ffb74d; margin-bottom: 0.5rem; font-size: 0.95rem;">
+                            📉 Exponential Moving Average (20% weight)
+                        </div>
+                        <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: var(--text-muted);">
+                            Gives more weight to recent prices using <code style="background: rgba(255, 183, 77, 0.2); padding: 2px 4px; border-radius: 3px;">multiplier = 2/(n+1)</code>. 
+                            Reacts faster to price changes than simple averages. Captures recent market sentiment.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Formula -->
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 1rem;">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary); font-size: 0.9rem;">
+                        🔢 Final Ensemble Formula:
+                    </div>
+                    <div style="font-family: 'Courier New', monospace; background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 4px; overflow-x: auto; font-size: 0.85rem; color: #4fc3f7;">
+                        Final_Prediction = (Linear_Regression × 0.40) + (Weighted_MA × 0.40) + (EMA_Trend × 0.20)
+                    </div>
+                </div>
+                
+                <!-- Confidence Levels -->
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-color);">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary); font-size: 0.9rem;">
+                        🎯 Confidence Levels:
+                    </div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.85rem;">
+                        <span style="color: #81c784;">● <strong>HIGH:</strong> Volatility &lt; 2%</span>
+                        <span style="color: #ffb74d;">● <strong>MEDIUM:</strong> Volatility 2-5%</span>
+                        <span style="color: #e57373;">● <strong>LOW:</strong> Volatility &gt; 5%</span>
+                    </div>
+                </div>
+                
+                <!-- Prediction Note -->
+                <p style="margin: 1rem 0 0 0; font-size: 0.85rem; color: var(--text-muted); font-style: italic;">
+                    📝 <span id="pred-note">Prediction metrics will appear here after generating a forecast.</span>
+                </p>
+            </div>
+        </div>
+        <div id="prediction-empty" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📈</div>
+            <p>Enter a stock symbol above and click "Generate Forecast" to see AI-powered predictions</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+                Try popular stocks: AAPL, MSFT, GOOGL, TSLA, AMZN
+            </p>
         </div>
     </div>
 </div>
@@ -269,8 +451,18 @@
             
             if (response.ok) {
                 const data = await response.json();
-                console.log('📊 [SHOWCASE] Received data:', data);
+                console.log('=' .repeat(80));
+                console.log('📊 [SHOWCASE] RAW API RESPONSE:', JSON.stringify(data, null, 2));
+                console.log('📊 [SHOWCASE] Response status:', data.status);
+                console.log('📊 [SHOWCASE] Quotes array type:', Array.isArray(data.quotes) ? 'Array' : typeof data.quotes);
                 console.log('📊 [SHOWCASE] Number of quotes:', data.quotes ? data.quotes.length : 0);
+                
+                if (data.quotes && data.quotes.length > 0) {
+                    console.log('📊 [SHOWCASE] First quote FULL DATA:', JSON.stringify(data.quotes[0], null, 2));
+                    console.log('📊 [SHOWCASE] First quote keys:', Object.keys(data.quotes[0]));
+                    console.log('📊 [SHOWCASE] All symbols:', data.quotes.map(q => q.symbol));
+                }
+                console.log('=' .repeat(80));
                 
                 // Update the table with real data
                 if (data.quotes && data.quotes.length > 0) {
@@ -361,9 +553,20 @@
                         
                         // Update timestamp
                         if (tsCell && quote.price_ts) {
-                            const date = new Date(quote.price_ts);
+                            // Database stores UTC timestamps - append 'Z' to ensure correct parsing
+                            const utcTimestamp = quote.price_ts.includes('Z') ? quote.price_ts : quote.price_ts + 'Z';
+                            const date = new Date(utcTimestamp);
                             const oldValue = tsCell.textContent;
-                            const newValue = date.toLocaleTimeString();
+                            // Format with CST timezone and include date
+                            const newValue = date.toLocaleString('en-US', { 
+                                timeZone: 'America/Chicago',
+                                month: '2-digit',
+                                day: '2-digit',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                second: '2-digit',
+                                timeZoneName: 'short'
+                            });
                             tsCell.textContent = newValue;
                             console.log(`🕒 [SHOWCASE] ${symbol} timestamp: ${oldValue} → ${newValue}`);
                             elementUpdated = true;
@@ -532,8 +735,407 @@
         alert('Add Stock Alert feature coming soon!\n\nThis will allow you to:\n• Set price targets\n• Choose alert direction (above/below)\n• Enable/disable alerts\n• Receive notifications');
     }
     
+    // Prediction functionality
+    let predictionChart = null;
+    
+    // Wait for Chart.js to load (3 seconds max)
+    function waitForChartJS(successCallback, failureCallback, maxAttempts = 30) {
+        let attempts = 0;
+        const checkInterval = setInterval(() => {
+            attempts++;
+            
+            // Check if Chart.js is available
+            const isReady = window.chartJsLoaded && typeof Chart !== 'undefined';
+            
+            if (isReady) {
+                clearInterval(checkInterval);
+                console.log('✅ Chart.js ready! Version:', Chart.version);
+                successCallback();
+            } else if (window.chartJsFailed || attempts >= maxAttempts) {
+                clearInterval(checkInterval);
+                console.log('⏱️ Chart.js loading timeout after 3 seconds');
+                console.error('   chartJsLoaded:', window.chartJsLoaded);
+                console.error('   chartJsFailed:', window.chartJsFailed);
+                console.error('   typeof Chart:', typeof Chart);
+                
+                if (failureCallback) {
+                    failureCallback();
+                }
+            } else {
+                if (attempts % 10 === 0) {
+                    console.log(`⏳ Waiting for Chart.js... attempt ${attempts}/${maxAttempts}`);
+                }
+            }
+        }, 100); // Check every 100ms
+    }
+    
+    async function loadPrediction() {
+        const symbol = document.getElementById('prediction-symbol').value.trim().toUpperCase();
+        const historicalDays = parseInt(document.getElementById('prediction-days').value);
+        
+        if (!symbol) {
+            alert('Please enter a stock symbol');
+            return;
+        }
+        
+        // Show loading state
+        document.getElementById('prediction-empty').style.display = 'none';
+        document.getElementById('prediction-error').style.display = 'none';
+        document.getElementById('prediction-content').style.display = 'none';
+        document.getElementById('prediction-loading').style.display = 'block';
+        
+        try {
+            const url = `/api/v1/plugins/stocks/predictions/${symbol}/detailed?historical_days=${historicalDays}&prediction_days=15`;
+            console.log('🔮 Fetching prediction from:', url);
+            
+            const response = await fetch(url, {
+                credentials: 'include',  // Include cookies for authentication
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            console.log('📊 Response status:', response.status, response.statusText);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('❌ Error response:', errorText);
+                throw new Error(`${response.status}: ${errorText}`);
+            }
+            
+            const data = await response.json();
+            console.log('📊 Prediction data:', data);
+            
+            displayPrediction(symbol, data);
+            
+        } catch (error) {
+            console.error('Error loading prediction:', error);
+            document.getElementById('prediction-loading').style.display = 'none';
+            document.getElementById('prediction-error').textContent = `Error: ${error.message}`;
+            document.getElementById('prediction-error').style.display = 'block';
+        }
+    }
+    
+    function displayPrediction(symbol, data) {
+        // Hide loading, show content
+        document.getElementById('prediction-loading').style.display = 'none';
+        document.getElementById('prediction-content').style.display = 'block';
+        
+        // Update summary cards
+        document.getElementById('pred-algorithm').textContent = data.metadata.algorithm || 'Ensemble ML';
+        
+        const confidence = data.metadata.confidence || 'medium';
+        const confElement = document.getElementById('pred-confidence');
+        confElement.textContent = confidence.toUpperCase();
+        confElement.style.color = 
+            confidence === 'high' ? '#81c784' : 
+            confidence === 'medium' ? '#ffb74d' : '#e57373';
+        
+        const currentPrice = data.summary.current_price || 0;
+        document.getElementById('pred-current').textContent = `$${currentPrice.toFixed(2)}`;
+        
+        const targetPrice = data.summary.final_predicted_price || 0;
+        const priceChange = targetPrice - currentPrice;
+        const targetElement = document.getElementById('pred-target');
+        targetElement.textContent = `$${targetPrice.toFixed(2)}`;
+        targetElement.style.color = priceChange >= 0 ? '#81c784' : '#e57373';
+        
+        // Update note
+        document.getElementById('pred-note').textContent = 
+            `Historical data: ${data.metadata.historical_days || 10} days. ` +
+            `Volatility: ${(data.metadata.volatility * 100).toFixed(2)}%. ` +
+            `Trend: ${data.metadata.trend_direction || 'neutral'}.`;
+        
+        // Populate prediction table
+        const tbody = document.getElementById('prediction-tbody');
+        tbody.innerHTML = '';
+        
+        data.predictions.forEach((pred, index) => {
+            const date = new Date(pred.date);
+            const predPrice = pred.predicted_price;
+            const change = predPrice - currentPrice;
+            const changePercent = (change / currentPrice) * 100;
+            
+            const row = document.createElement('tr');
+            row.style.borderBottom = '1px solid var(--border-color)';
+            row.innerHTML = `
+                <td style="padding: 0.75rem;">${date.toLocaleDateString()}</td>
+                <td style="padding: 0.75rem; text-align: right; font-weight: 600;">$${predPrice.toFixed(2)}</td>
+                <td style="padding: 0.75rem; text-align: right; color: ${change >= 0 ? '#81c784' : '#e57373'};">
+                    ${change >= 0 ? '+' : ''}$${change.toFixed(2)}
+                </td>
+                <td style="padding: 0.75rem; text-align: right; color: ${changePercent >= 0 ? '#81c784' : '#e57373'};">
+                    ${changePercent >= 0 ? '+' : ''}${changePercent.toFixed(2)}%
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+        
+        // Populate training data table
+        const trainingTbody = document.getElementById('training-tbody');
+        trainingTbody.innerHTML = '';
+        document.getElementById('training-days-count').textContent = data.historical_data.length;
+        
+        if (data.historical_data && data.historical_data.length > 0) {
+            data.historical_data.forEach((day, index) => {
+                const date = new Date(day.date);
+                const closePrice = day.close;
+                
+                // Calculate trend (compare to previous day)
+                let trend = '--';
+                let trendColor = 'var(--text-muted)';
+                if (index > 0) {
+                    const prevPrice = data.historical_data[index - 1].close;
+                    const change = closePrice - prevPrice;
+                    const changePercent = (change / prevPrice) * 100;
+                    
+                    if (change > 0) {
+                        trend = `↗ +${changePercent.toFixed(2)}%`;
+                        trendColor = '#81c784';
+                    } else if (change < 0) {
+                        trend = `↘ ${changePercent.toFixed(2)}%`;
+                        trendColor = '#e57373';
+                    } else {
+                        trend = `→ 0.00%`;
+                        trendColor = 'var(--text-muted)';
+                    }
+                }
+                
+                const row = document.createElement('tr');
+                row.style.borderBottom = '1px solid var(--border-color)';
+                row.style.opacity = '0.8';
+                row.innerHTML = `
+                    <td style="padding: 0.5rem;">${date.toLocaleDateString()}</td>
+                    <td style="padding: 0.5rem; text-align: right; font-weight: 600;">$${closePrice.toFixed(2)}</td>
+                    <td style="padding: 0.5rem; text-align: right; color: ${trendColor};">${trend}</td>
+                `;
+                trainingTbody.appendChild(row);
+            });
+        }
+        
+        // Wait for Chart.js or show error message
+        waitForChartJS(() => {
+            createPredictionChart(symbol, data);
+        }, () => {
+            // Fallback: show message that chart cannot be displayed
+            showChartError();
+        });
+    }
+    
+    function showChartError() {
+        const canvas = document.getElementById('prediction-chart');
+        if (canvas) {
+            const container = canvas.parentElement;
+            container.innerHTML = `
+                <div style="padding: 2rem; text-align: center; background: var(--card-bg); border: 2px dashed var(--border-color); border-radius: 8px;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                    <div style="font-size: 1.2rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">
+                        Chart Visualization Unavailable
+                    </div>
+                    <div style="color: var(--text-muted); font-size: 0.9rem;">
+                        Chart.js library could not be loaded from CDN.<br>
+                        The prediction data is still available in the table above.
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
+    function createPredictionChart(symbol, data) {
+        console.log('📊 Creating prediction chart for', symbol);
+        console.log('📊 Chart data:', data);
+        
+        const canvas = document.getElementById('prediction-chart');
+        
+        if (!canvas) {
+            console.error('❌ Canvas element "prediction-chart" not found!');
+            showChartError();
+            return;
+        }
+        
+        console.log('✅ Canvas element found:', canvas);
+        
+        if (typeof Chart === 'undefined') {
+            console.error('❌ Chart.js not loaded!');
+            showChartError();
+            return;
+        }
+        
+        console.log('✅ Chart.js version:', Chart.version);
+        
+        // Get 2D context
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+            console.error('❌ Could not get 2D context from canvas!');
+            return;
+        }
+        
+        console.log('✅ Got 2D context from canvas');
+        
+        // Destroy existing chart if any
+        if (predictionChart) {
+            console.log('🗑️ Destroying existing chart');
+            predictionChart.destroy();
+            predictionChart = null;
+        }
+        
+        // Prepare data
+        const historicalDates = data.historical_data.map(h => new Date(h.date).toLocaleDateString());
+        const historicalPrices = data.historical_data.map(h => h.close);
+        
+        console.log('📊 Historical data points:', historicalPrices.length);
+        console.log('📊 Historical dates:', historicalDates);
+        
+        const predictionDates = data.predictions.map(p => new Date(p.date).toLocaleDateString());
+        const predictionPrices = data.predictions.map(p => p.predicted_price);
+        
+        console.log('📊 Prediction data points:', predictionPrices.length);
+        console.log('📊 Prediction dates:', predictionDates);
+        
+        // Combine for chart
+        const allDates = [...historicalDates, ...predictionDates];
+        const historicalLine = [...historicalPrices, ...Array(predictionDates.length).fill(null)];
+        const predictionLine = [...Array(historicalDates.length - 1).fill(null), historicalPrices[historicalPrices.length - 1], ...predictionPrices];
+        
+        console.log('📊 Creating Chart instance...');
+        
+        try {
+            predictionChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: allDates,
+                datasets: [
+                    {
+                        label: 'Historical Prices',
+                        data: historicalLine,
+                        borderColor: '#4fc3f7',
+                        backgroundColor: 'rgba(79, 195, 247, 0.1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointHoverRadius: 5,
+                        fill: true
+                    },
+                    {
+                        label: '15-Day Forecast',
+                        data: predictionLine,
+                        borderColor: '#ffb74d',
+                        backgroundColor: 'rgba(255, 183, 77, 0.1)',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointHoverRadius: 5,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `${symbol} - Historical & Predicted Prices`,
+                        color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim() || '#e0e0e0',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 20
+                        }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim() || '#e0e0e0',
+                            usePointStyle: true,
+                            padding: 15,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: '#4fc3f7',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: true,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += '$' + context.parsed.y.toFixed(2);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toFixed(2);
+                            },
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#aaa',
+                            font: {
+                                size: 11
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: getComputedStyle(document.documentElement).getPropertyValue('--text-muted').trim() || '#aaa',
+                            maxRotation: 45,
+                            minRotation: 45,
+                            font: {
+                                size: 10
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.05)',
+                            drawBorder: false
+                        }
+                    }
+                }
+            }
+        });
+        
+        console.log('✅ Chart created successfully!');
+        
+        } catch (error) {
+            console.error('❌ Error creating chart:', error);
+            console.error('Error stack:', error.stack);
+        }
+    }
+    
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
+        // Check if Chart.js is loaded
+        console.log('🔍 DOMContentLoaded - Checking Chart.js availability...');
+        console.log('   window.chartJsReady:', window.chartJsReady);
+        console.log('   typeof Chart:', typeof Chart);
+        
         checkServiceStatus();
         refreshServiceLogs();
         

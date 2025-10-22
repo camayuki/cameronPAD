@@ -21,7 +21,7 @@ async def login_page(request: Request, next: str = "/", success: str = None):
     """Display login page."""
     logger.info("🌐 GET /auth/login - Displaying login page")
     
-    # Get plugin stats and featured apps for the info panel
+    # Get plugin stats and ALL apps for the info panel
     from app_new.main import plugin_manager
     featured_apps = []
     
@@ -32,34 +32,36 @@ async def login_page(request: Request, next: str = "/", success: str = None):
             "active_plugins": len(enabled_plugins)
         }
         
-        # Get featured apps (stocks, surf, system_monitor, notes)
-        featured_names = ["stocks", "surf", "system_monitor", "notes"]
+        # Get ALL enabled plugins, not just 4
         for plugin_name in enabled_plugins:
             # Get the actual plugin object
             plugin = plugin_manager.plugins.get(plugin_name)
-            if plugin and plugin_name.lower() in featured_names:
+            if plugin:
+                # Get menu items to get the icon
+                menu_items = plugin.get_menu_items() if hasattr(plugin, 'get_menu_items') else []
+                icon = menu_items[0]['icon'] if menu_items and 'icon' in menu_items[0] else "🔌"
+                
                 featured_apps.append({
                     "name": plugin.metadata.name.title(),  # Use metadata.name and capitalize
-                    "icon": getattr(plugin.metadata, "icon", "🔌"),
+                    "icon": icon,
                     "description": plugin.metadata.description,
                     "route": f"/api/v1/plugins/{plugin_name}",  # Use plugin_name (the key)
                     "requires_auth": getattr(plugin.metadata, "requires_auth", True)  # Default to requiring auth
                 })
-            if len(featured_apps) >= 4:  # Limit to 4 featured apps
-                break
     else:
         stats = {
             "total_plugins": 9,
             "active_plugins": 9
         }
-    
-    # Always provide default featured apps if we don't have enough
-    if len(featured_apps) < 4:
+        # Provide default apps as fallback
         featured_apps = [
             {"name": "Stocks", "icon": "📈", "description": "Real-time stock tracking", "route": "/api/v1/plugins/stocks", "requires_auth": True},
             {"name": "Surf", "icon": "🏄", "description": "Wave conditions monitor", "route": "/api/v1/plugins/surf", "requires_auth": False},
+            {"name": "TradingView", "icon": "📊", "description": "TradingView charts and analysis", "route": "/api/v1/plugins/tradingview", "requires_auth": False},
             {"name": "System Monitor", "icon": "🖥️", "description": "Server health dashboard", "route": "/api/v1/plugins/system_monitor", "requires_auth": True},
-            {"name": "Notes", "icon": "📝", "description": "Quick note-taking", "route": "/api/v1/plugins/notes", "requires_auth": True}
+            {"name": "Notes", "icon": "📝", "description": "Quick note-taking", "route": "/api/v1/plugins/notes", "requires_auth": True},
+            {"name": "Journal", "icon": "📔", "description": "Daily journaling", "route": "/api/v1/plugins/journal", "requires_auth": True},
+            {"name": "Notepad", "icon": "📄", "description": "Simple notepad", "route": "/api/v1/plugins/notepad", "requires_auth": True}
         ]
     
     return templates.TemplateResponse("auth/login.html", {

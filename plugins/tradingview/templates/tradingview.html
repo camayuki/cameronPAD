@@ -5,10 +5,486 @@
 {% block content %}
 <div class="container">
     <div class="page-header">
-        <h1>📊 TradingView</h1>
-        <p class="muted">Market heatmap and symbol overview widgets</p>
+        <h1>📊 TradingView Supercharts</h1>
+        <p class="muted">Three advanced charts with different configurations for comparison</p>
     </div>
 
+    <!-- Chart Height Control -->
+    <div class="height-control">
+        <label for="chartHeight">📏 Chart Height (px):</label>
+        <input type="number" id="chartHeight" min="400" max="1200" value="800" step="50">
+        <button onclick="updateChartHeights()">Apply Height</button>
+    </div>
+
+    <!-- Three Supercharts with Bollinger Bands -->
+    <div class="charts-grid">
+        <!-- Chart 1 - AVGO Daily with BB & SMA -->
+        <div class="chart-card" data-chart-number="1">
+            <div class="chart-header">
+                <h3>📈 Chart 1: AVGO - Daily (BB 9,2 & SMA 9)</h3>
+                <div class="chart-actions">
+                    <button class="btn-save-chart" onclick="saveChartConfig(1)" title="Save this chart configuration">💾 Save</button>
+                    <button class="btn-delete-chart" onclick="deleteChart(1)" title="Delete this chart">🗑️ Delete</button>
+                </div>
+            </div>
+            <p class="chart-description">
+                <strong>Daily Timeframe:</strong> Shows each candlestick representing one trading day. 
+                <strong>BB(9,2):</strong> Bollinger Bands with 9-period length and 2 standard deviations - measures short-term price volatility. The bands expand during volatile periods and contract during consolidation. 
+                <strong>SMA(9):</strong> Simple Moving Average over 9 periods - shows the short-term price trend.
+            </p>
+            <div class="tradingview-widget-container chart-container" style="height:800px;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "symbol": "NASDAQ:AVGO",
+                  "interval": "D",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(15, 15, 15, 1)",
+                  "gridColor": "rgba(242, 242, 242, 0.06)",
+                  "allow_symbol_change": true,
+                  "save_image": true,
+                  "calendar": false,
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "hide_side_toolbar": false,
+                  "details": false,
+                  "hotlist": false,
+                  "support_host": "https://www.tradingview.com",
+                  "studies": [
+                    {
+                      "id": "MASimple@tv-basicstudies",
+                      "inputs": {
+                        "length": 9
+                      }
+                    },
+                    {
+                      "id": "BB@tv-basicstudies",
+                      "inputs": {
+                        "length": 9,
+                        "stdDev": 2
+                      }
+                    }
+                  ]
+                }
+                </script>
+            </div>
+            <div class="chart-notes">
+                <label for="notes-1">📝 Chart Notes (Public - Everyone can see and edit):</label>
+                <textarea 
+                    id="notes-1" 
+                    class="notes-textarea" 
+                    placeholder="Add your analysis notes here..."
+                    onchange="saveNotes(1, this.value)"
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- Chart 2 - AVGO Weekly with BB & SMA -->
+        <div class="chart-card" data-chart-number="2">
+            <div class="chart-header">
+                <h3>📊 Chart 2: AVGO - Weekly (BB 9,2 & SMA 9)</h3>
+                <div class="chart-actions">
+                    <button class="btn-save-chart" onclick="saveChartConfig(2)" title="Save this chart configuration">💾 Save</button>
+                    <button class="btn-delete-chart" onclick="deleteChart(2)" title="Delete this chart">🗑️ Delete</button>
+                </div>
+            </div>
+            <p class="chart-description">
+                <strong>Weekly Timeframe:</strong> Each candlestick represents one week of trading. Better for identifying medium-term trends and swing trading opportunities. 
+                <strong>BB(9,2):</strong> Tracks weekly volatility patterns. 
+                <strong>SMA(9):</strong> 9-week moving average for trend direction.
+            </p>
+            <div class="tradingview-widget-container chart-container" style="height:800px;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "symbol": "NASDAQ:AVGO",
+                  "interval": "W",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(15, 15, 15, 1)",
+                  "gridColor": "rgba(242, 242, 242, 0.06)",
+                  "allow_symbol_change": true,
+                  "save_image": true,
+                  "calendar": false,
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "hide_side_toolbar": false,
+                  "details": false,
+                  "hotlist": false,
+                  "support_host": "https://www.tradingview.com",
+                  "studies": [
+                    {
+                      "id": "MASimple@tv-basicstudies",
+                      "inputs": {
+                        "length": 9
+                      }
+                    },
+                    {
+                      "id": "BB@tv-basicstudies",
+                      "inputs": {
+                        "length": 9,
+                        "stdDev": 2
+                      }
+                    }
+                  ]
+                }
+                </script>
+            </div>
+            <div class="chart-notes">
+                <label for="notes-2">📝 Chart Notes (Public - Everyone can see and edit):</label>
+                <textarea 
+                    id="notes-2" 
+                    class="notes-textarea" 
+                    placeholder="Add your analysis notes here..."
+                    onchange="saveNotes(2, this.value)"
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- Chart 3 - AVGO Monthly with BB & SMA -->
+        <div class="chart-card" data-chart-number="3">
+            <div class="chart-header">
+                <h3>📉 Chart 3: AVGO - Monthly (BB 9,2 & SMA 9)</h3>
+                <div class="chart-actions">
+                    <button class="btn-save-chart" onclick="saveChartConfig(3)" title="Save this chart configuration">💾 Save</button>
+                    <button class="btn-delete-chart" onclick="deleteChart(3)" title="Delete this chart">🗑️ Delete</button>
+                </div>
+            </div>
+            <p class="chart-description">
+                <strong>Monthly Timeframe:</strong> Each candlestick represents one month. Ideal for long-term investment analysis and identifying major trend changes. 
+                <strong>BB(9,2):</strong> Monthly volatility bands for macro perspective. 
+                <strong>SMA(9):</strong> 9-month trend average.
+            </p>
+            <div class="tradingview-widget-container chart-container" style="height:800px;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "symbol": "NASDAQ:AVGO",
+                  "interval": "M",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(15, 15, 15, 1)",
+                  "gridColor": "rgba(242, 242, 242, 0.06)",
+                  "allow_symbol_change": true,
+                  "save_image": true,
+                  "calendar": false,
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "hide_side_toolbar": false,
+                  "details": false,
+                  "hotlist": false,
+                  "support_host": "https://www.tradingview.com",
+                  "studies": [
+                    {
+                      "id": "MASimple@tv-basicstudies",
+                      "inputs": {
+                        "length": 9
+                      }
+                    },
+                    {
+                      "id": "BB@tv-basicstudies",
+                      "inputs": {
+                        "length": 9,
+                        "stdDev": 2
+                      }
+                    }
+                  ]
+                }
+                </script>
+            </div>
+            <div class="chart-notes">
+                <label for="notes-3">📝 Chart Notes (Public - Everyone can see and edit):</label>
+                <textarea 
+                    id="notes-3" 
+                    class="notes-textarea" 
+                    placeholder="Add your analysis notes here..."
+                    onchange="saveNotes(3, this.value)"
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- Chart 4 - AVGO 3-Month with BB & SMA -->
+        <div class="chart-card" data-chart-number="4">
+            <div class="chart-header">
+                <h3>📊 Chart 4: AVGO - 3 Months (BB 9,2 & SMA 9)</h3>
+                <div class="chart-actions">
+                    <button class="btn-save-chart" onclick="saveChartConfig(4)" title="Save this chart configuration">💾 Save</button>
+                    <button class="btn-delete-chart" onclick="deleteChart(4)" title="Delete this chart">🗑️ Delete</button>
+                </div>
+            </div>
+            <p class="chart-description">
+                <strong>3-Month Timeframe:</strong> Each candlestick represents 3 months (quarterly). Perfect for analyzing quarterly earnings patterns and seasonal trends. 
+                <strong>BB(9,2):</strong> Quarterly volatility assessment. 
+                <strong>SMA(9):</strong> 9-quarter moving average.
+            </p>
+            <div class="tradingview-widget-container chart-container" style="height:800px;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "symbol": "NASDAQ:AVGO",
+                  "interval": "3M",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(15, 15, 15, 1)",
+                  "gridColor": "rgba(242, 242, 242, 0.06)",
+                  "allow_symbol_change": true,
+                  "save_image": true,
+                  "calendar": false,
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "hide_side_toolbar": false,
+                  "details": false,
+                  "hotlist": false,
+                  "support_host": "https://www.tradingview.com",
+                  "studies": [
+                    {
+                      "id": "MASimple@tv-basicstudies",
+                      "inputs": {
+                        "length": 9
+                      }
+                    },
+                    {
+                      "id": "BB@tv-basicstudies",
+                      "inputs": {
+                        "length": 9,
+                        "stdDev": 2
+                      }
+                    }
+                  ]
+                }
+                </script>
+            </div>
+            <div class="chart-notes">
+                <label for="notes-4">📝 Chart Notes (Public - Everyone can see and edit):</label>
+                <textarea 
+                    id="notes-4" 
+                    class="notes-textarea" 
+                    placeholder="Add your analysis notes here..."
+                    onchange="saveNotes(4, this.value)"
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- Chart 5 - AVGO 6-Month with BB & SMA -->
+        <div class="chart-card" data-chart-number="5">
+            <div class="chart-header">
+                <h3>📈 Chart 5: AVGO - 6 Months (BB 9,2 & SMA 9)</h3>
+                <div class="chart-actions">
+                    <button class="btn-save-chart" onclick="saveChartConfig(5)" title="Save this chart configuration">💾 Save</button>
+                    <button class="btn-delete-chart" onclick="deleteChart(5)" title="Delete this chart">🗑️ Delete</button>
+                </div>
+            </div>
+            <p class="chart-description">
+                <strong>6-Month Timeframe:</strong> Each candlestick represents 6 months (semi-annual). Great for analyzing long-term investment cycles and major market movements. 
+                <strong>BB(9,2):</strong> Semi-annual volatility bands. 
+                <strong>SMA(9):</strong> 9 semi-annual periods trend.
+            </p>
+            <div class="tradingview-widget-container chart-container" style="height:800px;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "symbol": "NASDAQ:AVGO",
+                  "interval": "6M",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(15, 15, 15, 1)",
+                  "gridColor": "rgba(242, 242, 242, 0.06)",
+                  "allow_symbol_change": true,
+                  "save_image": true,
+                  "calendar": false,
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "hide_side_toolbar": false,
+                  "details": false,
+                  "hotlist": false,
+                  "support_host": "https://www.tradingview.com",
+                  "studies": [
+                    {
+                      "id": "MASimple@tv-basicstudies",
+                      "inputs": {
+                        "length": 20
+                      }
+                    },
+                    {
+                      "id": "BB@tv-basicstudies",
+                      "inputs": {
+                        "length": 9,
+                        "stdDev": 2
+                      }
+                    }
+                  ]
+                }
+                </script>
+            </div>
+        </div>
+
+        <!-- Chart 6 - AVGO 12-Month with BB & SMA -->
+        <div class="chart-card">
+            <h3>📉 Chart 6: AVGO - 12 Months (BB 9,2 & SMA)</h3>
+            <p class="chart-description">
+                <strong>12-Month Timeframe:</strong> Each candlestick represents one full year (annual). Best for multi-decade analysis and understanding the company's historical performance. 
+                <strong>BB(9,2):</strong> Annual volatility for macro-economic cycles. 
+                <strong>SMA(9):</strong> 9-year historical trend.
+            </p>
+            <div class="tradingview-widget-container chart-container" style="height:800px;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "symbol": "NASDAQ:AVGO",
+                  "interval": "12M",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(15, 15, 15, 1)",
+                  "gridColor": "rgba(242, 242, 242, 0.06)",
+                  "allow_symbol_change": true,
+                  "save_image": true,
+                  "calendar": false,
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "hide_side_toolbar": false,
+                  "details": false,
+                  "hotlist": false,
+                  "support_host": "https://www.tradingview.com",
+                  "studies": [
+                    {
+                      "id": "MASimple@tv-basicstudies",
+                      "inputs": {
+                        "length": 9
+                      }
+                    },
+                    {
+                      "id": "BB@tv-basicstudies",
+                      "inputs": {
+                        "length": 9,
+                        "stdDev": 2
+                      }
+                    }
+                  ]
+                }
+                </script>
+            </div>
+            <div class="chart-notes">
+                <label for="notes-5">📝 Chart Notes (Public - Everyone can see and edit):</label>
+                <textarea 
+                    id="notes-5" 
+                    class="notes-textarea" 
+                    placeholder="Add your analysis notes here..."
+                    onchange="saveNotes(5, this.value)"
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- Chart 6 - AVGO 12-Month with BB & SMA -->
+        <div class="chart-card" data-chart-number="6">
+            <div class="chart-header">
+                <h3>📉 Chart 6: AVGO - 12 Months (BB 9,2 & SMA 9)</h3>
+                <div class="chart-actions">
+                    <button class="btn-save-chart" onclick="saveChartConfig(6)" title="Save this chart configuration">💾 Save</button>
+                    <button class="btn-delete-chart" onclick="deleteChart(6)" title="Delete this chart">🗑️ Delete</button>
+                </div>
+            </div>
+            <p class="chart-description">
+                <strong>12-Month Timeframe:</strong> Each candlestick represents one full year (annual). Best for multi-decade analysis and understanding the company's historical performance. 
+                <strong>BB(9,2):</strong> Annual volatility for macro-economic cycles. 
+                <strong>SMA(9):</strong> 9-year historical trend.
+            </p>
+            <div class="tradingview-widget-container chart-container" style="height:800px;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "symbol": "NASDAQ:AVGO",
+                  "interval": "12M",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(15, 15, 15, 1)",
+                  "gridColor": "rgba(242, 242, 242, 0.06)",
+                  "allow_symbol_change": true,
+                  "save_image": true,
+                  "calendar": false,
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "hide_side_toolbar": false,
+                  "details": false,
+                  "hotlist": false,
+                  "support_host": "https://www.tradingview.com",
+                  "studies": [
+                    {
+                      "id": "MASimple@tv-basicstudies",
+                      "inputs": {
+                        "length": 9
+                      }
+                    },
+                    {
+                      "id": "BB@tv-basicstudies",
+                      "inputs": {
+                        "length": 9,
+                        "stdDev": 2
+                      }
+                    }
+                  ]
+                }
+                </script>
+            </div>
+            <div class="chart-notes">
+                <label for="notes-6">📝 Chart Notes (Public - Everyone can see and edit):</label>
+                <textarea 
+                    id="notes-6" 
+                    class="notes-textarea" 
+                    placeholder="Add your analysis notes here..."
+                    onchange="saveNotes(6, this.value)"
+                ></textarea>
+            </div>
+        </div>
+
+        <!-- Dynamic Charts Container -->
+        <div id="dynamic-charts-container"></div>
+    </div>
+
+    <!-- Add Chart Button -->
+    <div style="text-align: center; margin: 24px 0;">
+        <button onclick="addNewChart()" class="btn-add-chart">➕ Add New Chart</button>
+    </div>
+
+    <!-- Original Widgets Below -->
+    <div style="margin-top: 40px;">
+        <h2 style="margin-bottom: 20px;">Additional Widgets</h2>
+    
     <!-- Market Heatmap -->
     <div class="card">
         <h2>📈 Market Heatmap</h2>
@@ -208,11 +684,12 @@
             </div>
         </div>
     </div>
-</div>
+    </div> <!-- Close additional widgets div -->
+</div> <!-- Close main container -->
 
 <style>
     .container {
-        max-width: 1400px;
+        max-width: 100%;
         margin: 0 auto;
         padding: 20px;
     }
@@ -224,6 +701,218 @@
     .page-header h1 {
         margin: 0 0 10px 0;
         font-size: 32px;
+    }
+    
+    /* Height Control */
+    .height-control {
+        background: var(--card-bg, #1e1e1e);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 24px;
+        border: 1px solid var(--border-color, #333);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    
+    .height-control label {
+        font-size: 16px;
+        color: var(--text-primary, #e0e0e0);
+        font-weight: 500;
+    }
+    
+    .height-control input {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color, #444);
+        background: var(--input-bg, #2a2a2a);
+        color: var(--text-primary, #e0e0e0);
+        font-size: 16px;
+        width: 120px;
+    }
+    
+    .height-control button {
+        padding: 8px 20px;
+        border-radius: 6px;
+        border: none;
+        background: var(--primary-color, #007acc);
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    
+    .height-control button:hover {
+        background: var(--primary-hover, #005a9e);
+    }
+
+    /* Three Charts Stacked Vertically */
+    .charts-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+    
+    .chart-card {
+        background: var(--card-bg, #1e1e1e);
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid var(--border-color, #333);
+        width: 100%;
+    }
+    
+    .chart-card h3 {
+        margin: 0 0 12px 0;
+        font-size: 18px;
+        color: var(--text-primary, #e0e0e0);
+        text-align: center;
+        font-weight: 600;
+    }
+    
+    .chart-description {
+        margin: 0 0 16px 0;
+        padding: 12px 16px;
+        background: rgba(0, 122, 204, 0.1);
+        border-left: 3px solid var(--primary-color, #007acc);
+        border-radius: 6px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-secondary, #b0b0b0);
+    }
+    
+    .chart-description strong {
+        color: var(--text-primary, #e0e0e0);
+        font-weight: 600;
+    }
+    
+    .btn-add-chart {
+        padding: 12px 32px;
+        border-radius: 8px;
+        border: none;
+        background: linear-gradient(135deg, var(--primary-color, #007acc) 0%, #005a9e 100%);
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+    }
+    
+    .btn-add-chart:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 122, 204, 0.5);
+        background: linear-gradient(135deg, #0088e0 0%, #006bb3 100%);
+    }
+    
+    .btn-add-chart:active {
+        transform: translateY(0);
+    }
+    
+    .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    
+    .chart-header h3 {
+        margin: 0;
+        flex-grow: 1;
+    }
+    
+    .chart-actions {
+        display: flex;
+        gap: 8px;
+    }
+    
+    .btn-save-chart {
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: none;
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+    }
+    
+    .btn-save-chart:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(5, 150, 105, 0.5);
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+    
+    .btn-save-chart.saved {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    }
+    
+    .btn-save-chart.saved:hover {
+        background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+    }
+    
+    .btn-delete-chart {
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: none;
+        background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+    }
+    
+    .btn-delete-chart:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.5);
+        background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    }
+    
+    .chart-notes {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border-color, #333);
+    }
+    
+    .chart-notes label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-primary, #e0e0e0);
+        margin-bottom: 8px;
+    }
+    
+    .notes-textarea {
+        width: 100%;
+        min-height: 100px;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color, #444);
+        background: var(--input-bg, #2a2a2a);
+        color: var(--text-primary, #e0e0e0);
+        font-size: 14px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.5;
+        resize: vertical;
+        transition: border-color 0.2s;
+    }
+    
+    .notes-textarea:focus {
+        outline: none;
+        border-color: var(--primary-color, #007acc);
+        box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.1);
+    }
+    
+    .notes-textarea::placeholder {
+        color: var(--text-secondary, #888);
     }
     
     .card {
@@ -425,5 +1114,276 @@
             row.style.display = text.includes(query) ? '' : 'none';
         });
     }
+    
+    let chartCounter = 7; // Start from 7 since we have 6 default charts
+    
+    async function saveChartConfig(chartNumber) {
+        const button = event.target;
+        const originalText = button.textContent;
+        
+        try {
+            // Get the chart card to extract configuration
+            const chartCard = document.querySelector(`.chart-card[data-chart-number="${chartNumber}"]`);
+            if (!chartCard) {
+                throw new Error('Chart not found');
+            }
+            
+            // Extract timeframe from the chart (default to 'D' if not found)
+            let timeframe = 'D';
+            const heading = chartCard.querySelector('h3');
+            if (heading) {
+                const text = heading.textContent;
+                if (text.includes('Weekly')) timeframe = 'W';
+                else if (text.includes('Monthly')) timeframe = 'M';
+                else if (text.includes('3 Months')) timeframe = '3M';
+                else if (text.includes('6 Months')) timeframe = '6M';
+                else if (text.includes('12 Months')) timeframe = '12M';
+            }
+            
+            const formData = new FormData();
+            formData.append('chart_number', chartNumber);
+            formData.append('timeframe', timeframe);
+            
+            const response = await fetch('/api/v1/plugins/tradingview/charts/add', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                // Update button to show saved state
+                button.textContent = '✓ Saved';
+                button.classList.add('saved');
+                
+                // Revert after 2 seconds
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('saved');
+                }, 2000);
+                
+                console.log(`Chart ${chartNumber} configuration saved`);
+            } else {
+                throw new Error('Failed to save chart');
+            }
+        } catch (error) {
+            console.error('Error saving chart:', error);
+            button.textContent = '✗ Error';
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+            alert('Failed to save chart configuration. Please try again.');
+        }
+    }
+    
+    async function deleteChart(chartNumber) {
+        if (!confirm(`Are you sure you want to delete Chart ${chartNumber}? This will also delete all notes for this chart.`)) {
+            return;
+        }
+        
+        try {
+            const formData = new FormData();
+            formData.append('chart_number', chartNumber);
+            
+            const response = await fetch('/api/v1/plugins/tradingview/charts/delete', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                const chartCard = document.querySelector(`.chart-card[data-chart-number="${chartNumber}"]`);
+                if (chartCard) {
+                    chartCard.remove();
+                }
+                console.log(`Chart ${chartNumber} deleted`);
+            }
+        } catch (error) {
+            console.error('Error deleting chart:', error);
+            alert('Failed to delete chart. Please try again.');
+        }
+    }
+    
+    async function saveNotes(chartNumber, notes) {
+        try {
+            const formData = new FormData();
+            formData.append('chart_number', chartNumber);
+            formData.append('notes', notes);
+            
+            const response = await fetch('/api/v1/plugins/tradingview/charts/notes/save', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                console.log(`Notes saved for chart ${chartNumber}`);
+            }
+        } catch (error) {
+            console.error('Error saving notes:', error);
+        }
+    }
+    
+    async function loadNotes(chartNumber) {
+        try {
+            const response = await fetch(`/api/v1/plugins/tradingview/charts/notes/${chartNumber}`);
+            if (response.ok) {
+                const data = await response.json();
+                const textarea = document.getElementById(`notes-${chartNumber}`);
+                if (textarea) {
+                    textarea.value = data.notes || '';
+                }
+            }
+        } catch (error) {
+            console.error('Error loading notes:', error);
+        }
+    }
+    
+    function updateChartHeights() {
+        const height = document.getElementById('chartHeight').value;
+        const containers = document.querySelectorAll('.chart-container');
+        
+        containers.forEach(container => {
+            container.style.height = height + 'px';
+        });
+        
+        // Force a re-render by triggering a resize event
+        window.dispatchEvent(new Event('resize'));
+        
+        // Show confirmation
+        console.log(`Chart heights updated to ${height}px`);
+    }
+    
+    function addNewChart() {
+        const container = document.getElementById('dynamic-charts-container');
+        const height = document.getElementById('chartHeight').value || '800';
+        
+        // Create new chart card
+        const chartCard = document.createElement('div');
+        chartCard.className = 'chart-card';
+        chartCard.id = `dynamic-chart-${chartCounter}`;
+        
+        chartCard.innerHTML = `
+            <div class="chart-header">
+                <h3>📊 Chart ${chartCounter}: AVGO - Custom (BB 9,2 & SMA 9)</h3>
+                <button class="btn-delete-chart" onclick="deleteChart(${chartCounter})" title="Delete this chart">🗑️ Delete</button>
+            </div>
+            <p class="chart-description">
+                <strong>Custom Chart:</strong> Configure this chart to your preferred timeframe using the chart controls. 
+                <strong>BB(9,2):</strong> 9-period Bollinger Bands with 2 standard deviations. 
+                <strong>SMA(9):</strong> 9-period Simple Moving Average.
+            </p>
+            <div class="tradingview-widget-container chart-container" style="height:${height}px;width:100%">
+                <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                  "width": "100%",
+                  "height": "100%",
+                  "symbol": "NASDAQ:AVGO",
+                  "interval": "D",
+                  "timezone": "Etc/UTC",
+                  "theme": "dark",
+                  "style": "1",
+                  "locale": "en",
+                  "enable_publishing": false,
+                  "backgroundColor": "rgba(15, 15, 15, 1)",
+                  "gridColor": "rgba(242, 242, 242, 0.06)",
+                  "allow_symbol_change": true,
+                  "save_image": true,
+                  "calendar": false,
+                  "hide_top_toolbar": false,
+                  "hide_legend": false,
+                  "hide_side_toolbar": false,
+                  "details": false,
+                  "hotlist": false,
+                  "support_host": "https://www.tradingview.com",
+                  "studies": [
+                    {
+                      "id": "MASimple@tv-basicstudies",
+                      "inputs": {
+                        "length": 9
+                      }
+                    },
+                    {
+                      "id": "BB@tv-basicstudies",
+                      "inputs": {
+                        "length": 9,
+                        "stdDev": 2
+                      }
+                    }
+                  ]
+                }
+                <\/script>
+            </div>
+            <div class="chart-notes">
+                <label for="notes-${chartCounter}">📝 Chart Notes (Public - Everyone can see and edit):</label>
+                <textarea 
+                    id="notes-${chartCounter}" 
+                    class="notes-textarea" 
+                    placeholder="Add your analysis notes here..."
+                    onchange="saveNotes(${chartCounter}, this.value)"
+                ></textarea>
+            </div>
+        `;
+        
+        container.appendChild(chartCard);
+        
+        // Save chart to database
+        const formData = new FormData();
+        formData.append('chart_number', chartCounter);
+        formData.append('timeframe', 'D');
+        fetch('/api/v1/plugins/tradingview/charts/add', {
+            method: 'POST',
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                console.log(`Chart ${chartCounter} saved to database`);
+            }
+        });
+        
+        chartCounter++;
+        
+        // Re-run the script tag
+        const scripts = chartCard.querySelectorAll('script');
+        scripts.forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => 
+                newScript.setAttribute(attr.name, attr.value)
+            );
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+    }
+    
+    async function loadSavedCharts() {
+        // This function would load saved charts from the server
+        // For now, we don't auto-load any charts - user must click "Add New Chart"
+        console.log('Charts loaded. Click "Add New Chart" to create more.');
+    }
+    
+    // Initialize on page load
+    window.addEventListener('load', function() {
+        const input = document.getElementById('chartHeight');
+        if (input) {
+            // Load saved height from localStorage or use default
+            const savedHeight = localStorage.getItem('chartHeight') || '800';
+            input.value = savedHeight;
+            
+            // Set initial heights to match the input value
+            const containers = document.querySelectorAll('.chart-container');
+            containers.forEach(container => {
+                container.style.height = savedHeight + 'px';
+            });
+            
+            // Save height when changed
+            input.addEventListener('change', function() {
+                localStorage.setItem('chartHeight', this.value);
+            });
+        }
+        
+        // Load notes for all charts (1-6 default charts)
+        for (let i = 1; i <= 6; i++) {
+            loadNotes(i);
+        }
+        
+        // Load saved charts from database instead of localStorage
+        loadSavedCharts();
+    });
 </script>
 {% endblock %}

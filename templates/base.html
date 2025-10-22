@@ -167,7 +167,7 @@
                 rgba(255, 255, 255, 0.9) 100%
             );
             border-radius: 3px;
-            animation: macProgress 8s ease-out forwards;
+            animation: macProgress 3s ease-out forwards;
             box-shadow: 
                 0 0 10px rgba(255, 255, 255, 0.5),
                 0 0 20px rgba(255, 255, 255, 0.3);
@@ -690,7 +690,7 @@
                 // Mark that we've loaded the page in this session
                 sessionStorage.setItem('hasLoadedBefore', 'true');
                 
-                // Longer loading time for dashboard - 10 seconds for that premium Apple feel
+                // Apple loading bar - 3 seconds for sleek experience
                 setTimeout(() => {
                     loadingScreen.classList.add('hidden');
                     
@@ -698,7 +698,7 @@
                     setTimeout(() => {
                         loadingScreen.remove();
                     }, 800);
-                }, 10000);  // Increased from 5000 to 10000 (10 seconds for dramatic effect)
+                }, 3000);  // 3 seconds total loading time
             } else {
                 // Hide immediately on non-dashboard pages or subsequent loads
                 loadingScreen.classList.add('hidden');

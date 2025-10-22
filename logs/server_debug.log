@@ -1,562 +1,847 @@
-2025-10-20 07:23:19 - app_new.main - INFO - 📝 Logging to file: D:\Repositories\cameronPAD_main2\logs\server_debug.log
-2025-10-20 07:23:19 - app_new.core.config - INFO - Loaded configuration for environment: development
-2025-10-20 07:23:19 - app_new.core.database - INFO - 🔧 Creating DatabaseManager with URL: sqlite:///data/app.db
-2025-10-20 07:23:19 - app_new.core.database - INFO - 📁 Using database: data/app.db
-2025-10-20 07:23:19 - app_new.main - INFO - Starting CameronPAD application...
-2025-10-20 07:23:19 - app_new.main - INFO - Loaded configuration for environment: development
-2025-10-20 07:23:19 - app_new.core.database - INFO - 🔄 Initializing database with URL: sqlite+aiosqlite:///./data/cameronpad_dev.db
-2025-10-20 07:23:19 - app_new.core.database - INFO - 🔧 Creating DatabaseManager with URL: sqlite+aiosqlite:///./data/cameronpad_dev.db
-2025-10-20 07:23:19 - app_new.core.database - INFO - 📁 Using database: data/cameronpad_dev.db
-2025-10-20 07:23:19 - app_new.core.database - INFO - Running core database migrations...
-2025-10-20 07:23:20 - app_new.core.database - INFO - Database initialization completed
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Discovered 9 plugins
-2025-10-20 07:23:20 - plugins.stocks.plugin - INFO - 📈 Initializing Stocks plugin...
-2025-10-20 07:23:20 - plugins.stocks.database - INFO - 🗄️ Initializing Stocks database tables...
-2025-10-20 07:23:20 - plugins.stocks.database - INFO - ✅ Stocks database tables initialized
-2025-10-20 07:23:20 - plugins.stocks.plugin - INFO - ✅ Stocks routes registered
-2025-10-20 07:23:20 - plugins.stocks.plugin - INFO - ✅ Stock service initialized with API keys from environment
-2025-10-20 07:23:20 - plugins.stocks.services - INFO - ✅ Ensured 8 showcase symbols in database
-2025-10-20 07:23:20 - plugins.stocks.plugin - INFO - ✅ Stocks plugin initialized successfully
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: stocks v1.0.0
-2025-10-20 07:23:20 - plugins.notes.plugin - INFO - 📝 Initializing Notes plugin...
-2025-10-20 07:23:20 - plugins.notes.database - INFO - 🗄️ Initializing Notes database tables at: data/cameronpad_dev.db
-2025-10-20 07:23:20 - plugins.notes.database - INFO - ✅ Notes database tables initialized
-2025-10-20 07:23:20 - plugins.notes.plugin - INFO - ✅ Notes plugin initialized successfully
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: notes v1.0.0
-2025-10-20 07:23:20 - plugins.journal.plugin - INFO - 📔 Initializing Journal plugin...
-2025-10-20 07:23:20 - plugins.journal.plugin - INFO - ✅ Journal plugin initialized successfully
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: journal v1.0.0
-2025-10-20 07:23:20 - plugins.surf.plugin - INFO - 🏄 Initializing Surf plugin...
-2025-10-20 07:23:20 - plugins.surf.database - INFO - 🗄️ Initializing Surf database tables...
-2025-10-20 07:23:20 - plugins.surf.database - INFO - ✅ Surf database tables initialized
-2025-10-20 07:23:20 - plugins.surf.plugin - INFO - 🌊 Starting surf update service...
-2025-10-20 07:23:20 - plugins.surf.plugin - INFO - ✅ Surf update service started
-2025-10-20 07:23:20 - plugins.surf.plugin - INFO - ✅ Surf plugin initialized successfully
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: surf v1.0.0
-2025-10-20 07:23:20 - plugins.system_monitor.plugin - INFO - 🖥️ Initializing System Monitor plugin...
-2025-10-20 07:23:20 - plugins.system_monitor.plugin - INFO - ✅ System Monitor routes registered
-2025-10-20 07:23:20 - plugins.system_monitor.plugin - INFO - DEBUG System Monitor registered routes: ['/ (GET)', '/info (GET)', '/cpu (GET)', '/memory (GET)', '/disk (GET)', '/network (GET)', '/all (GET)', '/metrics (GET)', '/logs (GET)', '/stats (GET)']
-2025-10-20 07:23:20 - plugins.system_monitor.plugin - INFO - SUCCESS System Monitor plugin initialized successfully!
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: system_monitor v1.0.0
-2025-10-20 07:23:20 - plugins.hello_world.plugin - INFO - 🌍 Initializing Hello World plugin...
-2025-10-20 07:23:20 - plugins.hello_world.plugin - INFO - ✅ Hello World plugin initialized successfully!
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: hello_world v1.0.0
-2025-10-20 07:23:20 - plugins.notepad.plugin - INFO - 📓 Initializing Notepad plugin...
-2025-10-20 07:23:20 - plugins.notepad.database - INFO - 🗄️ Initializing Notepad database tables...
-2025-10-20 07:23:20 - plugins.notepad.database - INFO - ✅ Notepad database tables initialized
-2025-10-20 07:23:20 - plugins.notepad.plugin - INFO - ✅ Notepad plugin initialized successfully
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: notepad v1.0.0
-2025-10-20 07:23:20 - plugins.tradingview.plugin - INFO - 📊 Initializing TradingView plugin...
-2025-10-20 07:23:20 - plugins.tradingview.plugin - INFO - ✅ TradingView plugin initialized successfully
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: tradingview v1.0.0
-2025-10-20 07:23:20 - plugins.lol_champions.plugin - INFO - 🎮 Initializing LoL Champions plugin (Vanilla JS)...
-2025-10-20 07:23:20 - plugins.lol_champions.plugin - INFO - ✅ LoL Champions plugin initialized
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded plugin: League of Legends Champions v2.0.0
-2025-10-20 07:23:20 - app_new.plugins.manager - INFO - Loaded 9 plugins
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: stocks
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: notes
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: journal
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: surf
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: system_monitor
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: hello_world
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: notepad
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: tradingview
-2025-10-20 07:23:20 - app_new.plugins.registry - INFO - Registered plugin: League of Legends Champions
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: stocks
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: notes
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: journal
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: surf
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: system_monitor
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: hello_world
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: notepad
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: tradingview
-2025-10-20 07:23:20 - app_new.main - INFO - ✅ Included routes for plugin at startup: lol_champions
-2025-10-20 07:23:20 - app_new.main - INFO - Application startup completed
-2025-10-20 07:23:20 - plugins.surf.plugin - INFO - 🔄 Starting surf update loop (refresh=300s)
-2025-10-20 07:24:59 - app_new.main - INFO - Shutting down CameronPAD application...
-2025-10-20 07:24:59 - plugins.stocks.plugin - INFO - 🛑 Shutting down Stocks plugin...
-2025-10-20 07:24:59 - plugins.stocks.plugin - INFO - ✅ Stocks plugin shutdown completed
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: stocks
-2025-10-20 07:24:59 - plugins.notes.plugin - INFO - 🛑 Notes plugin shutting down
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: notes
-2025-10-20 07:24:59 - plugins.journal.plugin - INFO - 🛑 Journal plugin shutting down
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: journal
-2025-10-20 07:24:59 - plugins.surf.plugin - INFO - 🛑 Surf plugin shutting down
-2025-10-20 07:24:59 - plugins.surf.plugin - INFO - ⏹️ Stopping surf update service...
-2025-10-20 07:24:59 - plugins.surf.plugin - INFO - 🛑 Surf update loop cancelled
-2025-10-20 07:24:59 - plugins.surf.plugin - INFO - ✅ Surf update service stopped
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: surf
-2025-10-20 07:24:59 - plugins.system_monitor.plugin - INFO - 🛑 System Monitor plugin shutting down...
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: system_monitor
-2025-10-20 07:24:59 - plugins.hello_world.plugin - INFO - 👋 Shutting down Hello World plugin...
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: hello_world
-2025-10-20 07:24:59 - plugins.notepad.plugin - INFO - 🛑 Notepad plugin shutting down
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: notepad
-2025-10-20 07:24:59 - plugins.tradingview.plugin - INFO - 🛑 TradingView plugin shutting down
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: tradingview
-2025-10-20 07:24:59 - plugins.lol_champions.plugin - INFO - 🛑 LoL Champions plugin shutting down
-2025-10-20 07:24:59 - app_new.plugins.manager - INFO - Unloaded plugin: lol_champions
-2025-10-20 07:24:59 - app_new.main - INFO - Application shutdown completed
-25-10-20 07:23:28 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:23:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:23:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:23:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:23:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:23:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:23:33 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:23:33 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:23:33 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:23:33 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:23:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:38 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:23:38 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:23:38 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:23:38 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:23:38 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:23:38 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:23:38 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:23:38 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:23:38 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:23:43 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:43 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:43 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:23:43 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:23:43 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:23:43 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:23:43 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:23:43 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:23:43 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:23:43 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:23:43 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:23:48 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:48 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:48 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:23:48 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:23:48 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:23:48 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:23:48 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:23:48 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:23:48 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:23:48 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:23:48 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:23:53 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:53 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:53 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:23:53 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:23:53 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:23:53 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:23:53 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:23:53 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:23:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:23:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:23:53 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:23:58 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:58 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:23:58 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:23:58 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:23:58 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:23:58 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:23:58 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:23:58 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:23:58 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:23:58 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:23:58 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:03 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:03 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:03 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:03 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:08 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:08 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:08 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:08 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:08 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:08 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:08 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:09 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:09 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:09 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:09 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:13 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:13 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:13 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:13 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:13 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:14 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:14 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:14 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:14 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:18 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:23 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:23 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:23 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:23 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:28 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:33 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:33 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:33 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:34 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:38 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:38 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:38 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:38 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:38 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:39 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:39 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:39 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:39 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:43 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:43 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:43 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:43 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:43 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:43 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:43 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:43 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:43 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:43 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:43 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:48 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:48 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:48 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:48 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:48 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:48 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:48 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:48 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:48 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:48 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:48 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:53 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:53 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:53 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:53 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:53 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:53 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:53 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:53 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:53 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:24:58 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:58 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:24:58 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:24:58 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:24:58 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:24:58 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:24:58 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:24:59 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:24:59 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:24:59 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:24:59 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:03 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:03 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:03 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:03 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:08 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:08 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:08 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:08 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:08 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:08 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:08 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:08 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:08 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:08 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:08 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:13 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:13 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:13 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:13 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:13 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:13 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:13 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:13 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:13 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:18 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:23 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:23 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:23 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:23 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:28 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:33 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:33 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:33 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:33 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:38 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:38 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:38 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:38 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:38 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:38 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:38 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:38 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:38 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:43 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:43 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:43 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:43 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:43 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:43 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:43 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:44 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:44 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:44 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:44 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:48 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:48 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:48 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:48 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:48 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:48 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:48 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:48 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:48 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:48 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:48 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:53 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:53 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:53 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:53 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:53 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:53 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:53 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:53 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:53 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:25:58 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:58 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:25:58 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:25:58 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:25:58 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:25:58 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:25:58 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:25:58 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:25:58 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:25:58 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:25:58 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:04 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:04 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:04 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:04 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:08 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:08 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:08 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:08 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:08 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:08 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:08 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:08 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:08 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:08 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:08 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:13 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:13 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:13 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:13 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:13 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:13 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:13 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:13 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:14 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:18 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:23 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:23 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:23 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:23 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:28 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:34 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:34 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:34 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:34 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:38 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:38 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:38 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:38 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:38 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:39 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:39 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:39 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:39 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:43 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:43 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:43 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:43 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:43 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:43 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:43 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:43 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:43 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:43 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:43 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:48 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:48 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:48 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:48 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:48 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:48 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:48 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:48 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:48 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:48 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:48 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:53 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:53 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:53 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:53 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:53 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:53 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:53 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:53 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:53 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:53 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:53 - app_new.main - DEBUG - ✅ Response status: 200
-2025-10-20 07:26:58 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:58 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
-2025-10-20 07:26:58 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
-2025-10-20 07:26:58 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
-2025-10-20 07:26:58 - app_new.core.middleware - INFO - 🔍 Verifying token...
-2025-10-20 07:26:58 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761049347}
-2025-10-20 07:26:58 - app_new.core.themes - INFO - ✅ Theme tables initialized
-2025-10-20 07:26:59 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
-2025-10-20 07:26:59 - app_new.core.middleware - INFO - ✅ User authenticated: admin
-2025-10-20 07:26:59 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
-2025-10-20 07:26:59 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:06:24 - app_new.main - INFO - 📝 Logging to file: D:\Repositories\cameronPAD_main2\logs\server_debug.log
+2025-10-22 05:06:24 - app_new.core.config - INFO - Loaded configuration for environment: development
+2025-10-22 05:06:24 - app_new.core.database - INFO - 🔧 Creating DatabaseManager with URL: sqlite+aiosqlite:///./data/cameronpad_dev.db
+2025-10-22 05:06:24 - app_new.core.database - INFO - 📁 Using database: data/cameronpad_dev.db
+2025-10-22 05:06:24 - app_new.main - INFO - Starting CameronPAD application...
+2025-10-22 05:06:24 - app_new.main - INFO - Loaded configuration for environment: development
+2025-10-22 05:06:24 - app_new.core.database - INFO - 🔄 Initializing database with URL: sqlite+aiosqlite:///./data/cameronpad_dev.db
+2025-10-22 05:06:24 - app_new.core.database - INFO - 🔧 Creating DatabaseManager with URL: sqlite+aiosqlite:///./data/cameronpad_dev.db
+2025-10-22 05:06:24 - app_new.core.database - INFO - 📁 Using database: data/cameronpad_dev.db
+2025-10-22 05:06:24 - app_new.core.database - INFO - Running core database migrations...
+2025-10-22 05:06:24 - app_new.core.database - INFO - Database initialization completed
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Discovered 10 plugins
+2025-10-22 05:06:24 - plugins.stocks.plugin - INFO - 📈 Initializing Stocks plugin...
+2025-10-22 05:06:24 - plugins.stocks.database - INFO - 🗄️ Initializing Stocks database tables...
+2025-10-22 05:06:24 - plugins.stocks.database - INFO - ✅ Stocks database tables initialized
+2025-10-22 05:06:24 - plugins.stocks.services - INFO - 🤖 ML Predictor initialization: ✅ Ready (using Alpha Vantage)
+2025-10-22 05:06:24 - plugins.stocks.plugin - INFO - ✅ Stock service initialized with API keys from environment
+2025-10-22 05:06:24 - plugins.stocks.plugin - INFO - ✅ Stocks API routes registered (including predictions)
+2025-10-22 05:06:24 - plugins.stocks.plugin - INFO - ✅ Stocks routes registered
+2025-10-22 05:06:24 - plugins.stocks.services - INFO - ✅ Ensured 8 showcase symbols in database
+2025-10-22 05:06:24 - plugins.stocks.plugin - INFO - ✅ Stocks plugin initialized successfully
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: stocks v1.0.0
+2025-10-22 05:06:24 - plugins.notes.plugin - INFO - 📝 Initializing Notes plugin...
+2025-10-22 05:06:24 - plugins.notes.database - INFO - 🗄️ Initializing Notes database tables at: data/cameronpad_dev.db
+2025-10-22 05:06:24 - plugins.notes.database - INFO - ✅ Notes database tables initialized
+2025-10-22 05:06:24 - plugins.notes.plugin - INFO - ✅ Notes plugin initialized successfully
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: notes v1.0.0
+2025-10-22 05:06:24 - plugins.journal.plugin - INFO - 📔 Initializing Journal plugin...
+2025-10-22 05:06:24 - plugins.journal.plugin - INFO - ✅ Journal plugin initialized successfully
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: journal v1.0.0
+2025-10-22 05:06:24 - plugins.surf.plugin - INFO - 🏄 Initializing Surf plugin...
+2025-10-22 05:06:24 - plugins.surf.database - INFO - 🗄️ Initializing Surf database tables...
+2025-10-22 05:06:24 - plugins.surf.database - INFO - ✅ Surf database tables initialized
+2025-10-22 05:06:24 - plugins.surf.plugin - INFO - 🌊 Starting surf update service...
+2025-10-22 05:06:24 - plugins.surf.plugin - INFO - ✅ Surf update service started
+2025-10-22 05:06:24 - plugins.surf.plugin - INFO - ✅ Surf plugin initialized successfully
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: surf v1.0.0
+2025-10-22 05:06:24 - plugins.system_monitor.plugin - INFO - 🖥️ Initializing System Monitor plugin...
+2025-10-22 05:06:24 - plugins.system_monitor.plugin - INFO - ✅ System Monitor routes registered
+2025-10-22 05:06:24 - plugins.system_monitor.plugin - INFO - DEBUG System Monitor registered routes: ['/ (GET)', '/info (GET)', '/cpu (GET)', '/memory (GET)', '/disk (GET)', '/network (GET)', '/all (GET)', '/metrics (GET)', '/logs (GET)', '/stats (GET)']
+2025-10-22 05:06:24 - plugins.system_monitor.plugin - INFO - SUCCESS System Monitor plugin initialized successfully!
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: system_monitor v1.0.0
+2025-10-22 05:06:24 - plugins.hello_world.plugin - INFO - 🌍 Initializing Hello World plugin...
+2025-10-22 05:06:24 - plugins.hello_world.plugin - INFO - ✅ Hello World plugin initialized successfully!
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: hello_world v1.0.0
+2025-10-22 05:06:24 - plugins.notepad.plugin - INFO - 📓 Initializing Notepad plugin...
+2025-10-22 05:06:24 - plugins.notepad.database - INFO - 🗄️ Initializing Notepad database tables...
+2025-10-22 05:06:24 - plugins.notepad.database - INFO - ✅ Notepad database tables initialized
+2025-10-22 05:06:24 - plugins.notepad.plugin - INFO - ✅ Notepad plugin initialized successfully
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: notepad v1.0.0
+2025-10-22 05:06:24 - plugins.tradingview.plugin - INFO - 📊 Initializing TradingView plugin...
+2025-10-22 05:06:24 - plugins.tradingview.database - INFO - ✅ TradingView database tables initialized
+2025-10-22 05:06:24 - plugins.tradingview.plugin - INFO - ✅ TradingView plugin initialized successfully
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: tradingview v1.0.0
+2025-10-22 05:06:24 - plugins.lol_champions.plugin - INFO - 🎮 Initializing LoL Champions plugin (Vanilla JS)...
+2025-10-22 05:06:24 - plugins.lol_champions.plugin - INFO - ✅ LoL Champions plugin initialized
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: League of Legends Champions v2.0.0
+2025-10-22 05:06:24 - plugins.utd_classes.plugin - INFO - 🎓 Initializing UTD Classes plugin...
+2025-10-22 05:06:24 - plugins.utd_classes.plugin - INFO - ✅ UTD Classes plugin initialized successfully!
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded plugin: utd_classes v1.0.0
+2025-10-22 05:06:24 - app_new.plugins.manager - INFO - Loaded 10 plugins
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: stocks
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: notes
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: journal
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: surf
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: system_monitor
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: hello_world
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: notepad
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: tradingview
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: League of Legends Champions
+2025-10-22 05:06:24 - app_new.plugins.registry - INFO - Registered plugin: utd_classes
+2025-10-22 05:06:24 - app_new.main - INFO - ✅ Included routes for plugin at startup: stocks
+2025-10-22 05:06:24 - app_new.main - INFO - ✅ Included routes for plugin at startup: notes
+2025-10-22 05:06:24 - app_new.main - INFO - ✅ Included routes for plugin at startup: journal
+2025-10-22 05:06:24 - app_new.main - INFO - ✅ Included routes for plugin at startup: surf
+2025-10-22 05:06:24 - app_new.main - INFO - ✅ Included routes for plugin at startup: system_monitor
+2025-10-22 05:06:24 - app_new.main - INFO - ✅ Included routes for plugin at startup: hello_world
+2025-10-22 05:06:24 - app_new.main - INFO - ✅ Included routes for plugin at startup: notepad
+2025-10-22 05:06:25 - app_new.main - INFO - ✅ Included routes for plugin at startup: tradingview
+2025-10-22 05:06:25 - app_new.main - INFO - ✅ Included routes for plugin at startup: lol_champions
+2025-10-22 05:06:25 - app_new.main - INFO - ✅ Included routes for plugin at startup: utd_classes
+2025-10-22 05:06:25 - app_new.main - INFO - Application startup completed
+2025-10-22 05:06:25 - plugins.surf.plugin - INFO - 🔄 Starting surf update loop (refresh=300s)
+2025-10-22 05:11:24 - plugins.surf.plugin - INFO - 🌊 Starting surf update cycle #1
+2025-10-22 05:11:25 - plugins.surf.services - INFO - 🔄 Updating surf data for 24 spots...
+2025-10-22 05:11:25 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:25 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.664&longitude=-158.055&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:25 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.664, -158.055): 1.28m @ 11.5s from 352°
+2025-10-22 05:11:25 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 1
+2025-10-22 05:11:25 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:26 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=37.496&longitude=-122.496&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:26 - plugins.surf.services - INFO - 🌊 Fetched surf data for (37.496, -122.496): 2.2m @ 14.95s from 299°
+2025-10-22 05:11:26 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 2
+2025-10-22 05:11:26 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:26 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=20.942&longitude=-156.282&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:26 - plugins.surf.services - INFO - 🌊 Fetched surf data for (20.942, -156.282): 0.42m @ 8.7s from 165°
+2025-10-22 05:11:26 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 3
+2025-10-22 05:11:26 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:27 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-17.833&longitude=-149.267&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:27 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-17.833, -149.267): 1.82m @ 10.5s from 205°
+2025-10-22 05:11:27 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 4
+2025-10-22 05:11:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:28 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-8.829&longitude=115.084&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:28 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-8.829, 115.084): 1.7m @ 10.7s from 209°
+2025-10-22 05:11:28 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 5
+2025-10-22 05:11:28 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:28 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-28.166&longitude=153.552&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:28 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-28.166, 153.552): 1.38m @ 6.9s from 63°
+2025-10-22 05:11:28 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 6
+2025-10-22 05:11:28 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:29 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-34.05&longitude=24.933&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:29 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-34.05, 24.933): 1.32m @ 10.4s from 173°
+2025-10-22 05:11:29 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 7
+2025-10-22 05:11:29 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:30 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-38.371&longitude=144.283&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:30 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-38.371, 144.283): 2.7m @ 8.4s from 217°
+2025-10-22 05:11:30 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 8
+2025-10-22 05:11:30 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:30 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=39.604&longitude=-9.07&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:30 - plugins.surf.services - INFO - 🌊 Fetched surf data for (39.604, -9.07): 1.66m @ 7.85s from 293°
+2025-10-22 05:11:30 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 9
+2025-10-22 05:11:30 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:31 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=33.384&longitude=-117.6&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:31 - plugins.surf.services - INFO - 🌊 Fetched surf data for (33.384, -117.6): 0.72m @ 11.55s from 230°
+2025-10-22 05:11:31 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 10
+2025-10-22 05:11:31 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:31 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=34.373&longitude=-119.475&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:31 - plugins.surf.services - INFO - 🌊 Fetched surf data for (34.373, -119.475): 1.18m @ 10.25s from 287°
+2025-10-22 05:11:31 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 11
+2025-10-22 05:11:31 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:32 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=43.663&longitude=-1.441&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:32 - plugins.surf.services - INFO - 🌊 Fetched surf data for (43.663, -1.441): 2.44m @ 8.85s from 299°
+2025-10-22 05:11:32 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 12
+2025-10-22 05:11:32 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:33 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.28036&longitude=-157.84448&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:33 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.28036, -157.84448): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:33 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 13
+2025-10-22 05:11:33 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:33 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.279183&longitude=-157.842517&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:33 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.279183, -157.842517): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:34 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 14
+2025-10-22 05:11:34 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:34 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27883&longitude=-157.84306&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:34 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27883, -157.84306): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:34 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 15
+2025-10-22 05:11:34 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:35 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27693&longitude=-157.84072&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:35 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27693, -157.84072): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:35 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 16
+2025-10-22 05:11:35 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:35 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27475&longitude=-157.83907&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:35 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27475, -157.83907): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:35 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 17
+2025-10-22 05:11:35 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:36 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27242&longitude=-157.83269&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:36 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27242, -157.83269): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:36 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 18
+2025-10-22 05:11:36 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:37 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27018&longitude=-157.82059&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:37 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27018, -157.82059): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:37 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 19
+2025-10-22 05:11:37 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:37 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27625&longitude=-157.82925&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:37 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27625, -157.82925): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:37 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 20
+2025-10-22 05:11:37 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:38 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.2588992&longitude=-157.8191449&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:38 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.2588992, -157.8191449): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:38 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 21
+2025-10-22 05:11:38 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:39 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.2588889&longitude=-157.8122222&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:39 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.2588889, -157.8122222): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:39 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 22
+2025-10-22 05:11:39 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:39 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.252533&longitude=-157.804117&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:39 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.252533, -157.804117): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:39 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 23
+2025-10-22 05:11:39 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:40 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.29127&longitude=-157.85766&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:40 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.29127, -157.85766): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:40 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 24
+2025-10-22 05:11:40 - plugins.surf.services - INFO - ✅ Updated 24/24 surf spots successfully
+2025-10-22 05:11:40 - plugins.surf.plugin - INFO - ✅ Surf update cycle #1 complete
+2025-10-22 05:16:40 - plugins.surf.plugin - INFO - 🌊 Starting surf update cycle #2
+2025-10-22 05:16:40 - plugins.surf.services - INFO - 🔄 Updating surf data for 24 spots...
+2025-10-22 05:16:40 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:40 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.664&longitude=-158.055&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:40 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.664, -158.055): 1.28m @ 11.45s from 352°
+2025-10-22 05:16:40 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 1
+2025-10-22 05:16:40 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:41 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=37.496&longitude=-122.496&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:41 - plugins.surf.services - INFO - 🌊 Fetched surf data for (37.496, -122.496): 2.2m @ 14.95s from 299°
+2025-10-22 05:16:41 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 2
+2025-10-22 05:16:41 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:42 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=20.942&longitude=-156.282&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:42 - plugins.surf.services - INFO - 🌊 Fetched surf data for (20.942, -156.282): 0.42m @ 8.7s from 165°
+2025-10-22 05:16:42 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 3
+2025-10-22 05:16:42 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:42 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-17.833&longitude=-149.267&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:42 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-17.833, -149.267): 1.82m @ 10.5s from 205°
+2025-10-22 05:16:42 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 4
+2025-10-22 05:16:42 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:43 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-8.829&longitude=115.084&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:43 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-8.829, 115.084): 1.7m @ 10.7s from 209°
+2025-10-22 05:16:43 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 5
+2025-10-22 05:16:43 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:44 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-28.166&longitude=153.552&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:44 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-28.166, 153.552): 1.38m @ 6.9s from 63°
+2025-10-22 05:16:44 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 6
+2025-10-22 05:16:44 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:44 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-34.05&longitude=24.933&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:44 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-34.05, 24.933): 1.32m @ 10.35s from 173°
+2025-10-22 05:16:44 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 7
+2025-10-22 05:16:44 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:45 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-38.371&longitude=144.283&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:45 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-38.371, 144.283): 2.7m @ 8.45s from 217°
+2025-10-22 05:16:45 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 8
+2025-10-22 05:16:45 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:46 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=39.604&longitude=-9.07&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:46 - plugins.surf.services - INFO - 🌊 Fetched surf data for (39.604, -9.07): 1.66m @ 7.85s from 293°
+2025-10-22 05:16:46 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 9
+2025-10-22 05:16:46 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:46 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=33.384&longitude=-117.6&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:46 - plugins.surf.services - INFO - 🌊 Fetched surf data for (33.384, -117.6): 0.72m @ 11.5s from 230°
+2025-10-22 05:16:46 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 10
+2025-10-22 05:16:46 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:47 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=34.373&longitude=-119.475&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:47 - plugins.surf.services - INFO - 🌊 Fetched surf data for (34.373, -119.475): 1.18m @ 10.25s from 287°
+2025-10-22 05:16:47 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 11
+2025-10-22 05:16:47 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:47 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=43.663&longitude=-1.441&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:47 - plugins.surf.services - INFO - 🌊 Fetched surf data for (43.663, -1.441): 2.44m @ 8.8s from 299°
+2025-10-22 05:16:48 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 12
+2025-10-22 05:16:48 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:48 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.28036&longitude=-157.84448&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:48 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.28036, -157.84448): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:48 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 13
+2025-10-22 05:16:48 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:49 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.279183&longitude=-157.842517&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:49 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.279183, -157.842517): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:49 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 14
+2025-10-22 05:16:49 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:49 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27883&longitude=-157.84306&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:49 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27883, -157.84306): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:49 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 15
+2025-10-22 05:16:49 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:50 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27693&longitude=-157.84072&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:50 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27693, -157.84072): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:50 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 16
+2025-10-22 05:16:50 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:51 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27475&longitude=-157.83907&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:51 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27475, -157.83907): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:51 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 17
+2025-10-22 05:16:51 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:51 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27242&longitude=-157.83269&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:51 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27242, -157.83269): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:51 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 18
+2025-10-22 05:16:51 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:52 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27018&longitude=-157.82059&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:52 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27018, -157.82059): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:52 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 19
+2025-10-22 05:16:52 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:53 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27625&longitude=-157.82925&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:53 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27625, -157.82925): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:53 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 20
+2025-10-22 05:16:53 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:53 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.2588992&longitude=-157.8191449&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:53 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.2588992, -157.8191449): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:53 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 21
+2025-10-22 05:16:53 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:54 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.2588889&longitude=-157.8122222&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:54 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.2588889, -157.8122222): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:54 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 22
+2025-10-22 05:16:54 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:55 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.252533&longitude=-157.804117&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:55 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.252533, -157.804117): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:55 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 23
+2025-10-22 05:16:55 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:55 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.29127&longitude=-157.85766&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:55 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.29127, -157.85766): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:55 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 24
+2025-10-22 05:16:55 - plugins.surf.services - INFO - ✅ Updated 24/24 surf spots successfully
+2025-10-22 05:16:55 - plugins.surf.plugin - INFO - ✅ Surf update cycle #2 complete
+BUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes
+2025-10-22 05:08:58 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:08:58 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes
+2025-10-22 05:08:58 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:08:59 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:08:59 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:08:59 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:08:59 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:09:05 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:09:05 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:09:05 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:09:05 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:10:39 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/utd_classes
+2025-10-22 05:10:39 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes
+2025-10-22 05:10:39 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:10:39 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes
+2025-10-22 05:10:39 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:10:39 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:10:39 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:10:39 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:10:39 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:10:55 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:10:55 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:10:55 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:10:55 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:11:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /auth/login
+2025-10-22 05:11:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: POST /auth/login
+2025-10-22 05:11:03 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /auth/login
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:4]
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_data with data[5:8]
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_name with data[9:17]
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_data with data[18:23]
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_name with data[24:32]
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_data with data[33:44]
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2025-10-22 05:11:03 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2025-10-22 05:11:03 - app_new.api.auth - INFO - ================================================================================
+2025-10-22 05:11:03 - app_new.api.auth - INFO - 🚀 LOGIN HANDLER CALLED!
+2025-10-22 05:11:03 - app_new.api.auth - INFO - 📬 POST /auth/login received!
+2025-10-22 05:11:03 - app_new.api.auth - INFO - 🔐 Username: 'admin', Password length: 9
+2025-10-22 05:11:03 - app_new.api.auth - INFO - ================================================================================
+2025-10-22 05:11:03 - app_new.api.auth - INFO - 🔍 Calling authenticate_user for 'admin'
+2025-10-22 05:11:03 - app_new.core.auth - INFO - 🔐 authenticate_user called for username: 'admin'
+2025-10-22 05:11:03 - app_new.core.auth - INFO - 🔍 Trying old schema for 'admin'
+2025-10-22 05:11:03 - app_new.core.auth - INFO - 📊 Query result: [{'id': 5, 'username': 'admin', 'email': 'admin@cameronpad.local', 'hashed_password': '$2b$12$osXJgPGfkGRvQjScqb8xQOokXA0jJpEg5BLizL8.EhZ2MtOfHrqQ.', 'is_active': 1, 'role': 'admin'}]
+2025-10-22 05:11:03 - app_new.core.auth - INFO - 👤 User found: ID=5, role=admin, active=1
+2025-10-22 05:11:03 - app_new.core.auth - INFO - 🔑 Password hash from DB: $2b$12$osXJgPGfkGRvQ...
+2025-10-22 05:11:03 - app_new.core.auth - INFO - 🔑 Verifying password (length: 9)
+2025-10-22 05:11:03 - app_new.core.auth - INFO - 🔑 Password verification result: True
+2025-10-22 05:11:03 - app_new.core.auth - INFO - ✅ Authentication successful for 'admin'!
+2025-10-22 05:11:03 - app_new.api.auth - INFO - ✅ authenticate_user returned: {'id': 5, 'username': 'admin', 'email': 'admin@cameronpad.local', 'is_active': 1, 'role': 'admin', 'is_admin': True}
+2025-10-22 05:11:03 - app_new.api.auth - INFO - ✅ User authenticated successfully: admin
+2025-10-22 05:11:03 - app_new.api.auth - INFO - Creating access token...
+2025-10-22 05:11:03 - app_new.api.auth - INFO - ✅ Token created successfully
+2025-10-22 05:11:03 - app_new.api.auth - INFO - 🍪 Cookie set: access_token (max_age=None)
+2025-10-22 05:11:03 - app_new.api.auth - INFO - ✅ Login successful! Redirecting to: /
+2025-10-22 05:11:03 - app_new.api.auth - INFO - ================================================================================
+2025-10-22 05:11:03 - app_new.main - DEBUG - ✅ Response status: 303
+2025-10-22 05:11:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /
+2025-10-22 05:11:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:11:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:11:03 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:11:03 - app_new.main - INFO - 🏠 Public landing page accessed
+2025-10-22 05:11:03 - app_new.main - DEBUG - ✅ Response status: 307
+2025-10-22 05:11:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /app
+2025-10-22 05:11:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /app
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:11:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:11:03 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:11:03 - app_new.main - INFO - 📱 Main app (/app) accessed by user: admin
+2025-10-22 05:11:03 - app_new.main - INFO - 🎨 Templates object: True
+2025-10-22 05:11:03 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:11:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /templates/dashboard_apple_styles.css
+2025-10-22 05:11:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /templates/dashboard_apple_styles.css
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:11:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:11:03 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:11:03 - app_new.main - DEBUG - ✅ Response status: 404
+2025-10-22 05:11:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:11:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:11:03 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:11:03 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:11:03 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:11:03 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:11:03 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:11:03 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:11:03 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:11:03 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:11:03 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:11:07 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/utd_classes/
+2025-10-22 05:11:07 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes/
+2025-10-22 05:11:07 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:11:07 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes/
+2025-10-22 05:11:07 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:11:07 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:11:07 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:11:07 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:11:07 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:11:08 - plugins.surf.plugin - INFO - 🌊 Starting surf update cycle #1
+2025-10-22 05:11:08 - plugins.surf.services - INFO - 🔄 Updating surf data for 24 spots...
+2025-10-22 05:11:08 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:09 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.664&longitude=-158.055&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:09 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.664, -158.055): 1.28m @ 11.5s from 352°
+2025-10-22 05:11:09 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 1
+2025-10-22 05:11:09 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:10 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=37.496&longitude=-122.496&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:10 - plugins.surf.services - INFO - 🌊 Fetched surf data for (37.496, -122.496): 2.2m @ 14.95s from 299°
+2025-10-22 05:11:10 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 2
+2025-10-22 05:11:10 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:10 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=20.942&longitude=-156.282&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:10 - plugins.surf.services - INFO - 🌊 Fetched surf data for (20.942, -156.282): 0.42m @ 8.7s from 165°
+2025-10-22 05:11:10 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 3
+2025-10-22 05:11:10 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:11 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-17.833&longitude=-149.267&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:11 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-17.833, -149.267): 1.82m @ 10.5s from 205°
+2025-10-22 05:11:11 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 4
+2025-10-22 05:11:11 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:12 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-8.829&longitude=115.084&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:12 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-8.829, 115.084): 1.7m @ 10.7s from 209°
+2025-10-22 05:11:12 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 5
+2025-10-22 05:11:12 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:12 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-28.166&longitude=153.552&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:12 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-28.166, 153.552): 1.38m @ 6.9s from 63°
+2025-10-22 05:11:12 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 6
+2025-10-22 05:11:12 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:13 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-34.05&longitude=24.933&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:13 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-34.05, 24.933): 1.32m @ 10.4s from 173°
+2025-10-22 05:11:13 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 7
+2025-10-22 05:11:13 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:14 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-38.371&longitude=144.283&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:14 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-38.371, 144.283): 2.7m @ 8.4s from 217°
+2025-10-22 05:11:14 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 8
+2025-10-22 05:11:14 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:14 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=39.604&longitude=-9.07&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:14 - plugins.surf.services - INFO - 🌊 Fetched surf data for (39.604, -9.07): 1.66m @ 7.85s from 293°
+2025-10-22 05:11:14 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 9
+2025-10-22 05:11:14 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:15 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=33.384&longitude=-117.6&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:15 - plugins.surf.services - INFO - 🌊 Fetched surf data for (33.384, -117.6): 0.72m @ 11.55s from 230°
+2025-10-22 05:11:15 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 10
+2025-10-22 05:11:15 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:16 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=34.373&longitude=-119.475&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:16 - plugins.surf.services - INFO - 🌊 Fetched surf data for (34.373, -119.475): 1.18m @ 10.25s from 287°
+2025-10-22 05:11:16 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 11
+2025-10-22 05:11:16 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:16 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=43.663&longitude=-1.441&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:16 - plugins.surf.services - INFO - 🌊 Fetched surf data for (43.663, -1.441): 2.44m @ 8.85s from 299°
+2025-10-22 05:11:16 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 12
+2025-10-22 05:11:16 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:17 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.28036&longitude=-157.84448&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:17 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.28036, -157.84448): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:17 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 13
+2025-10-22 05:11:17 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:17 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.279183&longitude=-157.842517&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:17 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.279183, -157.842517): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:17 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 14
+2025-10-22 05:11:17 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:18 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27883&longitude=-157.84306&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:18 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27883, -157.84306): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:18 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 15
+2025-10-22 05:11:18 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:19 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27693&longitude=-157.84072&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:19 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27693, -157.84072): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:19 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 16
+2025-10-22 05:11:19 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:19 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27475&longitude=-157.83907&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:19 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27475, -157.83907): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:19 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 17
+2025-10-22 05:11:19 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:20 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27242&longitude=-157.83269&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:20 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27242, -157.83269): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:20 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 18
+2025-10-22 05:11:20 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:21 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27018&longitude=-157.82059&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:21 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27018, -157.82059): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:21 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 19
+2025-10-22 05:11:21 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:21 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27625&longitude=-157.82925&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:21 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27625, -157.82925): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:21 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 20
+2025-10-22 05:11:21 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:22 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.2588992&longitude=-157.8191449&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:22 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.2588992, -157.8191449): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:22 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 21
+2025-10-22 05:11:22 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:23 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.2588889&longitude=-157.8122222&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:23 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.2588889, -157.8122222): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:23 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 22
+2025-10-22 05:11:23 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:23 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.252533&longitude=-157.804117&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:23 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.252533, -157.804117): 1.06m @ 6.3s from 94°
+2025-10-22 05:11:23 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 23
+2025-10-22 05:11:23 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:11:24 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.29127&longitude=-157.85766&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:11:24 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.29127, -157.85766): 0.98m @ 6.85s from 116°
+2025-10-22 05:11:24 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 24
+2025-10-22 05:11:24 - plugins.surf.services - INFO - ✅ Updated 24/24 surf spots successfully
+2025-10-22 05:11:24 - plugins.surf.plugin - INFO - ✅ Surf update cycle #1 complete
+2025-10-22 05:11:45 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/utd_classes/
+2025-10-22 05:11:45 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes/
+2025-10-22 05:11:45 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:11:45 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes/
+2025-10-22 05:11:45 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:11:45 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:11:45 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:11:45 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:11:45 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:12:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:12:13 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:12:13 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:12:13 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:12:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:12:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:12:13 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:12:13 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:12:13 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:12:13 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:13 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:12:13 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:12:13 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:12:13 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:12:13 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:12:13 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:12:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:12:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:12:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:12:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:12:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:12:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:12:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:12:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:12:18 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:12:20 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/utd_classes/
+2025-10-22 05:12:20 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes/
+2025-10-22 05:12:20 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:12:20 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes/
+2025-10-22 05:12:20 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:12:20 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:12:20 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:12:20 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:12:20 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:12:22 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:12:22 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:12:22 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:12:22 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:12:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:12:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:12:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:12:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:12:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:12:24 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:12:24 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:12:24 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:12:24 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:12:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:12:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:12:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:12:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:12:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:12:29 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:12:29 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:12:29 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:12:29 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:12:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:12:33 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:12:33 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:12:33 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:12:33 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:12:33 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:12:33 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:12:33 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:12:33 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:12:33 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:12:37 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/utd_classes/
+2025-10-22 05:12:37 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes/
+2025-10-22 05:12:37 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:12:37 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes/
+2025-10-22 05:12:38 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:12:38 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:12:38 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:12:38 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:12:38 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:13:17 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/utd_classes/
+2025-10-22 05:13:17 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes/
+2025-10-22 05:13:17 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:13:17 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes/
+2025-10-22 05:13:17 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:13:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:13:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:13:18 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:13:18 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:13:54 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/utd_classes/
+2025-10-22 05:13:54 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes/
+2025-10-22 05:13:54 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:13:54 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes/
+2025-10-22 05:13:54 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:13:54 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:13:54 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:13:54 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:13:54 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:14:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:14:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:14:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:14:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:14:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:14:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:14:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:14:18 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:14:18 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:14:18 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:14:18 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:14:18 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:14:18 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:14:18 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:14:18 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:14:18 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:14:18 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:14:23 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:14:23 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:14:23 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:14:23 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:14:23 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:14:23 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:14:23 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:14:23 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:14:23 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:14:23 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:14:23 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:14:28 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:14:28 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:14:28 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:14:28 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:14:28 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:14:28 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:14:28 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:14:28 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:14:28 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:14:28 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:14:28 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:14:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/lol_champions/
+2025-10-22 05:14:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/lol_champions/
+2025-10-22 05:14:33 - app_new.core.middleware - DEBUG - 🔓 Plugin lol_champions is public (requires_auth=False)
+2025-10-22 05:14:33 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/lol_champions/
+2025-10-22 05:14:33 - plugins.lol_champions.plugin - INFO - 🎮 LoL Champions page accessed
+2025-10-22 05:14:33 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:14:33 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:14:33 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:14:33 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:14:33 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:15:02 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/lol_champions/
+2025-10-22 05:15:02 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/lol_champions/
+2025-10-22 05:15:02 - app_new.core.middleware - DEBUG - 🔓 Plugin lol_champions is public (requires_auth=False)
+2025-10-22 05:15:02 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/lol_champions/
+2025-10-22 05:15:02 - plugins.lol_champions.plugin - INFO - 🎮 LoL Champions page accessed
+2025-10-22 05:15:02 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:15:02 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:15:02 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:15:02 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:15:02 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:15:11 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /
+2025-10-22 05:15:11 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:15:11 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:15:11 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:15:11 - app_new.main - INFO - 🏠 Public landing page accessed
+2025-10-22 05:15:11 - app_new.main - DEBUG - ✅ Response status: 307
+2025-10-22 05:15:11 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /app
+2025-10-22 05:15:11 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /app
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:15:11 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:15:11 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:15:11 - app_new.main - INFO - 📱 Main app (/app) accessed by user: admin
+2025-10-22 05:15:11 - app_new.main - INFO - 🎨 Templates object: True
+2025-10-22 05:15:11 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:15:11 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /templates/dashboard_apple_styles.css
+2025-10-22 05:15:11 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /templates/dashboard_apple_styles.css
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:15:11 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:15:11 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:15:11 - app_new.main - DEBUG - ✅ Response status: 404
+2025-10-22 05:15:11 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:15:11 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/system_monitor/metrics
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🍪 Token from cookie: eyJhbGciOiJIUzI1NiIs...
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🍪 All cookies: ['access_token']
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - 🔍 Verifying token...
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - ✅ Token verified! Payload: {'sub': '5', 'username': 'admin', 'is_admin': True, 'exp': 1761214263}
+2025-10-22 05:15:11 - app_new.core.themes - INFO - ✅ Theme tables initialized
+2025-10-22 05:15:11 - app_new.core.themes - INFO - ✅ Loaded 6 built-in themes
+2025-10-22 05:15:11 - app_new.core.middleware - INFO - ✅ User authenticated: admin
+2025-10-22 05:15:11 - plugins.system_monitor.plugin - INFO - 📊 Dashboard metrics requested
+2025-10-22 05:15:11 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:15:11 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:15:11 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:15:11 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:15:11 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:15:15 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /api/v1/plugins/utd_classes/
+2025-10-22 05:15:15 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /api/v1/plugins/utd_classes/
+2025-10-22 05:15:15 - app_new.core.middleware - DEBUG - 🔓 Plugin utd_classes is public (requires_auth=False)
+2025-10-22 05:15:15 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /api/v1/plugins/utd_classes/
+2025-10-22 05:15:15 - app_new.main - DEBUG - ✅ Response status: 200
+2025-10-22 05:15:15 - app_new.main - DEBUG - 🔍 Middleware (noop): Request to /favicon.ico
+2025-10-22 05:15:15 - app_new.core.middleware - DEBUG - 🔍 Middleware: GET /favicon.ico
+2025-10-22 05:15:15 - app_new.core.middleware - DEBUG - ✅ Public route allowed: /favicon.ico
+2025-10-22 05:15:15 - app_new.main - DEBUG - ✅ Response status: 204
+2025-10-22 05:16:24 - plugins.surf.plugin - INFO - 🌊 Starting surf update cycle #2
+2025-10-22 05:16:24 - plugins.surf.services - INFO - 🔄 Updating surf data for 24 spots...
+2025-10-22 05:16:24 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:24 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.664&longitude=-158.055&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:24 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.664, -158.055): 1.28m @ 11.45s from 352°
+2025-10-22 05:16:25 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 1
+2025-10-22 05:16:25 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:25 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=37.496&longitude=-122.496&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:25 - plugins.surf.services - INFO - 🌊 Fetched surf data for (37.496, -122.496): 2.2m @ 14.95s from 299°
+2025-10-22 05:16:25 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 2
+2025-10-22 05:16:25 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:26 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=20.942&longitude=-156.282&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:26 - plugins.surf.services - INFO - 🌊 Fetched surf data for (20.942, -156.282): 0.42m @ 8.7s from 165°
+2025-10-22 05:16:26 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 3
+2025-10-22 05:16:26 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:26 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-17.833&longitude=-149.267&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:26 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-17.833, -149.267): 1.82m @ 10.5s from 205°
+2025-10-22 05:16:27 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 4
+2025-10-22 05:16:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:27 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-8.829&longitude=115.084&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:27 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-8.829, 115.084): 1.7m @ 10.7s from 209°
+2025-10-22 05:16:27 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 5
+2025-10-22 05:16:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:28 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-28.166&longitude=153.552&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:28 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-28.166, 153.552): 1.38m @ 6.9s from 63°
+2025-10-22 05:16:28 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 6
+2025-10-22 05:16:28 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:28 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-34.05&longitude=24.933&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:28 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-34.05, 24.933): 1.32m @ 10.35s from 173°
+2025-10-22 05:16:28 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 7
+2025-10-22 05:16:28 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:29 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=-38.371&longitude=144.283&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:29 - plugins.surf.services - INFO - 🌊 Fetched surf data for (-38.371, 144.283): 2.7m @ 8.45s from 217°
+2025-10-22 05:16:29 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 8
+2025-10-22 05:16:29 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:30 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=39.604&longitude=-9.07&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:30 - plugins.surf.services - INFO - 🌊 Fetched surf data for (39.604, -9.07): 1.66m @ 7.85s from 293°
+2025-10-22 05:16:30 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 9
+2025-10-22 05:16:30 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:30 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=33.384&longitude=-117.6&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:30 - plugins.surf.services - INFO - 🌊 Fetched surf data for (33.384, -117.6): 0.72m @ 11.5s from 230°
+2025-10-22 05:16:30 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 10
+2025-10-22 05:16:30 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:31 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=34.373&longitude=-119.475&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:31 - plugins.surf.services - INFO - 🌊 Fetched surf data for (34.373, -119.475): 1.18m @ 10.25s from 287°
+2025-10-22 05:16:31 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 11
+2025-10-22 05:16:31 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:32 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=43.663&longitude=-1.441&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:32 - plugins.surf.services - INFO - 🌊 Fetched surf data for (43.663, -1.441): 2.44m @ 8.8s from 299°
+2025-10-22 05:16:32 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 12
+2025-10-22 05:16:32 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:32 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.28036&longitude=-157.84448&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:32 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.28036, -157.84448): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:32 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 13
+2025-10-22 05:16:32 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:33 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.279183&longitude=-157.842517&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:33 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.279183, -157.842517): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:33 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 14
+2025-10-22 05:16:33 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:34 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27883&longitude=-157.84306&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:34 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27883, -157.84306): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:34 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 15
+2025-10-22 05:16:34 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:34 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27693&longitude=-157.84072&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:34 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27693, -157.84072): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:34 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 16
+2025-10-22 05:16:34 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:35 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27475&longitude=-157.83907&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:35 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27475, -157.83907): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:35 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 17
+2025-10-22 05:16:35 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:36 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27242&longitude=-157.83269&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:36 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27242, -157.83269): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:36 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 18
+2025-10-22 05:16:36 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:36 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27018&longitude=-157.82059&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:36 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27018, -157.82059): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:36 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 19
+2025-10-22 05:16:36 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:37 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.27625&longitude=-157.82925&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:37 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.27625, -157.82925): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:37 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 20
+2025-10-22 05:16:37 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:38 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.2588992&longitude=-157.8191449&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:38 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.2588992, -157.8191449): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:38 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 21
+2025-10-22 05:16:38 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:38 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.2588889&longitude=-157.8122222&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:38 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.2588889, -157.8122222): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:38 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 22
+2025-10-22 05:16:38 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:39 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.252533&longitude=-157.804117&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:39 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.252533, -157.804117): 1.06m @ 6.3s from 94°
+2025-10-22 05:16:39 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 23
+2025-10-22 05:16:39 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): marine-api.open-meteo.com:443
+2025-10-22 05:16:39 - urllib3.connectionpool - DEBUG - https://marine-api.open-meteo.com:443 "GET /v1/marine?latitude=21.29127&longitude=-157.85766&current=wave_height%2Cwave_period%2Cwave_direction HTTP/11" 200 None
+2025-10-22 05:16:39 - plugins.surf.services - INFO - 🌊 Fetched surf data for (21.29127, -157.85766): 0.98m @ 6.9s from 116°
+2025-10-22 05:16:40 - plugins.surf.services - INFO - 💾 Updated surf cache for spot ID 24
+2025-10-22 05:16:40 - plugins.surf.services - INFO - ✅ Updated 24/24 surf spots successfully
+2025-10-22 05:16:40 - plugins.surf.plugin - INFO - ✅ Surf update cycle #2 complete

@@ -8,6 +8,7 @@ from typing import Dict, List, Optional, Tuple, Any
 import aiohttp
 
 from .models import Stock, Alert, LatestPrice, Prediction
+from .predictor import StockPredictor
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +26,14 @@ class StockService:
         
         # Alert cooldown tracking
         self.last_alerts: Dict[str, float] = {}
+        
+        # Initialize predictor with Alpha Vantage for historical data (predictions)
+        # Finnhub continues to be used for real-time quotes in the service
+        self.predictor = StockPredictor(
+            alpha_vantage_key=self.alpha_vantage_key,
+            finnhub_key=self.finnhub_token
+        ) if self.alpha_vantage_key else None
+        logger.info(f"🤖 ML Predictor initialization: {'✅ Ready (using Alpha Vantage)' if self.predictor else '❌ Disabled (no Alpha Vantage key)'}")
     
     async def test_connectivity(self) -> Dict[str, Any]:
         """Test connectivity to external APIs."""
@@ -473,7 +482,7 @@ class StockService:
                 'price': price_data.get('price'),
                 'high': price_data.get('high'),
                 'low': price_data.get('low'),
-                'timestamp': price_data.get('ts')
+                'price_ts': price_data.get('ts')  # Changed from 'timestamp' to match frontend expectation
             })
         
         logger.info(f"📊 [GUI UPDATE] Prepared {len(showcase_data)} showcase records to send to frontend")
@@ -558,3 +567,41 @@ class StockService:
             logger.error(f"Error updating predictions for {symbol}: {e}")
         
         return None
+    
+    async def get_detailed_prediction(self, symbol: str, historical_days: int = 10, 
+                                     prediction_days: int = 15) -> Optional[Dict[str, Any]]:
+        """
+        Get detailed multi-day stock price prediction using machine learning.
+        
+        Args:
+            symbol: Stock symbol
+            historical_days: Number of historical days to analyze (default: 10)
+            prediction_days: Number of days to predict ahead (default: 15)
+        
+        Returns:
+            Dictionary with predictions and analysis, or None if prediction fails
+        """
+        if not self.predictor:
+            logger.error("❌ Predictor not initialized - Finnhub API key required for predictions")
+            return None
+        
+        logger.info(f"🔮 Generating {prediction_days}-day prediction for {symbol} using {historical_days} days of history")
+        logger.info(f"🔑 Predictor initialized: {self.predictor is not None}, Finnhub token: {'Yes' if self.finnhub_token else 'NO'}")
+        
+        try:
+            result = await self.predictor.predict_stock(
+                symbol=symbol,
+                historical_days=historical_days,
+                prediction_days=prediction_days
+            )
+            
+            if result:
+                logger.info(f"✅ Successfully generated prediction for {symbol}")
+            else:
+                logger.warning(f"⚠️ Failed to generate prediction for {symbol} - predictor returned None")
+            
+            return result
+        
+        except Exception as e:
+            logger.error(f"❌ Error generating detailed prediction for {symbol}: {e}", exc_info=True)
+            return None

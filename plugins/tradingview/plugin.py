@@ -5,11 +5,12 @@ import logging
 from pathlib import Path
 from typing import Dict, Any
 from fastapi import Request, Form
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from jinja2 import ChoiceLoader, FileSystemLoader
 
 from app_new.plugins.base import WebPlugin, PluginConfig, PluginMetadata
+from . import database as db
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,9 @@ class TradingViewPlugin(WebPlugin):
     async def initialize(self) -> None:
         """Initialize the TradingView plugin"""
         logger.info("📊 Initializing TradingView plugin...")
+        
+        # Initialize database
+        db.init_db()
         
         # Setup templates with both main and plugin template directories
         template_dir = Path(__file__).parent / "templates"
@@ -63,7 +67,8 @@ class TradingViewPlugin(WebPlugin):
             dependencies=[],
             api_version="1.0",
             enabled=True,
-            priority=100
+            priority=100,
+            requires_auth=False  # TradingView plugin is public
         )
     
     def register_routes(self) -> None:
@@ -72,7 +77,8 @@ class TradingViewPlugin(WebPlugin):
         @self._router.get("/")
         async def tradingview_home(request: Request):
             """Render TradingView page"""
-            # TODO: Fetch symbols from database
+            # Fetch saved charts from database
+            charts = db.get_all_charts()
             symbols = self.config.settings.get("default_symbols", [])
             
             return self.templates.TemplateResponse(
@@ -80,9 +86,34 @@ class TradingViewPlugin(WebPlugin):
                 {
                     "request": request,
                     "symbols": symbols,
+                    "charts": charts,
                     "user": getattr(request.state, "user", None)
                 }
             )
+        
+        @self._router.post("/charts/add")
+        async def add_chart(chart_number: int = Form(...), timeframe: str = Form("D")):
+            """Add a new chart"""
+            db.add_chart(chart_number, timeframe)
+            return JSONResponse({"success": True, "chart_number": chart_number})
+        
+        @self._router.post("/charts/delete")
+        async def delete_chart_endpoint(chart_number: int = Form(...)):
+            """Delete a chart and its notes"""
+            db.delete_chart(chart_number)
+            return JSONResponse({"success": True})
+        
+        @self._router.post("/charts/notes/save")
+        async def save_notes(chart_number: int = Form(...), notes: str = Form("")):
+            """Save notes for a chart"""
+            db.save_chart_notes(chart_number, notes)
+            return JSONResponse({"success": True})
+        
+        @self._router.get("/charts/notes/{chart_number}")
+        async def get_notes(chart_number: int):
+            """Get notes for a chart"""
+            notes = db.get_chart_notes(chart_number)
+            return JSONResponse({"notes": notes})
         
         @self._router.post("/add")
         async def add_symbol(tv_symbol: str = Form(...), label: str = Form("")):

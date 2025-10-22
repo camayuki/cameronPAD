@@ -34,7 +34,8 @@ class HelloWorldPlugin(WebPlugin):
             dependencies=[],
             api_version="1.0",
             enabled=True,
-            priority=100
+            priority=100,
+            requires_auth=False  # Hello World plugin is public
         )
     
     async def initialize(self) -> None:
@@ -55,7 +56,95 @@ class HelloWorldPlugin(WebPlugin):
     def register_routes(self) -> None:
         """Register web routes for this plugin."""
         from fastapi import Request
-        from fastapi.responses import JSONResponse
+        from fastapi.responses import JSONResponse, HTMLResponse
+        
+        @self._router.get("/", response_class=HTMLResponse)
+        @self._router.get("", response_class=HTMLResponse)
+        async def hello_page(request: Request):
+            """Hello World main page."""
+            return HTMLResponse(content=f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Hello World Plugin</title>
+                <style>
+                    body {{
+                        font-family: Arial, sans-serif;
+                        max-width: 800px;
+                        margin: 50px auto;
+                        padding: 20px;
+                        background: #1a1a1a;
+                        color: #e0e0e0;
+                    }}
+                    .container {{
+                        background: #2a2a2a;
+                        border-radius: 10px;
+                        padding: 30px;
+                        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                    }}
+                    h1 {{ color: #4CAF50; }}
+                    button {{
+                        background: #4CAF50;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-size: 16px;
+                        margin: 5px;
+                    }}
+                    button:hover {{ background: #45a049; }}
+                    .reset {{ background: #f44336; }}
+                    .reset:hover {{ background: #da190b; }}
+                    #result {{
+                        margin-top: 20px;
+                        padding: 15px;
+                        background: #333;
+                        border-radius: 5px;
+                        min-height: 50px;
+                    }}
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <h1>👋 Hello World Plugin</h1>
+                    <p>This is an example plugin demonstrating basic plugin functionality.</p>
+                    <p>Greetings sent: <strong id="count">{self.greeting_count}</strong></p>
+                    
+                    <input type="text" id="name" placeholder="Enter your name" value="World" />
+                    <button onclick="sayHello()">Say Hello!</button>
+                    <button class="reset" onclick="resetCounter()">Reset Counter</button>
+                    
+                    <div id="result"></div>
+                </div>
+                
+                <script>
+                    async function sayHello() {{
+                        const name = document.getElementById('name').value || 'World';
+                        const response = await fetch(`/api/v1/plugins/hello_world/hello?name=${{encodeURIComponent(name)}}`);
+                        const data = await response.json();
+                        document.getElementById('result').innerHTML = `
+                            <strong>${{data.message}}</strong><br>
+                            Greeting #${{data.greeting_number}}<br>
+                            Plugin version: ${{data.version}}
+                        `;
+                        document.getElementById('count').textContent = data.greeting_number;
+                    }}
+                    
+                    async function resetCounter() {{
+                        const response = await fetch('/api/v1/plugins/hello_world/reset', {{ method: 'POST' }});
+                        const data = await response.json();
+                        document.getElementById('result').innerHTML = `
+                            <strong>${{data.message}}</strong><br>
+                            Previous count: ${{data.previous_count}}<br>
+                            Current count: ${{data.current_count}}
+                        `;
+                        document.getElementById('count').textContent = data.current_count;
+                    }}
+                </script>
+            </body>
+            </html>
+            """)
         
         @self._router.get("/hello")
         async def hello_endpoint(name: str = "World"):

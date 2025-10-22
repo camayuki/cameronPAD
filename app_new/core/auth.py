@@ -7,6 +7,7 @@ import time
 from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any, List, Tuple
 import jwt
+from jwt.exceptions import InvalidSignatureError, ExpiredSignatureError, DecodeError, InvalidTokenError
 
 from .database import get_database_manager
 from .config import get_config
@@ -76,9 +77,9 @@ class TokenManager:
                 algorithms=[self.config.algorithm]
             )
             return payload
-        except jwt.ExpiredSignatureError:
+        except ExpiredSignatureError:
             raise AuthError("Token has expired")
-        except jwt.JWTError:
+        except (InvalidTokenError, InvalidSignatureError, DecodeError):
             raise AuthError("Invalid token")
 
 

@@ -188,10 +188,11 @@ def setup_routes(router: APIRouter, stock_service: StockService) -> None:
         
         return [dict(row) for row in quotes_data]
     
-    @router.get("/showcase", response_model=List[Dict[str, Any]])
+    @router.get("/showcase")
     async def get_showcase():
         """Get showcase stocks with latest prices."""
-        return await stock_service.get_showcase_data()
+        quotes = await stock_service.get_showcase_data()
+        return {"status": "success", "quotes": quotes}
     
     @router.post("/quotes/refresh")
     async def refresh_quotes():
@@ -228,6 +229,30 @@ def setup_routes(router: APIRouter, stock_service: StockService) -> None:
             "symbol": symbol,
             "prediction": prediction
         }
+    
+    @router.get("/predictions/{symbol}/detailed")
+    async def get_detailed_prediction(symbol: str, historical_days: int = 10, prediction_days: int = 15):
+        """
+        Get detailed 15-day price prediction using machine learning.
+        
+        Args:
+            symbol: Stock symbol
+            historical_days: Number of historical days to analyze (default: 10)
+            prediction_days: Number of days to predict ahead (default: 15)
+        """
+        result = await stock_service.get_detailed_prediction(
+            symbol, 
+            historical_days=historical_days,
+            prediction_days=prediction_days
+        )
+        
+        if result is None:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Could not generate prediction for {symbol}. Check if API keys are configured."
+            )
+        
+        return result
     
     @router.get("/health")
     async def stocks_health():

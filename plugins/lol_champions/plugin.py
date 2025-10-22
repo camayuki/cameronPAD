@@ -32,7 +32,8 @@ class LOLChampionsPlugin(WebPlugin):
             dependencies=[],
             api_version="1.0",
             enabled=True,
-            priority=100
+            priority=100,
+            requires_auth=False  # LoL Champions plugin is public
         )
     
     async def initialize(self) -> None:
