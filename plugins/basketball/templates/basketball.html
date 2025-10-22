@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball - NBA Stats & History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tab-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: #ff6b35;
+            border-color: #ff6b35;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .search-box {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .search-box input {
+            padding: 15px 25px;
+            width: 100%;
+            max-width: 600px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #ff6b35;
+        }
+
+        .card p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .stat-label {
+            font-weight: 600;
+            color: #ffd93d;
+        }
+
+        .championship-card {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #333;
+            font-weight: 600;
+        }
+
+        .championship-card h3 {
+            color: #1e3c72;
+        }
+
+        .team-logo {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .roster-list {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .roster-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .roster-list li {
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .roster-list li:last-child {
+            border-bottom: none;
+        }
+
+        .position {
+            display: inline-block;
+            background: #ff6b35;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            margin-right: 10px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(255, 107, 53, 0.3);
+            font-weight: 600;
+            color: #ffd93d;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .winner {
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        .loser {
+            color: #f87171;
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            color: #ffd93d;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏀 NBA Basketball</h1>
+            <p>Stats, Schedules, Teams & Championship History</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search teams, players, or years...">
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('championships')">🏆 Championships</button>
+            <button class="tab-button" onclick="openTab('teams')">🏀 Teams 2024-25</button>
+            <button class="tab-button" onclick="openTab('schedule')">📅 Schedule</button>
+            <button class="tab-button" onclick="openTab('stats')">📊 Stats Leaders</button>
+        </div>
+
+        <!-- Championships Tab -->
+        <div id="championships" class="tab-content active">
+            <h2 class="section-title">NBA Championship Winners</h2>
+            <div class="grid">
+                <div class="card championship-card">
+                    <div class="team-logo">🏆</div>
+                    <h3>2024 NBA Champions</h3>
+                    <p><span class="stat-label">Winner:</span> Boston Celtics</p>
+                    <p><span class="stat-label">Runner-up:</span> Dallas Mavericks</p>
+                    <p><span class="stat-label">Finals MVP:</span> Jaylen Brown</p>
+                    <p><span class="stat-label">Series:</span> 4-1</p>
+                </div>
+
+                <div class="card championship-card">
+                    <div class="team-logo">🏆</div>
+                    <h3>2023 NBA Champions</h3>
+                    <p><span class="stat-label">Winner:</span> Denver Nuggets</p>
+                    <p><span class="stat-label">Runner-up:</span> Miami Heat</p>
+                    <p><span class="stat-label">Finals MVP:</span> Nikola Jokić</p>
+                    <p><span class="stat-label">Series:</span> 4-1</p>
+                </div>
+
+                <div class="card championship-card">
+                    <div class="team-logo">🏆</div>
+                    <h3>2022 NBA Champions</h3>
+                    <p><span class="stat-label">Winner:</span> Golden State Warriors</p>
+                    <p><span class="stat-label">Runner-up:</span> Boston Celtics</p>
+                    <p><span class="stat-label">Finals MVP:</span> Stephen Curry</p>
+                    <p><span class="stat-label">Series:</span> 4-2</p>
+                </div>
+
+                <div class="card championship-card">
+                    <div class="team-logo">🏆</div>
+                    <h3>2021 NBA Champions</h3>
+                    <p><span class="stat-label">Winner:</span> Milwaukee Bucks</p>
+                    <p><span class="stat-label">Runner-up:</span> Phoenix Suns</p>
+                    <p><span class="stat-label">Finals MVP:</span> Giannis Antetokounmpo</p>
+                    <p><span class="stat-label">Series:</span> 4-2</p>
+                </div>
+
+                <div class="card championship-card">
+                    <div class="team-logo">🏆</div>
+                    <h3>2020 NBA Champions</h3>
+                    <p><span class="stat-label">Winner:</span> Los Angeles Lakers</p>
+                    <p><span class="stat-label">Runner-up:</span> Miami Heat</p>
+                    <p><span class="stat-label">Finals MVP:</span> LeBron James</p>
+                    <p><span class="stat-label">Series:</span> 4-2</p>
+                </div>
+
+                <div class="card championship-card">
+                    <div class="team-logo">🏆</div>
+                    <h3>2019 NBA Champions</h3>
+                    <p><span class="stat-label">Winner:</span> Toronto Raptors</p>
+                    <p><span class="stat-label">Runner-up:</span> Golden State Warriors</p>
+                    <p><span class="stat-label">Finals MVP:</span> Kawhi Leonard</p>
+                    <p><span class="stat-label">Series:</span> 4-2</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teams Tab -->
+        <div id="teams" class="tab-content">
+            <h2 class="section-title">2024-25 NBA Teams & Rosters</h2>
+            
+            <div class="grid">
+                <!-- Boston Celtics -->
+                <div class="card">
+                    <div class="team-logo">☘️</div>
+                    <h3>Boston Celtics</h3>
+                    <p><span class="stat-label">Conference:</span> Eastern</p>
+                    <p><span class="stat-label">Division:</span> Atlantic</p>
+                    <p><span class="stat-label">Head Coach:</span> Joe Mazzulla</p>
+                    <div class="roster-list">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Key Players:</p>
+                        <ul>
+                            <li><span class="position">SF</span> Jayson Tatum</li>
+                            <li><span class="position">SG</span> Jaylen Brown</li>
+                            <li><span class="position">PG</span> Jrue Holiday</li>
+                            <li><span class="position">C</span> Kristaps Porziņģis</li>
+                            <li><span class="position">SF</span> Derrick White</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Los Angeles Lakers -->
+                <div class="card">
+                    <div class="team-logo">💜</div>
+                    <h3>Los Angeles Lakers</h3>
+                    <p><span class="stat-label">Conference:</span> Western</p>
+                    <p><span class="stat-label">Division:</span> Pacific</p>
+                    <p><span class="stat-label">Head Coach:</span> Darvin Ham</p>
+                    <div class="roster-list">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Key Players:</p>
+                        <ul>
+                            <li><span class="position">SF</span> LeBron James</li>
+                            <li><span class="position">PF</span> Anthony Davis</li>
+                            <li><span class="position">PG</span> D'Angelo Russell</li>
+                            <li><span class="position">SF</span> Rui Hachimura</li>
+                            <li><span class="position">C</span> Jaxson Hayes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Golden State Warriors -->
+                <div class="card">
+                    <div class="team-logo">💛</div>
+                    <h3>Golden State Warriors</h3>
+                    <p><span class="stat-label">Conference:</span> Western</p>
+                    <p><span class="stat-label">Division:</span> Pacific</p>
+                    <p><span class="stat-label">Head Coach:</span> Steve Kerr</p>
+                    <div class="roster-list">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Key Players:</p>
+                        <ul>
+                            <li><span class="position">PG</span> Stephen Curry</li>
+                            <li><span class="position">SF</span> Andrew Wiggins</li>
+                            <li><span class="position">C</span> Draymond Green</li>
+                            <li><span class="position">SG</span> Klay Thompson</li>
+                            <li><span class="position">C</span> Kevon Looney</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Milwaukee Bucks -->
+                <div class="card">
+                    <div class="team-logo">🦌</div>
+                    <h3>Milwaukee Bucks</h3>
+                    <p><span class="stat-label">Conference:</span> Eastern</p>
+                    <p><span class="stat-label">Division:</span> Central</p>
+                    <p><span class="stat-label">Head Coach:</span> Adrian Griffin</p>
+                    <div class="roster-list">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Key Players:</p>
+                        <ul>
+                            <li><span class="position">PF</span> Giannis Antetokounmpo</li>
+                            <li><span class="position">PG</span> Damian Lillard</li>
+                            <li><span class="position">SF</span> Khris Middleton</li>
+                            <li><span class="position">C</span> Brook Lopez</li>
+                            <li><span class="position">SG</span> Malik Beasley</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Denver Nuggets -->
+                <div class="card">
+                    <div class="team-logo">⛰️</div>
+                    <h3>Denver Nuggets</h3>
+                    <p><span class="stat-label">Conference:</span> Western</p>
+                    <p><span class="stat-label">Division:</span> Northwest</p>
+                    <p><span class="stat-label">Head Coach:</span> Michael Malone</p>
+                    <div class="roster-list">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Key Players:</p>
+                        <ul>
+                            <li><span class="position">C</span> Nikola Jokić</li>
+                            <li><span class="position">SG</span> Jamal Murray</li>
+                            <li><span class="position">SF</span> Michael Porter Jr.</li>
+                            <li><span class="position">PF</span> Aaron Gordon</li>
+                            <li><span class="position">PG</span> Kentavious Caldwell-Pope</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phoenix Suns -->
+                <div class="card">
+                    <div class="team-logo">☀️</div>
+                    <h3>Phoenix Suns</h3>
+                    <p><span class="stat-label">Conference:</span> Western</p>
+                    <p><span class="stat-label">Division:</span> Pacific</p>
+                    <p><span class="stat-label">Head Coach:</span> Frank Vogel</p>
+                    <div class="roster-list">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Key Players:</p>
+                        <ul>
+                            <li><span class="position">SG</span> Devin Booker</li>
+                            <li><span class="position">SF</span> Kevin Durant</li>
+                            <li><span class="position">PG</span> Bradley Beal</li>
+                            <li><span class="position">C</span> Jusuf Nurkić</li>
+                            <li><span class="position">PF</span> Grayson Allen</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dallas Mavericks -->
+                <div class="card">
+                    <div class="team-logo">🐴</div>
+                    <h3>Dallas Mavericks</h3>
+                    <p><span class="stat-label">Conference:</span> Western</p>
+                    <p><span class="stat-label">Division:</span> Southwest</p>
+                    <p><span class="stat-label">Head Coach:</span> Jason Kidd</p>
+                    <div class="roster-list">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Key Players:</p>
+                        <ul>
+                            <li><span class="position">PG</span> Luka Dončić</li>
+                            <li><span class="position">PG</span> Kyrie Irving</li>
+                            <li><span class="position">C</span> Dereck Lively II</li>
+                            <li><span class="position">SF</span> Derrick Jones Jr.</li>
+                            <li><span class="position">PF</span> P.J. Washington</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Philadelphia 76ers -->
+                <div class="card">
+                    <div class="team-logo">🔔</div>
+                    <h3>Philadelphia 76ers</h3>
+                    <p><span class="stat-label">Conference:</span> Eastern</p>
+                    <p><span class="stat-label">Division:</span> Atlantic</p>
+                    <p><span class="stat-label">Head Coach:</span> Nick Nurse</p>
+                    <div class="roster-list">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Key Players:</p>
+                        <ul>
+                            <li><span class="position">C</span> Joel Embiid</li>
+                            <li><span class="position">PG</span> Tyrese Maxey</li>
+                            <li><span class="position">SF</span> Tobias Harris</li>
+                            <li><span class="position">SG</span> Kelly Oubre Jr.</li>
+                            <li><span class="position">C</span> Paul Reed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Tab -->
+        <div id="schedule" class="tab-content">
+            <h2 class="section-title">2024-25 Season Schedule Highlights</h2>
+            
+            <div class="schedule-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Home Team</th>
+                            <th>Away Team</th>
+                            <th>Result</th>
+                            <th>Arena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Oct 22, 2024</td>
+                            <td class="winner">Boston Celtics</td>
+                            <td class="loser">New York Knicks</td>
+                            <td>132-109</td>
+                            <td>TD Garden</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 22, 2024</td>
+                            <td class="winner">Los Angeles Lakers</td>
+                            <td class="loser">Minnesota Timberwolves</td>
+                            <td>110-103</td>
+                            <td>Crypto.com Arena</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 24, 2024</td>
+                            <td>Golden State Warriors</td>
+                            <td>Phoenix Suns</td>
+                            <td>TBD</td>
+                            <td>Chase Center</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 24, 2024</td>
+                            <td>Milwaukee Bucks</td>
+                            <td>Philadelphia 76ers</td>
+                            <td>TBD</td>
+                            <td>Fiserv Forum</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 25, 2024</td>
+                            <td>Dallas Mavericks</td>
+                            <td>San Antonio Spurs</td>
+                            <td>TBD</td>
+                            <td>American Airlines Center</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 26, 2024</td>
+                            <td>Denver Nuggets</td>
+                            <td>Brooklyn Nets</td>
+                            <td>TBD</td>
+                            <td>Ball Arena</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 25, 2024</td>
+                            <td>Lakers vs Warriors</td>
+                            <td colspan="3">Christmas Day Game - Chase Center</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 25, 2024</td>
+                            <td>Celtics vs 76ers</td>
+                            <td colspan="3">Christmas Day Game - TD Garden</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 50px;">Playoffs Schedule (2025)</h2>
+            <div class="card">
+                <h3>📅 Important Dates</h3>
+                <p><span class="stat-label">Play-In Tournament:</span> April 15-18, 2025</p>
+                <p><span class="stat-label">First Round:</span> April 19 - May 4, 2025</p>
+                <p><span class="stat-label">Conference Semifinals:</span> May 5-19, 2025</p>
+                <p><span class="stat-label">Conference Finals:</span> May 20 - June 3, 2025</p>
+                <p><span class="stat-label">NBA Finals:</span> June 5-22, 2025</p>
+            </div>
+        </div>
+
+        <!-- Stats Tab -->
+        <div id="stats" class="tab-content">
+            <h2 class="section-title">2023-24 Season Leaders</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>🏆 MVP</h3>
+                    <p><span class="stat-label">Player:</span> Nikola Jokić</p>
+                    <p><span class="stat-label">Team:</span> Denver Nuggets</p>
+                    <p><span class="stat-label">Stats:</span> 26.4 PPG, 12.4 RPG, 9.0 APG</p>
+                </div>
+
+                <div class="card">
+                    <h3>🏅 Scoring Leader</h3>
+                    <p><span class="stat-label">Player:</span> Luka Dončić</p>
+                    <p><span class="stat-label">Team:</span> Dallas Mavericks</p>
+                    <p><span class="stat-label">Points Per Game:</span> 33.9 PPG</p>
+                </div>
+
+                <div class="card">
+                    <h3>🏅 Rebounds Leader</h3>
+                    <p><span class="stat-label">Player:</span> Domantas Sabonis</p>
+                    <p><span class="stat-label">Team:</span> Sacramento Kings</p>
+                    <p><span class="stat-label">Rebounds Per Game:</span> 13.7 RPG</p>
+                </div>
+
+                <div class="card">
+                    <h3>🏅 Assists Leader</h3>
+                    <p><span class="stat-label">Player:</span> Tyrese Haliburton</p>
+                    <p><span class="stat-label">Team:</span> Indiana Pacers</p>
+                    <p><span class="stat-label">Assists Per Game:</span> 10.9 APG</p>
+                </div>
+
+                <div class="card">
+                    <h3>🏅 Steals Leader</h3>
+                    <p><span class="stat-label">Player:</span> De'Aaron Fox</p>
+                    <p><span class="stat-label">Team:</span> Sacramento Kings</p>
+                    <p><span class="stat-label">Steals Per Game:</span> 2.0 SPG</p>
+                </div>
+
+                <div class="card">
+                    <h3>🏅 Blocks Leader</h3>
+                    <p><span class="stat-label">Player:</span> Victor Wembanyama</p>
+                    <p><span class="stat-label">Team:</span> San Antonio Spurs</p>
+                    <p><span class="stat-label">Blocks Per Game:</span> 3.6 BPG</p>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 3-Point % Leader</h3>
+                    <p><span class="stat-label">Player:</span> Shai Gilgeous-Alexander</p>
+                    <p><span class="stat-label">Team:</span> Oklahoma City Thunder</p>
+                    <p><span class="stat-label">Percentage:</span> 53.5%</p>
+                </div>
+
+                <div class="card">
+                    <h3>🏀 Field Goal % Leader</h3>
+                    <p><span class="stat-label">Player:</span> Rudy Gobert</p>
+                    <p><span class="stat-label">Team:</span> Minnesota Timberwolves</p>
+                    <p><span class="stat-label">Percentage:</span> 66.1%</p>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 50px;">All-Time Records</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🏆 Most Championships</h3>
+                    <p><span class="stat-label">Team:</span> Boston Celtics & LA Lakers</p>
+                    <p><span class="stat-label">Titles:</span> 17 each</p>
+                </div>
+
+                <div class="card">
+                    <h3>👑 All-Time Points Leader</h3>
+                    <p><span class="stat-label">Player:</span> LeBron James</p>
+                    <p><span class="stat-label">Points:</span> 40,474+</p>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Most 3-Pointers Made</h3>
+                    <p><span class="stat-label">Player:</span> Stephen Curry</p>
+                    <p><span class="stat-label">3-Pointers:</span> 3,747+</p>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Most Career Assists</h3>
+                    <p><span class="stat-label">Player:</span> John Stockton</p>
+                    <p><span class="stat-label">Assists:</span> 15,806</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            // Hide all tabs
+            const tabs = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+
+            // Remove active class from all buttons
+            const buttons = document.getElementsByClassName('tab-button');
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            const rows = document.querySelectorAll('tbody tr');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? 'table-row' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

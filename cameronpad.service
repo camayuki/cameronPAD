@@ -1,0 +1,15 @@
+[Unit]
+Description=CameronPAD Web Application
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/cameronpad
+Environment="PATH=/opt/cameronpad/venv/bin"
+ExecStart=/opt/cameronpad/venv/bin/python -m uvicorn app_new.main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

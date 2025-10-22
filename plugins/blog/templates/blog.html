@@ -1,0 +1,662 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - CameronPAD{% endblock %}
+
+{% block content %}
+<!-- DEBUG: User = {{ user }} -->
+<style>
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .blog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .blog-title {
+        font-size: 2.5rem;
+        color: var(--accent-primary);
+        margin: 0;
+        text-shadow: 0 0 20px rgba(79, 195, 247, 0.5);
+    }
+
+    .create-post-btn {
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        border: none;
+        border-radius: 8px;
+        color: #000;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .create-post-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(79, 195, 247, 0.4);
+    }
+
+    .sort-tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+
+    .sort-tab {
+        padding: 0.5rem 1rem;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .sort-tab:hover {
+        background: rgba(79, 195, 247, 0.1);
+        color: var(--accent-primary);
+        border-color: var(--accent-primary);
+    }
+
+    .sort-tab.active {
+        background: var(--accent-primary);
+        color: #000;
+        border-color: var(--accent-primary);
+    }
+
+    .posts-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .post-card {
+        display: flex;
+        background: rgba(26, 31, 53, 0.8);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .post-card:hover {
+        border-color: var(--accent-primary);
+        box-shadow: 0 10px 30px rgba(79, 195, 247, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .vote-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        min-width: 80px;
+    }
+
+    .vote-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+        padding: 0.25rem;
+    }
+
+    .vote-btn:hover {
+        transform: scale(1.2);
+    }
+
+    .vote-btn.upvote:hover,
+    .vote-btn.upvote.active {
+        color: #ff6b35;
+    }
+
+    .vote-btn.downvote:hover,
+    .vote-btn.downvote.active {
+        color: #7f7fff;
+    }
+
+    .vote-count {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--accent-primary);
+        margin: 0.5rem 0;
+    }
+
+    .post-content {
+        flex: 1;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .post-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .post-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+        flex: 1;
+    }
+
+    .post-title a {
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .post-title a:hover {
+        color: var(--accent-primary);
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        flex-wrap: wrap;
+    }
+
+    .post-author {
+        color: var(--accent-primary);
+        font-weight: 600;
+    }
+
+    .post-text {
+        color: var(--text-primary);
+        line-height: 1.6;
+        white-space: pre-wrap;
+        max-height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .post-text.has-more::after {
+        content: '...';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(to right, transparent, rgba(26, 31, 53, 0.8) 50%);
+        padding-left: 2rem;
+    }
+
+    .post-media {
+        margin-top: 1rem;
+    }
+
+    .post-image {
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: 8px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    .post-video {
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: 8px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .media-actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 0.5rem;
+    }
+
+    .download-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(79, 195, 247, 0.2);
+        border: 1px solid var(--accent-primary);
+        border-radius: 6px;
+        color: var(--accent-primary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .download-btn:hover {
+        background: var(--accent-primary);
+        color: #000;
+        transform: translateY(-2px);
+    }
+
+    .post-actions {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    .action-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .action-btn:hover {
+        background: rgba(79, 195, 247, 0.1);
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--text-secondary);
+    }
+
+    .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+    }
+
+    .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        border: 2px solid var(--accent-primary);
+        border-radius: 20px;
+        padding: 2rem;
+        max-width: 600px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(79, 195, 247, 0.3);
+        animation: slideUp 0.3s ease;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--accent-primary);
+    }
+
+    .modal-header h2 {
+        color: var(--accent-primary);
+        margin: 0;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: var(--accent-primary);
+        font-size: 2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        line-height: 1;
+    }
+
+    .close-btn:hover {
+        color: #fff;
+        transform: rotate(90deg);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.75rem;
+        background: rgba(45, 53, 97, 0.3);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 150px;
+    }
+
+    .file-input-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .file-input-wrapper input[type=file] {
+        position: absolute;
+        left: -9999px;
+    }
+
+    .file-input-label {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: rgba(79, 195, 247, 0.1);
+        border: 2px dashed var(--accent-primary);
+        border-radius: 8px;
+        color: var(--accent-primary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .file-input-label:hover {
+        background: rgba(79, 195, 247, 0.2);
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        border: none;
+        border-radius: 8px;
+        color: #000;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(79, 195, 247, 0.4);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .blog-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .sort-tabs {
+            flex-wrap: wrap;
+        }
+
+        .post-card {
+            flex-direction: column;
+        }
+
+        .vote-section {
+            flex-direction: row;
+            min-width: unset;
+            padding: 0.75rem;
+        }
+
+        .vote-count {
+            margin: 0 0.75rem;
+        }
+    }
+</style>
+
+<div class="blog-container">
+    <div class="blog-header">
+        <h1 class="blog-title">📝 CameronPAD Blog</h1>
+        <button class="create-post-btn" onclick="openCreatePostModal()">
+            ➕ Create Post
+        </button>
+    </div>
+
+    <div class="sort-tabs">
+        <a href="/api/v1/plugins/blog/?sort=hot" class="sort-tab {% if current_sort == 'hot' %}active{% endif %}">
+            🔥 Hot
+        </a>
+        <a href="/api/v1/plugins/blog/?sort=new" class="sort-tab {% if current_sort == 'new' %}active{% endif %}">
+            🆕 New
+        </a>
+        <a href="/api/v1/plugins/blog/?sort=top" class="sort-tab {% if current_sort == 'top' %}active{% endif %}">
+            ⭐ Top
+        </a>
+    </div>
+
+    <div class="posts-list">
+        {% if posts %}
+            {% for post in posts %}
+            <div class="post-card">
+                <div class="vote-section">
+                    <button class="vote-btn upvote" onclick="votePost({{ post.id }}, 1)">▲</button>
+                    <div class="vote-count" id="score-{{ post.id }}">{{ post.score }}</div>
+                    <button class="vote-btn downvote" onclick="votePost({{ post.id }}, -1)">▼</button>
+                </div>
+                
+                <div class="post-content">
+                    <div class="post-header">
+                        <h2 class="post-title">
+                            <a href="/api/v1/plugins/blog/post/{{ post.id }}">{{ post.title }}</a>
+                        </h2>
+                    </div>
+                    
+                    <div class="post-meta">
+                        <span>Posted by <span class="post-author">{{ post.author_name }}</span></span>
+                        <span>•</span>
+                        <span>{{ post.created_at.strftime('%B %d, %Y at %I:%M %p') }}</span>
+                        {% if post.updated_at and post.updated_at != post.created_at %}
+                        <span>•</span>
+                        <span>(edited)</span>
+                        {% endif %}
+                    </div>
+                    
+                    {% if post.content %}
+                    <div class="post-text {% if post.content|length > 300 %}has-more{% endif %}">
+                        {{ post.content[:300] }}
+                    </div>
+                    {% endif %}
+                    
+                    {% if post.media_type == 'image' and post.image_url %}
+                    <div class="post-media">
+                        <img src="{{ post.image_url }}" alt="Post image" class="post-image">
+                        <div class="media-actions">
+                            <a href="{{ post.image_url }}" download class="download-btn">📥 Download Image</a>
+                        </div>
+                    </div>
+                    {% elif post.media_type == 'video' and post.video_url %}
+                    <div class="post-media">
+                        <video controls class="post-video">
+                            <source src="{{ post.video_url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="media-actions">
+                            <a href="{{ post.video_url }}" download class="download-btn">📥 Download Video</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="post-actions">
+                        <a href="/api/v1/plugins/blog/post/{{ post.id }}" class="action-btn">
+                            💬 {{ post.comment_count }} Comments
+                        </a>
+                        <div class="action-btn">
+                            👁️ {{ post.view_count }} Views
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h2>No posts yet</h2>
+                <p>Be the first to create a post!</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Create Post Modal -->
+<div id="createPostModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Create a New Post</h2>
+            <button class="close-btn" onclick="closeCreatePostModal()">&times;</button>
+        </div>
+        
+        <form action="/api/v1/plugins/blog/post/create" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Title *</label>
+                <input type="text" id="title" name="title" required maxlength="500" placeholder="What's on your mind?">
+            </div>
+            
+            <div class="form-group">
+                <label for="content">Content (optional)</label>
+                <textarea id="content" name="content" placeholder="Share your thoughts..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Media (optional)</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="media" name="media" accept="image/*,video/*">
+                    <label for="media" class="file-input-label">
+                        📎 Choose Image or Video
+                    </label>
+                </div>
+                <div id="fileName" style="margin-top: 0.5rem; color: var(--text-secondary);"></div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Post</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openCreatePostModal() {
+        {% if not user %}
+        alert('Please log in to create a post');
+        window.location.href = '/auth/login';
+        return;
+        {% endif %}
+        document.getElementById('createPostModal').classList.add('active');
+    }
+
+    function closeCreatePostModal() {
+        document.getElementById('createPostModal').classList.remove('active');
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('createPostModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeCreatePostModal();
+        }
+    });
+
+    // Show selected file name
+    document.getElementById('media').addEventListener('change', function(e) {
+        const fileName = e.target.files[0]?.name || '';
+        document.getElementById('fileName').textContent = fileName ? `Selected: ${fileName}` : '';
+    });
+
+    async function votePost(postId, voteType) {
+        {% if not user %}
+        alert('Please log in to vote');
+        window.location.href = '/auth/login';
+        return;
+        {% endif %}
+
+        try {
+            const formData = new FormData();
+            formData.append('vote_type', voteType);
+
+            const response = await fetch(`/api/v1/plugins/blog/post/${postId}/vote`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById(`score-${postId}`).textContent = data.score;
+            }
+        } catch (error) {
+            console.error('Error voting:', error);
+        }
+    }
+</script>
+
+{% endblock %}

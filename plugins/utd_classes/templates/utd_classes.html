@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTD Classes - Study Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(22, 33, 62, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid #8b5cf6;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #e0e0e0;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #16213e;
+            border-bottom: 2px solid #667eea;
+            overflow-x: auto;
+            padding: 0 20px;
+        }
+
+        .tab-button {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            color: #a0a0a0;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: rgba(102, 126, 234, 0.15);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            background: #1a1a2e;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #8b5cf6;
+            margin: 20px 0 10px 0;
+            font-size: 1.4em;
+        }
+
+        .section h4 {
+            color: #a78bfa;
+            margin: 15px 0 8px 0;
+            font-size: 1.2em;
+        }
+
+        .code-block {
+            background: #0f1419;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .code-block code {
+            color: #e0e0e0;
+        }
+
+        .keyword {
+            color: #ff79c6;
+            font-weight: bold;
+        }
+
+        .string {
+            color: #50fa7b;
+        }
+
+        .comment {
+            color: #6272a4;
+            font-style: italic;
+        }
+
+        .function {
+            color: #8be9fd;
+        }
+
+        .number {
+            color: #bd93f9;
+        }
+
+        .highlight-box {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .info-card {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .info-card h5 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .info-card p {
+            line-height: 1.6;
+            color: #d0d0d0;
+        }
+
+        ul, ol {
+            margin: 10px 0 10px 25px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        strong {
+            color: #8b5cf6;
+        }
+
+        .search-box {
+            margin: 20px 0;
+            padding: 15px;
+            background: #1a1a2e;
+            border-radius: 8px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            background: #0f1419;
+            color: #e0e0e0;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .scroll-content {
+            max-height: 80vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .scroll-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .scroll-content::-webkit-scrollbar-track {
+            background: #16213e;
+            border-radius: 5px;
+        }
+
+        .scroll-content::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 5px;
+        }
+
+        .scroll-content::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        th {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 0 5px 5px 0;
+        }
+
+        .badge-important {
+            background: rgba(255, 79, 79, 0.2);
+            color: #ff4f4f;
+            border: 1px solid #ff4f4f;
+        }
+
+        .badge-concept {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border: 1px solid #667eea;
+        }
+
+        .badge-advanced {
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+            border: 1px solid #8b5cf6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 UTD Classes Study Guide</h1>
+            <p>Quick Reference for Your Courses</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('ftec6v97')">FTEC 6V97 - Python</button>
+            <button class="tab-button" onclick="switchTab('future1')">Add New Class +</button>
+        </div>
+
+        <!-- FTEC 6V97 Content -->
+        <div id="ftec6v97" class="tab-content active">
+            <div class="scroll-content">
+                
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 Search Python concepts..." onkeyup="searchContent()">
+                </div>
+
+                <div class="section">
+                    <h2>📚 FTEC 6V97 - Python Programming Comprehensive Reference</h2>
+                    <p style="font-size: 1.1em; margin: 15px 0; line-height: 1.8;">
+                        Complete guide covering Python fundamentals through advanced concepts for your midterm.
+                    </p>
+                </div>
+
+                <!-- Classes & Objects -->
+                <div class="section" id="classes-objects">
+                    <h2>🏗️ Classes & Objects</h2>
+                    <span class="badge badge-important">CORE CONCEPT</span>
+                    
+                    <h3>What are Classes?</h3>
+                    <p>Classes are blueprints for creating objects. They define attributes (data) and methods (functions) that objects will have.</p>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>Class</strong> = Car blueprint/design plans from the manufacturer (e.g., "Toyota Camry 2024 design")</p>
+                        <p><strong>Object</strong> = The actual car you drive (your specific red Camry with VIN #12345)</p>
+                        <p><strong>Attributes</strong> = The car's properties (color, mileage, fuel level)</p>
+                        <p><strong>Methods</strong> = Actions the car can do (accelerate(), brake(), turn())</p>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <p>Python classes are similar to C++ classes, but Python is more flexible and doesn't require explicit access modifiers.</p>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ Version</span>
+<span class="keyword">class</span> <span class="function">Car</span> {
+<span class="keyword">public</span>:
+    <span class="keyword">static</span> <span class="keyword">int</span> wheels = <span class="number">4</span>;  <span class="comment">// Class attribute</span>
+    
+    <span class="comment">// Constructor</span>
+    Car(string b, string c) : brand(b), color(c), speed(<span class="number">0</span>) {}
+    
+    <span class="comment">// Member function</span>
+    string accelerate(<span class="keyword">int</span> amount) {
+        speed += amount;
+        <span class="keyword">return</span> <span class="string">"Now going "</span> + to_string(speed) + <span class="string">" mph"</span>;
+    }
+
+<span class="keyword">private</span>:
+    string brand;  <span class="comment">// Instance attributes</span>
+    string color;
+    <span class="keyword">int</span> speed;
+};</code>
+                        </div>
+                        <p style="margin-top: 10px;"><strong>Key Differences:</strong></p>
+                        <ul>
+                            <li>Python: No explicit public/private (uses _ convention)</li>
+                            <li>Python: Constructor is __init__() vs C++ constructor with class name</li>
+                            <li>Python: self parameter explicit, C++ uses implicit 'this' pointer</li>
+                            <li>Python: Dynamic typing, C++ requires type declarations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="code-block">
+<code><span class="keyword">class</span> <span class="function">Car</span>:
+    <span class="comment"># Class attribute (shared by all instances)</span>
+    wheels = <span class="number">4</span>
+    
+    <span class="comment"># Constructor - initializes object</span>
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, brand, color):
+        <span class="comment"># Instance attributes (unique to each object)</span>
+        self.brand = brand
+        self.color = color
+        self.speed = <span class="number">0</span>
+    
+    <span class="comment"># Instance method</span>
+    <span class="keyword">def</span> <span class="function">accelerate</span>(self, amount):
+        self.speed += amount
+        <span class="keyword">return</span> <span class="string">f"Now going {self.speed} mph"</span>
+    
+    <span class="comment"># String representation</span>
+    <span class="keyword">def</span> <span class="function">__str__</span>(self):
+        <span class="keyword">return</span> <span class="string">f"{self.color} {self.brand}"</span>
+
+<span class="comment"># Creating objects (instances)</span>
+my_car = Car(<span class="string">"Toyota"</span>, <span class="string">"red"</span>)
+your_car = Car(<span class="string">"Honda"</span>, <span class="string">"blue"</span>)
+
+<span class="keyword">print</span>(my_car.accelerate(<span class="number">30</span>))  <span class="comment"># Now going 30 mph</span></code>
+                    </div>
+
+                    <h3>Key Components</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h5>__init__ (Constructor)</h5>
+                            <p>Special method that runs when creating a new object. Initializes attributes.</p>
+                        </div>
+                        <div class="info-card">
+                            <h5>self</h5>
+                            <p>Refers to the current instance. Required as first parameter in instance methods.</p>
+                        </div>
+                        <div class="info-card">
+                            <h5>Instance Attributes</h5>
+                            <p>Data unique to each object (self.brand, self.color)</p>
+                        </div>
+                        <div class="info-card">
+                            <h5>Class Attributes</h5>
+                            <p>Data shared by all instances (wheels = 4)</p>
+                        </div>
+                    </div>
+
+                    <h3>Inheritance</h3>
+                    <span class="badge badge-advanced">ADVANCED</span>
+                    <div class="code-block">
+<code><span class="keyword">class</span> <span class="function">ElectricCar</span>(Car):  <span class="comment"># Inherits from Car</span>
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, brand, color, battery_size):
+        <span class="keyword">super</span>().__init__(brand, color)  <span class="comment"># Call parent constructor</span>
+        self.battery_size = battery_size
+    
+    <span class="comment"># Method overriding</span>
+    <span class="keyword">def</span> <span class="function">accelerate</span>(self, amount):
+        self.speed += amount * <span class="number">1.5</span>  <span class="comment"># Electric cars accelerate faster!</span>
+        <span class="keyword">return</span> <span class="string">f"⚡ Smoothly at {self.speed} mph"</span>
+
+tesla = ElectricCar(<span class="string">"Tesla"</span>, <span class="string">"white"</span>, <span class="number">100</span>)</code>
+                    </div>
+                </div>
+
+                <!-- Functions & Methods -->
+                <div class="section" id="functions">
+                    <h2>⚡ Functions & Methods</h2>
+                    <span class="badge badge-important">CORE CONCEPT</span>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>Function</strong> = A tool in your garage (like a tire pump) - standalone, can work on any car</p>
+                        <p><strong>Method</strong> = Built-in car function (like cruise control) - tied to that specific car</p>
+                        <p><strong>Parameters</strong> = Input (gas pedal pressure, steering wheel angle)</p>
+                        <p><strong>Return value</strong> = Output (new speed, new direction)</p>
+                    </div>
+                    
+                    <h3>Regular Functions</h3>
+                    <div class="code-block">
+<code><span class="keyword">def</span> <span class="function">greet</span>(name, greeting=<span class="string">"Hello"</span>):  <span class="comment"># Default parameter</span>
+    <span class="string">"""This is a docstring - describes the function"""</span>
+    <span class="keyword">return</span> <span class="string">f"{greeting}, {name}!"</span>
+
+<span class="comment"># Calling functions</span>
+<span class="keyword">print</span>(greet(<span class="string">"Alice"</span>))              <span class="comment"># Hello, Alice!</span>
+<span class="keyword">print</span>(greet(<span class="string">"Bob"</span>, <span class="string">"Hi"</span>))        <span class="comment"># Hi, Bob!</span>
+<span class="keyword">print</span>(greet(name=<span class="string">"Eve"</span>, greeting=<span class="string">"Hey"</span>))  <span class="comment"># Keyword args</span></code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ Version (Default Parameters)</span>
+string greet(string name, string greeting = <span class="string">"Hello"</span>) {
+    <span class="keyword">return</span> greeting + <span class="string">", "</span> + name + <span class="string">"!"</span>;
+}
+
+<span class="comment">// Calling</span>
+cout << greet(<span class="string">"Alice"</span>);         <span class="comment">// Hello, Alice!</span>
+cout << greet(<span class="string">"Bob"</span>, <span class="string">"Hi"</span>);   <span class="comment">// Hi, Bob!</span>
+<span class="comment">// Note: C++ doesn't have keyword arguments natively</span></code>
+                        </div>
+                    </div>
+
+                    <h3>*args and **kwargs</h3>
+                    <span class="badge badge-advanced">ADVANCED</span>
+                    <div class="code-block">
+<code><span class="comment"># *args - variable number of positional arguments</span>
+<span class="keyword">def</span> <span class="function">sum_all</span>(*numbers):
+    <span class="keyword">return</span> <span class="function">sum</span>(numbers)
+
+<span class="keyword">print</span>(sum_all(<span class="number">1, 2, 3</span>))        <span class="comment"># 6</span>
+<span class="keyword">print</span>(sum_all(<span class="number">1, 2, 3, 4, 5</span>))  <span class="comment"># 15</span>
+
+<span class="comment"># **kwargs - variable number of keyword arguments</span>
+<span class="keyword">def</span> <span class="function">print_info</span>(**info):
+    <span class="keyword">for</span> key, value <span class="keyword">in</span> info.items():
+        <span class="keyword">print</span>(<span class="string">f"{key}: {value}"</span>)
+
+print_info(name=<span class="string">"Alice"</span>, age=<span class="number">25</span>, city=<span class="string">"Dallas"</span>)</code>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>*args</strong> = Variable trunk space - fit any number of bags (1 bag, 5 bags, 10 bags)</p>
+                        <p><strong>**kwargs</strong> = Customizable dashboard - add any labeled controls you want (temp: 72, radio: FM, seat: heated)</p>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ uses variadic templates or initializer_list</span>
+<span class="keyword">template</span><<span class="keyword">typename</span>... Args>
+<span class="keyword">auto</span> sum_all(Args... numbers) {
+    <span class="keyword">return</span> (numbers + ...);  <span class="comment">// Fold expression (C++17)</span>
+}
+
+<span class="comment">// Or using initializer_list</span>
+<span class="keyword">int</span> sum_all(initializer_list<<span class="keyword">int</span>> numbers) {
+    <span class="keyword">int</span> total = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> n : numbers) total += n;
+    <span class="keyword">return</span> total;
+}
+
+<span class="comment">// For **kwargs, C++ doesn't have native support</span>
+<span class="comment">// Would use std::map<string, variant> or similar</span></code>
+                        </div>
+                    </div>
+
+                    <h3>Lambda Functions (Anonymous)</h3>
+                    <div class="code-block">
+<code><span class="comment"># Single line functions</span>
+square = <span class="keyword">lambda</span> x: x ** <span class="number">2</span>
+add = <span class="keyword">lambda</span> x, y: x + y
+
+<span class="keyword">print</span>(square(<span class="number">5</span>))      <span class="comment"># 25</span>
+<span class="keyword">print</span>(add(<span class="number">3, 4</span>))      <span class="comment"># 7</span>
+
+<span class="comment"># Common use with map, filter</span>
+numbers = [<span class="number">1, 2, 3, 4, 5</span>]
+squared = <span class="function">list</span>(<span class="function">map</span>(<span class="keyword">lambda</span> x: x**<span class="number">2</span>, numbers))
+even = <span class="function">list</span>(<span class="function">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, numbers))</code>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>Lambda</strong> = Quick roadside fix with duct tape - fast, temporary, no need to visit a full garage</p>
+                        <p>Example: Instead of driving to a car wash (full function), use a spray bottle (lambda) for a quick spot clean</p>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ Lambda Functions (C++11+)</span>
+<span class="keyword">auto</span> square = [](<span class="keyword">int</span> x) { <span class="keyword">return</span> x * x; };
+<span class="keyword">auto</span> add = [](<span class="keyword">int</span> x, <span class="keyword">int</span> y) { <span class="keyword">return</span> x + y; };
+
+cout << square(<span class="number">5</span>);      <span class="comment">// 25</span>
+cout << add(<span class="number">3</span>, <span class="number">4</span>);      <span class="comment">// 7</span>
+
+<span class="comment">// With algorithms</span>
+vector<<span class="keyword">int</span>> numbers = {<span class="number">1, 2, 3, 4, 5</span>};
+transform(numbers.begin(), numbers.end(), numbers.begin(),
+          [](<span class="keyword">int</span> x) { <span class="keyword">return</span> x * x; });</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Structures -->
+                <div class="section" id="data-structures">
+                    <h2>📦 Data Structures</h2>
+                    <span class="badge badge-important">CORE CONCEPT</span>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy - Overview</h4>
+                        <p><strong>List</strong> = Parking garage with numbered spots - ordered, can rearrange cars</p>
+                        <p><strong>Tuple</strong> = Train cars - ordered, permanently connected, can't swap</p>
+                        <p><strong>Dictionary</strong> = Valet parking - give ticket (key), get specific car (value)</p>
+                        <p><strong>Set</strong> = Car show - each model appears once, order doesn't matter</p>
+                    </div>
+                    
+                    <h3>Lists (Mutable, Ordered)</h3>
+                    <div class="code-block">
+<code>fruits = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"cherry"</span>]
+
+<span class="comment"># Common operations</span>
+fruits.append(<span class="string">"date"</span>)         <span class="comment"># Add to end</span>
+fruits.insert(<span class="number">1</span>, <span class="string">"avocado"</span>)  <span class="comment"># Insert at index</span>
+fruits.remove(<span class="string">"banana"</span>)       <span class="comment"># Remove by value</span>
+popped = fruits.pop()         <span class="comment"># Remove and return last item</span>
+fruits.sort()                 <span class="comment"># Sort in place</span>
+fruits.reverse()              <span class="comment"># Reverse in place</span>
+
+<span class="comment"># Slicing</span>
+<span class="keyword">print</span>(fruits[<span class="number">1:3</span>])           <span class="comment"># Items 1 and 2</span>
+<span class="keyword">print</span>(fruits[::<span class="number">-1</span>])          <span class="comment"># Reverse the list</span>
+
+<span class="comment"># List comprehension</span>
+squares = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="function">range</span>(<span class="number">10</span>)]
+even_squares = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="function">range</span>(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ vector (dynamic array)</span>
+#include <vector>
+vector<string> fruits = {<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"cherry"</span>};
+
+<span class="comment">// Common operations</span>
+fruits.push_back(<span class="string">"date"</span>);          <span class="comment">// Add to end</span>
+fruits.insert(fruits.begin()+<span class="number">1</span>, <span class="string">"avocado"</span>);  <span class="comment">// Insert at index</span>
+fruits.erase(remove(fruits.begin(), fruits.end(), <span class="string">"banana"</span>), fruits.end());
+fruits.pop_back();                 <span class="comment">// Remove last</span>
+sort(fruits.begin(), fruits.end());  <span class="comment">// Sort</span>
+reverse(fruits.begin(), fruits.end());  <span class="comment">// Reverse</span>
+
+<span class="comment">// Slicing not native - use iterators or copy</span>
+vector<string> subset(fruits.begin()+<span class="number">1</span>, fruits.begin()+<span class="number">3</span>);</code>
+                        </div>
+                    </div>
+
+                    <h3>Tuples (Immutable, Ordered)</h3>
+                    <div class="code-block">
+<code>coordinates = (<span class="number">10, 20</span>)
+person = (<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="string">"Dallas"</span>)
+
+<span class="comment"># Unpacking</span>
+x, y = coordinates
+name, age, city = person
+
+<span class="comment"># Cannot modify tuples!</span>
+<span class="comment"># coordinates[0] = 15  # This would cause an error</span></code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ tuple (C++11+) or std::pair</span>
+#include <tuple>
+tuple<<span class="keyword">int</span>, <span class="keyword">int</span>> coordinates(<span class="number">10</span>, <span class="number">20</span>);
+tuple<string, <span class="keyword">int</span>, string> person(<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="string">"Dallas"</span>);
+
+<span class="comment">// Unpacking (C++17 structured bindings)</span>
+<span class="keyword">auto</span> [x, y] = coordinates;
+<span class="keyword">auto</span> [name, age, city] = person;
+
+<span class="comment">// Or use std::pair for 2 elements</span>
+pair<<span class="keyword">int</span>, <span class="keyword">int</span>> coords(<span class="number">10</span>, <span class="number">20</span>);
+<span class="keyword">int</span> x = coords.first;
+<span class="keyword">int</span> y = coords.second;</code>
+                        </div>
+                    </div>
+
+                    <h3>Dictionaries (Key-Value Pairs)</h3>
+                    <div class="code-block">
+<code>student = {
+    <span class="string">"name"</span>: <span class="string">"Alice"</span>,
+    <span class="string">"age"</span>: <span class="number">22</span>,
+    <span class="string">"courses"</span>: [<span class="string">"FTEC 6V97"</span>, <span class="string">"CS 6301"</span>]
+}
+
+<span class="comment"># Accessing values</span>
+<span class="keyword">print</span>(student[<span class="string">"name"</span>])           <span class="comment"># Alice</span>
+<span class="keyword">print</span>(student.get(<span class="string">"gpa"</span>, <span class="number">0.0</span>))  <span class="comment"># Safe access with default</span>
+
+<span class="comment"># Adding/modifying</span>
+student[<span class="string">"gpa"</span>] = <span class="number">3.8</span>
+
+<span class="comment"># Iterating</span>
+<span class="keyword">for</span> key, value <span class="keyword">in</span> student.items():
+    <span class="keyword">print</span>(<span class="string">f"{key}: {value}"</span>)
+
+<span class="comment"># Dictionary comprehension</span>
+squared = {x: x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="function">range</span>(<span class="number">6</span>)}</code>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p>Like a car's feature lookup: key="heated_seats" → value=True, key="sunroof" → value=False</p>
+                        <p>VIN lookup system: VIN (key) → Car details (value)</p>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ std::map (ordered) or std::unordered_map (hash table)</span>
+#include <map>
+#include <unordered_map>
+
+map<string, <span class="keyword">int</span>> student;
+student[<span class="string">"age"</span>] = <span class="number">22</span>;
+student[<span class="string">"gpa"</span>] = <span class="number">3</span>;
+
+<span class="comment">// Accessing values</span>
+cout << student[<span class="string">"age"</span>];  <span class="comment">// 22</span>
+<span class="keyword">int</span> gpa = student.count(<span class="string">"gpa"</span>) ? student[<span class="string">"gpa"</span>] : <span class="number">0</span>;
+
+<span class="comment">// Iterating</span>
+<span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>& [key, value] : student) {
+    cout << key << <span class="string">": "</span> << value << endl;
+}
+
+<span class="comment">// unordered_map is faster (O(1) vs O(log n))</span>
+unordered_map<string, <span class="keyword">int</span>> fast_student;</code>
+                        </div>
+                    </div>
+
+                    <h3>Sets (Unique, Unordered)</h3>
+                    <div class="code-block">
+<code>numbers = {<span class="number">1, 2, 3, 4, 5</span>}
+letters = <span class="function">set</span>([<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"a"</span>])  <span class="comment"># Duplicates removed</span>
+
+<span class="comment"># Set operations</span>
+set_a = {<span class="number">1, 2, 3</span>}
+set_b = {<span class="number">3, 4, 5</span>}
+
+<span class="keyword">print</span>(set_a | set_b)  <span class="comment"># Union: {1, 2, 3, 4, 5}</span>
+<span class="keyword">print</span>(set_a & set_b)  <span class="comment"># Intersection: {3}</span>
+<span class="keyword">print</span>(set_a - set_b)  <span class="comment"># Difference: {1, 2}</span></code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ std::set (ordered) or std::unordered_set</span>
+#include <set>
+#include <unordered_set>
+
+set<<span class="keyword">int</span>> numbers = {<span class="number">1, 2, 3, 4, 5</span>};
+unordered_set<string> letters = {<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"a"</span>};  <span class="comment">// Duplicates removed</span>
+
+<span class="comment">// Set operations</span>
+set<<span class="keyword">int</span>> set_a = {<span class="number">1, 2, 3</span>};
+set<<span class="keyword">int</span>> set_b = {<span class="number">3, 4, 5</span>};
+set<<span class="keyword">int</span>> result;
+
+<span class="comment">// Union</span>
+set_union(set_a.begin(), set_a.end(), 
+          set_b.begin(), set_b.end(),
+          inserter(result, result.begin()));
+
+<span class="comment">// Intersection, difference use similar syntax</span></code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decorators -->
+                <div class="section" id="decorators">
+                    <h2>🎨 Decorators</h2>
+                    <span class="badge badge-advanced">ADVANCED</span>
+                    
+                    <h3>What are Decorators?</h3>
+                    <p>Functions that modify or enhance other functions without changing their code.</p>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>Decorator</strong> = Car wrap or body kit - changes appearance/features without modifying the engine</p>
+                        <p>Example: Add racing stripes decorator → same car, looks faster!</p>
+                        <p>@turbocharger decorator → add power boost without rebuilding engine</p>
+                        <p>@alarm_system decorator → add security without redesigning the car</p>
+                    </div>
+                    
+                    <div class="code-block">
+<code><span class="keyword">def</span> <span class="function">timing_decorator</span>(func):
+    <span class="keyword">import</span> time
+    <span class="keyword">def</span> <span class="function">wrapper</span>(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        <span class="keyword">print</span>(<span class="string">f"{func.__name__} took {end-start:.4f} seconds"</span>)
+        <span class="keyword">return</span> result
+    <span class="keyword">return</span> wrapper
+
+<span class="comment"># Using decorator with @ syntax</span>
+@timing_decorator
+<span class="keyword">def</span> <span class="function">slow_function</span>():
+    <span class="keyword">import</span> time
+    time.sleep(<span class="number">1</span>)
+    <span class="keyword">return</span> <span class="string">"Done!"</span>
+
+slow_function()  <span class="comment"># Prints: slow_function took 1.0001 seconds</span></code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <p>C++ doesn't have decorators, but similar patterns exist:</p>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ - Function wrapper or template metaprogramming</span>
+<span class="keyword">template</span><<span class="keyword">typename</span> Func>
+<span class="keyword">auto</span> timing_wrapper(Func func) {
+    <span class="keyword">return</span> [func](<span class="keyword">auto</span>... args) {
+        <span class="keyword">auto</span> start = chrono::high_resolution_clock::now();
+        <span class="keyword">auto</span> result = func(args...);
+        <span class="keyword">auto</span> end = chrono::high_resolution_clock::now();
+        <span class="keyword">auto</span> duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+        cout << <span class="string">"Took "</span> << duration.count() << <span class="string">"ms"</span> << endl;
+        <span class="keyword">return</span> result;
+    };
+}
+
+<span class="comment">// Usage</span>
+<span class="keyword">auto</span> timed_func = timing_wrapper(my_function);</code>
+                        </div>
+                        <p><strong>Note:</strong> C++ uses RAII, templates, and wrappers for similar effects</p>
+                    </div>
+
+                    <h3>Common Built-in Decorators</h3>
+                    <div class="code-block">
+<code><span class="keyword">class</span> <span class="function">MyClass</span>:
+    <span class="comment"># Static method - doesn't need instance or class</span>
+    @staticmethod
+    <span class="keyword">def</span> <span class="function">static_method</span>():
+        <span class="keyword">return</span> <span class="string">"No self or cls needed"</span>
+    
+    <span class="comment"># Class method - receives class as first argument</span>
+    @classmethod
+    <span class="keyword">def</span> <span class="function">class_method</span>(cls):
+        <span class="keyword">return</span> <span class="string">f"Called on class {cls.__name__}"</span>
+    
+    <span class="comment"># Property - access method like an attribute</span>
+    @property
+    <span class="keyword">def</span> <span class="function">my_property</span>(self):
+        <span class="keyword">return</span> self._value
+
+obj = MyClass()
+<span class="keyword">print</span>(MyClass.static_method())
+<span class="keyword">print</span>(MyClass.class_method())</code>
+                    </div>
+                </div>
+
+                <!-- Exception Handling -->
+                <div class="section" id="exceptions">
+                    <h2>⚠️ Exception Handling</h2>
+                    <span class="badge badge-important">CORE CONCEPT</span>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>try</strong> = Attempting to start the car</p>
+                        <p><strong>except</strong> = Backup plan if car won't start (dead battery, out of gas)</p>
+                        <p><strong>else</strong> = What to do if car starts fine (drive to work!)</p>
+                        <p><strong>finally</strong> = Always happens (close garage door regardless)</p>
+                        <p><strong>raise</strong> = Sound the alarm! Manual problem notification</p>
+                    </div>
+                    
+                    <div class="code-block">
+<code><span class="keyword">try</span>:
+    x = <span class="number">10</span> / <span class="number">0</span>  <span class="comment"># This will raise ZeroDivisionError</span>
+<span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:
+    <span class="keyword">print</span>(<span class="string">f"Error: {e}"</span>)
+<span class="keyword">except</span> Exception <span class="keyword">as</span> e:  <span class="comment"># Catch all other exceptions</span>
+    <span class="keyword">print</span>(<span class="string">f"Unexpected error: {e}"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"No errors occurred"</span>)  <span class="comment"># Runs if no exception</span>
+<span class="keyword">finally</span>:
+    <span class="keyword">print</span>(<span class="string">"This always runs"</span>)  <span class="comment"># Cleanup code</span>
+
+<span class="comment"># Raising exceptions</span>
+<span class="keyword">def</span> <span class="function">validate_age</span>(age):
+    <span class="keyword">if</span> age < <span class="number">0</span>:
+        <span class="keyword">raise</span> ValueError(<span class="string">"Age cannot be negative"</span>)
+    <span class="keyword">return</span> age</code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ exception handling</span>
+<span class="keyword">try</span> {
+    <span class="keyword">int</span> x = <span class="number">10</span> / <span class="number">0</span>;  <span class="comment">// Undefined behavior in C++!</span>
+} <span class="keyword">catch</span> (<span class="keyword">const</span> runtime_error& e) {
+    cout << <span class="string">"Error: "</span> << e.what() << endl;
+} <span class="keyword">catch</span> (<span class="keyword">const</span> exception& e) {  <span class="comment">// Catch all std exceptions</span>
+    cout << <span class="string">"Unexpected: "</span> << e.what() << endl;
+} <span class="keyword">catch</span> (...) {  <span class="comment">// Catch absolutely everything</span>
+    cout << <span class="string">"Unknown error"</span> << endl;
+}
+
+<span class="comment">// C++ doesn't have 'else' - use flag or nest</span>
+<span class="comment">// 'finally' doesn't exist - use RAII or destructors</span>
+
+<span class="comment">// Throwing exceptions</span>
+<span class="keyword">int</span> validate_age(<span class="keyword">int</span> age) {
+    <span class="keyword">if</span> (age < <span class="number">0</span>) {
+        <span class="keyword">throw</span> invalid_argument(<span class="string">"Age cannot be negative"</span>);
+    }
+    <span class="keyword">return</span> age;
+}</code>
+                        </div>
+                        <p><strong>Key Differences:</strong> C++ uses RAII for cleanup instead of finally</p>
+                    </div>
+
+                    <h3>Common Exception Types</h3>
+                    <table>
+                        <tr>
+                            <th>Exception</th>
+                            <th>When it Occurs</th>
+                        </tr>
+                        <tr>
+                            <td>ValueError</td>
+                            <td>Wrong value type (e.g., int("abc"))</td>
+                        </tr>
+                        <tr>
+                            <td>TypeError</td>
+                            <td>Wrong type (e.g., "string" + 5)</td>
+                        </tr>
+                        <tr>
+                            <td>KeyError</td>
+                            <td>Dictionary key doesn't exist</td>
+                        </tr>
+                        <tr>
+                            <td>IndexError</td>
+                            <td>List index out of range</td>
+                        </tr>
+                        <tr>
+                            <td>FileNotFoundError</td>
+                            <td>File doesn't exist</td>
+                        </tr>
+                        <tr>
+                            <td>ZeroDivisionError</td>
+                            <td>Division by zero</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- File I/O -->
+                <div class="section" id="file-io">
+                    <h2>📁 File Input/Output</h2>
+                    <span class="badge badge-concept">COMMON USE</span>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>File</strong> = Car's logbook/manual stored in glove compartment</p>
+                        <p><strong>Read mode ('r')</strong> = Looking at the manual without writing in it</p>
+                        <p><strong>Write mode ('w')</strong> = Starting fresh logbook (erases old entries!)</p>
+                        <p><strong>Append mode ('a')</strong> = Adding new entries to existing logbook</p>
+                        <p><strong>Close file</strong> = Put logbook back in glove compartment properly</p>
+                    </div>
+                    
+                    <h3>Reading Files</h3>
+                    <div class="code-block">
+<code><span class="comment"># Read entire file</span>
+<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"data.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> file:
+    content = file.read()
+    <span class="keyword">print</span>(content)
+
+<span class="comment"># Read line by line</span>
+<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"data.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> file:
+    <span class="keyword">for</span> line <span class="keyword">in</span> file:
+        <span class="keyword">print</span>(line.strip())  <span class="comment"># Remove newline chars</span>
+
+<span class="comment"># Read all lines into list</span>
+<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"data.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> file:
+    lines = file.readlines()</code>
+                    </div>
+
+                    <h3>Writing Files</h3>
+                    <div class="code-block">
+<code><span class="comment"># Write (overwrites existing file)</span>
+<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"output.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> file:
+    file.write(<span class="string">"Hello, World!\n"</span>)
+    file.write(<span class="string">"Second line\n"</span>)
+
+<span class="comment"># Append (adds to existing file)</span>
+<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"output.txt"</span>, <span class="string">"a"</span>) <span class="keyword">as</span> file:
+    file.write(<span class="string">"Appended line\n"</span>)
+
+<span class="comment"># File modes: 'r' = read, 'w' = write, 'a' = append, 'r+' = read/write</span></code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ file I/O using fstream</span>
+#include <fstream>
+#include <string>
+
+<span class="comment">// Reading entire file</span>
+ifstream file(<span class="string">"data.txt"</span>);
+string content((istreambuf_iterator<<span class="keyword">char</span>>(file)),
+                istreambuf_iterator<<span class="keyword">char</span>>());
+file.close();
+
+<span class="comment">// Reading line by line</span>
+ifstream file(<span class="string">"data.txt"</span>);
+string line;
+<span class="keyword">while</span> (getline(file, line)) {
+    cout << line << endl;
+}
+file.close();
+
+<span class="comment">// Writing to file</span>
+ofstream outfile(<span class="string">"output.txt"</span>);  <span class="comment">// ios::out mode (overwrite)</span>
+outfile << <span class="string">"Hello, World!\n"</span>;
+outfile << <span class="string">"Second line\n"</span>;
+outfile.close();
+
+<span class="comment">// Appending to file</span>
+ofstream appendfile(<span class="string">"output.txt"</span>, ios::app);
+appendfile << <span class="string">"Appended line\n"</span>;
+appendfile.close();</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Context Managers -->
+                <div class="section" id="context-managers">
+                    <h2>🔒 Context Managers (with statement)</h2>
+                    <span class="badge badge-advanced">ADVANCED</span>
+                    
+                    <p>Context managers ensure resources are properly cleaned up (e.g., files are closed).</p>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>with statement</strong> = Valet parking service - they handle parking AND retrieving your car</p>
+                        <p>You don't worry about finding a spot or remembering where you parked</p>
+                        <p>Guaranteed car retrieval when done, even if restaurant catches fire (exception)!</p>
+                    </div>
+                    
+                    <div class="code-block">
+<code><span class="comment"># The 'with' statement automatically closes resources</span>
+<span class="keyword">with</span> <span class="function">open</span>(<span class="string">"file.txt"</span>) <span class="keyword">as</span> f:
+    data = f.read()
+<span class="comment"># File is automatically closed here</span>
+
+<span class="comment"># Creating custom context manager</span>
+<span class="keyword">class</span> <span class="function">DatabaseConnection</span>:
+    <span class="keyword">def</span> <span class="function">__enter__</span>(self):
+        <span class="keyword">print</span>(<span class="string">"Opening connection"</span>)
+        <span class="keyword">return</span> self
+    
+    <span class="keyword">def</span> <span class="function">__exit__</span>(self, exc_type, exc_val, exc_tb):
+        <span class="keyword">print</span>(<span class="string">"Closing connection"</span>)
+        <span class="keyword">return</span> <span class="keyword">False</span>  <span class="comment"># Don't suppress exceptions</span>
+
+<span class="keyword">with</span> DatabaseConnection() <span class="keyword">as</span> db:
+    <span class="keyword">print</span>(<span class="string">"Using database"</span>)</code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ uses RAII (Resource Acquisition Is Initialization)</span>
+<span class="comment">// Destructors automatically called when object goes out of scope</span>
+
+<span class="keyword">class</span> DatabaseConnection {
+<span class="keyword">public</span>:
+    DatabaseConnection() {
+        cout << <span class="string">"Opening connection"</span> << endl;
+    }
+    
+    ~DatabaseConnection() {  <span class="comment">// Destructor - automatic cleanup!</span>
+        cout << <span class="string">"Closing connection"</span> << endl;
+    }
+};
+
+{
+    DatabaseConnection db;  <span class="comment">// Constructor called</span>
+    cout << <span class="string">"Using database"</span> << endl;
+}  <span class="comment">// Destructor automatically called here!</span>
+
+<span class="comment">// Or use smart pointers (unique_ptr, shared_ptr)</span>
+{
+    <span class="keyword">auto</span> db = make_unique<DatabaseConnection>();
+    <span class="comment">// Automatically cleaned up when out of scope</span>
+}</code>
+                        </div>
+                        <p><strong>Philosophy:</strong> Python = explicit 'with', C++ = automatic RAII</p>
+                    </div>
+                </div>
+
+                <!-- Iterators & Generators -->
+                <div class="section" id="iterators">
+                    <h2>🔄 Iterators & Generators</h2>
+                    <span class="badge badge-advanced">ADVANCED</span>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>Iterator</strong> = Assembly line - one car at a time, methodical process</p>
+                        <p><strong>Generator</strong> = Made-to-order factory - builds next car only when customer asks (memory efficient!)</p>
+                        <p><strong>yield</strong> = "Here's one car, I'll pause production until you need the next one"</p>
+                        <p>vs <strong>return list</strong> = "Here are ALL 1000 cars at once!" (uses lots of parking lot space/memory)</p>
+                    </div>
+                    
+                    <h3>Iterators</h3>
+                    <div class="code-block">
+<code><span class="comment"># Any object that implements __iter__() and __next__()</span>
+<span class="keyword">class</span> <span class="function">Counter</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, max_value):
+        self.max_value = max_value
+        self.current = <span class="number">0</span>
+    
+    <span class="keyword">def</span> <span class="function">__iter__</span>(self):
+        <span class="keyword">return</span> self
+    
+    <span class="keyword">def</span> <span class="function">__next__</span>(self):
+        <span class="keyword">if</span> self.current >= self.max_value:
+            <span class="keyword">raise</span> StopIteration
+        self.current += <span class="number">1</span>
+        <span class="keyword">return</span> self.current
+
+<span class="keyword">for</span> num <span class="keyword">in</span> Counter(<span class="number">5</span>):
+    <span class="keyword">print</span>(num)  <span class="comment"># 1, 2, 3, 4, 5</span></code>
+                    </div>
+
+                    <h3>Generators (Memory Efficient)</h3>
+                    <div class="code-block">
+<code><span class="comment"># Generator function (uses yield)</span>
+<span class="keyword">def</span> <span class="function">fibonacci</span>(n):
+    a, b = <span class="number">0, 1</span>
+    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="function">range</span>(n):
+        <span class="keyword">yield</span> a  <span class="comment"># Returns value and pauses</span>
+        a, b = b, a + b
+
+<span class="keyword">for</span> num <span class="keyword">in</span> fibonacci(<span class="number">10</span>):
+    <span class="keyword">print</span>(num)
+
+<span class="comment"># Generator expression (like list comprehension)</span>
+squares_gen = (x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1000000</span>))  <span class="comment"># Doesn't create list in memory!</span></code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ Iterators (built into STL containers)</span>
+vector<<span class="keyword">int</span>> numbers = {<span class="number">1, 2, 3, 4, 5</span>};
+<span class="keyword">for</span> (<span class="keyword">auto</span> it = numbers.begin(); it != numbers.end(); ++it) {
+    cout << *it << endl;
+}
+
+<span class="comment">// Range-based for loop (syntactic sugar)</span>
+<span class="keyword">for</span> (<span class="keyword">int</span> num : numbers) {
+    cout << num << endl;
+}
+
+<span class="comment">// C++20 coroutines (generators!)</span>
+#include <coroutine>
+generator<<span class="keyword">int</span>> fibonacci(<span class="keyword">int</span> n) {
+    <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">1</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i < n; ++i) {
+        co_yield a;  <span class="comment">// Similar to Python yield!</span>
+        <span class="keyword">auto</span> temp = a;
+        a = b;
+        b = temp + b;
+    }
+}
+
+<span class="comment">// Pre-C++20: Use custom iterator classes</span></code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Built-in Functions -->
+                <div class="section" id="builtins">
+                    <h2>🛠️ Essential Built-in Functions</h2>
+                    <span class="badge badge-important">MUST KNOW</span>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy - Built-in Tools</h4>
+                        <p><strong>len()</strong> = Odometer reading (how far/long)</p>
+                        <p><strong>range()</strong> = Cruise control speed presets (55, 60, 65...)</p>
+                        <p><strong>enumerate()</strong> = Mile markers on highway with scenery</p>
+                        <p><strong>zip()</strong> = Merging two lanes into one</p>
+                        <p><strong>map()</strong> = Car wash - apply same cleaning to all cars</p>
+                        <p><strong>filter()</strong> = Toll booth EZ-Pass lane - only certain cars pass</p>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h5>len()</h5>
+                            <p>Returns length of object</p>
+                            <code>len([1,2,3]) # 3</code>
+                        </div>
+                        <div class="info-card">
+                            <h5>range()</h5>
+                            <p>Generates sequence of numbers</p>
+                            <code>range(5) # 0,1,2,3,4</code>
+                        </div>
+                        <div class="info-card">
+                            <h5>enumerate()</h5>
+                            <p>Adds counter to iterable</p>
+                            <code>for i, v in enumerate(list)</code>
+                        </div>
+                        <div class="info-card">
+                            <h5>zip()</h5>
+                            <p>Combines iterables</p>
+                            <code>zip([1,2], ['a','b'])</code>
+                        </div>
+                        <div class="info-card">
+                            <h5>map()</h5>
+                            <p>Apply function to all items</p>
+                            <code>map(str.upper, words)</code>
+                        </div>
+                        <div class="info-card">
+                            <h5>filter()</h5>
+                            <p>Filter items by condition</p>
+                            <code>filter(lambda x: x>0, nums)</code>
+                        </div>
+                        <div class="info-card">
+                            <h5>sorted()</h5>
+                            <p>Returns sorted list</p>
+                            <code>sorted(list, reverse=True)</code>
+                        </div>
+                        <div class="info-card">
+                            <h5>any() / all()</h5>
+                            <p>Check if any/all items are True</p>
+                            <code>any([False, True]) # True</code>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalents</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ STL algorithms (need #include <algorithm>)</span>
+vector<<span class="keyword">int</span>> vec = {<span class="number">1, 2, 3, 4, 5</span>};
+
+vec.size()           <span class="comment">// len() equivalent</span>
+<span class="comment">// range() → use for loop or iota</span>
+<span class="comment">// enumerate() → use loop with index or boost::counting_iterator</span>
+
+<span class="comment">// zip() - no native equivalent, use boost::zip_iterator or custom</span>
+
+<span class="comment">// map()</span>
+transform(vec.begin(), vec.end(), vec.begin(), 
+          [](<span class="keyword">int</span> x) { <span class="keyword">return</span> x * <span class="number">2</span>; });
+
+<span class="comment">// filter()</span>
+<span class="keyword">auto</span> it = remove_if(vec.begin(), vec.end(),
+                     [](<span class="keyword">int</span> x) { <span class="keyword">return</span> x < <span class="number">0</span>; });
+vec.erase(it, vec.end());
+
+<span class="comment">// sorted()</span>
+sort(vec.begin(), vec.end());
+
+<span class="comment">// any() / all()</span>
+any_of(vec.begin(), vec.end(), [](<span class="keyword">int</span> x) { <span class="keyword">return</span> x > <span class="number">0</span>; });
+all_of(vec.begin(), vec.end(), [](<span class="keyword">int</span> x) { <span class="keyword">return</span> x > <span class="number">0</span>; });</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- String Methods -->
+                <div class="section" id="strings">
+                    <h2>📝 String Methods & Operations</h2>
+                    <span class="badge badge-concept">COMMON USE</span>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>String</strong> = License plate text</p>
+                        <p><strong>strip()</strong> = Remove dirt from edges of plate</p>
+                        <p><strong>upper()/lower()</strong> = Change letter styling (ABC vs abc)</p>
+                        <p><strong>split()</strong> = Break plate "TX-1234" into ["TX", "1234"]</p>
+                        <p><strong>join()</strong> = Connect plate parts TX + 1234 = "TX-1234"</p>
+                        <p><strong>replace()</strong> = Get vanity plate - swap numbers for letters</p>
+                    </div>
+                    
+                    <div class="code-block">
+<code>text = <span class="string">"  Hello, World!  "</span>
+
+<span class="comment"># Common string methods</span>
+text.strip()           <span class="comment"># Remove whitespace: "Hello, World!"</span>
+text.lower()           <span class="comment"># Lowercase: "  hello, world!  "</span>
+text.upper()           <span class="comment"># Uppercase</span>
+text.split(<span class="string">","</span>)       <span class="comment"># Split into list: ["  Hello", " World!  "]</span>
+<span class="string">"-"</span>.join([<span class="string">"a"</span>, <span class="string">"b"</span>])  <span class="comment"># Join list: "a-b"</span>
+text.replace(<span class="string">"Hello"</span>, <span class="string">"Hi"</span>)  <span class="comment"># Replace substring</span>
+text.startswith(<span class="string">"  H"</span>)    <span class="comment"># True</span>
+text.endswith(<span class="string">"!"</span>)      <span class="comment"># False (has spaces after)</span>
+text.find(<span class="string">"World"</span>)     <span class="comment"># Index of substring: 9</span>
+
+<span class="comment"># F-strings (formatted strings)</span>
+name = <span class="string">"Alice"</span>
+age = <span class="number">25</span>
+<span class="keyword">print</span>(<span class="string">f"My name is {name} and I'm {age} years old"</span>)
+<span class="keyword">print</span>(<span class="string">f"Pi is approximately {3.14159:.2f}"</span>)  <span class="comment"># 3.14</span></code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ string methods (need #include <string>)</span>
+#include <string>
+#include <algorithm>
+#include <sstream>
+
+string text = <span class="string">"  Hello, World!  "</span>;
+
+<span class="comment">// String methods</span>
+text.erase(<span class="number">0</span>, text.find_first_not_of(<span class="string">" "</span>));  <span class="comment">// ltrim</span>
+text.erase(text.find_last_not_of(<span class="string">" "</span>) + <span class="number">1</span>);   <span class="comment">// rtrim</span>
+
+transform(text.begin(), text.end(), text.begin(), ::tolower);
+transform(text.begin(), text.end(), text.begin(), ::toupper);
+
+<span class="comment">// Split (requires manual implementation or boost)</span>
+stringstream ss(text);
+string token;
+vector<string> tokens;
+<span class="keyword">while</span> (getline(ss, token, <span class="string">','</span>)) {
+    tokens.push_back(token);
+}
+
+<span class="comment">// Replace</span>
+size_t pos = text.find(<span class="string">"Hello"</span>);
+<span class="keyword">if</span> (pos != string::npos) {
+    text.replace(pos, <span class="number">5</span>, <span class="string">"Hi"</span>);
+}
+
+<span class="comment">// C++20 format (similar to f-strings)</span>
+#include <format>
+string result = format(<span class="string">"My name is {} and I'm {} years old"</span>, name, age);</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modules & Imports -->
+                <div class="section" id="modules">
+                    <h2>📚 Modules & Imports</h2>
+                    <span class="badge badge-concept">COMMON USE</span>
+                    
+                    <div class="highlight-box">
+                        <h4>🚗 Car Analogy</h4>
+                        <p><strong>Module</strong> = Aftermarket parts catalog (Brembo brakes, K&N filters)</p>
+                        <p><strong>import math</strong> = Order the whole Brembo catalog</p>
+                        <p><strong>from math import sqrt</strong> = Order just the brake rotors</p>
+                        <p><strong>import numpy as np</strong> = Call catalog "NP" for short</p>
+                        <p><strong>from math import *</strong> = Order EVERYTHING (messy garage!)</p>
+                    </div>
+                    
+                    <div class="code-block">
+<code><span class="comment"># Different ways to import</span>
+<span class="keyword">import</span> math                    <span class="comment"># Import entire module</span>
+<span class="keyword">print</span>(math.pi)
+
+<span class="keyword">from</span> math <span class="keyword">import</span> sqrt, pi    <span class="comment"># Import specific items</span>
+<span class="keyword">print</span>(sqrt(<span class="number">16</span>))
+
+<span class="keyword">from</span> math <span class="keyword">import</span> *            <span class="comment"># Import everything (not recommended)</span>
+
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np           <span class="comment"># Import with alias</span>
+arr = np.array([<span class="number">1, 2, 3</span>])
+
+<span class="comment"># Common useful modules</span>
+<span class="keyword">import</span> os        <span class="comment"># Operating system operations</span>
+<span class="keyword">import</span> sys       <span class="comment"># System-specific parameters</span>
+<span class="keyword">import</span> datetime  <span class="comment"># Date and time operations</span>
+<span class="keyword">import</span> random    <span class="comment"># Random number generation</span>
+<span class="keyword">import</span> json      <span class="comment"># JSON encoding/decoding</span></code>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #8be9fd;">
+                        <h4>⚙️ C++ Equivalent</h4>
+                        <div class="code-block" style="margin-top: 10px;">
+<code><span class="comment">// C++ uses #include for headers</span>
+#include <cmath>      <span class="comment">// Math functions (sqrt, pow, etc.)</span>
+#include <iostream>   <span class="comment">// Input/output</span>
+#include <vector>     <span class="comment">// Dynamic arrays</span>
+#include <algorithm>  <span class="comment">// Algorithms (sort, find, etc.)</span>
+#include <string>     <span class="comment">// String class</span>
+#include <fstream>    <span class="comment">// File operations</span>
+
+<span class="comment">// Using specific items from namespace</span>
+<span class="keyword">using</span> std::cout;
+<span class="keyword">using</span> std::vector;
+
+<span class="comment">// Or import entire namespace (like 'from x import *')</span>
+<span class="keyword">using</span> <span class="keyword">namespace</span> std;  <span class="comment">// Not recommended!</span>
+
+<span class="comment">// C++ doesn't have 'import as' - use typedef/using</span>
+<span class="keyword">namespace</span> np = boost::numeric::ublas;  <span class="comment">// Alias</span>
+
+<span class="comment">// Common libraries</span>
+#include <chrono>     <span class="comment">// Time operations</span>
+#include <random>     <span class="comment">// Random numbers</span>
+#include <filesystem> <span class="comment">// File system (C++17)</span></code>
+                        </div>
+                        <p><strong>Key Difference:</strong> C++ includes are compile-time, Python imports are runtime</p>
+                    </div>
+                </div>
+
+                <!-- Quick Tips -->
+                <div class="section">
+                    <h2>💡 Quick Tips for Midterm</h2>
+                    <div class="highlight-box">
+                        <h4>Remember These Key Points:</h4>
+                        <ul>
+                            <li><strong>self</strong> is always the first parameter in instance methods</li>
+                            <li><strong>__init__</strong> is the constructor, not the same as __str__ or __repr__</li>
+                            <li><strong>Lists are mutable</strong>, tuples are immutable</li>
+                            <li><strong>Dictionaries</strong> use curly braces {}, <strong>sets</strong> also use {} but no key:value pairs</li>
+                            <li><strong>Indentation matters!</strong> Python uses indentation for code blocks</li>
+                            <li><strong>range(5)</strong> gives you 0,1,2,3,4 (not 1,2,3,4,5)</li>
+                            <li><strong>try/except/finally</strong> - finally always runs, even with return statements</li>
+                            <li><strong>with statement</strong> automatically handles resource cleanup</li>
+                            <li><strong>yield</strong> makes a function a generator (memory efficient)</li>
+                            <li><strong>Lambda functions</strong> are anonymous single-expression functions</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Future Class Template -->
+        <div id="future1" class="tab-content">
+            <div class="section">
+                <h2>➕ Add New Class</h2>
+                <p style="font-size: 1.1em; line-height: 1.8;">
+                    This section is ready for your next class! Just let me know which course you'd like to add,
+                    and I'll create a comprehensive study guide for it.
+                </p>
+                <div class="highlight-box">
+                    <h4>Future Classes Can Include:</h4>
+                    <ul>
+                        <li>Course notes and key concepts</li>
+                        <li>Code examples and syntax references</li>
+                        <li>Formula sheets and quick references</li>
+                        <li>Practice problems and solutions</li>
+                        <li>Exam preparation materials</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function searchContent() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
