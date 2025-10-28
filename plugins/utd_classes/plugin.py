@@ -1,8 +1,8 @@
 """UTD Classes Study Plugin - Quick reference guide for university courses."""
 
 from pathlib import Path
-from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse
+from fastapi import APIRouter, Request, HTTPException
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
 from jinja2 import ChoiceLoader, FileSystemLoader
 import logging
@@ -81,6 +81,30 @@ class UTDClassesPlugin(WebPlugin):
                 "plugin": "utd_classes",
                 "version": "1.0.0"
             }
+
+        @self._router.get("/download/{file_id}")
+        async def download_file(file_id: str):
+            """Download course files like syllabi."""
+            data_dir = Path(__file__).parent / "data"
+            
+            # Map file IDs to actual files
+            file_mapping = {
+                "ftec6312_syllabus": "ftec6312_fall_2025_syllabus.pdf"
+            }
+            
+            if file_id not in file_mapping:
+                raise HTTPException(status_code=404, detail="File not found")
+            
+            file_path = data_dir / file_mapping[file_id]
+            
+            if not file_path.exists():
+                raise HTTPException(status_code=404, detail="File not found on server")
+            
+            return FileResponse(
+                path=str(file_path),
+                filename=file_mapping[file_id],
+                media_type="application/pdf"
+            )
 
     def get_router(self) -> APIRouter:
         """Return the plugin's router."""

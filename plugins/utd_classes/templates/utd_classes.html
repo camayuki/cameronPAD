@@ -67,6 +67,8 @@
             transition: all 0.3s ease;
             border-bottom: 3px solid transparent;
             white-space: nowrap;
+            position: relative;
+            z-index: 10;
         }
 
         .tab-button:hover {
@@ -78,6 +80,60 @@
             color: #667eea;
             border-bottom-color: #667eea;
             background: rgba(102, 126, 234, 0.15);
+        }
+
+        .course-content {
+            display: none;
+        }
+
+        .course-content.active {
+            display: block;
+        }
+
+        .subtabs {
+            display: flex;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 15px 30px;
+            border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .subtab-button {
+            padding: 10px 20px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #a0a0a0;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 6px;
+            white-space: nowrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .subtab-button:hover {
+            color: #a78bfa;
+            background: rgba(139, 92, 246, 0.2);
+            border-color: #a78bfa;
+        }
+
+        .subtab-button.active {
+            color: #fff;
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+        }
+
+        .subtab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .subtab-content.active {
+            display: block;
         }
 
         .tab-content {
@@ -303,6 +359,8 @@
             border: 1px solid #8b5cf6;
         }
     </style>
+    <!-- Pyodide for running Python in browser -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
 </head>
 <body>
     <div class="container">
@@ -311,18 +369,29 @@
             <p>Quick Reference for Your Courses</p>
         </div>
 
+        <!-- Main Course Tabs -->
         <div class="tabs">
-            <button class="tab-button active" onclick="switchTab('ftec6v97')">FTEC 6V97 - Python</button>
-            <button class="tab-button" onclick="switchTab('future1')">Add New Class +</button>
+            <button class="tab-button active" onclick="switchCourse('ftec6v97', this)">FTEC 6V97 - Python Programming</button>
+            <button class="tab-button" onclick="switchCourse('ftec6312', this)">FTEC 6312 - Financial Data Analytics</button>
+            <button class="tab-button" onclick="switchCourse('future1', this)">Add New Class +</button>
         </div>
 
-        <!-- FTEC 6V97 Content -->
-        <div id="ftec6v97" class="tab-content active">
-            <div class="scroll-content">
-                
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="🔍 Search Python concepts..." onkeyup="searchContent()">
-                </div>
+        <!-- FTEC 6V97 Course Container -->
+        <div id="ftec6v97" class="course-content active">
+            <!-- Subtabs for FTEC 6V97 -->
+            <div class="subtabs" style="background: rgba(15, 23, 42, 0.6); padding: 15px 30px; border-bottom: 2px solid rgba(139, 92, 246, 0.3);">
+                <button class="subtab-button active" onclick="switchSubtab('ftec6v97', 'midterm', this)">📚 Midterm Study Guide</button>
+                <button class="subtab-button" onclick="switchSubtab('ftec6v97', 'assignment1', this)">🐦 Assignment 1: Portfolio Manager</button>
+                <button class="subtab-button" onclick="switchSubtab('ftec6v97', 'resources', this)">📖 Additional Resources</button>
+            </div>
+
+            <!-- Midterm Study Guide -->
+            <div id="ftec6v97-midterm" class="subtab-content active">
+                <div class="scroll-content">
+                    
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="🔍 Search Python concepts..." onkeyup="searchContent()">
+                    </div>
 
                 <div class="section">
                     <h2>📚 FTEC 6V97 - Python Programming Comprehensive Reference</h2>
@@ -1381,6 +1450,1129 @@ arr = np.array([<span class="number">1, 2, 3</span>])
                     </div>
                 </div>
 
+                <!-- Sample Exam Questions -->
+                <div class="section" id="exam-questions">
+                    <h2>📝 Sample Exam Questions (70+ Questions Total)</h2>
+                    <span class="badge badge-important">EXAM PREP</span>
+                    
+                    <h3>Part 1: Multiple Choice (50 Questions) - OOP Fundamentals & Python Concepts</h3>
+                    <p style="font-style: italic; color: #a78bfa;">Focus on: Why OOP exists, inheritance benefits, polymorphism, encapsulation, abstraction, data structures, and Python specifics</p>
+                    
+                    <div class="highlight-box">
+                        <h4>Sample Question 1:</h4>
+                        <p><strong>Why is inheritance beneficial in object-oriented programming?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) It allows multiple classes to share common functionality without code duplication<br>
+                            B) It makes programs run faster<br>
+                            C) It is required by Python syntax<br>
+                            D) It prevents bugs from occurring
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: A</strong> - Inheritance promotes code reuse and establishes hierarchical relationships</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 2:</h4>
+                        <p><strong>What is polymorphism in object-oriented programming?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Having multiple constructors<br>
+                            B) The ability of different objects to respond to the same method call in their own way<br>
+                            C) Creating many classes<br>
+                            D) Using multiple inheritance
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Polymorphism allows different classes to implement the same interface differently</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 3:</h4>
+                        <p><strong>What is the main advantage of encapsulation?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) It makes code run faster<br>
+                            B) It hides internal implementation details and protects data integrity<br>
+                            C) It allows multiple inheritance<br>
+                            D) It reduces memory usage
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Encapsulation bundles data and methods while controlling access</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 4:</h4>
+                        <p><strong>Why did object-oriented languages become popular?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) They were faster than procedural languages<br>
+                            B) They better model real-world entities and relationships, making code more maintainable<br>
+                            C) They use less memory<br>
+                            D) They don't require compilers
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - OOP's natural modeling of real-world concepts improves code organization</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 5:</h4>
+                        <p><strong>What is abstraction in OOP?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Making all methods abstract<br>
+                            B) Hiding complex implementation details and showing only essential features<br>
+                            C) Using only abstract base classes<br>
+                            D) Avoiding inheritance
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Abstraction simplifies complex systems by hiding unnecessary details</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 6:</h4>
+                        <p><strong>Which data structure would be most efficient for checking if an element exists?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) List<br>
+                            B) Tuple<br>
+                            C) Set<br>
+                            D) String
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: C</strong> - Sets use hash tables for O(1) lookup time vs O(n) for lists</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 7:</h4>
+                        <p><strong>What is the purpose of the 'self' parameter in Python instance methods?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) It's optional and can be named anything<br>
+                            B) It refers to the current instance of the class<br>
+                            C) It's only used in static methods<br>
+                            D) It prevents method overriding
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Self allows access to instance attributes and methods</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 8:</h4>
+                        <p><strong>What is the difference between a list and a tuple in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Lists use [] and tuples use ()<br>
+                            B) Lists are mutable, tuples are immutable<br>
+                            C) Lists are faster than tuples<br>
+                            D) Both A and B
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: D</strong> - Lists can be modified after creation, tuples cannot</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 9:</h4>
+                        <p><strong>What does the @property decorator do?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Makes a method static<br>
+                            B) Allows a method to be accessed like an attribute<br>
+                            C) Creates multiple instances<br>
+                            D) Prevents inheritance
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - @property enables getter-like behavior without parentheses</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 10:</h4>
+                        <p><strong>What is the main advantage of using generators over lists?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Generators are faster<br>
+                            B) Generators use less memory by computing values on-demand<br>
+                            C) Generators can be indexed<br>
+                            D) Generators are easier to write
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Generators yield values one at a time, avoiding memory overhead</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 11:</h4>
+                        <p><strong>What is method overriding in OOP?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Having multiple methods with the same name but different parameters<br>
+                            B) A subclass providing a specific implementation of a method from its parent class<br>
+                            C) Calling a method multiple times<br>
+                            D) Deleting a method from a class
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Overriding allows child classes to customize inherited behavior</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 12:</h4>
+                        <p><strong>What is the purpose of __init__ in Python classes?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) To destroy objects<br>
+                            B) To initialize object attributes when creating an instance<br>
+                            C) To import modules<br>
+                            D) To define static methods
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - __init__ is the constructor that sets up initial state</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 13:</h4>
+                        <p><strong>What does the 'with' statement guarantee in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Faster code execution<br>
+                            B) Proper resource cleanup even if exceptions occur<br>
+                            C) Thread safety<br>
+                            D) Automatic error correction
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Context managers ensure __exit__ is called for cleanup</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 14:</h4>
+                        <p><strong>What is duck typing in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Typing with two fingers<br>
+                            B) If it walks like a duck and quacks like a duck, it's a duck - focus on behavior not type<br>
+                            C) Strong type checking at runtime<br>
+                            D) A type of inheritance
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Python cares about what methods exist, not the object's class</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 15:</h4>
+                        <p><strong>What is the difference between 'is' and '==' in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) They are the same<br>
+                            B) 'is' checks identity (same object in memory), '==' checks equality (same value)<br>
+                            C) 'is' is faster<br>
+                            D) 'is' only works with numbers
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - 'is' compares memory addresses, '==' compares values</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 16:</h4>
+                        <p><strong>What is a lambda function in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) A function that takes lambda as a parameter<br>
+                            B) An anonymous single-expression function<br>
+                            C) A function from the lambda module<br>
+                            D) A function that returns lambda values
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Lambda creates small inline functions without def</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 17:</h4>
+                        <p><strong>What happens in the finally block of try-except?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) It only runs if no exception occurs<br>
+                            B) It always runs, regardless of exceptions<br>
+                            C) It only runs if an exception occurs<br>
+                            D) It prevents exceptions from being raised
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Finally ensures cleanup code executes in all cases</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 18:</h4>
+                        <p><strong>Why use list comprehensions instead of for loops?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) They are always faster<br>
+                            B) More concise and often more readable for simple transformations<br>
+                            C) They use less memory<br>
+                            D) They support parallel processing
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Comprehensions provide elegant one-line syntax for list creation</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 19:</h4>
+                        <p><strong>What does the @staticmethod decorator do?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Makes methods run faster<br>
+                            B) Creates a method that doesn't receive self or cls as first parameter<br>
+                            C) Prevents method from being overridden<br>
+                            D) Makes the method private
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Static methods are utility functions that belong to the class namespace</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 20:</h4>
+                        <p><strong>What is the purpose of __str__ vs __repr__ methods?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) They are the same<br>
+                            B) __str__ is for user-friendly output, __repr__ is for debugging/developer output<br>
+                            C) __str__ is faster<br>
+                            D) __repr__ is deprecated
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - __str__ for end users, __repr__ for developers</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 21:</h4>
+                        <p><strong>What does the 'pass' statement do in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Skips the current iteration<br>
+                            B) Is a null operation placeholder for future code<br>
+                            C) Passes arguments to functions<br>
+                            D) Raises an exception
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Pass does nothing, used where syntax requires a statement</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 22:</h4>
+                        <p><strong>Why are dictionaries faster than lists for lookups?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Dictionaries use less memory<br>
+                            B) Dictionaries use hash tables for O(1) average lookup vs O(n) for lists<br>
+                            C) Dictionaries are sorted<br>
+                            D) Lists are deprecated
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Hash-based access is constant time on average</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 23:</h4>
+                        <p><strong>What is multiple inheritance?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) A class inheriting from multiple parent classes<br>
+                            B) Having multiple instances of a class<br>
+                            C) Using multiple import statements<br>
+                            D) Creating multiple child classes
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: A</strong> - Child class can inherit from more than one parent</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 24:</h4>
+                        <p><strong>What does the enumerate() function do?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Counts the number of items in a list<br>
+                            B) Adds a counter to an iterable, returning (index, value) pairs<br>
+                            C) Creates numbered lists<br>
+                            D) Sorts items numerically
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Enumerate provides automatic indexing in loops</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 25:</h4>
+                        <p><strong>What is the purpose of the super() function?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) To make methods faster<br>
+                            B) To call methods from a parent class<br>
+                            C) To create superuser permissions<br>
+                            D) To override all methods
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Super() allows access to parent class methods, especially in __init__</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 26:</h4>
+                        <p><strong>What does *args allow in function definitions?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Variable number of positional arguments<br>
+                            B) Variable number of keyword arguments<br>
+                            C) Multiplication of arguments<br>
+                            D) Pointer dereferencing
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: A</strong> - *args collects extra positional arguments into a tuple</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 27:</h4>
+                        <p><strong>What does **kwargs allow in function definitions?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Variable number of positional arguments<br>
+                            B) Variable number of keyword arguments<br>
+                            C) Power operations<br>
+                            D) Comments in code
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - **kwargs collects extra keyword arguments into a dictionary</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 28:</h4>
+                        <p><strong>What is the difference between append() and extend() for lists?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) They are the same<br>
+                            B) append() adds one item, extend() adds multiple items from an iterable<br>
+                            C) extend() is faster<br>
+                            D) append() only works with numbers
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - append([1,2]) adds list as one item, extend([1,2]) adds two items</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 29:</h4>
+                        <p><strong>What does the zip() function do?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Compresses files<br>
+                            B) Combines multiple iterables into tuples of corresponding elements<br>
+                            C) Sorts lists<br>
+                            D) Encrypts data
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - zip([1,2], ['a','b']) → [(1,'a'), (2,'b')]</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 30:</h4>
+                        <p><strong>What is the purpose of the @classmethod decorator?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Creates multiple classes<br>
+                            B) Defines a method that receives the class as first parameter (cls)<br>
+                            C) Makes methods private<br>
+                            D) Prevents inheritance
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Class methods can access/modify class state</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 31:</h4>
+                        <p><strong>What does 'break' do in a loop?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Exits the current loop entirely<br>
+                            B) Skips the current iteration<br>
+                            C) Pauses the loop<br>
+                            D) Reverses the loop direction
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: A</strong> - Break terminates the loop immediately</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 32:</h4>
+                        <p><strong>What does 'continue' do in a loop?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Exits the loop<br>
+                            B) Skips the rest of the current iteration and moves to the next<br>
+                            C) Continues forever<br>
+                            D) Pauses execution
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Continue jumps to the next loop iteration</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 33:</h4>
+                        <p><strong>What is slicing in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Cutting strings into characters<br>
+                            B) Extracting a portion of a sequence using [start:stop:step] notation<br>
+                            C) Dividing numbers<br>
+                            D) Splitting files
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - my_list[1:5] extracts elements from index 1 to 4</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 34:</h4>
+                        <p><strong>What does the any() function return?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) All elements that are True<br>
+                            B) True if at least one element is True, False otherwise<br>
+                            C) The first True element<br>
+                            D) A list of True values
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - any([False, False, True]) returns True</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 35:</h4>
+                        <p><strong>What does the all() function return?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) All elements in the list<br>
+                            B) True only if all elements are True, False otherwise<br>
+                            C) The last element<br>
+                            D) A count of True values
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - all([True, True, False]) returns False</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 36:</h4>
+                        <p><strong>What is a shallow copy vs deep copy?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) They are the same<br>
+                            B) Shallow copies references, deep copy copies all nested objects<br>
+                            C) Shallow is faster<br>
+                            D) Deep only works with numbers
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Shallow copy: nested objects are still references</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 37:</h4>
+                        <p><strong>What does the map() function do?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Creates geographical maps<br>
+                            B) Applies a function to every item in an iterable<br>
+                            C) Sorts items<br>
+                            D) Filters items
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - map(str.upper, words) converts all words to uppercase</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 38:</h4>
+                        <p><strong>What does the filter() function do?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Removes all elements<br>
+                            B) Returns elements that satisfy a condition<br>
+                            C) Sorts elements<br>
+                            D) Modifies elements
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - filter(lambda x: x>0, nums) keeps only positive numbers</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 39:</h4>
+                        <p><strong>What is the Global Interpreter Lock (GIL) in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) A security feature<br>
+                            B) A mutex that prevents multiple threads from executing Python bytecode simultaneously<br>
+                            C) A type of encryption<br>
+                            D) A debugging tool
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - GIL limits true parallelism in multithreaded Python programs</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 40:</h4>
+                        <p><strong>What is the difference between remove() and pop() for lists?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) They are the same<br>
+                            B) remove() takes a value, pop() takes an index and returns the item<br>
+                            C) pop() is faster<br>
+                            D) remove() returns the item
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - list.remove('x') vs list.pop(0)</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 41:</h4>
+                        <p><strong>What does range(1, 10, 2) produce?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) [1, 2, 3, 4, 5, 6, 7, 8, 9]<br>
+                            B) [1, 3, 5, 7, 9]<br>
+                            C) [2, 4, 6, 8, 10]<br>
+                            D) [1, 2, 10]
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - range(start, stop, step) with step=2</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 42:</h4>
+                        <p><strong>What is the purpose of __name__ == "__main__"?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) To name the main function<br>
+                            B) To execute code only when script is run directly, not when imported<br>
+                            C) To check if code is correct<br>
+                            D) To import main modules
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Allows scripts to be both importable and executable</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 43:</h4>
+                        <p><strong>What are f-strings in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Functions that start with 'f'<br>
+                            B) Formatted string literals that embed expressions using {}<br>
+                            C) File strings<br>
+                            D) Frozen strings
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - f"Hello {name}" evaluates variables inline</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 44:</h4>
+                        <p><strong>What does the sorted() function do differently from .sort()?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) They are identical<br>
+                            B) sorted() returns a new sorted list, .sort() modifies the list in-place<br>
+                            C) .sort() is faster<br>
+                            D) sorted() only works with numbers
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - sorted() doesn't modify original, .sort() does</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 45:</h4>
+                        <p><strong>What is the walrus operator (:=) in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) A comparison operator<br>
+                            B) An assignment expression that assigns AND returns a value<br>
+                            C) A string operator<br>
+                            D) A division operator
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - if (n := len(items)) > 10: assigns and checks in one line</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 46:</h4>
+                        <p><strong>What does the join() method do?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Joins two lists<br>
+                            B) Concatenates elements of an iterable with a separator string<br>
+                            C) Connects to a network<br>
+                            D) Merges dictionaries
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - "-".join(['a','b','c']) → "a-b-c"</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 47:</h4>
+                        <p><strong>What is the difference between == and 'is' for comparing None?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) No difference<br>
+                            B) 'is None' is preferred because None is a singleton object<br>
+                            C) == is faster<br>
+                            D) 'is' doesn't work with None
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - Use 'is None' for identity check, not == None</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 48:</h4>
+                        <p><strong>What does the reversed() function do?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Sorts in descending order<br>
+                            B) Returns an iterator that accesses elements in reverse order<br>
+                            C) Deletes items backwards<br>
+                            D) Undoes the last operation
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - list(reversed([1,2,3])) → [3,2,1]</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 49:</h4>
+                        <p><strong>What is the purpose of the else clause in a try-except block?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) Handles all exceptions<br>
+                            B) Executes only if NO exception was raised in the try block<br>
+                            C) Always executes<br>
+                            D) Executes when any exception occurs
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - else runs when try succeeds without exceptions</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Question 50:</h4>
+                        <p><strong>What does PEP 8 refer to in Python?</strong></p>
+                        <p style="margin-left: 20px;">
+                            A) A performance optimization tool<br>
+                            B) Python's official style guide for code formatting<br>
+                            C) A testing framework<br>
+                            D) A package manager
+                        </p>
+                        <p style="color: #50fa7b; margin-top: 10px;"><strong>Answer: B</strong> - PEP 8 defines naming conventions, indentation, line length, etc.</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Additional Multiple Choice Topics Covered:</h4>
+                        <ul>
+                            <li>✅ Why use classes instead of just functions</li>
+                            <li>✅ Benefits of method overriding</li>
+                            <li>✅ Class attributes vs instance attributes</li>
+                            <li>✅ Duck typing in Python</li>
+                            <li>✅ Purpose of decorators (@property, @staticmethod, @classmethod)</li>
+                            <li>✅ List operations (append, extend, remove, pop)</li>
+                            <li>✅ Dictionary operations and performance</li>
+                            <li>✅ Set operations and use cases</li>
+                            <li>✅ String methods (join, split, strip)</li>
+                            <li>✅ Built-in functions (map, filter, zip, enumerate, any, all)</li>
+                            <li>✅ Generators and memory efficiency</li>
+                            <li>✅ Context managers (with statement)</li>
+                            <li>✅ Exception handling (try-except-else-finally)</li>
+                            <li>✅ Function arguments (*args, **kwargs)</li>
+                            <li>✅ Python-specific features (GIL, walrus operator, f-strings)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Part 2: Code Analysis (10 Questions) - Find the Errors</h3>
+                    <p style="font-style: italic; color: #a78bfa;">You'll see code snippets with import issues, exception handling problems, logic errors</p>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 1: Import Error</h4>
+                        <p><strong>What's wrong with this code?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">import</span> math
+
+<span class="keyword">def</span> <span class="function">calculate_area</span>(radius):
+    <span class="keyword">return</span> Math.PI * radius ** <span class="number">2</span>
+
+<span class="keyword">print</span>(calculate_area(<span class="number">5</span>))</code>
+                        </div>
+                        <p style="color: #ff4f4f; margin-top: 10px;">
+                            <strong>Error:</strong> Line 4 uses <code>Math.PI</code> (capital M) but Python is case-sensitive. Should be <code>math.pi</code>
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Fixed:</strong> <code>return math.pi * radius ** 2</code>
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 2: Exception Handling</h4>
+                        <p><strong>What will happen when this code runs?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">try</span>:
+    x = <span class="number">10</span> / <span class="number">0</span>
+    <span class="keyword">print</span>(<span class="string">"Result:"</span>, x)
+<span class="keyword">except</span> ValueError:
+    <span class="keyword">print</span>(<span class="string">"Math error occurred"</span>)
+<span class="keyword">finally</span>:
+    <span class="keyword">print</span>(<span class="string">"Cleanup complete"</span>)</code>
+                        </div>
+                        <p style="color: #ff4f4f; margin-top: 10px;">
+                            <strong>Error:</strong> Division by zero raises <code>ZeroDivisionError</code>, not <code>ValueError</code>. 
+                            The exception won't be caught, program will crash AFTER printing "Cleanup complete" (finally always runs).
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Fixed:</strong> <code>except ZeroDivisionError:</code>
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 3: List Mutability</h4>
+                        <p><strong>What is the output of this code?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">def</span> <span class="function">modify_list</span>(my_list):
+    my_list.append(<span class="number">4</span>)
+    <span class="keyword">return</span> my_list
+
+original = [<span class="number">1, 2, 3</span>]
+new = modify_list(original)
+<span class="keyword">print</span>(<span class="string">"Original:"</span>, original)
+<span class="keyword">print</span>(<span class="string">"New:"</span>, new)</code>
+                        </div>
+                        <p style="color: #a78bfa; margin-top: 10px;">
+                            <strong>Output:</strong><br>
+                            Original: [1, 2, 3, 4]<br>
+                            New: [1, 2, 3, 4]
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Explanation:</strong> Lists are mutable and passed by reference. Both variables point to the same list object.
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 4: Dictionary KeyError</h4>
+                        <p><strong>What's wrong with this code?</strong></p>
+                        <div class="code-block">
+<code>student = {<span class="string">"name"</span>: <span class="string">"Alice"</span>, <span class="string">"age"</span>: <span class="number">22</span>}
+
+<span class="keyword">print</span>(<span class="string">f"GPA: {student['gpa']}"</span>)</code>
+                        </div>
+                        <p style="color: #ff4f4f; margin-top: 10px;">
+                            <strong>Error:</strong> Accessing non-existent key 'gpa' raises <code>KeyError</code>
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Fixed:</strong> <code>student.get('gpa', 'N/A')</code> or check if key exists first
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 5: Indentation Error</h4>
+                        <p><strong>What's wrong with this code?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">def</span> <span class="function">greet</span>(name):
+<span class="keyword">print</span>(<span class="string">f"Hello, {name}!"</span>)
+  <span class="keyword">return</span> name.upper()
+
+<span class="keyword">print</span>(greet(<span class="string">"Alice"</span>))</code>
+                        </div>
+                        <p style="color: #ff4f4f; margin-top: 10px;">
+                            <strong>Error:</strong> Inconsistent indentation. First line has no indent, second has 2 spaces. Python requires consistent indentation.
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Fixed:</strong> Both lines inside function must have same indentation (4 spaces is standard)
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 6: Mutable Default Argument</h4>
+                        <p><strong>What's wrong with this code and what will happen?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">def</span> <span class="function">add_item</span>(item, my_list=[]):
+    my_list.append(item)
+    <span class="keyword">return</span> my_list
+
+<span class="keyword">print</span>(add_item(<span class="number">1</span>))  
+<span class="keyword">print</span>(add_item(<span class="number">2</span>))  
+<span class="keyword">print</span>(add_item(<span class="number">3</span>))</code>
+                        </div>
+                        <p style="color: #ff4f4f; margin-top: 10px;">
+                            <strong>Error:</strong> Mutable default arguments are created once at function definition, not each call.<br>
+                            <strong>Output:</strong> [1], [1, 2], [1, 2, 3] - list persists across calls!
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Fixed:</strong> <code>def add_item(item, my_list=None): my_list = my_list or []</code>
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 7: Missing Self</h4>
+                        <p><strong>What's wrong with this code?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">class</span> <span class="function">Car</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, brand):
+        self.brand = brand
+    
+    <span class="keyword">def</span> <span class="function">get_brand</span>():
+        <span class="keyword">return</span> self.brand
+
+car = Car(<span class="string">"Toyota"</span>)
+<span class="keyword">print</span>(car.get_brand())</code>
+                        </div>
+                        <p style="color: #ff4f4f; margin-top: 10px;">
+                            <strong>Error:</strong> get_brand() missing 'self' parameter. Instance methods need self as first parameter.
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Fixed:</strong> <code>def get_brand(self):</code>
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 8: Wrong Exception Order</h4>
+                        <p><strong>What's wrong with this exception handling?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">try</span>:
+    x = <span class="keyword">int</span>(<span class="string">"abc"</span>)
+<span class="keyword">except</span> Exception:
+    <span class="keyword">print</span>(<span class="string">"General error"</span>)
+<span class="keyword">except</span> ValueError:
+    <span class="keyword">print</span>(<span class="string">"Value error"</span>)</code>
+                        </div>
+                        <p style="color: #ff4f4f; margin-top: 10px;">
+                            <strong>Error:</strong> Exception (base class) is caught before ValueError (specific class). 
+                            ValueError handler will never be reached. Python will also raise SyntaxError.
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Fixed:</strong> Catch specific exceptions first, then general ones
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 9: Generator Exhaustion</h4>
+                        <p><strong>What is the output of this code?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">def</span> <span class="function">gen_numbers</span>():
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):
+        <span class="keyword">yield</span> i
+
+nums = gen_numbers()
+<span class="keyword">print</span>(<span class="function">list</span>(nums))
+<span class="keyword">print</span>(<span class="function">list</span>(nums))</code>
+                        </div>
+                        <p style="color: #a78bfa; margin-top: 10px;">
+                            <strong>Output:</strong><br>
+                            [0, 1, 2]<br>
+                            []
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Explanation:</strong> Generators are exhausted after one iteration. Second call returns empty list.
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Code Question 10: Integer Division</h4>
+                        <p><strong>What will be the output and why?</strong></p>
+                        <div class="code-block">
+<code><span class="keyword">print</span>(<span class="number">7</span> / <span class="number">2</span>)
+<span class="keyword">print</span>(<span class="number">7</span> // <span class="number">2</span>)</code>
+                        </div>
+                        <p style="color: #a78bfa; margin-top: 10px;">
+                            <strong>Output:</strong><br>
+                            3.5<br>
+                            3
+                        </p>
+                        <p style="color: #50fa7b;">
+                            <strong>Explanation:</strong> / is float division (returns float), // is floor division (returns int)
+                        </p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Additional Code Error Topics:</h4>
+                        <ul>
+                            <li>✅ Missing colons after if/for/while/def/class statements</li>
+                            <li>✅ Using = instead of == in comparisons</li>
+                            <li>✅ Forgetting to call methods (missing parentheses)</li>
+                            <li>✅ IndexError from accessing list out of bounds</li>
+                            <li>✅ TypeError from mixing incompatible types (e.g., "string" + 5)</li>
+                            <li>✅ NameError from using undefined variables</li>
+                            <li>✅ Incorrect use of self in class methods</li>
+                            <li>✅ Mutable default arguments in function definitions</li>
+                            <li>✅ Generator exhaustion issues</li>
+                            <li>✅ Incorrect exception handling order (catching general before specific)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Part 3: Short Answer (15 Questions) - Philosophy & Tools</h3>
+                    <p style="font-style: italic; color: #a78bfa;">Explain concepts, justify design decisions, describe version control benefits</p>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 1:</h4>
+                        <p><strong>Why are object-oriented languages considered better for large-scale software development compared to procedural languages?</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Modularity:</strong> Code is organized into self-contained objects, making it easier to understand and modify specific parts</li>
+                            <li><strong>Reusability:</strong> Classes can be reused across projects through inheritance and composition</li>
+                            <li><strong>Maintainability:</strong> Changes to one class don't necessarily affect others due to encapsulation</li>
+                            <li><strong>Real-world modeling:</strong> Objects naturally represent real-world entities, making code more intuitive</li>
+                            <li><strong>Team collaboration:</strong> Different developers can work on different classes simultaneously</li>
+                            <li><strong>Testing:</strong> Individual objects can be tested in isolation (unit testing)</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 2:</h4>
+                        <p><strong>Explain what Git branching is and why it's important for collaborative development.</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Branching concept:</strong> Creating a separate line of development from the main codebase</li>
+                            <li><strong>Isolation:</strong> Work on features/fixes without affecting main production code</li>
+                            <li><strong>Parallel development:</strong> Multiple team members can work on different features simultaneously</li>
+                            <li><strong>Safe experimentation:</strong> Try new ideas without risking stable code</li>
+                            <li><strong>Code review:</strong> Changes can be reviewed before merging into main branch</li>
+                            <li><strong>Rollback capability:</strong> Easy to discard or revert problematic changes</li>
+                            <li><strong>Common workflows:</strong> feature branches, hotfix branches, release branches</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 3:</h4>
+                        <p><strong>Describe the benefits of using version control systems like Git in software development.</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>History tracking:</strong> Complete record of all changes with timestamps and authors</li>
+                            <li><strong>Backup:</strong> Distributed copies prevent data loss</li>
+                            <li><strong>Collaboration:</strong> Multiple developers can work together efficiently</li>
+                            <li><strong>Revert capability:</strong> Easy to undo mistakes or roll back to previous versions</li>
+                            <li><strong>Branching/merging:</strong> Parallel development streams</li>
+                            <li><strong>Accountability:</strong> Know who made what changes and why</li>
+                            <li><strong>Experimentation:</strong> Try changes without fear of breaking things</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 4:</h4>
+                        <p><strong>Explain the difference between inheritance and composition in OOP. When would you choose one over the other?</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Inheritance ("is-a"):</strong> A Car IS-A Vehicle - inherits all Vehicle properties and behaviors</li>
+                            <li><strong>Composition ("has-a"):</strong> A Car HAS-AN Engine - contains an Engine object</li>
+                            <li><strong>When to use inheritance:</strong> True hierarchical relationship, child is a specialized version of parent</li>
+                            <li><strong>When to use composition:</strong> Flexible assembly of behaviors, avoid deep inheritance chains</li>
+                            <li><strong>Flexibility:</strong> Composition is more flexible - can change components at runtime</li>
+                            <li><strong>Best practice:</strong> "Favor composition over inheritance" for maintainable code</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 5:</h4>
+                        <p><strong>Why is exception handling important in production code? Provide specific examples.</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Graceful degradation:</strong> Program continues running instead of crashing</li>
+                            <li><strong>User experience:</strong> Show helpful error messages instead of stack traces</li>
+                            <li><strong>Resource cleanup:</strong> finally blocks ensure files/connections close properly</li>
+                            <li><strong>Error logging:</strong> Record issues for debugging without exposing internals to users</li>
+                            <li><strong>Recovery:</strong> Attempt alternative solutions when primary method fails</li>
+                            <li><strong>Example:</strong> File not found → create new file; API timeout → retry with exponential backoff</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 6:</h4>
+                        <p><strong>Explain the concept of DRY (Don't Repeat Yourself) and why it matters in software development.</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Principle:</strong> Every piece of knowledge should have a single, unambiguous representation</li>
+                            <li><strong>Maintainability:</strong> Changes only need to be made in one place</li>
+                            <li><strong>Bug reduction:</strong> Fewer copies mean fewer places for bugs to hide</li>
+                            <li><strong>Consistency:</strong> Same logic guaranteed to behave the same everywhere</li>
+                            <li><strong>Implementation:</strong> Use functions, classes, inheritance, and modules to avoid duplication</li>
+                            <li><strong>Example:</strong> Instead of copying validation code, create a validate() function used everywhere</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 7:</h4>
+                        <p><strong>What is Test-Driven Development (TDD) and what are its benefits?</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Process:</strong> Write tests first, then write code to pass those tests</li>
+                            <li><strong>Red-Green-Refactor:</strong> Write failing test (red), make it pass (green), improve code (refactor)</li>
+                            <li><strong>Better design:</strong> Forces you to think about interfaces before implementation</li>
+                            <li><strong>Documentation:</strong> Tests serve as examples of how code should be used</li>
+                            <li><strong>Confidence:</strong> Safe to refactor knowing tests will catch breakage</li>
+                            <li><strong>Debugging:</strong> Easier to locate problems when tests are granular</li>
+                            <li><strong>Coverage:</strong> Ensures high test coverage by definition</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 8:</h4>
+                        <p><strong>Explain what a merge conflict is in Git and how to resolve it.</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Definition:</strong> Occurs when two branches modify the same lines of code differently</li>
+                            <li><strong>Git markers:</strong> <<<<<<< HEAD, =======, >>>>>>> branch_name mark conflicts</li>
+                            <li><strong>Resolution steps:</strong> 1) Identify conflicted files, 2) Open and edit conflicts, 3) Remove markers, 4) Stage resolved files, 5) Commit merge</li>
+                            <li><strong>Prevention:</strong> Frequent pulls, small commits, clear communication with team</li>
+                            <li><strong>Tools:</strong> Use diff tools or IDE integrations to visualize conflicts</li>
+                            <li><strong>Best practice:</strong> Test code after resolving to ensure it still works</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 9:</h4>
+                        <p><strong>Why is code documentation important? What are different types of documentation?</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Importance:</strong> Helps others (and future you) understand code purpose and usage</li>
+                            <li><strong>Inline comments:</strong> Explain complex logic, edge cases, workarounds</li>
+                            <li><strong>Docstrings:</strong> Describe what functions/classes do, parameters, return values</li>
+                            <li><strong>README files:</strong> Project overview, setup instructions, usage examples</li>
+                            <li><strong>API documentation:</strong> Endpoints, request/response formats, authentication</li>
+                            <li><strong>Architecture docs:</strong> High-level system design, component relationships</li>
+                            <li><strong>Best practice:</strong> Keep docs close to code, update when code changes</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 10:</h4>
+                        <p><strong>What is continuous integration (CI) and why is it beneficial?</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Definition:</strong> Automatically building and testing code whenever changes are pushed</li>
+                            <li><strong>Early detection:</strong> Find bugs immediately rather than before release</li>
+                            <li><strong>Reduced integration problems:</strong> Small, frequent integrations vs large, painful merges</li>
+                            <li><strong>Quality assurance:</strong> Automated tests run consistently on every commit</li>
+                            <li><strong>Confidence:</strong> Know that main branch always builds and passes tests</li>
+                            <li><strong>Tools:</strong> Jenkins, GitHub Actions, GitLab CI, CircleCI, Travis CI</li>
+                            <li><strong>Pipeline:</strong> Typically includes: checkout code → install dependencies → run tests → build → deploy</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 11:</h4>
+                        <p><strong>Explain the Single Responsibility Principle (SRP) and provide an example.</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Principle:</strong> A class should have only one reason to change</li>
+                            <li><strong>One responsibility:</strong> Each class/function should do one thing well</li>
+                            <li><strong>Maintainability:</strong> Changes to one feature don't affect unrelated features</li>
+                            <li><strong>Testing:</strong> Easier to test focused, single-purpose code</li>
+                            <li><strong>Reusability:</strong> Small, focused components can be reused more easily</li>
+                            <li><strong>Bad example:</strong> User class that handles validation, database, email, and authentication</li>
+                            <li><strong>Good example:</strong> Separate classes: UserValidator, UserRepository, EmailService, AuthService</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 12:</h4>
+                        <p><strong>What are virtual environments in Python and why should you use them?</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Definition:</strong> Isolated Python environments with their own packages and dependencies</li>
+                            <li><strong>Isolation:</strong> Different projects can use different package versions</li>
+                            <li><strong>No conflicts:</strong> Project A uses Django 3.0, Project B uses Django 4.0 - no problem!</li>
+                            <li><strong>Reproducibility:</strong> requirements.txt captures exact dependencies for team members</li>
+                            <li><strong>Clean system:</strong> Doesn't pollute system-wide Python installation</li>
+                            <li><strong>Tools:</strong> venv (built-in), virtualenv, conda</li>
+                            <li><strong>Workflow:</strong> Create venv → activate → install packages → deactivate</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 13:</h4>
+                        <p><strong>Explain the difference between unit tests, integration tests, and end-to-end tests.</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Unit tests:</strong> Test individual functions/methods in isolation, fast, mock dependencies</li>
+                            <li><strong>Integration tests:</strong> Test how components work together (e.g., API + database)</li>
+                            <li><strong>End-to-end tests:</strong> Test entire system from user perspective (e.g., web browser automation)</li>
+                            <li><strong>Speed:</strong> Unit (milliseconds) → Integration (seconds) → E2E (minutes)</li>
+                            <li><strong>Test pyramid:</strong> Many unit tests, fewer integration tests, few E2E tests</li>
+                            <li><strong>Purpose:</strong> Unit finds logic bugs, Integration finds interface bugs, E2E finds workflow bugs</li>
+                            <li><strong>Example:</strong> Unit tests calculate_total(), Integration tests API endpoint, E2E tests checkout flow</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 14:</h4>
+                        <p><strong>What is code refactoring and when should you do it?</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Definition:</strong> Restructuring code without changing its external behavior</li>
+                            <li><strong>Goals:</strong> Improve readability, reduce complexity, increase maintainability</li>
+                            <li><strong>When to refactor:</strong> Code smells, duplication, overly complex functions, before adding features</li>
+                            <li><strong>Safety:</strong> Tests ensure refactoring doesn't break functionality</li>
+                            <li><strong>Common refactorings:</strong> Extract method, rename variable, split class, remove duplication</li>
+                            <li><strong>Red flag:</strong> Don't refactor during bug fixes or feature additions - do it separately</li>
+                            <li><strong>Boy Scout Rule:</strong> Leave code cleaner than you found it</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Sample Short Answer 15:</h4>
+                        <p><strong>Explain what API design principles lead to good, maintainable APIs.</strong></p>
+                        <p style="color: #a78bfa; margin-top: 10px; margin-left: 20px;">
+                            <strong>Key Points to Include:</strong>
+                        </p>
+                        <ul style="margin-left: 40px; color: #d0d0d0;">
+                            <li><strong>Consistency:</strong> Use consistent naming, patterns, and response formats</li>
+                            <li><strong>RESTful principles:</strong> Use appropriate HTTP methods (GET, POST, PUT, DELETE)</li>
+                            <li><strong>Clear naming:</strong> Resource names should be intuitive (/users, /products)</li>
+                            <li><strong>Versioning:</strong> /api/v1/ allows changes without breaking existing clients</li>
+                            <li><strong>Error handling:</strong> Return meaningful error messages and appropriate status codes</li>
+                            <li><strong>Documentation:</strong> Clear docs with examples of requests and responses</li>
+                            <li><strong>Pagination:</strong> Don't return thousands of items, use page/limit parameters</li>
+                            <li><strong>Security:</strong> Authentication, authorization, rate limiting, input validation</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>Additional Short Answer Topics:</h4>
+                        <ul>
+                            <li>✅ Advantages of using type hints in Python</li>
+                            <li>✅ Benefits of test-driven development (TDD)</li>
+                            <li>✅ Why documentation matters in software projects</li>
+                            <li>✅ Purpose of code reviews and pair programming</li>
+                            <li>✅ Advantages of continuous integration/deployment</li>
+                            <li>✅ Why modularity improves code maintainability</li>
+                            <li>✅ Benefits of using virtual environments in Python</li>
+                            <li>✅ Importance of following coding standards (PEP 8)</li>
+                            <li>✅ Why separation of concerns is a fundamental principle (SRP)</li>
+                            <li>✅ Benefits of using package managers (pip, npm, etc.)</li>
+                            <li>✅ DRY principle and code reusability</li>
+                            <li>✅ Different types of testing (unit, integration, E2E)</li>
+                            <li>✅ When and why to refactor code</li>
+                            <li>✅ API design best practices</li>
+                            <li>✅ Git merge conflicts and resolution strategies</li>
+                        </ul>
+                    </div>
+                </div>
+
                 <!-- Quick Tips -->
                 <div class="section">
                     <h2>💡 Quick Tips for Midterm</h2>
@@ -1397,51 +2589,859 @@ arr = np.array([<span class="number">1, 2, 3</span>])
                             <li><strong>with statement</strong> automatically handles resource cleanup</li>
                             <li><strong>yield</strong> makes a function a generator (memory efficient)</li>
                             <li><strong>Lambda functions</strong> are anonymous single-expression functions</li>
+                            <li><strong>Python is case-sensitive</strong> - Math.PI vs math.pi matters!</li>
+                            <li><strong>Lists are passed by reference</strong> - modifications affect original</li>
+                            <li><strong>Use .get() for dictionaries</strong> to avoid KeyError</li>
+                            <li><strong>Catch specific exceptions first</strong>, then general ones</li>
+                            <li><strong>Inheritance = "is-a"</strong>, Composition = "has-a"</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box" style="border-left-color: #ff4f4f;">
+                        <h4>🎯 Exam Strategy:</h4>
+                        <ul>
+                            <li><strong>Multiple Choice:</strong> Read all options before answering - focus on WHY, not just WHAT</li>
+                            <li><strong>Code Questions:</strong> Check imports, exception types, indentation, and variable names first</li>
+                            <li><strong>Short Answer:</strong> Use bullet points, give examples, explain the "why" behind concepts</li>
+                            <li><strong>Time Management:</strong> 40 questions total - pace yourself (roughly 2 min per question)</li>
+                            <li><strong>Review:</strong> Save time at the end to double-check your answers</li>
                         </ul>
                     </div>
                 </div>
 
+                </div>
+            </div>
+
+            <!-- Assignment 1: Portfolio Manager -->
+            <div id="ftec6v97-assignment1" class="subtab-content">
+                <div class="scroll-content">
+                    <div class="section">
+                        <h2>🐦 Assignment 1: UTD Kiwi Portfolio Manager</h2>
+                        <p style="font-size: 1.1em; line-height: 1.8; margin-bottom: 20px;">
+                            <strong>Interactive Demo:</strong> Test the UTD Kiwi CLI Portfolio Manager directly in your browser! 
+                            This Python application demonstrates object-oriented programming principles including inheritance, 
+                            polymorphism, abstraction, and exception handling.
+                        </p>
+
+                        <div class="highlight-box" style="margin-bottom: 20px;">
+                            <h4>🎯 Key Features Demonstrated:</h4>
+                            <ul>
+                                <li><strong>OOP Design:</strong> User, Portfolio, Security, Transaction classes with proper encapsulation</li>
+                                <li><strong>Layered Architecture:</strong> CLI → Service → Domain → Database (separation of concerns)</li>
+                                <li><strong>Authentication:</strong> Bcrypt password hashing, role-based access control (admin/user)</li>
+                                <li><strong>Exception Handling:</strong> Custom exceptions with graceful error recovery</li>
+                                <li><strong>Data Persistence:</strong> JSON file storage with bcrypt security</li>
+                                <li><strong>Testing:</strong> 50+ comprehensive tests covering edge cases</li>
+                            </ul>
+                        </div>
+
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="color: #60a5fa; margin-bottom: 15px;">📖 Quick Start Guide</h3>
+                    <div style="background: rgba(15, 23, 42, 0.9); padding: 15px; border-radius: 6px; border-left: 4px solid #8b5cf6;">
+                        <p style="margin-bottom: 10px;"><strong>Default Login Credentials:</strong></p>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li>👤 <strong>Username:</strong> <code style="background: rgba(139, 92, 246, 0.2); padding: 2px 8px; border-radius: 3px;">admin</code></li>
+                            <li>🔑 <strong>Password:</strong> <code style="background: rgba(139, 92, 246, 0.2); padding: 2px 8px; border-radius: 3px;">admin123</code></li>
+                            <li>🎭 <strong>Role:</strong> Administrator (full access)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="color: #60a5fa; margin-bottom: 15px;">🎮 Available Actions</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <div style="background: rgba(15, 23, 42, 0.9); padding: 12px; border-radius: 6px; border-left: 3px solid #10b981;">
+                            <strong style="color: #10b981;">📊 Portfolio Management</strong>
+                            <ul style="font-size: 0.9em; margin-top: 8px;">
+                                <li>View your portfolios</li>
+                                <li>Buy/sell securities</li>
+                                <li>Track holdings</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.9); padding: 12px; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                            <strong style="color: #f59e0b;">🏪 Marketplace</strong>
+                            <ul style="font-size: 0.9em; margin-top: 8px;">
+                                <li>Browse available stocks</li>
+                                <li>Check current prices</li>
+                                <li>View owned quantities</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.9); padding: 12px; border-radius: 6px; border-left: 3px solid #ef4444;">
+                            <strong style="color: #ef4444;">👥 User Management (Admin)</strong>
+                            <ul style="font-size: 0.9em; margin-top: 8px;">
+                                <li>Create new users</li>
+                                <li>Delete users</li>
+                                <li>View all accounts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Python Terminal Emulator -->
+                <div style="background: #1e293b; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);">
+                    <div style="background: #0f172a; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #334155;">
+                        <div style="display: flex; gap: 8px;">
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444;"></div>
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #f59e0b;"></div>
+                            <div style="width: 12px; height: 12px; border-radius: 50%; background: #10b981;"></div>
+                        </div>
+                        <div style="color: #94a3b8; font-size: 0.9em; font-family: 'Courier New', monospace;">
+                            🐍 Python Terminal - UTD Kiwi Menu
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="runKiwiApp()" style="background: #8b5cf6; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 0.85em; font-weight: 600;">
+                                ▶ Start Interactive Demo
+                            </button>
+                            <button onclick="clearTerminal()" style="background: #475569; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 0.85em;">
+                                🗑️ Clear
+                            </button>
+                            <button onclick="downloadProject()" style="background: #10b981; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer; font-size: 0.85em; font-weight: 600;">
+                                📥 Download Full Project
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="pyodide-terminal" style="background: #0f172a; padding: 20px; font-family: 'Courier New', monospace; font-size: 14px; color: #e2e8f0; min-height: 500px; max-height: 600px; overflow-y: auto; line-height: 1.6;">
+                        <div style="color: #94a3b8; margin-bottom: 15px;">
+                            <span style="color: #10b981;">●</span> Initializing Python environment... Please wait.
+                        </div>
+                        <div id="terminal-output"></div>
+                        <div id="terminal-input-line" style="display: flex; align-items: center; margin-top: 10px;">
+                            <span style="color: #8b5cf6; margin-right: 8px;">➜</span> 
+                            <input type="text" id="terminal-input" onkeypress="handleTerminalInput(event)" style="background: transparent; border: none; color: #e2e8f0; outline: none; font-family: 'Courier New', monospace; font-size: 14px; flex: 1;" placeholder="Type your command and press Enter..." />
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid #8b5cf6; border-radius: 8px; padding: 15px; margin-top: 20px;">
+                    <h4 style="color: #a78bfa; margin-bottom: 10px;">💡 How to Use:</h4>
+                    <ul style="font-size: 0.95em; line-height: 1.8;">
+                        <li>Click <strong>"▶ Start Interactive Demo"</strong> to begin</li>
+                        <li>Type commands in the input box at the bottom and press <strong>Enter</strong></li>
+                        <li>Try: <code style="background: rgba(139, 92, 246, 0.2); padding: 2px 6px; border-radius: 3px;">login admin admin123</code></li>
+                        <li>Then explore: <code style="background: rgba(139, 92, 246, 0.2); padding: 2px 6px; border-radius: 3px;">portfolio</code>, <code style="background: rgba(139, 92, 246, 0.2); padding: 2px 6px; border-radius: 3px;">market</code>, <code style="background: rgba(139, 92, 246, 0.2); padding: 2px 6px; border-radius: 3px;">buy AAPL 5</code></li>
+                        <li>Download the full project to run locally with all features!</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(234, 88, 12, 0.15); border: 2px solid #ea580c; border-radius: 8px; padding: 20px; margin-top: 20px;">
+                    <h4 style="color: #fb923c; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.3em;">⚠️</span> 
+                        <strong>Browser-Based Limitations Notice</strong>
+                    </h4>
+                    <div style="font-size: 0.95em; line-height: 1.8; color: #fed7aa;">
+                        <p style="margin-bottom: 10px;"><strong>This is a browser-based Python environment using Pyodide (WebAssembly).</strong></p>
+                        <p style="margin-bottom: 10px;">Due to browser constraints, we had to make several compromises:</p>
+                        <ul style="margin-left: 20px; margin-bottom: 10px;">
+                            <li><strong>No Rich Library Tables:</strong> Beautiful colored terminal output using the Rich library doesn't render properly in browsers. ANSI color codes show as escape sequences instead of colors.</li>
+                            <li><strong>Simple Text Formatting:</strong> We use basic ASCII formatting (lines, spaces) instead of fancy box-drawing characters and colors.</li>
+                            <li><strong>No Terminal Colors:</strong> The colorful CLI experience from the original app is reduced to monochrome text with basic styling.</li>
+                            <li><strong>Limited Styling:</strong> We can't use terminal-specific features like progress bars, spinners, or interactive prompts.</li>
+                            <li><strong>Performance:</strong> Running Python in the browser via WebAssembly is slower than native Python execution.</li>
+                        </ul>
+                        <p style="border-top: 1px solid #ea580c; padding-top: 10px; margin-top: 10px;">
+                            <strong style="color: #fb923c;">💡 For the Full Experience:</strong> Download the project and run it locally! 
+                            You'll get beautiful Rich library tables with colors, better performance, and the complete feature set including persistent database storage.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(59, 130, 246, 0.15); border: 2px solid #3b82f6; border-radius: 8px; padding: 20px; margin-top: 20px;">
+                    <h4 style="color: #60a5fa; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.3em;">🎯</span> 
+                        <strong>Design Decision: Command-Based vs Menu-Based Interface</strong>
+                    </h4>
+                    <div style="font-size: 0.95em; line-height: 1.8; color: #bfdbfe;">
+                        <p style="margin-bottom: 10px;"><strong>Why this demo uses commands instead of traditional menu navigation:</strong></p>
+                        
+                        <div style="background: rgba(30, 41, 59, 0.5); padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+                            <h5 style="color: #ef4444; margin-bottom: 8px;">❌ Menu-Based Limitations in Browser:</h5>
+                            <ul style="margin-left: 20px; margin-bottom: 0;">
+                                <li><strong>No <code>input()</code> function:</strong> Pyodide doesn't support interactive <code>input()</code> prompts like native Python</li>
+                                <li><strong>Async execution model:</strong> Each command runs asynchronously, making continuous menu loops difficult</li>
+                                <li><strong>No event loops:</strong> Can't create a persistent running loop like a traditional terminal application</li>
+                                <li><strong>Poor UX:</strong> Users would need to repeatedly click buttons between each menu choice</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(30, 41, 59, 0.5); padding: 15px; border-radius: 6px; margin-bottom: 15px;">
+                            <h5 style="color: #10b981; margin-bottom: 8px;">✅ Command-Based Advantages:</h5>
+                            <ul style="margin-left: 20px; margin-bottom: 0;">
+                                <li><strong>Perfect for Pyodide:</strong> Single commands execute and return results immediately</li>
+                                <li><strong>Web-native experience:</strong> Works like modern CLI tools (git, npm, docker)</li>
+                                <li><strong>Fast & responsive:</strong> No waiting for menu loops or page refreshes</li>
+                                <li><strong>Easy to extend:</strong> Add new commands by adding <code>else if</code> blocks in JavaScript</li>
+                                <li><strong>Better discoverability:</strong> Users can type <code>help</code> to see all options at once</li>
+                            </ul>
+                        </div>
+
+                        <div style="border-top: 1px solid #3b82f6; padding-top: 12px; margin-top: 12px;">
+                            <p style="margin-bottom: 8px;"><strong style="color: #60a5fa;">📚 Educational Takeaway:</strong></p>
+                            <p style="margin: 0;">
+                                This demonstrates an important software engineering principle: <strong>adapt your interface to your runtime environment</strong>. 
+                                The same application can have different UX patterns depending on where it runs (native terminal vs browser vs mobile app).
+                                Menu-based navigation works great in native Python, but command-based is superior for web-based Python via Pyodide/WebAssembly.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(30, 41, 59, 0.8); padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h3 style="color: #60a5fa; margin-bottom: 15px;">📚 Learning Objectives</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                        <div class="code-example" style="margin: 0;">
+                            <h4 style="color: #10b981; margin-bottom: 8px;">🏗️ Architecture Pattern</h4>
+                            <pre style="margin: 0; font-size: 0.85em; line-height: 1.5;"><code>CLI Layer (User Interface)
+    ↓
+Service Layer (Business Logic)
+    ↓
+Domain Layer (Models/Entities)
+    ↓
+Database Layer (Persistence)</code></pre>
+                        </div>
+                        <div class="code-example" style="margin: 0;">
+                            <h4 style="color: #f59e0b; margin-bottom: 8px;">🔐 Security Features</h4>
+                            <pre style="margin: 0; font-size: 0.85em; line-height: 1.5;"><code>✓ Bcrypt password hashing
+✓ Role-based access control
+✓ Input validation & sanitization
+✓ Custom exception handling
+✓ Secure session management</code></pre>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- Additional Resources -->
+            <div id="ftec6v97-resources" class="subtab-content">
+                <div class="scroll-content">
+                    <div class="section">
+                        <h2>📖 Additional Resources</h2>
+                        <p style="font-size: 1.1em; line-height: 1.8;">
+                            Supplementary materials and helpful links for FTEC 6V97.
+                        </p>
+                        
+                        <div class="highlight-box" style="margin: 20px 0;">
+                            <h4>📚 Recommended Reading:</h4>
+                            <ul>
+                                <li><strong>Python Official Documentation:</strong> <a href="https://docs.python.org/3/" target="_blank" style="color: #60a5fa;">docs.python.org</a></li>
+                                <li><strong>Real Python Tutorials:</strong> <a href="https://realpython.com/" target="_blank" style="color: #60a5fa;">realpython.com</a></li>
+                                <li><strong>Python Testing with Pytest:</strong> <a href="https://docs.pytest.org/" target="_blank" style="color: #60a5fa;">docs.pytest.org</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="highlight-box">
+                            <h4>🛠️ Useful Tools:</h4>
+                            <ul>
+                                <li><strong>Python REPL:</strong> Interactive Python shell for testing code</li>
+                                <li><strong>VS Code:</strong> Recommended IDE with Python extension</li>
+                                <li><strong>Git:</strong> Version control for your projects</li>
+                            </ul>
+                        </div>
+
+                        <div class="highlight-box">
+                            <h4>💡 Practice Resources:</h4>
+                            <ul>
+                                <li><strong>LeetCode:</strong> Python coding challenges</li>
+                                <li><strong>HackerRank:</strong> Python certification prep</li>
+                                <li><strong>Python Koans:</strong> Learn Python through testing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FTEC 6312 Course Container -->
+        <div id="ftec6312" class="course-content">
+            <!-- Subtabs for FTEC 6312 -->
+            <div class="subtabs" style="background: rgba(15, 23, 42, 0.6); padding: 15px 30px; border-bottom: 2px solid rgba(139, 92, 246, 0.3);">
+                <button class="subtab-button active" onclick="switchSubtab('ftec6312', 'general', this)">📋 General Info</button>
+                <button class="subtab-button" onclick="switchSubtab('ftec6312', 'midterm', this)">📊 Midterm Results</button>
+            </div>
+
+            <!-- General Info -->
+            <div id="ftec6312-general" class="subtab-content active">
+                <div class="scroll-content">
+                    <div class="section">
+                        <h2 style="color: #60a5fa; margin-bottom: 20px;">📚 FTEC 6312 - Financial Data Analytics with Python</h2>
+                        <p style="font-size: 1.2em; line-height: 1.8; color: #e2e8f0; margin-bottom: 30px;">
+                            <strong>Fall 2025</strong> | Graduate Level Course
+                        </p>
+
+                        <div style="background: rgba(139, 92, 246, 0.1); border-left: 4px solid #8b5cf6; padding: 20px; margin: 20px 0; border-radius: 4px;">
+                            <h3 style="color: #a78bfa; margin-bottom: 15px;">📖 Course Description</h3>
+                            <p style="font-size: 1.05em; line-height: 1.8; color: #e2e8f0;">
+                                This course provides comprehensive training in financial data analytics using Python. 
+                                Students will learn to analyze financial data, build predictive models, and create 
+                                data-driven investment strategies using modern Python libraries and techniques.
+                            </p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
+                            <div style="background: rgba(30, 41, 59, 0.8); padding: 20px; border-radius: 8px; border: 1px solid rgba(100, 116, 139, 0.3);">
+                                <h4 style="color: #10b981; margin-bottom: 12px;">👨‍🏫 Instructor Information</h4>
+                                <div style="font-size: 0.95em; line-height: 1.8; color: #cbd5e1;">
+                                    <p><strong>Professor:</strong> [To be added]</p>
+                                    <p><strong>Office:</strong> [To be added]</p>
+                                    <p><strong>Email:</strong> [To be added]</p>
+                                    <p><strong>Office Hours:</strong> [To be added]</p>
+                                </div>
+                            </div>
+
+                            <div style="background: rgba(30, 41, 59, 0.8); padding: 20px; border-radius: 8px; border: 1px solid rgba(100, 116, 139, 0.3);">
+                                <h4 style="color: #f59e0b; margin-bottom: 12px;">📅 Course Schedule</h4>
+                                <div style="font-size: 0.95em; line-height: 1.8; color: #cbd5e1;">
+                                    <p><strong>Semester:</strong> Fall 2025</p>
+                                    <p><strong>Days:</strong> [To be added]</p>
+                                    <p><strong>Time:</strong> [To be added]</p>
+                                    <p><strong>Location:</strong> [To be added]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 8px; padding: 20px; margin: 30px 0;">
+                            <h3 style="color: #10b981; margin-bottom: 15px;">📄 Course Syllabus</h3>
+                            <p style="margin-bottom: 15px; line-height: 1.8;">
+                                Download the complete course syllabus for detailed information about course objectives, 
+                                grading policies, schedule, and required materials.
+                            </p>
+                            <a href="/plugins/utd_classes/download/ftec6312_syllabus" 
+                               style="display: inline-block; background: #10b981; color: white; padding: 12px 24px; 
+                                      border-radius: 6px; text-decoration: none; font-weight: 600; 
+                                      transition: all 0.3s; border: 2px solid #10b981;"
+                               onmouseover="this.style.background='#059669'; this.style.transform='translateY(-2px)';"
+                               onmouseout="this.style.background='#10b981'; this.style.transform='translateY(0)';">
+                                📥 Download Syllabus (PDF)
+                            </a>
+                        </div>
+
+                        <div style="background: rgba(30, 41, 59, 0.8); padding: 25px; border-radius: 8px; margin-top: 30px;">
+                            <h3 style="color: #60a5fa; margin-bottom: 20px;">🎯 Learning Outcomes</h3>
+                            <ul style="font-size: 1.05em; line-height: 2; color: #e2e8f0;">
+                                <li>Master Python programming for financial data analysis</li>
+                                <li>Utilize pandas, NumPy, and other data science libraries</li>
+                                <li>Develop quantitative trading strategies</li>
+                                <li>Build and evaluate predictive financial models</li>
+                                <li>Analyze and visualize financial datasets</li>
+                                <li>Apply machine learning techniques to financial problems</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: rgba(30, 41, 59, 0.8); padding: 25px; border-radius: 8px; margin-top: 20px;">
+                            <h3 style="color: #f59e0b; margin-bottom: 20px;">📚 Topics Covered</h3>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                                <div>
+                                    <h4 style="color: #8b5cf6; margin-bottom: 10px;">Module 1: Python Fundamentals</h4>
+                                    <ul style="font-size: 0.95em; line-height: 1.8; color: #cbd5e1;">
+                                        <li>Python basics & data structures</li>
+                                        <li>NumPy arrays & operations</li>
+                                        <li>Pandas DataFrames</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: #8b5cf6; margin-bottom: 10px;">Module 2: Financial Data</h4>
+                                    <ul style="font-size: 0.95em; line-height: 1.8; color: #cbd5e1;">
+                                        <li>Data acquisition & APIs</li>
+                                        <li>Data cleaning & preprocessing</li>
+                                        <li>Time series analysis</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: #8b5cf6; margin-bottom: 10px;">Module 3: Analytics & Modeling</h4>
+                                    <ul style="font-size: 0.95em; line-height: 1.8; color: #cbd5e1;">
+                                        <li>Statistical analysis</li>
+                                        <li>Regression models</li>
+                                        <li>Machine learning applications</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: #8b5cf6; margin-bottom: 10px;">Module 4: Visualization</h4>
+                                    <ul style="font-size: 0.95em; line-height: 1.8; color: #cbd5e1;">
+                                        <li>Matplotlib & Seaborn</li>
+                                        <li>Interactive dashboards</li>
+                                        <li>Financial charts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Midterm Results -->
+            <div id="ftec6312-midterm" class="subtab-content">
+                <div class="scroll-content">
+                    <div class="section">
+                        <h2 style="color: #60a5fa; margin-bottom: 20px;">📊 Midterm Exam Results</h2>
+                        
+                        <div style="background: rgba(234, 88, 12, 0.15); border: 2px solid #ea580c; border-radius: 8px; padding: 20px; margin: 30px 0;">
+                            <p style="font-size: 1.1em; line-height: 1.8; color: #fed7aa;">
+                                <strong>📌 Coming Soon</strong><br>
+                                Midterm results will be posted here after the exam is graded.
+                            </p>
+                        </div>
+
+                        <div style="background: rgba(30, 41, 59, 0.8); padding: 25px; border-radius: 8px; margin-top: 30px;">
+                            <h3 style="color: #10b981; margin-bottom: 15px;">📈 What to Expect</h3>
+                            <ul style="font-size: 1.05em; line-height: 2; color: #e2e8f0;">
+                                <li>Individual scores and percentile rankings</li>
+                                <li>Class performance statistics</li>
+                                <li>Score distribution analysis</li>
+                                <li>Feedback and areas for improvement</li>
+                                <li>Answer key and solution explanations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Future Class Template -->
-        <div id="future1" class="tab-content">
-            <div class="section">
-                <h2>➕ Add New Class</h2>
-                <p style="font-size: 1.1em; line-height: 1.8;">
-                    This section is ready for your next class! Just let me know which course you'd like to add,
-                    and I'll create a comprehensive study guide for it.
-                </p>
-                <div class="highlight-box">
-                    <h4>Future Classes Can Include:</h4>
-                    <ul>
-                        <li>Course notes and key concepts</li>
-                        <li>Code examples and syntax references</li>
-                        <li>Formula sheets and quick references</li>
-                        <li>Practice problems and solutions</li>
-                        <li>Exam preparation materials</li>
-                    </ul>
+        <div id="future1" class="course-content">
+            <div style="padding: 30px;">
+                <div class="section">
+                    <h2>➕ Add New Class</h2>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        This section is ready for your next class! Just let me know which course you'd like to add,
+                        and I'll create a comprehensive study guide for it.
+                    </p>
+                    <div class="highlight-box">
+                        <h4>Future Classes Can Include:</h4>
+                        <ul>
+                            <li>Course notes and key concepts</li>
+                            <li>Code examples and syntax references</li>
+                            <li>Formula sheets and quick references</li>
+                            <li>Practice problems and solutions</li>
+                            <li>Exam preparation materials</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 
+    {% raw %}
     <script>
-        function switchTab(tabId) {
-            // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+        // Global Pyodide instance and app state
+        let pyodide = null;
+        let pyodideReady = false;
+        let appState = {
+            loggedIn: false,
+            db: null
+        };
+
+        // Initialize Pyodide when page loads
+        async function initPyodide() {
+            const outputDiv = document.getElementById('terminal-output');
             
-            // Remove active class from all buttons
+            try {
+                outputDiv.innerHTML = '<div style="color: #60a5fa;">⏳ Loading Python environment (Pyodide)...</div>';
+                pyodide = await loadPyodide();
+                
+                outputDiv.innerHTML = '<div style="color: #10b981;">✓ Python environment ready!</div>' +
+                    '<div style="color: #94a3b8; margin-top: 10px;">Click "▶ Start Interactive Demo" to begin</div>';
+                pyodideReady = true;
+            } catch (error) {
+                outputDiv.innerHTML = `<div style="color: #ef4444;">✗ Failed to load Python: ${error.message}</div>`;
+            }
+        }
+
+        // Initialize when Kiwi Demo subtab is clicked
+        function switchCourse(courseId, clickedButton) {
+            console.log('switchCourse called:', courseId);
+            const courses = document.querySelectorAll('.course-content');
+            courses.forEach(course => course.classList.remove('active'));
+            
             const buttons = document.querySelectorAll('.tab-button');
             buttons.forEach(button => button.classList.remove('active'));
             
-            // Show selected tab
-            document.getElementById(tabId).classList.add('active');
+            const courseElement = document.getElementById(courseId);
+            if (courseElement) {
+                courseElement.classList.add('active');
+                console.log('Course activated:', courseId);
+            } else {
+                console.error('Course not found:', courseId);
+            }
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+        }
+
+        function switchSubtab(courseId, subtabId, clickedButton) {
+            console.log('switchSubtab called:', courseId, subtabId);
+            const subtabs = document.querySelectorAll(`#${courseId} .subtab-content`);
+            subtabs.forEach(subtab => subtab.classList.remove('active'));
             
-            // Add active class to clicked button
-            event.target.classList.add('active');
+            const buttons = document.querySelectorAll(`#${courseId} .subtab-button`);
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            const subtabElement = document.getElementById(`${courseId}-${subtabId}`);
+            if (subtabElement) {
+                subtabElement.classList.add('active');
+                console.log('Subtab activated:', `${courseId}-${subtabId}`);
+            } else {
+                console.error('Subtab not found:', `${courseId}-${subtabId}`);
+            }
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+
+            // Initialize Pyodide when Assignment 1 subtab is opened
+            if (subtabId === 'assignment1' && !pyodideReady && !pyodide) {
+                initPyodide();
+            }
+        }
+
+        function clearTerminal() {
+            document.getElementById('terminal-output').innerHTML = '';
+        }
+
+        function appendOutput(text, color = '#e2e8f0', style = '') {
+            const outputDiv = document.getElementById('terminal-output');
+            const line = document.createElement('div');
+            line.style.color = color;
+            if (style) line.style.cssText += style;
+            line.innerHTML = text; // Use innerHTML to support HTML entities
+            outputDiv.appendChild(line);
+            
+            const terminal = document.getElementById('pyodide-terminal');
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        async function runKiwiApp() {
+            if (!pyodideReady) {
+                appendOutput('Python environment not ready yet. Please wait...', '#f59e0b');
+                return;
+            }
+
+            const outputDiv = document.getElementById('terminal-output');
+            outputDiv.innerHTML = '';
+            
+            appendOutput('════════════════════════════════════════════════', '#8b5cf6');
+            appendOutput('   🐦 UTD KIWI PORTFOLIO MANAGER   ', '#a78bfa', 'font-weight: bold; font-size: 1.1em;');
+            appendOutput('════════════════════════════════════════════════', '#8b5cf6');
+            appendOutput('', '#e2e8f0');
+            appendOutput('💡 Type commands to interact with the system:', '#60a5fa');
+            appendOutput('', '#e2e8f0');
+            appendOutput('  • <strong>login &lt;username&gt; &lt;password&gt;</strong> - Login to system', '#94a3b8');
+            appendOutput('  • <strong>portfolio</strong> - View your portfolio', '#94a3b8');
+            appendOutput('  • <strong>market</strong> - View marketplace', '#94a3b8');
+            appendOutput('  • <strong>buy &lt;symbol&gt; &lt;qty&gt;</strong> - Buy stocks', '#94a3b8');
+            appendOutput('  • <strong>sell &lt;symbol&gt; &lt;qty&gt;</strong> - Sell stocks', '#94a3b8');
+            appendOutput('  • <strong>users</strong> - View all users (admin only)', '#94a3b8');
+            appendOutput('  • <strong>help</strong> - Show this help', '#94a3b8');
+            appendOutput('', '#e2e8f0');
+            appendOutput('Try: <code style="background: rgba(139, 92, 246, 0.3); padding: 2px 6px; border-radius: 3px;">login admin admin123</code>', '#10b981');
+            appendOutput('', '#e2e8f0');
+
+            try {
+                await pyodide.runPythonAsync(`
+# Initialize the app
+class AppDB:
+    def __init__(self):
+        self.users = {}
+        self.current_user = None
+        
+    def create_user(self, username, password, first_name, last_name, role='user'):
+        if username in self.users:
+            return False
+        self.users[username] = {
+            'username': username,
+            'password': password,
+            'first_name': first_name,
+            'last_name': last_name,
+            'role': role,
+            'balance': 10000.0,
+            'portfolio': {}
+        }
+        return True
+    
+    def authenticate(self, username, password):
+        user = self.users.get(username)
+        if user and user['password'] == password:
+            self.current_user = username
+            return True
+        return False
+    
+    def get_current_user(self):
+        if self.current_user:
+            return self.users.get(self.current_user)
+        return None
+    
+    def logout(self):
+        self.current_user = None
+
+MARKET = {
+    'AAPL': 178.50,
+    'GOOGL': 142.30,
+    'MSFT': 380.25,
+    'TSLA': 245.80,
+    'AMZN': 155.90
+}
+
+# Create global app_db instance
+import builtins
+builtins.app_db = AppDB()
+builtins.app_db.create_user('admin', 'admin123', 'Admin', 'User', 'admin')
+builtins.app_db.create_user('demo', 'demo123', 'Demo', 'User', 'user')
+
+# Store MARKET globally
+builtins.MARKET = MARKET
+`);
+                
+                document.getElementById('terminal-input-line').style.display = 'flex';
+                document.getElementById('terminal-input').focus();
+                appState.loggedIn = false;
+                
+            } catch (error) {
+                appendOutput('✗ Error initializing: ' + error.message, '#ef4444');
+            }
+        }
+
+        async function handleTerminalInput(event) {
+            if (event.key !== 'Enter') return;
+            
+            const input = document.getElementById('terminal-input');
+            const command = input.value.trim();
+            input.value = '';
+            
+            if (!command) return;
+            
+            appendOutput('➜ ' + command, '#8b5cf6', 'font-weight: bold;');
+            
+            const parts = command.split(' ');
+            const cmd = parts[0].toLowerCase();
+            
+            try {
+                if (cmd === 'login') {
+                    if (parts.length !== 3) {
+                        appendOutput('Usage: login <username> <password>', '#ef4444');
+                        return;
+                    }
+                    const result = await pyodide.runPythonAsync(
+"result = app_db.authenticate('" + parts[1] + "', '" + parts[2] + "')\n" +
+"if result:\n" +
+"    user = app_db.get_current_user()\n" +
+"    result = '✓ Welcome, ' + user['first_name'] + ' ' + user['last_name'] + '! Balance: ${:.2f}'.format(user['balance'])\n" +
+"else:\n" +
+"    result = '✗ Invalid credentials'\n" +
+"result");
+                    if (result.startsWith('✓')) {
+                        appendOutput(result, '#10b981');
+                        appState.loggedIn = true;
+                    } else {
+                        appendOutput(result, '#ef4444');
+                    }
+                    
+                } else if (cmd === 'portfolio') {
+                    if (!appState.loggedIn) {
+                        appendOutput('✗ Please login first', '#ef4444');
+                        return;
+                    }
+                    const result = await pyodide.runPythonAsync(
+"user = app_db.get_current_user()\n" +
+"if not user:\n" +
+"    result = '✗ Not logged in'\n" +
+"else:\n" +
+"    output = ['', '📊 YOUR PORTFOLIO', '=' * 60]\n" +
+"    if not user['portfolio']:\n" +
+"        output.append('No holdings yet. Visit the marketplace to buy stocks!')\n" +
+"    else:\n" +
+"        output.append('{0:<8} {1:>10} {2:>15} {3:>15}'.format('Symbol', 'Quantity', 'Price', 'Value'))\n" +
+"        output.append('-' * 60)\n" +
+"        total_value = 0\n" +
+"        for symbol, qty in user['portfolio'].items():\n" +
+"            price = MARKET.get(symbol, 0)\n" +
+"            value = price * qty\n" +
+"            total_value += value\n" +
+"            line = '{0:<8} {1:>10} {2:>15} {3:>15}'.format(symbol, qty, '${:,.2f}'.format(price), '${:,.2f}'.format(value))\n" +
+"            output.append(line)\n" +
+"        output.append('=' * 60)\n" +
+"        output.append('{0:<8} {1:>10} {2:>15} {3:>15}'.format('', '', 'TOTAL:', '${:,.2f}'.format(total_value)))\n" +
+"    result = '\\n'.join(output)\n" +
+"result");
+                    result.split('\n').forEach(line => appendOutput(line, '#e2e8f0'));
+                    
+                } else if (cmd === 'market') {
+                    if (!appState.loggedIn) {
+                        appendOutput('✗ Please login first', '#ef4444');
+                        return;
+                    }
+                    const result = await pyodide.runPythonAsync(
+"user = app_db.get_current_user()\n" +
+"output = ['', '🏪 MARKETPLACE', '=' * 70]\n" +
+"output.append('{0:<10} {1:>15} {2:>12} {3:<20}'.format('Symbol', 'Price', 'Owned', 'Actions'))\n" +
+"output.append('-' * 70)\n" +
+"for symbol, price in MARKET.items():\n" +
+"    owned = user['portfolio'].get(symbol, 0)\n" +
+"    line = '{0:<10} {1:>15} {2:>12} {3:<20}'.format(symbol, '${:,.2f}'.format(price), owned, '[B]uy | [S]ell')\n" +
+"    output.append(line)\n" +
+"output.append('=' * 70)\n" +
+"output.append('Your Balance: ${:,.2f}'.format(user['balance']))\n" +
+"'\\n'.join(output)");
+                    result.split('\n').forEach(line => appendOutput(line, '#e2e8f0'));
+                    
+                } else if (cmd === 'buy') {
+                    if (!appState.loggedIn) {
+                        appendOutput('✗ Please login first', '#ef4444');
+                        return;
+                    }
+                    if (parts.length !== 3) {
+                        appendOutput('Usage: buy <symbol> <quantity>', '#ef4444');
+                        return;
+                    }
+                    const result = await pyodide.runPythonAsync(
+"user = app_db.get_current_user()\n" +
+"symbol = '" + parts[1] + "'.upper()\n" +
+"qty = " + parts[2] + "\n" +
+"if symbol not in MARKET:\n" +
+"    result = '✗ Symbol ' + symbol + ' not found!'\n" +
+"else:\n" +
+"    price = MARKET[symbol]\n" +
+"    cost = price * qty\n" +
+"    if user['balance'] < cost:\n" +
+"        result = '✗ Insufficient funds! Need ${0:.2f}, have ${1:.2f}'.format(cost, user['balance'])\n" +
+"    else:\n" +
+"        user['balance'] -= cost\n" +
+"        user['portfolio'][symbol] = user['portfolio'].get(symbol, 0) + qty\n" +
+"        result = '✓ Purchased {0} shares of {1} for ${2:.2f}'.format(qty, symbol, cost)\n" +
+"result");
+                    if (result.startsWith('✓')) {
+                        appendOutput(result, '#10b981');
+                    } else {
+                        appendOutput(result, '#ef4444');
+                    }
+                    
+                } else if (cmd === 'sell') {
+                    if (!appState.loggedIn) {
+                        appendOutput('✗ Please login first', '#ef4444');
+                        return;
+                    }
+                    if (parts.length !== 3) {
+                        appendOutput('Usage: sell <symbol> <quantity>', '#ef4444');
+                        return;
+                    }
+                    const result = await pyodide.runPythonAsync(
+"user = app_db.get_current_user()\n" +
+"symbol = '" + parts[1] + "'.upper()\n" +
+"qty = " + parts[2] + "\n" +
+"if symbol not in user['portfolio'] or user['portfolio'][symbol] < qty:\n" +
+"    result = '✗ You don\\'t have {0} shares of {1} to sell!'.format(qty, symbol)\n" +
+"else:\n" +
+"    price = MARKET[symbol]\n" +
+"    revenue = price * qty\n" +
+"    user['portfolio'][symbol] -= qty\n" +
+"    if user['portfolio'][symbol] == 0:\n" +
+"        del user['portfolio'][symbol]\n" +
+"    user['balance'] += revenue\n" +
+"    result = '✓ Sold {0} shares of {1} for ${2:.2f}'.format(qty, symbol, revenue)\n" +
+"result");
+                    if (result.startsWith('✓')) {
+                        appendOutput(result, '#10b981');
+                    } else {
+                        appendOutput(result, '#ef4444');
+                    }
+                    
+                } else if (cmd === 'users') {
+                    if (!appState.loggedIn) {
+                        appendOutput('✗ Please login first', '#ef4444');
+                        return;
+                    }
+                    const result = await pyodide.runPythonAsync(
+"user = app_db.get_current_user()\n" +
+"if user['role'] != 'admin':\n" +
+"    result = '✗ Admin access required'\n" +
+"else:\n" +
+"    output = ['', '👥 USER MANAGEMENT', '=' * 80]\n" +
+"    output.append('{0:<15} {1:<25} {2:>15} {3:<10} {4:>10}'.format('Username', 'Name', 'Balance', 'Role', 'Holdings'))\n" +
+"    output.append('-' * 80)\n" +
+"    for username, u in app_db.users.items():\n" +
+"        full_name = u['first_name'] + ' ' + u['last_name']\n" +
+"        holdings_count = len(u['portfolio'])\n" +
+"        line = '{0:<15} {1:<25} {2:>15} {3:<10} {4:>10}'.format(username, full_name, '${:,.2f}'.format(u['balance']), u['role'], holdings_count)\n" +
+"        output.append(line)\n" +
+"    output.append('=' * 80)\n" +
+"    result = '\\n'.join(output)\n" +
+"result");
+                    if (result.startsWith('✗')) {
+                        appendOutput(result, '#ef4444');
+                    } else {
+                        result.split('\n').forEach(line => appendOutput(line, '#e2e8f0'));
+                    }
+                    
+                } else if (cmd === 'help') {
+                    appendOutput('', '#e2e8f0');
+                    appendOutput('📋 Available Commands:', '#60a5fa', 'font-weight: bold;');
+                    appendOutput('  • login <username> <password> - Login to system', '#94a3b8');
+                    appendOutput('  • portfolio - View your portfolio', '#94a3b8');
+                    appendOutput('  • market - View marketplace', '#94a3b8');
+                    appendOutput('  • buy <symbol> <qty> - Buy stocks', '#94a3b8');
+                    appendOutput('  • sell <symbol> <qty> - Sell stocks', '#94a3b8');
+                    appendOutput('  • users - View all users (admin only)', '#94a3b8');
+                    appendOutput('  • help - Show this help', '#94a3b8');
+                    appendOutput('', '#e2e8f0');
+                    
+                } else {
+                    appendOutput(`✗ Unknown command: ${cmd}. Type 'help' for available commands.`, '#ef4444');
+                }
+                
+            } catch (error) {
+                appendOutput('✗ Error: ' + error.message, '#ef4444');
+            }
+            
+            appendOutput('', '#e2e8f0');
+        }
+
+        function downloadProject() {
+            // Show download instructions in terminal
+            appendOutput('', '#e2e8f0');
+            appendOutput('═'.repeat(60), '#8b5cf6');
+            appendOutput('📥 UTD KIWI MENU - PORTFOLIO MANAGER PROJECT', '#10b981', 'font-weight: bold; text-align: center;');
+            appendOutput('═'.repeat(60), '#8b5cf6');
+            appendOutput('', '#e2e8f0');
+            appendOutput('📁 Project Information:', '#60a5fa', 'font-weight: bold;');
+            appendOutput('  • Interactive stock portfolio management system', '#94a3b8');
+            appendOutput('  • User authentication with role-based access', '#94a3b8');
+            appendOutput('  • Buy/sell stocks with real-time calculations', '#94a3b8');
+            appendOutput('  • Admin panel for user management', '#94a3b8');
+            appendOutput('  • Beautiful Rich library tables and formatting', '#94a3b8');
+            appendOutput('', '#e2e8f0');
+            appendOutput('� Technologies Used:', '#60a5fa', 'font-weight: bold;');
+            appendOutput('  • Python 3.9+', '#94a3b8');
+            appendOutput('  • Rich library for terminal UI', '#94a3b8');
+            appendOutput('  • Object-oriented design patterns', '#94a3b8');
+            appendOutput('  • In-memory database with user sessions', '#94a3b8');
+            appendOutput('', '#e2e8f0');
+            appendOutput('� Features Demonstrated:', '#60a5fa', 'font-weight: bold;');
+            appendOutput('  ✓ User Authentication System', '#10b981');
+            appendOutput('  ✓ Portfolio Management (Buy/Sell)', '#10b981');
+            appendOutput('  ✓ Real-time Balance Tracking', '#10b981');
+            appendOutput('  ✓ Admin User Management', '#10b981');
+            appendOutput('  ✓ Market Data Display', '#10b981');
+            appendOutput('  ✓ Transaction Processing', '#10b981');
+            appendOutput('', '#e2e8f0');
+            appendOutput('🚀 Quick Start:', '#60a5fa', 'font-weight: bold;');
+            appendOutput('  1. Install Python 3.9 or higher', '#94a3b8');
+            appendOutput('  2. Install Rich: pip install rich', '#94a3b8');
+            appendOutput('  3. Copy the code from this interactive demo', '#94a3b8');
+            appendOutput('  4. Run: python portfolio_manager.py', '#94a3b8');
+            appendOutput('', '#e2e8f0');
+            appendOutput('👤 Demo Accounts:', '#60a5fa', 'font-weight: bold;');
+            appendOutput('  Admin: username=admin, password=admin123', '#fbbf24');
+            appendOutput('  User:  username=demo,  password=demo123', '#fbbf24');
+            appendOutput('', '#e2e8f0');
+            appendOutput('💡 Source Code Available:', '#60a5fa', 'font-weight: bold;');
+            appendOutput('  All source code is visible in this interactive demo!', '#94a3b8');
+            appendOutput('  Use the commands above to explore the full functionality.', '#94a3b8');
+            appendOutput('', '#e2e8f0');
+            appendOutput('═'.repeat(60), '#8b5cf6');
+            appendOutput('', '#e2e8f0');
+            
+            // Open GitHub repository ZIP download
+            const repoUrl = 'https://github.com/thevillan808/UTD-Kiwi-Menu/archive/refs/heads/main.zip';
+            window.open(repoUrl, '_blank');
         }
 
         function searchContent() {
@@ -1458,5 +3458,6 @@ arr = np.array([<span class="number">1, 2, 3</span>])
             });
         }
     </script>
+    {% endraw %}
 </body>
 </html>

@@ -1,45 +1,46 @@
-echo "🚀 Starting CameronPAD on port 8000..."
-
 #!/bin/bash
-# Robust CameronPAD Start Script for Linux
+# CameronPAD Start Script for Linux/macOS
+# Starts the development server with auto-reload
 
-set -e
+echo "� Starting CameronPAD Server"
+echo "================================"
 
-echo "🔍 Checking if port 8000 is already in use..."
-if command -v lsof >/dev/null 2>&1 && sudo lsof -i :8000 > /dev/null 2>&1; then
-    echo "⚠️  Port 8000 is in use. Killing existing process..."
-    sudo fuser -k 8000/tcp || true
-    sleep 2
-    echo "✅ Port 8000 freed"
-fi
-
-# Always fix Windows line endings in venv/bin/activate
-if [ -f venv/bin/activate ]; then
-    sed -i 's/\r$//' venv/bin/activate
+# Check if python3 is available
+if command -v python3 >/dev/null 2>&1; then
+    PYTHON_CMD="python3"
+elif command -v python >/dev/null 2>&1; then
+    PYTHON_CMD="python"
 else
-    echo "❌ venv/bin/activate not found. Please create a virtual environment first."
+    echo "❌ Error: Python is not installed or not in PATH"
+    echo "   Please install Python 3.8 or higher"
     exit 1
 fi
 
-# Check for python3 and pip3
-if ! command -v python3 >/dev/null 2>&1; then
-    echo "❌ python3 not found. Please install Python 3."
+echo "✓ Found Python: $PYTHON_CMD"
+
+# Check if FastAPI is installed
+$PYTHON_CMD -c "import fastapi" 2>/dev/null
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "❌ Error: FastAPI is not installed"
+    echo "   Please run ./install.sh first to install dependencies"
     exit 1
 fi
-if ! command -v pip3 >/dev/null 2>&1; then
-    echo "❌ pip3 not found. Please install pip for Python 3."
-    exit 1
+
+echo "✓ FastAPI installed"
+
+# Check if .env file exists
+if [ ! -f ".env" ]; then
+    echo ""
+    echo "⚠️  Warning: .env file not found"
+    echo "   Using default configuration. Run ./install.sh to set up .env file"
+    echo ""
 fi
 
-# Activate virtual environment
-source venv/bin/activate
+echo ""
+echo "🌐 Starting server on http://127.0.0.1:8000"
+echo "📝 Press Ctrl+C to stop the server"
+echo ""
 
-# Ensure uvicorn is installed in venv
-if ! python3 -c "import uvicorn" 2>/dev/null; then
-    echo "Installing uvicorn..."
-    pip3 install uvicorn
-fi
-
-echo "🚀 Starting CameronPAD on port 8000..."
-python3 -m uvicorn app_new.main:app --host 0.0.0.0 --port 8000
-python3 -m uvicorn app_new.main:app --host 0.0.0.0 --port 8000 --reload
+# Start the server
+$PYTHON_CMD -m uvicorn app_new.main:app --reload --host 127.0.0.1 --port 8000
