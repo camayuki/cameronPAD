@@ -212,17 +212,9 @@
 
     .auth-loading-progress {
         height: 100%;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #667eea 100%);
-        background-size: 200% 100%;
+        background: #667eea;
         width: 0%;
         transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
-        animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-        0% { background-position: 0% 0%; }
-        100% { background-position: 200% 0%; }
     }
 
     /* Login Page Split Screen */
@@ -254,7 +246,6 @@
         border-radius: 50%;
         top: -100px;
         right: -100px;
-        animation: floatBubble 20s infinite ease-in-out;
     }
 
     .info-panel::after {
@@ -266,12 +257,6 @@
         border-radius: 50%;
         bottom: -80px;
         left: -80px;
-        animation: floatBubble 15s infinite ease-in-out reverse;
-    }
-
-    @keyframes floatBubble {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(-30px, 30px); }
     }
 
     .info-content {
