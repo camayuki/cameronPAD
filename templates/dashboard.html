@@ -6,15 +6,15 @@
 <link rel="stylesheet" href="/templates/dashboard_apple_styles.css">
 
 <div class="dashboard-header">
-    <h1>🌌 Welcome to CameronPAD</h1>
-    <p>Your personal space in the digital cosmos</p>
+    <h1>cameronPAD</h1>
+    <p>{{ current_user.full_name or current_user.username }} — dashboard</p>
 </div>
 
 <div class="dashboard-grid">
     <!-- Quick Stats -->
     <div class="card stats-card">
         <div class="card-header">
-            <h3>🚀 Mission Control</h3>
+            <h3>System</h3>
         </div>
         <div class="stats-grid">
             <div class="stat-item clickable" onclick="openMissionControlPanel('users')">
