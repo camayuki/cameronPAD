@@ -33,9 +33,8 @@
 
 /* Apple-style Cards */
 .card {
-    background: rgba(255, 255, 255, 0.05) !important;
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    background: rgba(30, 35, 50, 0.85) !important;
+    /* backdrop-filter blur removed — it forces expensive per-frame compositing on every card */
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: 20px !important;
     padding: 2rem !important;

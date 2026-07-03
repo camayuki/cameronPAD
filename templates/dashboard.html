@@ -2322,9 +2322,9 @@
 
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
-        // Start system metrics updates
+        // Start system metrics updates (30s interval — was 5s, reduced for performance)
         updateSystemMetrics();
-        setInterval(updateSystemMetrics, 5000);
+        setInterval(updateSystemMetrics, 30000);
         
         // Get user IP
         getUserIP();

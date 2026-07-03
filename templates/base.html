@@ -125,24 +125,10 @@
             gap: 4rem;
         }
 
-        /* Apple Logo */
+        /* Apple Logo (glow animation removed — animated drop-shadow filters are GPU-expensive) */
         .apple-logo {
             color: #ffffff;
-            animation: appleGlow 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
-        }
-
-        @keyframes appleGlow {
-            0%, 100% {
-                opacity: 0.6;
-                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
-                transform: scale(1.02);
-            }
+            opacity: 0.9;
         }
 
         /* Loading Bar - Apple Style */
@@ -630,9 +616,8 @@
         </div>
     </div>
 
-    <!-- Animated Background -->
+    <!-- Background (static — particles removed for performance) -->
     <div class="space-bg"></div>
-    <div class="particles" id="particles"></div>
 
     <!-- Header/Navigation -->
     <header class="header">
@@ -691,15 +676,15 @@
                 // Mark that we've loaded the page in this session
                 sessionStorage.setItem('hasLoadedBefore', 'true');
                 
-                // Apple loading bar - 3 seconds for sleek experience
+                // Brief loading screen (reduced from 3s for performance/responsiveness)
                 setTimeout(() => {
                     loadingScreen.classList.add('hidden');
                     
                     // Remove from DOM after fade-out animation completes
                     setTimeout(() => {
                         loadingScreen.remove();
-                    }, 800);
-                }, 3000);  // 3 seconds total loading time
+                    }, 300);
+                }, 500);
             } else {
                 // Hide immediately on non-dashboard pages or subsequent loads
                 loadingScreen.classList.add('hidden');
@@ -709,36 +694,8 @@
             }
         });
 
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                // Random positioning and animation delay
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                
-                // Random particle size and opacity
-                const size = Math.random() * 3 + 1;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                particle.style.opacity = Math.random() * 0.7 + 0.3;
-                
-                // Random colors
-                const colors = ['#4fc3f7', '#ab47bc', '#66bb6a', '#ff9800'];
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Initialize particles on load
-        document.addEventListener('DOMContentLoaded', createParticles);
+        // Floating particles disabled for performance
+        // (50 infinitely-animated DOM elements caused constant GPU compositing)
 
         // Modal functionality
         function showModal(modalId) {
